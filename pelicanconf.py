@@ -6,7 +6,6 @@ AUTHOR = 'Porfirio Páiz'
 TAGLINE = '(■_■¬)'
 SITEURL = 'https://porfiriopaiz.github.io/site'
 USER_LOGO_URL = 'https://porfiriopaiz.github.io/site/images/prpd8Vi.png'
-FAVICON = 'https://porfiriopaiz.github.io/site/images/favicon.ico'
 SITENAME = "porfirio's blog"
 DISQUS_SITENAME = 'porfiriopaizsite'
 
@@ -41,15 +40,15 @@ DEFAULT_PAGINATION = 10
 THEME = 'themes/pelican-svbhack'
 
 # Static Path
-#STATIC_PATHS = [
-#    'images', 
-#    'extra/robots.txt', 
-#    'extra/favicon.ico'
-#]
-#EXTRA_PATH_METADATA = {
-#    'extra/robots.txt': {'path': 'robots.txt'},
-#    'extra/favicon.ico': {'path': 'favicon.ico'}
-#}
+STATIC_PATHS = [
+    'images', 
+    'extra/robots.txt', 
+    'extra/favicon.ico'
+]
+EXTRA_PATH_METADATA = {
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
 
 # URL's
 ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}.html'
