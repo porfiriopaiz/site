@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>porfirio's blog</title><link>http://localhost:8000/</link><description></description><lastBuildDate>Sun, 09 Oct 2016 20:49:00 -0600</lastBuildDate><item><title>Hello World!</title><link>http://localhost:8000/posts/2016/Oct/09/hello-world.html</link><description>&lt;p&gt;Hello World from Pelican!&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Oct 2016 20:49:00 -0600</pubDate><guid isPermaLink="false">tag:localhost:8000,2016-10-09:posts/2016/Oct/09/hello-world.html</guid></item></channel></rss>
