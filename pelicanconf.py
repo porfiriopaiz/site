@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- #
+from __future__ import unicode_literals
+
+AUTHOR = 'Porfirio Páiz'
+TAGLINE = '(■_■¬)'
+SITEURL = 'http://localhost:8000'
+USER_LOGO_URL = '/images/prpd8Vi.png'
+SITENAME = "porfirio's blog"
+DISQUS_SITENAME = 'porfiriopaizsite'
+
+# Default Path
+PATH = 'content'
+
+TIMEZONE = 'America/Managua'
+
+DEFAULT_LANG = 'en'
+
+# Feed generation is usually not desired when developing
+#FEED_DOMAIN = SITEUR
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
+FEED_ALL_RSS = 'feeds/all.rss.xml'
+TAG_FEED_ATOM = 'feeds/%s.atom.xml'
+TAG_FEED_RSS = 'feeds/%s.rss.xml'
+
+# Blogroll
+LINKS = (('About', 'https://fedoraproject.org/wiki/User:Porfiriopaiz'),
+         ('github', 'https://github.com/porfiriopaiz'),)
+
+# Social widget
+SOCIAL = (('twitter', 'https://twitter.com/porfiriopaiz'),
+          ('Google+', 'https://plus.google.com/+PorfirioAndresPaizCarrasco'),)
+
+DEFAULT_PAGINATION = 10
+
+# Uncomment following line if you want document-relative URLs when developing
+#RELATIVE_URLS = True
+
+# Theme
+THEME = 'themes/pelican-svbhack'
+
+# Static Path
+STATIC_PATHS = [
+    'images', 
+    'extra/robots.txt', 
+    'extra/favicon.ico'
+]
+EXTRA_PATH_METADATA = {
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
+
+# URL's
+ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}.html'
+ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}.html'
+PAGE_URL = 'pages/{slug}.html'
+PAGE_SAVE_AS = 'pages/{slug}.html'
+ARTICLE_LANG_URL = '{slug}-{lang}.html'
+ARTICLE_LANG_SAVE_AS = '{slug}-{lang}.html'
+DRAFT_URL = 'drafts/{slug}.html'
+DRAFT_SAVE_AS = 'drafts/{slug}.html'
+DRAFT_LANG_URL = 'drafts/{slug}-{lang}.html'
+DRAFT_LANG_SAVE_AS = 'drafts/{slug}-{lang}.html'
+PAGE_URL = 'pages/{slug}.html'
+PAGE_SAVE_AS = 'pages/{slug}.html'
+PAGE_LANG_URL = 'pages/{slug}-{lang}.html'
+PAGE_LANG_SAVE_AS = 'pages/{slug}-{lang}.html'
+CATEGORY_URL = 'category/{slug}.html'
+CATEGORY_SAVE_AS = 'category/{slug}.html'
+TAG_URL = 'tag/{slug}.html'
+TAG_SAVE_AS = 'tag/{slug}.html'
+AUTHOR_URL = 'author/{slug}.html'
+AUTHOR_SAVE_AS = 'author/{slug}.html'
