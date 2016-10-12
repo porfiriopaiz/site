@@ -42,8 +42,7 @@ THEME = 'themes/pelican-svbhack'
 # Static Path
 STATIC_PATHS = [
     'images', 
-    'extra/robots.txt', 
-    'extra/favicon.ico'
+    'extra'
 ]
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
