@@ -42,14 +42,13 @@ THEME = 'themes/pelican-svbhack'
 # Static Path
 STATIC_PATHS = [
     'images', 
-    'robots.txt', 
-    'favicon.ico'
+    'extra/robots.txt', 
+    'extra/favicon.ico'
 ]
 EXTRA_PATH_METADATA = {
-    'robots.txt': {'path': 'robots.txt'},
-    'favicon.ico': {'path': 'favicon.ico'}
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'}
 }
-
 # URL's
 ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}.html'
 ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}.html'
@@ -71,3 +70,4 @@ TAG_URL = 'tag/{slug}.html'
 TAG_SAVE_AS = 'tag/{slug}.html'
 AUTHOR_URL = 'author/{slug}.html'
 AUTHOR_SAVE_AS = 'author/{slug}.html'
+YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
