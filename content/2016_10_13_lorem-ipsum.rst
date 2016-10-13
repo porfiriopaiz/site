@@ -6,7 +6,6 @@ Lorem Ipsum
 :category:
 :slug: lorem-ipsum
 :lang: en
-:translation: true
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi maximus leo eget dignissim dictum. Vivamus pulvinar est quis sagittis vulputate. Proin volutpat leo a convallis aliquam. Aliquam non lorem pharetra, hendrerit orci eu, hendrerit nibh. Mauris maximus leo ut sem aliquet mollis. Nam a quam vitae mi convallis vestibulum finibus aliquet nibh. Morbi mauris risus, pulvinar eget mauris a, bibendum dictum purus. Phasellus eu sapien est. Donec ac turpis vestibulum, vestibulum arcu in, faucibus ipsum. Vestibulum et diam iaculis, blandit eros sit amet, ultricies ligula. Maecenas luctus facilisis ex a interdum.
 
