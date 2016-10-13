@@ -71,3 +71,6 @@ TAG_SAVE_AS = 'tag/{slug}.html'
 AUTHOR_URL = 'author/{slug}.html'
 AUTHOR_SAVE_AS = 'author/{slug}.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
+
+# Summary
+SUMMARY_MAX_LENGTH = 50
