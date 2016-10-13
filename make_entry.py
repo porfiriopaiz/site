@@ -10,6 +10,7 @@ TEMPLATE = """
 :category:
 :slug: {slug}
 :summary:
+:lang:
 
 
 """
