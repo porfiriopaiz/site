@@ -6,6 +6,5 @@ Lorem ipsum español
 :category:
 :slug: lorem-ipsum
 :lang: es
-:translation: true
 
 Lorem ipsum en español latino XD
