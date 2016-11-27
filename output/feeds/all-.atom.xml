@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all-.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2016-11-03T21:20:00-06:00</updated><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi-.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:site/posts/2016/11/03/irc-with-irssi-.html</id><summary type="html">&lt;p&gt;From my beginnings in the Free Software and GNU / Linux, one of the features
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all-.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2016-11-03T21:20:00-06:00</updated><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi-.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:site/posts/2016/11/03/irc-with-irssi-.html</id><summary type="html">&lt;p&gt;From my beginnings in the Free Software and GNU/Linux, one of the features
 that caught my attention is the power of the command line in this operating
 system. From moving between different directories or installing an operating
 system completely from scratch, these are some of the routine tasks you can
 achive from the terminal.&lt;/p&gt;
+&lt;!-- TEASER_END --&gt;
 &lt;p&gt;In this post I will show how to configure irssi to automate some of the steps to
-carry out in order to access a chat room, as it is connected to the server,
-authenticate and then enter the different channels that are of interest.&lt;/p&gt;
+carry out in order to access a chat room, as it is connecting to the server,
+authenticate and then joining the differents channels that are of interest.&lt;/p&gt;
 &lt;div class="section" id="installing-irssi"&gt;
 &lt;h2&gt;Installing irssi&lt;/h2&gt;
 &lt;p&gt;To install irssi in fedora, just open a terminal and type the following command:&lt;/p&gt;
@@ -17,7 +18,7 @@ authenticate and then enter the different channels that are of interest.&lt;/p&g
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="running-irssi"&gt;
 &lt;h3&gt;Running irssi&lt;/h3&gt;
-&lt;p&gt;To run irssi we open a terminal and type the following command:&lt;/p&gt;
+&lt;p&gt;To run irssi, open a terminal and type the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -26,8 +27,8 @@ authenticate and then enter the different channels that are of interest.&lt;/p&g
 &lt;h2&gt;Configurations&lt;/h2&gt;
 &lt;div class="section" id="server-configurations"&gt;
 &lt;h3&gt;Server Configurations&lt;/h3&gt;
-&lt;p&gt;All these commands must be executed in a session irssi.&lt;/p&gt;
-&lt;p&gt;First we will remove the existing server configuration we need to automate.
+&lt;p&gt;All these commands must be executed on a irssi session.&lt;/p&gt;
+&lt;p&gt;First we will remove the existing server configuration that we want to automate.
 With &lt;tt class="docutils literal"&gt;/server list&lt;/tt&gt; we can view existing servers:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/server list&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -42,8 +43,9 @@ automatic and &lt;tt class="docutils literal"&gt;your_nick_password&lt;/tt&gt; i
 &lt;/div&gt;
 &lt;div class="section" id="adding-channels"&gt;
 &lt;h3&gt;Adding Channels&lt;/h3&gt;
-&lt;p&gt;Similarly, it is possible to add to this server channels automatically connect
-us want each login, for this run the following command in our irssi session:&lt;/p&gt;
+&lt;p&gt;Similarly, it is possible to add channels to this server in order to get
+connected automatically on each login, for this run the following command in our
+irssi session:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/channel add -auto #fedora Freenode&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In which &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-auto&lt;/span&gt;&lt;/tt&gt; allows us joining to &lt;tt class="docutils literal"&gt;#fedora&lt;/tt&gt; channel at &lt;tt class="docutils literal"&gt;Freenode&lt;/tt&gt;
@@ -52,18 +54,18 @@ server automatically at each login.&lt;/p&gt;
 with the command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/save&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;irssi takes the user name of your current session as the user for your session
-in irc to prevent this from happening if the name of your session in the system
-does not match your user Freenode, should run irssi with the following
-parameter:&lt;/p&gt;
+&lt;p&gt;irssi takes the user name of your current session on the system as the user for
+your session in irc, to prevent this from happening if the name of your session
+in the system does not match your user at Freenode, you should run irssi with
+the following parameter:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi -n nick&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Where &lt;tt class="docutils literal"&gt;nick&lt;/tt&gt; is your user nick on Freenode IRC.&lt;/p&gt;
-&lt;p&gt;Once you've added all your channels of interest found at the Freenode server and
+&lt;p&gt;Once you've added all your channels of interest from the Freenode server and
 saved the changes, you only need to run in a terminal the &lt;tt class="docutils literal"&gt;irssi&lt;/tt&gt; command and
-automatically you will connect to the server and all the channels you've added
-without needing to authenticate manually and without risking anyone can read
-your password while you type it. All this from a terminal.&lt;/p&gt;
+automatically you will be connected to the server and all the channels you've
+added without needing to authenticate manually and without risking anyone from
+reading your password while you type it. All this from a terminal.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="cli"></category><category term="irc"></category></entry></feed>
