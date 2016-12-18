@@ -6,5 +6,6 @@ Hello World!
 :category:
 :slug: hello-world
 :summary:
+:lang: en
 
 Hello World from Pelican!
