@@ -6,7 +6,6 @@ IRC with irssi
 :category: floss
 :slug: irc-with-irssi
 :summary:
-:lang:
 
 From my beginnings in the Free Software and GNU/Linux, one of the features
 that caught my attention is the power of the command line in this operating

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="https://porfiriopaiz.github.io/site/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="https://porfiriopaiz.github.io/site/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://porfiriopaiz.github.io/site/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/ico" href="https://porfiriopaiz.github.io/site/theme/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="https://porfiriopaiz.github.io/site/favicon.ico">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="cli, irc">
+
+  <title>
+    porfirio's blog
+&ndash; IRC with irssi  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="https://porfiriopaiz.github.io/site">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="https://porfiriopaiz.github.io/site">Porfirio Páiz</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="https://porfiriopaiz.github.io/site">Index</a> &brvbar; <a href="https://porfiriopaiz.github.io/site/archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html">IRC with irssi</a></h1>
+  </div>
+  <div class="article_text">
+    <p>From my beginnings in the Free Software and GNU/Linux, one of the features
+that caught my attention is the power of the command line in this operating
+system. From moving between different directories or installing an operating
+system completely from scratch, these are some of the routine tasks you can
+achive from the terminal.</p>
+<!-- TEASER_END -->
+<p>In this post I will show how to configure irssi to automate some of the steps to
+carry out in order to access a chat room, as it is connecting to the server,
+authenticate and then joining the differents channels that are of interest.</p>
+<div class="section" id="installing-irssi">
+<h2>Installing irssi</h2>
+<p>To install irssi in fedora, just open a terminal and type the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install irssi&#39;</span>
+</pre></div>
+<p>And to install irssi in debian:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install irssi&#39;</span>
+</pre></div>
+<div class="section" id="running-irssi">
+<h3>Running irssi</h3>
+<p>To run irssi, open a terminal and type the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">irssi</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configurations">
+<h2>Configurations</h2>
+<div class="section" id="server-configurations">
+<h3>Server Configurations</h3>
+<p>All these commands must be executed on a irssi session.</p>
+<p>First we will remove the existing server configuration that we want to automate.
+With <tt class="docutils literal">/server list</tt> we can view existing servers:</p>
+<div class="highlight"><pre><span></span><span class="go">/server list</span>
+</pre></div>
+<p>In our case we will remove the existing configuration of Freenode.</p>
+<div class="highlight"><pre><span></span><span class="go">/server remove chat.freenode.net</span>
+</pre></div>
+<p>And add the new configuration with the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">/SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password</span>
+</pre></div>
+<p>In which <tt class="docutils literal"><span class="pre">-auto</span></tt> defines the connection to the <tt class="docutils literal">Freenode</tt> server as
+automatic and <tt class="docutils literal">your_nick_password</tt> is your user password.</p>
+</div>
+<div class="section" id="adding-channels">
+<h3>Adding Channels</h3>
+<p>Similarly, it is possible to add channels to this server in order to get
+connected automatically on each login, for this run the following command in our
+irssi session:</p>
+<div class="highlight"><pre><span></span><span class="go">/channel add -auto #fedora Freenode</span>
+</pre></div>
+<p>In which <tt class="docutils literal"><span class="pre">-auto</span></tt> allows us joining to <tt class="docutils literal">#fedora</tt> channel at <tt class="docutils literal">Freenode</tt>
+server automatically at each login.</p>
+<p>Finally, every time we make a change in our configuration, we must save changes
+with the command:</p>
+<div class="highlight"><pre><span></span><span class="go">/save</span>
+</pre></div>
+<p>irssi takes the user name of your current session on the system as the user for
+your session in irc, to prevent this from happening if the name of your session
+in the system does not match your user at Freenode, you should run irssi with
+the following parameter:</p>
+<div class="highlight"><pre><span></span><span class="go">irssi -n nick</span>
+</pre></div>
+<p>Where <tt class="docutils literal">nick</tt> is your user nick on Freenode IRC.</p>
+<p>Once you've added all your channels of interest from the Freenode server and
+saved the changes, you only need to run in a terminal the <tt class="docutils literal">irssi</tt> command and
+automatically you will be connected to the server and all the channels you've
+added without needing to authenticate manually and without risking anyone from
+reading your password while you type it. All this from a terminal.</p>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 03 November 2016</p>
+    <p>Category: <a href="https://porfiriopaiz.github.io/site/category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="https://porfiriopaiz.github.io/site/tag/cli.html">cli</a>,      <a href="https://porfiriopaiz.github.io/site/tag/irc.html">irc</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2016/11/03/irc-with-irssi.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
