@@ -25,11 +25,12 @@ TAG_FEED_RSS = 'feeds/%s.rss.xml'
 
 # Blogroll
 LINKS = (('About', 'https://fedoraproject.org/wiki/User:Porfiriopaiz'),
-         ('github', 'https://github.com/porfiriopaiz'),)
+         ('Github', 'https://github.com/porfiriopaiz'),)
 
 # Social widget
-SOCIAL = (('twitter', 'https://twitter.com/porfiriopaiz'),
-          ('Google+', 'https://plus.google.com/+PorfirioAndresPaizCarrasco'),)
+SOCIAL = (('Twitter', 'https://twitter.com/porfiriopaiz'),
+          ('Google+', 'https://plus.google.com/+PorfirioAndresPaizCarrasco'),
+          ('License', 'https://creativecommons.org/licenses/by-sa/4.0/'),)
 
 DEFAULT_PAGINATION = 10
 
