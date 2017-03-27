@@ -62,34 +62,35 @@
   </div>
   <div class="article_text">
     <p>From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
-Lenovo ThinkPad T440p, which is equivalent to a year and a half running fc22. On
-July 19th of 2016 fc22 reached its period <a class="reference external" href="https://fedoraproject.org/wiki/End_of_life">EOL</a>,
-this means that you will not receive any further security or maintenance
-updates, so upgrading to a newer stable version was recommended.</p>
-<p>In this post I will explain how to update to Fedora 23 using the packages
-administrator dnf.</p>
+Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
+July 19th of 2016 F22 entered <a class="reference external" href="https://fedoraproject.org/wiki/End_of_life">EOL</a>
+status, which means that you will not receive any further security or
+maintenance updates, so upgrading to a newer stable version was recommended.</p>
+<p>In this post I will explain how to update to Fedora 23 using the dnf package
+manager.</p>
 <!-- TEASER_END -->
 <p>After using Fedora 22 for a year and a half, the packages cache had taken
 approximately 10GB of space on my hard drive:</p>
 <img alt="" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" />
 <p>To tell dnf to preserve the packages downloaded in the cache it is required to
-add the next line to the dnf configuration file <tt class="docutils literal">/etc/dnf/dnf.conf</tt>:</p>
+add the following line to the dnf configuration file <tt class="docutils literal">/etc/dnf/dnf.conf</tt>:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &quot;echo &#39;keepcache = true&#39; &gt;&gt; /etc/dnf/dnf.conf&quot;</span>
 </pre></div>
 <div class="section" id="upgrading-fedora-23">
 <h2>Upgrading Fedora 23</h2>
 <div class="section" id="prerequisites-for-upgrading">
 <h3>Prerequisites for upgrading</h3>
-<p>First we make sure we have enough space on our <tt class="docutils literal">/</tt> partition, since during
+<p>First, we make sure we have enough space on our <tt class="docutils literal">/</tt> partition, since during
 the update process we will need to download the most recent version of each and
-every one of the packages installed in our system. Whereas there is a
+every single of the packages installed in our system. Whereas there is a
 possibility that our cache may be full, it is good to remove the packages stored
-in it to free space in case we need:</p>
+in it to freed space in case we need:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf clean all&#39;</span>
 </pre></div>
 <p>Before we continue, we need to make sure that our system has installed the
 latest updates available from the different repositories enabled in our system.
-To do this, we must reconstruct the packages metadata cache:</p>
+To do this, we must reconstruct the packages metadata cache and then apply the
+recent upgrades:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf makecache&#39;</span>
 </pre></div>
 <img alt="" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" />
@@ -102,12 +103,12 @@ To do this, we must reconstruct the packages metadata cache:</p>
 Fedora, using a mechanism similar to that used for offline package updates.
 Packages are donwloaded while the system is running normally, and then the
 system is restarted in a special environment (implemented as a systmend
-target) to install them. Once the installation of the packages is complete
-, the system reboots but this time in the new Fedora version.</p>
+target) to install them. Once the installation of the packages is complete,
+the system reboots but this time in the new Fedora version.</p>
 <p>The first step is to install the <tt class="docutils literal"><span class="pre">dnf-plugin-system-upgrade</span></tt> plugin:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install dnf-plugin-system-upgrade&#39;</span>
 </pre></div>
-<p>And now let's proceed to download the packages needed for upgrade to Fedora 23.</p>
+<p>And now let's proceed to download the packages needed to upgrade to Fedora 23.</p>
 <p>This process will download each and every one of the packages that we have
 installed in our system, in its most recent version available for the release
 that we indicate, in this case the release will be <tt class="docutils literal">23</tt>.</p>
@@ -121,11 +122,11 @@ recommend jumping to a <tt class="docutils literal">(n + 2)</tt> Fedora version,
 22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24
 and Fedora 25; Fedora 26 is <a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched">Branched</a>
 and <a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide">Rawhide</a> the version in
-continuous development. To upgrade to any of the above versions, only the <tt class="docutils literal">number</tt>
-parameter should be edited in the <tt class="docutils literal"><span class="pre">--releasever=number</span></tt> option, 24 for fc24,
-25 for fc25, 26 for Fedora Branched and <tt class="docutils literal">rawhide</tt> for Upgrade to Rawhide. It
-should be noted that both Branched and Rawhide are not stable versions of Fedora
-, so its use is only recommended to more experienced users.</p>
+continuous development. To upgrade to any of the above versions, only the
+<tt class="docutils literal">number</tt> parameter should be edited in the <tt class="docutils literal"><span class="pre">--releasever=number</span></tt> option, 24
+for F24, 25 for F25, 26 for Fedora Branched and <tt class="docutils literal">rawhide</tt> to upgrade to
+Rawhide. It should be noted that both Branched and Rawhide are not stable
+versions of Fedora, so its use is only recommended for more experienced users.</p>
 <p>Upgrading to Fedora 24:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&#39;</span>
 </pre></div>
@@ -135,7 +136,7 @@ should be noted that both Branched and Rawhide are not stable versions of Fedora
 <p>Upgrading to Fedora Rawhide:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&#39;</span>
 </pre></div>
-<p>Finally, once the download the packages, it is necessary to start the system by
+<p>Finally, once it downloads the packages, it is necessary to restart the system by
 executing the following command:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade reboot&#39;</span>
 </pre></div>
