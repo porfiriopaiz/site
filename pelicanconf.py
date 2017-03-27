@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Porfirio Páiz'
 TAGLINE = '(■_■¬)'
 SITEURL = 'https://localhost:8000'
-USER_LOGO_URL = '/images/prpd8Vi.png'
+USER_LOGO_URL = 'http://localhost:8000/images/prpd8Vi.png'
 SITENAME = "porfirio's blog"
 DISQUS_SITENAME = 'porfiriopaizsite'
 
@@ -42,8 +42,8 @@ THEME = 'themes/pelican-svbhack'
 
 # Static Path
 STATIC_PATHS = [
-    'images/', 
-    'extra/'
+    'images',
+    'extra'
 ]
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},

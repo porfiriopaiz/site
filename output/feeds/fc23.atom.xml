@@ -9,7 +9,7 @@ administrator dnf.&lt;/p&gt;
 &lt;!-- TEASER_END --&gt;
 &lt;p&gt;After using Fedora 22 for a year and a half, the packages cache had taken
 approximately 10GB of space on my hard drive:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
+&lt;img alt="" class="align-center" src="https://localhost:8000/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
 &lt;p&gt;To tell dnf to preserve the packages downloaded in the cache it is required to
 add the next line to the dnf configuration file &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
@@ -30,7 +30,7 @@ latest updates available from the different repositories enabled in our system.
 To do this, we must reconstruct the packages metadata cache:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
+&lt;img alt="" class="align-center" src="https://localhost:8000/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -53,7 +53,7 @@ that we indicate, in this case the release will be &lt;tt class="docutils litera
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In the next screenshot you can see the number of packages to download and the
 amount of data that implies downloading them:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
+&lt;img alt="" class="align-center" src="https://localhost:8000/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
 &lt;p&gt;In the same way it is possible to upgrade to Fedora 24, although I do not
 recommend jumping to a &lt;tt class="docutils literal"&gt;(n + 2)&lt;/tt&gt; Fedora version, that is, moving from Fedora
 22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24

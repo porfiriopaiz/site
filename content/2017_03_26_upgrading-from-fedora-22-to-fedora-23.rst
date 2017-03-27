@@ -22,7 +22,7 @@ administrator dnf.
 After using Fedora 22 for a year and a half, the packages cache had taken
 approximately 10GB of space on my hard drive:
 
-.. image:: /images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png
+.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png
    :align: center
 
 To tell dnf to preserve the packages downloaded in the cache it is required to
@@ -56,7 +56,7 @@ To do this, we must reconstruct the packages metadata cache:
 
     su -c 'dnf makecache'
 
-.. image:: /images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png
+.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png
    :align: center
 
 .. code-block:: console
@@ -92,7 +92,7 @@ that we indicate, in this case the release will be ``23``.
 In the next screenshot you can see the number of packages to download and the
 amount of data that implies downloading them:
 
-.. image:: /images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png
+.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png
    :align: center
 
 In the same way it is possible to upgrade to Fedora 24, although I do not

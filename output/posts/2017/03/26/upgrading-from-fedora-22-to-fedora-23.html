@@ -33,7 +33,7 @@
   <aside>
     <div id="user_meta">
       <a href="../../../..">
-        <img src="/images/prpd8Vi.png" alt="logo">
+        <img src="http://localhost:8000/images/prpd8Vi.png" alt="logo">
       </a>
       <h2><a href="../../../..">Porfirio Páiz</a></h2>
       <p>(■_■¬)</p>
@@ -71,7 +71,7 @@ administrator dnf.</p>
 <!-- TEASER_END -->
 <p>After using Fedora 22 for a year and a half, the packages cache had taken
 approximately 10GB of space on my hard drive:</p>
-<img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" />
+<img alt="" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" />
 <p>To tell dnf to preserve the packages downloaded in the cache it is required to
 add the next line to the dnf configuration file <tt class="docutils literal">/etc/dnf/dnf.conf</tt>:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &quot;echo &#39;keepcache = true&#39; &gt;&gt; /etc/dnf/dnf.conf&quot;</span>
@@ -92,7 +92,7 @@ latest updates available from the different repositories enabled in our system.
 To do this, we must reconstruct the packages metadata cache:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf makecache&#39;</span>
 </pre></div>
-<img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" />
+<img alt="" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" />
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
 </pre></div>
 </div>
@@ -115,7 +115,7 @@ that we indicate, in this case the release will be <tt class="docutils literal">
 </pre></div>
 <p>In the next screenshot you can see the number of packages to download and the
 amount of data that implies downloading them:</p>
-<img alt="" class="align-center" src="/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" />
+<img alt="" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" />
 <p>In the same way it is possible to upgrade to Fedora 24, although I do not
 recommend jumping to a <tt class="docutils literal">(n + 2)</tt> Fedora version, that is, moving from Fedora
 22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24
