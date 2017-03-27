@@ -25,25 +25,25 @@ TAG_FEED_RSS = 'feeds/%s.rss.xml'
 
 # Blogroll
 LINKS = (('About', 'https://fedoraproject.org/wiki/User:Porfiriopaiz'),
-         ('Github', 'https://github.com/porfiriopaiz'),)
+         ('Github', 'https://github.com/porfiriopaiz'))
 
 # Social widget
 SOCIAL = (('Twitter', 'https://twitter.com/porfiriopaiz'),
           ('Google+', 'https://plus.google.com/+PorfirioAndresPaizCarrasco'),
-          ('License', 'https://creativecommons.org/licenses/by-sa/4.0/'),)
+          ('License', 'https://creativecommons.org/licenses/by-sa/4.0/'))
 
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 # Theme
 THEME = 'themes/pelican-svbhack'
 
 # Static Path
 STATIC_PATHS = [
-    'images', 
-    'extra'
+    'images/', 
+    'extra/'
 ]
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
