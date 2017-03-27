@@ -32,11 +32,11 @@ add the next line to the dnf configuration file ``/etc/dnf/dnf.conf``:
 
     su -c "echo 'keepcache = true' >> /etc/dnf/dnf.conf"
 
-Updating Fedora 23
-==================
+Upgrading Fedora 23
+===================
 
-Prerequisites for updating
---------------------------
+Prerequisites for upgrading
+---------------------------
 
 First we make sure we have enough space on our ``/`` partition, since during
 the update process we will need to download the most recent version of each and

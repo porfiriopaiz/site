@@ -14,10 +14,10 @@ approximately 10GB of space on my hard drive:&lt;/p&gt;
 add the next line to the dnf configuration file &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="updating-fedora-23"&gt;
-&lt;h2&gt;Updating Fedora 23&lt;/h2&gt;
-&lt;div class="section" id="prerequisites-for-updating"&gt;
-&lt;h3&gt;Prerequisites for updating&lt;/h3&gt;
+&lt;div class="section" id="upgrading-fedora-23"&gt;
+&lt;h2&gt;Upgrading Fedora 23&lt;/h2&gt;
+&lt;div class="section" id="prerequisites-for-upgrading"&gt;
+&lt;h3&gt;Prerequisites for upgrading&lt;/h3&gt;
 &lt;p&gt;First we make sure we have enough space on our &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition, since during
 the update process we will need to download the most recent version of each and
 every one of the packages installed in our system. Whereas there is a
