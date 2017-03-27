@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fc23</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/fc23.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2017-03-26T16:46:00-06:00</updated><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
-Lenovo ThinkPad T440p, which is equivalent to a year and a half running fc22. On
-July 19th of 2016 fc22 reached its period &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt;,
-this means that you will not receive any further security or maintenance
-updates, so upgrading to a newer stable version was recommended.&lt;/p&gt;
-&lt;p&gt;In this post I will explain how to update to Fedora 23 using the packages
-administrator dnf.&lt;/p&gt;
+Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
+July 19th of 2016 F22 entered &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt;
+status, which means that you will not receive any further security or
+maintenance updates, so upgrading to a newer stable version was recommended.&lt;/p&gt;
+&lt;p&gt;In this post I will explain how to update to Fedora 23 using the dnf package
+manager.&lt;/p&gt;
 &lt;!-- TEASER_END --&gt;
 &lt;p&gt;After using Fedora 22 for a year and a half, the packages cache had taken
 approximately 10GB of space on my hard drive:&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
 &lt;p&gt;To tell dnf to preserve the packages downloaded in the cache it is required to
-add the next line to the dnf configuration file &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
+add the following line to the dnf configuration file &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="upgrading-fedora-23"&gt;
 &lt;h2&gt;Upgrading Fedora 23&lt;/h2&gt;
 &lt;div class="section" id="prerequisites-for-upgrading"&gt;
 &lt;h3&gt;Prerequisites for upgrading&lt;/h3&gt;
-&lt;p&gt;First we make sure we have enough space on our &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition, since during
+&lt;p&gt;First, we make sure we have enough space on our &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition, since during
 the update process we will need to download the most recent version of each and
-every one of the packages installed in our system. Whereas there is a
+every single of the packages installed in our system. Whereas there is a
 possibility that our cache may be full, it is good to remove the packages stored
-in it to free space in case we need:&lt;/p&gt;
+in it to freed space in case we need:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Before we continue, we need to make sure that our system has installed the
 latest updates available from the different repositories enabled in our system.
-To do this, we must reconstruct the packages metadata cache:&lt;/p&gt;
+To do this, we must reconstruct the packages metadata cache and then apply the
+recent upgrades:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
@@ -40,12 +41,12 @@ To do this, we must reconstruct the packages metadata cache:&lt;/p&gt;
 Fedora, using a mechanism similar to that used for offline package updates.
 Packages are donwloaded while the system is running normally, and then the
 system is restarted in a special environment (implemented as a systmend
-target) to install them. Once the installation of the packages is complete
-, the system reboots but this time in the new Fedora version.&lt;/p&gt;
+target) to install them. Once the installation of the packages is complete,
+the system reboots but this time in the new Fedora version.&lt;/p&gt;
 &lt;p&gt;The first step is to install the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-plugin-system-upgrade&lt;/span&gt;&lt;/tt&gt; plugin:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install dnf-plugin-system-upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And now let's proceed to download the packages needed for upgrade to Fedora 23.&lt;/p&gt;
+&lt;p&gt;And now let's proceed to download the packages needed to upgrade to Fedora 23.&lt;/p&gt;
 &lt;p&gt;This process will download each and every one of the packages that we have
 installed in our system, in its most recent version available for the release
 that we indicate, in this case the release will be &lt;tt class="docutils literal"&gt;23&lt;/tt&gt;.&lt;/p&gt;
@@ -59,11 +60,11 @@ recommend jumping to a &lt;tt class="docutils literal"&gt;(n + 2)&lt;/tt&gt; Fed
 22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24
 and Fedora 25; Fedora 26 is &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched"&gt;Branched&lt;/a&gt;
 and &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;Rawhide&lt;/a&gt; the version in
-continuous development. To upgrade to any of the above versions, only the &lt;tt class="docutils literal"&gt;number&lt;/tt&gt;
-parameter should be edited in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever=number&lt;/span&gt;&lt;/tt&gt; option, 24 for fc24,
-25 for fc25, 26 for Fedora Branched and &lt;tt class="docutils literal"&gt;rawhide&lt;/tt&gt; for Upgrade to Rawhide. It
-should be noted that both Branched and Rawhide are not stable versions of Fedora
-, so its use is only recommended to more experienced users.&lt;/p&gt;
+continuous development. To upgrade to any of the above versions, only the
+&lt;tt class="docutils literal"&gt;number&lt;/tt&gt; parameter should be edited in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever=number&lt;/span&gt;&lt;/tt&gt; option, 24
+for F24, 25 for F25, 26 for Fedora Branched and &lt;tt class="docutils literal"&gt;rawhide&lt;/tt&gt; to upgrade to
+Rawhide. It should be noted that both Branched and Rawhide are not stable
+versions of Fedora, so its use is only recommended for more experienced users.&lt;/p&gt;
 &lt;p&gt;Upgrading to Fedora 24:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -73,7 +74,7 @@ should be noted that both Branched and Rawhide are not stable versions of Fedora
 &lt;p&gt;Upgrading to Fedora Rawhide:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Finally, once the download the packages, it is necessary to start the system by
+&lt;p&gt;Finally, once it downloads the packages, it is necessary to restart the system by
 executing the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade reboot&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
