@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Porfirio Páiz'
 TAGLINE = '(■_■¬)'
-SITEURL = 'http://localhost:8000'
+SITEURL = 'https://localhost:8000'
 USER_LOGO_URL = '/images/prpd8Vi.png'
 SITENAME = "porfirio's blog"
 DISQUS_SITENAME = 'porfiriopaizsite'
