@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - floss</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/floss.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2017-03-26T16:46:00-06:00</updated><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fc22</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/fc22.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2017-03-26T16:46:00-06:00</updated><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
 Lenovo ThinkPad T440p, which is equivalent to a year and a half running fc22. On
 July 19th of 2016 fc22 reached its period &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt;,
 this means that you will not receive any further security or maintenance
@@ -82,73 +82,4 @@ executing the following command:&lt;/p&gt;
 to Fedora 23.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:/site/posts/2016/11/03/irc-with-irssi.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From my beginnings in the Free Software and GNU/Linux, one of the features
-that caught my attention is the power of the command line in this operating
-system. From moving between different directories or installing an operating
-system completely from scratch, these are some of the routine tasks you can
-achive from the terminal.&lt;/p&gt;
-&lt;!-- TEASER_END --&gt;
-&lt;p&gt;In this post I will show how to configure irssi to automate some of the steps to
-carry out in order to access a chat room, as it is connecting to the server,
-authenticate and then joining the differents channels that are of interest.&lt;/p&gt;
-&lt;div class="section" id="installing-irssi"&gt;
-&lt;h2&gt;Installing irssi&lt;/h2&gt;
-&lt;p&gt;To install irssi in fedora, just open a terminal and type the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install irssi&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And to install irssi in debian:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install irssi&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="running-irssi"&gt;
-&lt;h3&gt;Running irssi&lt;/h3&gt;
-&lt;p&gt;To run irssi, open a terminal and type the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configurations"&gt;
-&lt;h2&gt;Configurations&lt;/h2&gt;
-&lt;div class="section" id="server-configurations"&gt;
-&lt;h3&gt;Server Configurations&lt;/h3&gt;
-&lt;p&gt;All these commands must be executed on a irssi session.&lt;/p&gt;
-&lt;p&gt;First we will remove the existing server configuration that we want to automate.
-With &lt;tt class="docutils literal"&gt;/server list&lt;/tt&gt; we can view existing servers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/server list&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In our case we will remove the existing configuration of Freenode.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/server remove chat.freenode.net&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And add the new configuration with the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In which &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-auto&lt;/span&gt;&lt;/tt&gt; defines the connection to the &lt;tt class="docutils literal"&gt;Freenode&lt;/tt&gt; server as
-automatic and &lt;tt class="docutils literal"&gt;your_nick_password&lt;/tt&gt; is your user password.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="adding-channels"&gt;
-&lt;h3&gt;Adding Channels&lt;/h3&gt;
-&lt;p&gt;Similarly, it is possible to add channels to this server in order to get
-connected automatically on each login, for this run the following command in our
-irssi session:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/channel add -auto #fedora Freenode&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In which &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-auto&lt;/span&gt;&lt;/tt&gt; allows us joining to &lt;tt class="docutils literal"&gt;#fedora&lt;/tt&gt; channel at &lt;tt class="docutils literal"&gt;Freenode&lt;/tt&gt;
-server automatically at each login.&lt;/p&gt;
-&lt;p&gt;Finally, every time we make a change in our configuration, we must save changes
-with the command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/save&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;irssi takes the user name of your current session on the system as the user for
-your session in irc, to prevent this from happening if the name of your session
-in the system does not match your user at Freenode, you should run irssi with
-the following parameter:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi -n nick&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Where &lt;tt class="docutils literal"&gt;nick&lt;/tt&gt; is your user nick on Freenode IRC.&lt;/p&gt;
-&lt;p&gt;Once you've added all your channels of interest from the Freenode server and
-saved the changes, you only need to run in a terminal the &lt;tt class="docutils literal"&gt;irssi&lt;/tt&gt; command and
-automatically you will be connected to the server and all the channels you've
-added without needing to authenticate manually and without risking anyone from
-reading your password while you type it. All this from a terminal.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="cli"></category><category term="irc"></category></entry></feed>
+</content><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry></feed>
