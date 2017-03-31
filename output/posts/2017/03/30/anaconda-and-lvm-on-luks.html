@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/ico" href="../../../../theme/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="anaconda, fc25, fedora, luks, lvm">
+
+  <title>
+    porfirio's blog
+&ndash; Anaconda and LVM on LUKS  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">Porfirio Páiz</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2017/03/30/anaconda-and-lvm-on-luks.html">Anaconda and LVM on LUKS</a></h1>
+  </div>
+  <div class="article_text">
+    <p>Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
+more than 6 months since it reached its End of Life, it is also possible reuse
+partitions created for F22 so that they can be used to install the new Fedora
+release and keep all the files contained in the Logical Volume that serves as
+<tt class="docutils literal">/home</tt>.</p>
+<p>In this post I will explain how to achieve this without compromising the
+integrity of our information or the other operating systems installed in our
+Desktop/Laptop.</p>
+<p>As we saw in the previous post, it is possible to make an upgrade, this is great
+to have the ability to do this, but the idea of downloading all packages, and
+then updating them at once, is something I do not know if I want do, frankly,
+doing fresh installs and setting everything to as it was before is something
+I like and enjoy doing. It also represents less burden for the computer, since
+it only downloads the minimum packages to have a functional system, anything
+else I may need can be later installed on demand.</p>
+<p>Once all the files contained in our systems have a proper backup, we can begin
+with the installation process without the fear of something going wrong, you
+never know what could go wrong until it goes wrong XD.</p>
+<div class="section" id="creating-an-installation-media">
+<h2>Creating an Installation Media</h2>
+<p>The first step is to create an installation medium, for this we must download
+the Fedora 25 ISO file. Since Fedora 21 I have been using the netinstall image,
+according to Chapter 2 of the <a class="reference external" href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Installation_Guide/chap-downloading-fedora.html">Fedora Installation Guide</a>:</p>
+<blockquote>
+<p>The netinstall image boots directly into the installation environment, and
+uses the online Fedora package repositories as the installation source.
+With a netinstall image, you can select a wide variety of packages to
+create a customized installation of Fedora.</p>
+<p>The Fedora Server netinstall image is a universal one, and can be used to
+install any Fedora flavor or your own set of favorite packages.</p>
+</blockquote>
+<div class="section" id="downloading-the-image-everything-netinstall">
+<h3>Downloading the image Everything netinstall</h3>
+<p>I'd rather use the netinstall ISO image of <a class="reference external" href="https://alt.fedoraproject.org/en/">Fedora Everything</a>.</p>
+<p>Apparently, the Everything netinstall image does not have a torrent seeder for
+download:</p>
+<p><a class="reference external" href="https://torrent.fedoraproject.org/">https://torrent.fedoraproject.org/</a></p>
+<p>So we must use the conventional method of direct download, for this we will
+make use of the command line.</p>
+<p>To download the image for 32bit systems use the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/i386/iso/Fedora-Everything-netinst-i386-25-1.3.iso</span>
+</pre></div>
+<p>To download the image for 64bit systems use the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-25-1.3.iso</span>
+</pre></div>
+<dl class="docutils">
+<dt>Where:</dt>
+<dd><p class="first"><cite>-N</cite> downloads the file with the same time and date stamp when it was first
+uploaded to the servers.</p>
+<p><cite>-t 0</cite> in case the download is interrupted due to problems of connection
+this will attempt to make an automatic reconnection, if we leave the time in
+<cite>0</cite> will reconnect immediately.</p>
+<p class="last"><cite>-c</cite> indicates that the download must be continued in the byte that was left
+pending when the donwload was interrupted.</p>
+</dd>
+</dl>
+<p>This is a small contingency measure in case we do not have access to a network
+stable enough.</p>
+<p>we can also verify the integrity of the downloaded image using the checksum
+file. we only have to download the file and save it in the same directory
+containing the ISO image:</p>
+<div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://alt.fedoraproject.org/es/static/checksums/Fedora-Everything-25-1.3-x86_64-CHECKSUM</span>
+</pre></div>
+<p>Then we execute the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">sha256sum -c Fedora-Everything-25-1.3-x86_64-CHECKSUM</span>
+</pre></div>
+</div>
+<div class="section" id="writing-the-iso-image-on-a-usb">
+<h3>Writing the ISO image on a USB</h3>
+<p>To burn the ISO image to an USB drive we will use the <strong>Fedora Media Writer</strong>
+tool. If you are using Windows you can install Fedora Media Writer using the
+next link:</p>
+<p><a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe">https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe</a></p>
+<p>For MacOS:</p>
+<p><a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg">https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg</a></p>
+<p>If you are using Fedora 23 or higher you can install Fedora Media Writer with
+following command:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install mediawriter&#39;</span>
+</pre></div>
+<p>Before running Fedora Media Writer it is advisable to disconnect any removable
+storage device that may be plugged in our system, this to avoid possible
+confusion. Then we connect the USB memory that we will use and until then run
+Fedora Media Writer.</p>
+<p>The steps to follow are very simple, we select:</p>
+<ol class="arabic simple">
+<li>Custom image.</li>
+<li>Navigate to the directory where the ISO image was previously downloaded.</li>
+<li>Select the USB.</li>
+<li>Click <cite>Write to disk</cite>.</li>
+<li>Enter your user password if you are in the <cite>wheel</cite> group or the <cite>root</cite>
+password in case we are not in the admins group.</li>
+<li>Done.</li>
+</ol>
+</div>
+<div class="section" id="booting-from-usb">
+<h3>Booting from USB</h3>
+<p>In my case I have configured my laptop to start in <cite>UEFI mode</cite> and with
+<cite>Secure Boot</cite> enabled.</p>
+<p>Creating our installation media with Fedora Media Writer guarantees that the
+installation medium will work in any possible scenario.</p>
+<p>To access the Boot Manager on my laptop, I only need to press the <strong>Enter</strong>
+key while the <strong>Lenovo</strong> logo is displayed, this is a indicator, in my case,
+that the machine is booting in UEFI mode.</p>
+</div>
+</div>
+<div class="section" id="starting-the-fedora-25-installation-process">
+<h2>Starting the Fedora 25 Installation Process</h2>
+<p>For this section of the post I will use screenshots and a brief description of
+them.</p>
+<p>First, the Internet connection.</p>
+<p>Installation media created from netinstall images depends exclusively on an
+Internet connection, either wired via RJ45 port (Ethernet) or via Wireless
+(Using our WiFi card), in my case the netinstall setup detects both network
+cards. Fedora netinstall contain a set of drivers that allow us to make use of
+certain network cards, in case our network card is not detected it might be due
+to our device is not supported by Fedora, this is for legal reasons. Fedora only
+includes FLOSS drivers or that its manufacturers make explicit mention of its
+terms of use and distribution policy.</p>
+<p>My T440p comes equipped with an <a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM">Intel® Ethernet Wired Network Card
+Connection I217-LM</a>
+and an <a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260">Intel® Wireless-N 7260 Wireless Network Card</a>,
+both cards were detected during installation, in the office I only have access
+to WiFi networks so I used the Wireless card.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0000.png" />
+<p>In this first image of the installation summary, the first thing we must do
+is to get connected to any of the available networks whether we use a Wired
+network or WiFi network, for this we click on the <cite>NETWORK &amp; HOST NAME</cite>.</p>
+<p>Then selecting Wireless and activating the card; we select one Network of those
+available; we change the name of our Desktop/Laptop and click <cite>Apply</cite>...</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0002.png" />
+<p>Click <cite>Done</cite>.</p>
+<p>In the <cite>LOCALIZATION</cite> section I added the <tt class="docutils literal">French (International (AltGr dead keys)</tt>
+and removed <tt class="docutils literal">English (US)</tt>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0005.png" />
+<p>You can see a short test, when by pressing the <cite>AltGr + a</cite> key and other vowels,
+the result is accentuated vowels.</p>
+<p>In the <cite>TIME &amp; DATE</cite> section I always enable <cite>Network Time</cite>...</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0007.png" />
+<p>We also select our <cite>Region</cite> and <cite>City</cite>, based on this, the time and date are set.</p>
+<p>Up to now we have configured the following sections:</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0008.png" />
+<p>Now we must configure the <cite>SOFTWARE</cite> section, specifically <cite>INSTALLATION SOURCE</cite>...</p>
+<p>In this section we mark <cite>On the Network:</cite> and select <cite>Closest mirror</cite>, we also
+make sure to uncheck the <cite>Updates</cite> option...</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0009.png" />
+<p>This way the installer will use the online repositories to download the required
+packages for the installation, using the nearest server that commonly is not the
+closest geographically, but the most efficient and with better times in terms
+of data transfer.</p>
+<p>By unchecking <cite>Updates</cite> we are telling the installer to use the latest packages
+that are available in the repo.</p>
+<p>We wait for the package group metadata to be downloaded, the section <cite>SOFTWARE SELECTION</cite>
+depends on this:</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0011.png" />
+<p>In <cite>SOFTWARE SELECTION</cite> I chose <cite>Fedora Custom Operating System</cite>, which
+represents a very minimal package selection, with no graphical environment, only
+a few packages groups as follows:</p>
+<div class="highlight"><pre><span></span><span class="go">Environment Group: Fedora Custom Operating System</span>
+<span class="go"> Environment-Id: custom-environment</span>
+<span class="go"> Description: Basic building block for a custom Fedora system.</span>
+<span class="go"> Mandatory Groups:</span>
+<span class="go">   Core</span>
+<span class="go"> Optional Groups:</span>
+<span class="go">   Guest Agents</span>
+<span class="go">   Standard</span>
+</pre></div>
+<p>Finally we have reached the <cite>SYSTEM</cite> section, select <cite>INSTALLATION DESTINATION</cite>.
+In <cite>Device Selection</cite>, in <cite>Local Stardard Disk</cite> select the hard disk that has
+the Fedora installation with the existing partitions we want to reuse.</p>
+<p>In the <cite>Other Storage Options</cite> section, under <cite>Partitioning</cite> we select <cite>I will
+Configure partitioning</cite>.</p>
+<p>The following menu is shown below, in which we will click on <cite>Unknown</cite>:</p>
+<blockquote>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0013.png" />
+</blockquote>
+<p>Once we click <cite>Unknown</cite> the other existing partitions will be displayed. we will
+focus on the partitions <strong>sda2</strong>, <strong>sda9</strong> and <strong>sda10</strong>:</p>
+<blockquote>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0014.png" />
+</blockquote>
+<p>Where:</p>
+<blockquote>
+<p><strong>sda2</strong> is the ESP (EFI Partition System) partition, this partition
+contains the other *.efi files; every OS that has been installed on our
+computer in UEFI mode has an *.efi file that will be linked to our GRUB,
+which allows us to choose which OS to boot during the first few seconds
+after our computer is turned on. <strong>You should never mark</strong> this partition to
+be formatted. <strong>sda2</strong> will be mounted on <cite>/boot/efi</cite>.</p>
+<p><strong>sda9</strong> is the partition I will mount in <cite>/boot</cite>, this partition should not
+be encrypted, since inside there are files needed for the OS to be loaded,
+in example the kernel. If we encrypt this partition we will not be
+able  to load the kernels on boot.</p>
+<p><strong>sda10</strong> is the partition that was encrypted using LUKS, which contains
+the <cite>Volume Group</cite> which contains the other logical volumes that serve as
+<cite>/</cite>, <cite>/home</cite> and <cite>swap</cite>.</p>
+</blockquote>
+<p>After selecting <strong>sda10</strong> you are prompted for the encryption password that will
+grant you access to the <cite>Volume Group</cite> containing the mentioned partitions. It
+is shown as the existing Fedora 23 installation, which was originally the F22
+that we updated in the previous post.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0015.png" />
+<p>We click on <cite>Fedora Linux 23 for x86_64</cite> and we can see the logical volumes that
+we will reuse.</p>
+<p>By clicking <cite>/home</cite>, we make sure to assign a <cite>Mount Point</cite> for this Logical
+Volumen. We make sure that the <cite>Reformat</cite> checkbox is <strong>not</strong> checked, and click
+on <cite>Update Settings</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0017.png" />
+<p>In the following image we can see that the logical volume <cite>fedora_lilit-home</cite>
+was reassigned to <cite>New Fedora 25 Installation</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0018.png" />
+<p>We select <cite>/boot/efi</cite>, which is nothing more than the ESP partition located in
+<strong>sda2</strong>, we make sure to assign a <cite>Mount Point</cite> for this Logical Volume, which
+in this case would be <cite>/boot/efi</cite>. we make sure that the checkbox <cite>Reformat</cite> is
+<strong>not</strong> checked, and click on <cite>Update Settings</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0019.png" />
+<p>We select <cite>/</cite>, this logical volume served as <cite>/</cite> for F23, so to be able to reuse
+it we must mark it to format. we assign <cite>/</cite> as the point, I assign a file system
+ext4, we ensure that the checkbox <cite>Reformat</cite> <strong>is</strong> marked, and click on
+<cite>Update Settings</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0023.png" />
+<p>Select <cite>swap</cite>, mark the checkbox and click <cite>Update Settings</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0025.png" />
+<p>We select <cite>/boot</cite>, here is where the F23 kernels were stored, so to reuse this
+partition it is required to format it. we assign a <cite>Mount Point</cite> <cite>/boot</cite>, then
+click <cite>Reformat</cite>, in my case I assign an ext4 file system and click <cite>Update Settings</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0030.png" />
+<p>Click on <cite>Done</cite> and accept the changes that will be made.</p>
+<p>To finish just click on <cite>Begin Installation</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0032.png" />
+<p>We assign a user password and ROOT password. And wait, now we must wait for the
+download of the packages and their installation to finish:</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0037.png" />
+<p>After done, click <cite>Reboot</cite>.</p>
+<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0053.png" />
+<p>In my case I had to do a series of steps after the installation that the
+we will see in the next post.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 30 March 2017</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/anaconda.html">anaconda</a>,      <a href="../../../../tag/fc25.html">fc25</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/luks.html">luks</a>,      <a href="../../../../tag/lvm.html">lvm</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2017/03/30/anaconda-and-lvm-on-luks.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
