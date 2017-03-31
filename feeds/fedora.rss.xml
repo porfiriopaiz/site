@@ -1,2 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - fedora</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description></description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 30 Mar 2017 21:00:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</guid><category>anaconda</category><category>fc25</category><category>fedora</category><category>luks</category><category>lvm</category></item><item><title>Upgrading from Fedora 22 to Fedora 23</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</link><description></description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 26 Mar 2017 16:46:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</guid><category>dnf</category><category>eol</category><category>fc22</category><category>fc23</category><category>fedora</category><category>system-upgrade</category></item></channel></rss>
+<rss version="2.0"><channel><title>porfirio's blog - fedora</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
+more than 6 months since it reached its End of Life, it is also possible reuse
+partitions created for F22 so that they can be used to install the new Fedora
+release and keep all the files contained in the Logical Volume that serves as
+&lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In this post I will explain how to achieve this without compromising the
+integrity of our information or the other operating systems installed in our
+Desktop/Laptop.&lt;/p&gt;
+&lt;p&gt;As we saw in the previous post, it is possible to make an upgrade, this is great
+to have the ability to do this, but the idea of downloading all packages, and
+then updating them at once, is something I do not know if I want do, frankly,
+doing fresh installs and setting everything to as it was before is something
+I like and enjoy doing. It also represents less burden for the computer, since
+it only downloads the minimum packages to have a functional system, anything
+else I may need can be later installed on demand.&lt;/p&gt;
+&lt;p&gt;Once all the files contained in our systems have a proper backup, we can begin
+with the installation process without the fear of something going wrong, you
+never know what could go wrong until it goes wrong XD.&lt;/p&gt;
+&lt;div class="section" id="creating-an-installation-media"&gt;
+&lt;h2&gt;Creating an Installation Media&lt;/h2&gt;
+&lt;p&gt;The first step is to create an installation medium, for this we must download
+the Fedora 25 ISO file. Since Fedora 21 I have been using the netinstall image,
+according to Chapter 2 of the &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Installation_Guide/chap-downloading-fedora.html"&gt;Fedora Installation Guide&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The netinstall image boots directly into the installation environment, and
+uses the online Fedora package repositories as the installation source.
+With a netinstall image, you can select a wide variety of packages to
+create a customized installation of Fedora.&lt;/p&gt;
+&lt;p&gt;The Fedora Server netinstall image is a universal one, and can be used to
+install any Fedora flavor or your own set of favorite packages.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="section" id="downloading-the-image-everything-netinstall"&gt;
+&lt;h3&gt;Downloading the image Everything netinstall&lt;/h3&gt;
+&lt;p&gt;I'd rather use the netinstall ISO image of &lt;a class="reference external" href="https://alt.fedoraproject.org/en/"&gt;Fedora Everything&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Apparently, the Everything netinstall image does not have a torrent seeder for
+download:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://torrent.fedoraproject.org/"&gt;https://torrent.fedoraproject.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So we must use the conventional method of direct download, for this we will
+make use of the command line.&lt;/p&gt;
+&lt;p&gt;To download the image for 32bit systems use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/i386/iso/Fedora-Everything-netinst-i386-25-1.3.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To download the image for 64bit systems use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-25-1.3.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Where:&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;&lt;cite&gt;-N&lt;/cite&gt; downloads the file with the same time and date stamp when it was first
+uploaded to the servers.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-t 0&lt;/cite&gt; in case the download is interrupted due to problems of connection
+this will attempt to make an automatic reconnection, if we leave the time in
+&lt;cite&gt;0&lt;/cite&gt; will reconnect immediately.&lt;/p&gt;
+&lt;p class="last"&gt;&lt;cite&gt;-c&lt;/cite&gt; indicates that the download must be continued in the byte that was left
+pending when the donwload was interrupted.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;This is a small contingency measure in case we do not have access to a network
+stable enough.&lt;/p&gt;
+&lt;p&gt;we can also verify the integrity of the downloaded image using the checksum
+file. we only have to download the file and save it in the same directory
+containing the ISO image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://alt.fedoraproject.org/es/static/checksums/Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then we execute the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="writing-the-iso-image-on-a-usb"&gt;
+&lt;h3&gt;Writing the ISO image on a USB&lt;/h3&gt;
+&lt;p&gt;To burn the ISO image to an USB drive we will use the &lt;strong&gt;Fedora Media Writer&lt;/strong&gt;
+tool. If you are using Windows you can install Fedora Media Writer using the
+next link:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe"&gt;https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For MacOS:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg"&gt;https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you are using Fedora 23 or higher you can install Fedora Media Writer with
+following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install mediawriter&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Before running Fedora Media Writer it is advisable to disconnect any removable
+storage device that may be plugged in our system, this to avoid possible
+confusion. Then we connect the USB memory that we will use and until then run
+Fedora Media Writer.&lt;/p&gt;
+&lt;p&gt;The steps to follow are very simple, we select:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Custom image.&lt;/li&gt;
+&lt;li&gt;Navigate to the directory where the ISO image was previously downloaded.&lt;/li&gt;
+&lt;li&gt;Select the USB.&lt;/li&gt;
+&lt;li&gt;Click &lt;cite&gt;Write to disk&lt;/cite&gt;.&lt;/li&gt;
+&lt;li&gt;Enter your user password if you are in the &lt;cite&gt;wheel&lt;/cite&gt; group or the &lt;cite&gt;root&lt;/cite&gt;
+password in case we are not in the admins group.&lt;/li&gt;
+&lt;li&gt;Done.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="booting-from-usb"&gt;
+&lt;h3&gt;Booting from USB&lt;/h3&gt;
+&lt;p&gt;In my case I have configured my laptop to start in &lt;cite&gt;UEFI mode&lt;/cite&gt; and with
+&lt;cite&gt;Secure Boot&lt;/cite&gt; enabled.&lt;/p&gt;
+&lt;p&gt;Creating our installation media with Fedora Media Writer guarantees that the
+installation medium will work in any possible scenario.&lt;/p&gt;
+&lt;p&gt;To access the Boot Manager on my laptop, I only need to press the &lt;strong&gt;Enter&lt;/strong&gt;
+key while the &lt;strong&gt;Lenovo&lt;/strong&gt; logo is displayed, this is a indicator, in my case,
+that the machine is booting in UEFI mode.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="starting-the-fedora-25-installation-process"&gt;
+&lt;h2&gt;Starting the Fedora 25 Installation Process&lt;/h2&gt;
+&lt;p&gt;For this section of the post I will use screenshots and a brief description of
+them.&lt;/p&gt;
+&lt;p&gt;First, the Internet connection.&lt;/p&gt;
+&lt;p&gt;Installation media created from netinstall images depends exclusively on an
+Internet connection, either wired via RJ45 port (Ethernet) or via Wireless
+(Using our WiFi card), in my case the netinstall setup detects both network
+cards. Fedora netinstall contain a set of drivers that allow us to make use of
+certain network cards, in case our network card is not detected it might be due
+to our device is not supported by Fedora, this is for legal reasons. Fedora only
+includes FLOSS drivers or that its manufacturers make explicit mention of its
+terms of use and distribution policy.&lt;/p&gt;
+&lt;p&gt;My T440p comes equipped with an &lt;a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM"&gt;Intel® Ethernet Wired Network Card
+Connection I217-LM&lt;/a&gt;
+and an &lt;a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260"&gt;Intel® Wireless-N 7260 Wireless Network Card&lt;/a&gt;,
+both cards were detected during installation, in the office I only have access
+to WiFi networks so I used the Wireless card.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0000.png" /&gt;
+&lt;p&gt;In this first image of the installation summary, the first thing we must do
+is to get connected to any of the available networks whether we use a Wired
+network or WiFi network, for this we click on the &lt;cite&gt;NETWORK &amp;amp; HOST NAME&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Then selecting Wireless and activating the card; we select one Network of those
+available; we change the name of our Desktop/Laptop and click &lt;cite&gt;Apply&lt;/cite&gt;...&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0002.png" /&gt;
+&lt;p&gt;Click &lt;cite&gt;Done&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;LOCALIZATION&lt;/cite&gt; section I added the &lt;tt class="docutils literal"&gt;French (International (AltGr dead keys)&lt;/tt&gt;
+and removed &lt;tt class="docutils literal"&gt;English (US)&lt;/tt&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0005.png" /&gt;
+&lt;p&gt;You can see a short test, when by pressing the &lt;cite&gt;AltGr + a&lt;/cite&gt; key and other vowels,
+the result is accentuated vowels.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;TIME &amp;amp; DATE&lt;/cite&gt; section I always enable &lt;cite&gt;Network Time&lt;/cite&gt;...&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0007.png" /&gt;
+&lt;p&gt;We also select our &lt;cite&gt;Region&lt;/cite&gt; and &lt;cite&gt;City&lt;/cite&gt;, based on this, the time and date are set.&lt;/p&gt;
+&lt;p&gt;Up to now we have configured the following sections:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0008.png" /&gt;
+&lt;p&gt;Now we must configure the &lt;cite&gt;SOFTWARE&lt;/cite&gt; section, specifically &lt;cite&gt;INSTALLATION SOURCE&lt;/cite&gt;...&lt;/p&gt;
+&lt;p&gt;In this section we mark &lt;cite&gt;On the Network:&lt;/cite&gt; and select &lt;cite&gt;Closest mirror&lt;/cite&gt;, we also
+make sure to uncheck the &lt;cite&gt;Updates&lt;/cite&gt; option...&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0009.png" /&gt;
+&lt;p&gt;This way the installer will use the online repositories to download the required
+packages for the installation, using the nearest server that commonly is not the
+closest geographically, but the most efficient and with better times in terms
+of data transfer.&lt;/p&gt;
+&lt;p&gt;By unchecking &lt;cite&gt;Updates&lt;/cite&gt; we are telling the installer to use the latest packages
+that are available in the repo.&lt;/p&gt;
+&lt;p&gt;We wait for the package group metadata to be downloaded, the section &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt;
+depends on this:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0011.png" /&gt;
+&lt;p&gt;In &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt; I chose &lt;cite&gt;Fedora Custom Operating System&lt;/cite&gt;, which
+represents a very minimal package selection, with no graphical environment, only
+a few packages groups as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;Environment Group: Fedora Custom Operating System&lt;/span&gt;
+&lt;span class="go"&gt; Environment-Id: custom-environment&lt;/span&gt;
+&lt;span class="go"&gt; Description: Basic building block for a custom Fedora system.&lt;/span&gt;
+&lt;span class="go"&gt; Mandatory Groups:&lt;/span&gt;
+&lt;span class="go"&gt;   Core&lt;/span&gt;
+&lt;span class="go"&gt; Optional Groups:&lt;/span&gt;
+&lt;span class="go"&gt;   Guest Agents&lt;/span&gt;
+&lt;span class="go"&gt;   Standard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally we have reached the &lt;cite&gt;SYSTEM&lt;/cite&gt; section, select &lt;cite&gt;INSTALLATION DESTINATION&lt;/cite&gt;.
+In &lt;cite&gt;Device Selection&lt;/cite&gt;, in &lt;cite&gt;Local Stardard Disk&lt;/cite&gt; select the hard disk that has
+the Fedora installation with the existing partitions we want to reuse.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;Other Storage Options&lt;/cite&gt; section, under &lt;cite&gt;Partitioning&lt;/cite&gt; we select &lt;cite&gt;I will
+Configure partitioning&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;The following menu is shown below, in which we will click on &lt;cite&gt;Unknown&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0013.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once we click &lt;cite&gt;Unknown&lt;/cite&gt; the other existing partitions will be displayed. we will
+focus on the partitions &lt;strong&gt;sda2&lt;/strong&gt;, &lt;strong&gt;sda9&lt;/strong&gt; and &lt;strong&gt;sda10&lt;/strong&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0014.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;sda2&lt;/strong&gt; is the ESP (EFI Partition System) partition, this partition
+contains the other *.efi files; every OS that has been installed on our
+computer in UEFI mode has an *.efi file that will be linked to our GRUB,
+which allows us to choose which OS to boot during the first few seconds
+after our computer is turned on. &lt;strong&gt;You should never mark&lt;/strong&gt; this partition to
+be formatted. &lt;strong&gt;sda2&lt;/strong&gt; will be mounted on &lt;cite&gt;/boot/efi&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda9&lt;/strong&gt; is the partition I will mount in &lt;cite&gt;/boot&lt;/cite&gt;, this partition should not
+be encrypted, since inside there are files needed for the OS to be loaded,
+in example the kernel. If we encrypt this partition we will not be
+able  to load the kernels on boot.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda10&lt;/strong&gt; is the partition that was encrypted using LUKS, which contains
+the &lt;cite&gt;Volume Group&lt;/cite&gt; which contains the other logical volumes that serve as
+&lt;cite&gt;/&lt;/cite&gt;, &lt;cite&gt;/home&lt;/cite&gt; and &lt;cite&gt;swap&lt;/cite&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;After selecting &lt;strong&gt;sda10&lt;/strong&gt; you are prompted for the encryption password that will
+grant you access to the &lt;cite&gt;Volume Group&lt;/cite&gt; containing the mentioned partitions. It
+is shown as the existing Fedora 23 installation, which was originally the F22
+that we updated in the previous post.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0015.png" /&gt;
+&lt;p&gt;We click on &lt;cite&gt;Fedora Linux 23 for x86_64&lt;/cite&gt; and we can see the logical volumes that
+we will reuse.&lt;/p&gt;
+&lt;p&gt;By clicking &lt;cite&gt;/home&lt;/cite&gt;, we make sure to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical
+Volumen. We make sure that the &lt;cite&gt;Reformat&lt;/cite&gt; checkbox is &lt;strong&gt;not&lt;/strong&gt; checked, and click
+on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0017.png" /&gt;
+&lt;p&gt;In the following image we can see that the logical volume &lt;cite&gt;fedora_lilit-home&lt;/cite&gt;
+was reassigned to &lt;cite&gt;New Fedora 25 Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0018.png" /&gt;
+&lt;p&gt;We select &lt;cite&gt;/boot/efi&lt;/cite&gt;, which is nothing more than the ESP partition located in
+&lt;strong&gt;sda2&lt;/strong&gt;, we make sure to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical Volume, which
+in this case would be &lt;cite&gt;/boot/efi&lt;/cite&gt;. we make sure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; is
+&lt;strong&gt;not&lt;/strong&gt; checked, and click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0019.png" /&gt;
+&lt;p&gt;We select &lt;cite&gt;/&lt;/cite&gt;, this logical volume served as &lt;cite&gt;/&lt;/cite&gt; for F23, so to be able to reuse
+it we must mark it to format. we assign &lt;cite&gt;/&lt;/cite&gt; as the point, I assign a file system
+ext4, we ensure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; &lt;strong&gt;is&lt;/strong&gt; marked, and click on
+&lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0023.png" /&gt;
+&lt;p&gt;Select &lt;cite&gt;swap&lt;/cite&gt;, mark the checkbox and click &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0025.png" /&gt;
+&lt;p&gt;We select &lt;cite&gt;/boot&lt;/cite&gt;, here is where the F23 kernels were stored, so to reuse this
+partition it is required to format it. we assign a &lt;cite&gt;Mount Point&lt;/cite&gt; &lt;cite&gt;/boot&lt;/cite&gt;, then
+click &lt;cite&gt;Reformat&lt;/cite&gt;, in my case I assign an ext4 file system and click &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0030.png" /&gt;
+&lt;p&gt;Click on &lt;cite&gt;Done&lt;/cite&gt; and accept the changes that will be made.&lt;/p&gt;
+&lt;p&gt;To finish just click on &lt;cite&gt;Begin Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0032.png" /&gt;
+&lt;p&gt;We assign a user password and ROOT password. And wait, now we must wait for the
+download of the packages and their installation to finish:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0037.png" /&gt;
+&lt;p&gt;After done, click &lt;cite&gt;Reboot&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0053.png" /&gt;
+&lt;p&gt;In my case I had to do a series of steps after the installation that the
+we will see in the next post.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 30 Mar 2017 21:00:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</guid><category>anaconda</category><category>fc25</category><category>fedora</category><category>luks</category><category>lvm</category></item><item><title>Upgrading from Fedora 22 to Fedora 23</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</link><description>&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
+Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
+July 19th of 2016 F22 entered &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt;
+status, which means that you will not receive any further security or
+maintenance updates, so upgrading to a newer stable version was recommended.&lt;/p&gt;
+&lt;p&gt;In this post I will explain how to update to Fedora 23 using the dnf package
+manager.&lt;/p&gt;
+&lt;!-- TEASER_END --&gt;
+&lt;p&gt;After using Fedora 22 for a year and a half, the packages cache had taken
+approximately 10GB of space on my hard drive:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
+&lt;p&gt;To tell dnf to preserve the packages downloaded in the cache it is required to
+add the following line to the dnf configuration file &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="upgrading-fedora-23"&gt;
+&lt;h2&gt;Upgrading Fedora 23&lt;/h2&gt;
+&lt;div class="section" id="prerequisites-for-upgrading"&gt;
+&lt;h3&gt;Prerequisites for upgrading&lt;/h3&gt;
+&lt;p&gt;First, we make sure we have enough space on our &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition, since during
+the update process we will need to download the most recent version of each and
+every single of the packages installed in our system. Whereas there is a
+possibility that our cache may be full, it is good to remove the packages stored
+in it to freed space in case we need:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Before we continue, we need to make sure that our system has installed the
+latest updates available from the different repositories enabled in our system.
+To do this, we must reconstruct the packages metadata cache and then apply the
+recent upgrades:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-the-dnf-plugin-system-upgrade-plugin"&gt;
+&lt;h3&gt;Install the dnf-plugin-system-upgrade plugin&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;DNF System Upgrade&lt;/strong&gt; can upgrade your system to a more recent version of
+Fedora, using a mechanism similar to that used for offline package updates.
+Packages are donwloaded while the system is running normally, and then the
+system is restarted in a special environment (implemented as a systmend
+target) to install them. Once the installation of the packages is complete,
+the system reboots but this time in the new Fedora version.&lt;/p&gt;
+&lt;p&gt;The first step is to install the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-plugin-system-upgrade&lt;/span&gt;&lt;/tt&gt; plugin:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install dnf-plugin-system-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And now let's proceed to download the packages needed to upgrade to Fedora 23.&lt;/p&gt;
+&lt;p&gt;This process will download each and every one of the packages that we have
+installed in our system, in its most recent version available for the release
+that we indicate, in this case the release will be &lt;tt class="docutils literal"&gt;23&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=23&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the next screenshot you can see the number of packages to download and the
+amount of data that implies downloading them:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
+&lt;p&gt;In the same way it is possible to upgrade to Fedora 24, although I do not
+recommend jumping to a &lt;tt class="docutils literal"&gt;(n + 2)&lt;/tt&gt; Fedora version, that is, moving from Fedora
+22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24
+and Fedora 25; Fedora 26 is &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched"&gt;Branched&lt;/a&gt;
+and &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;Rawhide&lt;/a&gt; the version in
+continuous development. To upgrade to any of the above versions, only the
+&lt;tt class="docutils literal"&gt;number&lt;/tt&gt; parameter should be edited in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever=number&lt;/span&gt;&lt;/tt&gt; option, 24
+for F24, 25 for F25, 26 for Fedora Branched and &lt;tt class="docutils literal"&gt;rawhide&lt;/tt&gt; to upgrade to
+Rawhide. It should be noted that both Branched and Rawhide are not stable
+versions of Fedora, so its use is only recommended for more experienced users.&lt;/p&gt;
+&lt;p&gt;Upgrading to Fedora 24:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upgrading to Fedora 25:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=25&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upgrading to Fedora Rawhide:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, once it downloads the packages, it is necessary to restart the system by
+executing the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade reboot&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will restart the system. Then the system should boot again using the same
+(newer) kernel, but this time it will start the upgrade process from Fedora 22
+to Fedora 23.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 26 Mar 2017 16:46:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</guid><category>dnf</category><category>eol</category><category>fc22</category><category>fc23</category><category>fedora</category><category>system-upgrade</category></item></channel></rss>
