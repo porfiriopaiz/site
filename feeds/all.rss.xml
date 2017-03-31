@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
+<rss version="2.0"><channel><title>porfirio's blog</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Fri, 31 Mar 2017 15:07:00 -0600</lastBuildDate><item><title>This was Fedora at CS50x.ni</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</link><description>&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
+community and the &lt;a class="reference external" href="http://code-fu.net.ni/"&gt;CS50x.ni&lt;/a&gt; staff, with the support
+from &lt;a class="reference external" href="http://fundacionuno.org/en/"&gt;Fundación UNO&lt;/a&gt; and the Fedora Project, we
+had the opportunity to meet to see a series of lectures in which the speakers
+shared their experience using Free Software, the importance and benefits of the
+different software tools used in the CS50x.ni course. The lectures were aimed
+for anyone who is taking the CS50x.ni course currently, or who wants to take it
+in the future or people interested in learning more about free software and more
+specifically about the Fedora Project.&lt;/p&gt;
+&lt;p&gt;The meeting was in the basement of the north wing of the Rigoberto López Pérez
+building of the National University of Engineering in the Simón Bolívar Campus,
+in the classrooms dedicated to the CS50x.ni (Coding) project.&lt;/p&gt;
+&lt;p&gt;The talks began at 9:00 AM, as the first presentation we had a &lt;a class="reference external" href="https://fedorapeople.org/~mayorga/slides/this_is_fedora.odp"&gt;&amp;quot;Fedora Project
+Overview&amp;quot;&lt;/a&gt;
+facilitated by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Mayorga"&gt;Eduardo Mayorga&lt;/a&gt;.
+Eduardo a Fedora Project Ambassador, Package Maintainer and is currently part of
+the group of students who are participating in the course CS50x.ni, explained
+to us what the Fedora Project is about, its mission and vision as a Free
+Software project, and also gave us a look at what is being part of this
+community both locally and internationally.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/mayorga.jpg" /&gt;
+&lt;p&gt;The second talk was given by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Yn1v"&gt;Neville Cross&lt;/a&gt;,
+Founder and Leader of Fedora Community in Nicaragua. In his talk Neville
+motivated the attendees to know more about the importance of mastering the
+command line tools shipped in all the GNU/Linux distributions. Neville made a
+demonstration on the use of &lt;a class="reference external" href="https://yn1v.fedorapeople.org/Slides/ssh_una_presentacion_corta.odp"&gt;SSH remote management tools&lt;/a&gt;
+in which he showed how to access a computer connected in the same network from
+a second computer through a command line and talked about some tools that allow
+monitoring resources, all this remotely.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/yn1v.jpg" /&gt;
+&lt;p&gt;The third talk was facilitated by &lt;a class="reference external" href="http://reactivated.net/"&gt;Daniel Drake&lt;/a&gt;.
+Daniel is an operating system developer originally from the UK settled in
+Nicaragua for 8 years. Daniel came as part of Project One Laptop per Child, the
+talk was related to &lt;a class="reference external" href="https://drive.google.com/uc?export=download&amp;amp;id=0ByFPl6lV1b_MRHROTmFQTkQ1V3c"&gt;&amp;quot;Employment Opportunities related to Linux after CS50&amp;quot;&lt;/a&gt;,
+in which Daniel shared his experiences and advice acquired over 15 years of
+experience as a developer and contributor of Free Software projects such as &lt;a class="reference external" href="https://www.openhub.net/p/gnome/contributors/16149077045725"&gt;The
+GNOME Project&lt;/a&gt;.
+Daniel has also been a leader of the development team &lt;a class="reference external" href="https://www.openhub.net/p/linux/contributors/13490492289501"&gt;Linux Kernel&lt;/a&gt; for the &lt;a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&amp;amp;q=daniel+drake"&gt;Gentoo
+distribution&lt;/a&gt;,
+and shared tips on being part of Free Software projects and emphasized the
+benefits of contributing to projects through the experience one acquires by
+working with talented people from all over the world.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/dsd.jpg" /&gt;
+&lt;p&gt;In the last block of talks &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Porfiriopaiz"&gt;Porfirio Páiz&lt;/a&gt;,
+contributor of the Fedora Projet and student of the CS50x.ni course, gave 3
+examples of how the Fedora distribution can be a very useful tool for students
+of the CS50x.ni with demonstrations on the use of tools such as the &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/comenzando_con_git.odp"&gt;&amp;quot;Getting started with Git&amp;quot;&lt;/a&gt; talk
+where he made a small demo about the workflow for managing code version control
+system. In a second talk he did, &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/breve_introduccion_a_docker.odp"&gt;&amp;quot;A brief introduction to Docker&amp;quot;&lt;/a&gt;
+he talked to us about how this tool is being used in the CS50x.ni to provide an
+easy and simple programming environment for those who are taking the course.
+And in a third talk he shared about how to set up a &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/estacion_de_trabajo.odp"&gt;&amp;quot;Development Workstation
+with Fedora&amp;quot;&lt;/a&gt;.
+In this talk Porfirio spoke about one of the products offered by the Fedora
+Project for all those who are focused on achieving a work environment with the
+objective of materializing their software project ideas using Fedora as a basis
+to build them, making use of the different programming languages available
+between the Fedora software repositories, as well as other tools.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/porfiriopaiz.jpg" /&gt;
+&lt;p&gt;And as a final surprise, the members of Fedora Nicaragua, together with the
+staff of the CS50x.ni, shared with the audience a pleasant time full of talks,
+exchanges of ideas and experiences accompanied by cold drinks and delicious
+pizza, which was kindly sponsored by the Fedora Project.&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg" /&gt;
+&lt;p&gt;The Fedora Project Users and Contributors Community are keen to continue with
+these sessions of talks and conversations focused on topics that are of great
+help and interest to those who are entering the wonderful world of programming
+thanks to the CS50x.ni.&lt;/p&gt;
+&lt;p&gt;Sorry for the late post here is a happy Hot Dog:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/beefy_miracle.gif" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Fri, 31 Mar 2017 15:07:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-31:/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</guid><category>cs50x.ni</category><category>events</category><category>fedora</category></item><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
 more than 6 months since it reached its End of Life, it is also possible reuse
 partitions created for F22 so that they can be used to install the new Fedora
 release and keep all the files contained in the Logical Volume that serves as
