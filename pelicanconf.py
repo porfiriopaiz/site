@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Porfirio Páiz'
 TAGLINE = '(■_■¬)'
-SITEURL = 'https://porfiriopaiz.github.io/site/'
+SITEURL = 'https://porfiriopaiz.github.io/site'
 USER_LOGO_URL = 'https://porfiriopaiz.github.io/site/images/prpd8Vi.png'
 SITENAME = "porfirio's blog"
 DISQUS_SITENAME = 'porfiriopaizsite'
@@ -22,6 +22,7 @@ FEED_ALL_ATOM = 'feeds/all.atom.xml'
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 TAG_FEED_ATOM = 'feeds/%s.atom.xml'
 TAG_FEED_RSS = 'feeds/%s.rss.xml'
+RSS_FEED_SUMMARY_ONLY = False
 
 # Blogroll
 LINKS = (('About', 'https://fedoraproject.org/wiki/User:Porfiriopaiz'),
