@@ -69,7 +69,7 @@ pip install pelican
 ## Upgrading Everything
 
 ```sh
-pip install --upgrade pelican Markdown typogrify
+pip install --upgrade pelican Markdown typogrify setuptools pip
 ```
 
 ## Clone the github repo
