@@ -36,7 +36,7 @@ cd virtualenvs
 Use the `virtualenv-3` or the `virtualenv-3.6` command.
 
 ```sh
-virtualenv3 pelican
+virtualenv-3 --no-site-packages pelican
 ```
 
 ```sh
