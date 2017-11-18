@@ -75,7 +75,7 @@ pip install --upgrade pelican Markdown typogrify setuptools pip
 ## Clone the github repo
 
 ```sh
-git@github.com:porfiriopaiz/site.git
+git clone git@github.com:porfiriopaiz/site.git
 ```
 
 ## Pelican commands
