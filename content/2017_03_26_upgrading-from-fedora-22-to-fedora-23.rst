@@ -10,9 +10,10 @@ Upgrading from Fedora 22 to Fedora 23
 
 From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
 Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
-July 19th of 2016 F22 entered `EOL <https://fedoraproject.org/wiki/End_of_life>`_
-status, which means that you will not receive any further security or
-maintenance updates, so upgrading to a newer stable version was recommended.
+July 19th of 2016 F22 entered `EOL
+<https://fedoraproject.org/wiki/End_of_life>`_ status, which means that you
+will not receive any further security or maintenance updates, so upgrading to a
+newer stable version was recommended.
 
 In this post I will explain how to update to Fedora 23 using the dnf package
 manager.
@@ -41,8 +42,8 @@ Prerequisites for upgrading
 First, we make sure we have enough space on our ``/`` partition, since during
 the update process we will need to download the most recent version of each and
 every single of the packages installed in our system. Whereas there is a
-possibility that our cache may be full, it is good to remove the packages stored
-in it to freed space in case we need:
+possibility that our cache may be full, it is good to remove the packages
+stored in it to freed space in case we need:
 
 .. code-block:: console
 
@@ -70,9 +71,9 @@ Install the dnf-plugin-system-upgrade plugin
 **DNF System Upgrade** can upgrade your system to a more recent version of
 Fedora, using a mechanism similar to that used for offline package updates.
 Packages are donwloaded while the system is running normally, and then the
-system is restarted in a special environment (implemented as a systmend
-target) to install them. Once the installation of the packages is complete,
-the system reboots but this time in the new Fedora version.
+system is restarted in a special environment (implemented as a systmend target)
+to install them. Once the installation of the packages is complete, the system
+reboots but this time in the new Fedora version.
 
 The first step is to install the ``dnf-plugin-system-upgrade`` plugin:
 
@@ -99,13 +100,14 @@ amount of data that implies downloading them:
 In the same way it is possible to upgrade to Fedora 24, although I do not
 recommend jumping to a ``(n + 2)`` Fedora version, that is, moving from Fedora
 22 to Fedora 24. At the moment, the most recent stable versions are Fedora 24
-and Fedora 25; Fedora 26 is `Branched <https://fedoraproject.org/wiki/Releases/Branched>`_
-and `Rawhide <https://fedoraproject.org/wiki/Releases/Rawhide>`_ the version in
-continuous development. To upgrade to any of the above versions, only the
-``number`` parameter should be edited in the ``--releasever=number`` option, 24
-for F24, 25 for F25, 26 for Fedora Branched and ``rawhide`` to upgrade to
-Rawhide. It should be noted that both Branched and Rawhide are not stable
-versions of Fedora, so its use is only recommended for more experienced users.
+and Fedora 25; Fedora 26 is `Branched
+<https://fedoraproject.org/wiki/Releases/Branched>`_ and `Rawhide
+<https://fedoraproject.org/wiki/Releases/Rawhide>`_ the version in continuous
+development. To upgrade to any of the above versions, only the ``number``
+parameter should be edited in the ``--releasever=number`` option, 24 for F24,
+25 for F25, 26 for Fedora Branched and ``rawhide`` to upgrade to Rawhide. It
+should be noted that both Branched and Rawhide are not stable versions of
+Fedora, so its use is only recommended for more experienced users.
 
 Upgrading to Fedora 24:
 
@@ -125,8 +127,8 @@ Upgrading to Fedora Rawhide:
 
     su -c 'dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide'
 
-Finally, once it downloads the packages, it is necessary to restart the system by
-executing the following command:
+Finally, once it downloads the packages, it is necessary to restart the system
+by executing the following command:
 
 .. code-block:: console
 

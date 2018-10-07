@@ -8,22 +8,23 @@ IRC with irssi
 :summary:
 :lang: en
 
-From my beginnings in the Free Software and GNU/Linux, one of the features
-that caught my attention is the power of the command line in this operating
-system. From moving between different directories or installing an operating
-system completely from scratch, these are some of the routine tasks you can
-achive from the terminal.
+From my beginnings in the Free Software and GNU/Linux, one of the features that
+caught my attention is the power of the command line in this operating system.
+From moving between different directories or installing an operating system
+completely from scratch, these are some of the routine tasks you can achive
+from the terminal.
 
 .. TEASER_END
 
-In this post I will show how to configure irssi to automate some of the steps to
-carry out in order to access a chat room, as it is connecting to the server,
+In this post I will show how to configure irssi to automate some of the steps
+to carry out in order to access a chat room, as it is connecting to the server,
 authenticate and then joining the differents channels that are of interest.
 
 Installing irssi
 ================
 
-To install irssi in fedora, just open a terminal and type the following command:
+To install irssi in fedora, just open a terminal and type the following
+command:
 
 .. code-block:: console
 
@@ -52,8 +53,8 @@ Server Configurations
 
 All these commands must be executed on a irssi session.
 
-First we will remove the existing server configuration that we want to automate.
-With ``/server list`` we can view existing servers:
+First we will remove the existing server configuration that we want to
+automate.  With ``/server list`` we can view existing servers:
 
 .. code-block:: console
 
@@ -76,9 +77,10 @@ automatic and ``your_nick_password`` is your user password.
 
 Adding Channels
 ---------------
+
 Similarly, it is possible to add channels to this server in order to get
-connected automatically on each login, for this run the following command in our
-irssi session:
+connected automatically on each login, for this run the following command in
+our irssi session:
 
 .. code-block:: console
 
