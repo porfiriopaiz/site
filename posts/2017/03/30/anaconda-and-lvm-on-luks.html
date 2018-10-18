@@ -69,13 +69,13 @@ release and keep all the files contained in the Logical Volume that serves as
 <p>In this post I will explain how to achieve this without compromising the
 integrity of our information or the other operating systems installed in our
 Desktop/Laptop.</p>
-<p>As we saw in the previous post, it is possible to make an upgrade, this is great
-to have the ability to do this, but the idea of downloading all packages, and
-then updating them at once, is something I do not know if I want do, frankly,
-doing fresh installs and setting everything to as it was before is something
-I like and enjoy doing. It also represents less burden for the computer, since
-it only downloads the minimum packages to have a functional system, anything
-else I may need can be later installed on demand.</p>
+<p>As we saw in the previous post, it is possible to make an upgrade, this is
+great to have the ability to do this, but the idea of downloading all packages,
+and then updating them at once, is something I do not know if I want do,
+frankly, doing fresh installs and setting everything to as it was before is
+something I like and enjoy doing. It also represents less burden for the
+computer, since it only downloads the minimum packages to have a functional
+system, anything else I may need can be later installed on demand.</p>
 <p>Once all the files contained in our systems have a proper backup, we can begin
 with the installation process without the fear of something going wrong, you
 never know what could go wrong until it goes wrong XD.</p>
@@ -106,17 +106,16 @@ make use of the command line.</p>
 <p>To download the image for 64bit systems use the following command:</p>
 <div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-25-1.3.iso</span>
 </pre></div>
-<dl class="docutils">
-<dt>Where:</dt>
-<dd><p class="first"><cite>-N</cite> downloads the file with the same time and date stamp when it was first
+<p>Where:</p>
+<blockquote>
+<p><cite>-N</cite> downloads the file with the same time and date stamp when it was first
 uploaded to the servers.</p>
 <p><cite>-t 0</cite> in case the download is interrupted due to problems of connection
-this will attempt to make an automatic reconnection, if we leave the time in
-<cite>0</cite> will reconnect immediately.</p>
-<p class="last"><cite>-c</cite> indicates that the download must be continued in the byte that was left
-pending when the donwload was interrupted.</p>
-</dd>
-</dl>
+this will attempt to make an automatic reconnection, if we leave the time
+in <cite>0</cite> will reconnect immediately.</p>
+<p><cite>-c</cite> indicates that the download must be continued in the byte that was
+left pending when the donwload was interrupted.</p>
+</blockquote>
 <p>This is a small contingency measure in case we do not have access to a network
 stable enough.</p>
 <p>we can also verify the integrity of the downloaded image using the checksum
@@ -157,13 +156,13 @@ password in case we are not in the admins group.</li>
 </div>
 <div class="section" id="booting-from-usb">
 <h3>Booting from USB</h3>
-<p>In my case I have configured my laptop to start in <cite>UEFI mode</cite> and with
-<cite>Secure Boot</cite> enabled.</p>
+<p>In my case I have configured my laptop to start in <cite>UEFI mode</cite> and with <cite>Secure
+Boot</cite> enabled.</p>
 <p>Creating our installation media with Fedora Media Writer guarantees that the
 installation medium will work in any possible scenario.</p>
-<p>To access the Boot Manager on my laptop, I only need to press the <strong>Enter</strong>
-key while the <strong>Lenovo</strong> logo is displayed, this is a indicator, in my case,
-that the machine is booting in UEFI mode.</p>
+<p>To access the Boot Manager on my laptop, I only need to press the <strong>Enter</strong> key
+while the <strong>Lenovo</strong> logo is displayed, this is a indicator, in my case, that
+the machine is booting in UEFI mode.</p>
 </div>
 </div>
 <div class="section" id="starting-the-fedora-25-installation-process">
@@ -176,48 +175,50 @@ Internet connection, either wired via RJ45 port (Ethernet) or via Wireless
 (Using our WiFi card), in my case the netinstall setup detects both network
 cards. Fedora netinstall contain a set of drivers that allow us to make use of
 certain network cards, in case our network card is not detected it might be due
-to our device is not supported by Fedora, this is for legal reasons. Fedora only
-includes FLOSS drivers or that its manufacturers make explicit mention of its
-terms of use and distribution policy.</p>
-<p>My T440p comes equipped with an <a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM">Intel® Ethernet Wired Network Card
-Connection I217-LM</a>
-and an <a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260">Intel® Wireless-N 7260 Wireless Network Card</a>,
-both cards were detected during installation, in the office I only have access
-to WiFi networks so I used the Wireless card.</p>
+to our device is not supported by Fedora, this is for legal reasons. Fedora
+only includes FLOSS drivers or that its manufacturers make explicit mention of
+its terms of use and distribution policy.</p>
+<p>My T440p comes equipped with an <a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM">Intel® Ethernet Wired Network Card Connection
+I217-LM</a> and
+an <a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260">Intel® Wireless-N 7260 Wireless Network Card</a>, both cards were
+detected during installation, in the office I only have access to WiFi networks
+so I used the Wireless card.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0000.png" />
-<p>In this first image of the installation summary, the first thing we must do
-is to get connected to any of the available networks whether we use a Wired
+<p>In this first image of the installation summary, the first thing we must do is
+to get connected to any of the available networks whether we use a Wired
 network or WiFi network, for this we click on the <cite>NETWORK &amp; HOST NAME</cite>.</p>
 <p>Then selecting Wireless and activating the card; we select one Network of those
 available; we change the name of our Desktop/Laptop and click <cite>Apply</cite>...</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0002.png" />
 <p>Click <cite>Done</cite>.</p>
-<p>In the <cite>LOCALIZATION</cite> section I added the <tt class="docutils literal">French (International (AltGr dead keys)</tt>
-and removed <tt class="docutils literal">English (US)</tt>.</p>
+<p>In the <cite>LOCALIZATION</cite> section I added the <tt class="docutils literal">French (International (AltGr dead
+keys)</tt> and removed <tt class="docutils literal">English (US)</tt>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0005.png" />
-<p>You can see a short test, when by pressing the <cite>AltGr + a</cite> key and other vowels,
-the result is accentuated vowels.</p>
+<p>You can see a short test, when by pressing the <cite>AltGr + a</cite> key and other
+vowels, the result is accentuated vowels.</p>
 <p>In the <cite>TIME &amp; DATE</cite> section I always enable <cite>Network Time</cite>...</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0007.png" />
-<p>We also select our <cite>Region</cite> and <cite>City</cite>, based on this, the time and date are set.</p>
+<p>We also select our <cite>Region</cite> and <cite>City</cite>, based on this, the time and date are
+set.</p>
 <p>Up to now we have configured the following sections:</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0008.png" />
-<p>Now we must configure the <cite>SOFTWARE</cite> section, specifically <cite>INSTALLATION SOURCE</cite>...</p>
+<p>Now we must configure the <cite>SOFTWARE</cite> section, specifically <cite>INSTALLATION
+SOURCE</cite>...</p>
 <p>In this section we mark <cite>On the Network:</cite> and select <cite>Closest mirror</cite>, we also
 make sure to uncheck the <cite>Updates</cite> option...</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0009.png" />
-<p>This way the installer will use the online repositories to download the required
-packages for the installation, using the nearest server that commonly is not the
-closest geographically, but the most efficient and with better times in terms
-of data transfer.</p>
+<p>This way the installer will use the online repositories to download the
+required packages for the installation, using the nearest server that commonly
+is not the closest geographically, but the most efficient and with better times
+in terms of data transfer.</p>
 <p>By unchecking <cite>Updates</cite> we are telling the installer to use the latest packages
 that are available in the repo.</p>
-<p>We wait for the package group metadata to be downloaded, the section <cite>SOFTWARE SELECTION</cite>
-depends on this:</p>
+<p>We wait for the package group metadata to be downloaded, the section <cite>SOFTWARE
+SELECTION</cite> depends on this:</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0011.png" />
 <p>In <cite>SOFTWARE SELECTION</cite> I chose <cite>Fedora Custom Operating System</cite>, which
-represents a very minimal package selection, with no graphical environment, only
-a few packages groups as follows:</p>
+represents a very minimal package selection, with no graphical environment,
+only a few packages groups as follows:</p>
 <div class="highlight"><pre><span></span><span class="go">Environment Group: Fedora Custom Operating System</span>
 <span class="go"> Environment-Id: custom-environment</span>
 <span class="go"> Description: Basic building block for a custom Fedora system.</span>
@@ -227,17 +228,18 @@ a few packages groups as follows:</p>
 <span class="go">   Guest Agents</span>
 <span class="go">   Standard</span>
 </pre></div>
-<p>Finally we have reached the <cite>SYSTEM</cite> section, select <cite>INSTALLATION DESTINATION</cite>.
-In <cite>Device Selection</cite>, in <cite>Local Stardard Disk</cite> select the hard disk that has
-the Fedora installation with the existing partitions we want to reuse.</p>
+<p>Finally we have reached the <cite>SYSTEM</cite> section, select <cite>INSTALLATION
+DESTINATION</cite>.  In <cite>Device Selection</cite>, in <cite>Local Stardard Disk</cite> select the hard
+disk that has the Fedora installation with the existing partitions we want to
+reuse.</p>
 <p>In the <cite>Other Storage Options</cite> section, under <cite>Partitioning</cite> we select <cite>I will
 Configure partitioning</cite>.</p>
 <p>The following menu is shown below, in which we will click on <cite>Unknown</cite>:</p>
 <blockquote>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0013.png" />
 </blockquote>
-<p>Once we click <cite>Unknown</cite> the other existing partitions will be displayed. we will
-focus on the partitions <strong>sda2</strong>, <strong>sda9</strong> and <strong>sda10</strong>:</p>
+<p>Once we click <cite>Unknown</cite> the other existing partitions will be displayed. we
+will focus on the partitions <strong>sda2</strong>, <strong>sda9</strong> and <strong>sda10</strong>:</p>
 <blockquote>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0014.png" />
 </blockquote>
@@ -247,26 +249,26 @@ focus on the partitions <strong>sda2</strong>, <strong>sda9</strong> and <strong
 contains the other *.efi files; every OS that has been installed on our
 computer in UEFI mode has an *.efi file that will be linked to our GRUB,
 which allows us to choose which OS to boot during the first few seconds
-after our computer is turned on. <strong>You should never mark</strong> this partition to
-be formatted. <strong>sda2</strong> will be mounted on <cite>/boot/efi</cite>.</p>
-<p><strong>sda9</strong> is the partition I will mount in <cite>/boot</cite>, this partition should not
-be encrypted, since inside there are files needed for the OS to be loaded,
-in example the kernel. If we encrypt this partition we will not be
+after our computer is turned on. <strong>You should never mark</strong> this partition
+to be formatted. <strong>sda2</strong> will be mounted on <cite>/boot/efi</cite>.</p>
+<p><strong>sda9</strong> is the partition I will mount in <cite>/boot</cite>, this partition should
+not be encrypted, since inside there are files needed for the OS to be
+loaded, in example the kernel. If we encrypt this partition we will not be
 able  to load the kernels on boot.</p>
 <p><strong>sda10</strong> is the partition that was encrypted using LUKS, which contains
 the <cite>Volume Group</cite> which contains the other logical volumes that serve as
 <cite>/</cite>, <cite>/home</cite> and <cite>swap</cite>.</p>
 </blockquote>
-<p>After selecting <strong>sda10</strong> you are prompted for the encryption password that will
-grant you access to the <cite>Volume Group</cite> containing the mentioned partitions. It
-is shown as the existing Fedora 23 installation, which was originally the F22
-that we updated in the previous post.</p>
+<p>After selecting <strong>sda10</strong> you are prompted for the encryption password that
+will grant you access to the <cite>Volume Group</cite> containing the mentioned
+partitions. It is shown as the existing Fedora 23 installation, which was
+originally the F22 that we updated in the previous post.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0015.png" />
-<p>We click on <cite>Fedora Linux 23 for x86_64</cite> and we can see the logical volumes that
-we will reuse.</p>
+<p>We click on <cite>Fedora Linux 23 for x86_64</cite> and we can see the logical volumes
+that we will reuse.</p>
 <p>By clicking <cite>/home</cite>, we make sure to assign a <cite>Mount Point</cite> for this Logical
-Volumen. We make sure that the <cite>Reformat</cite> checkbox is <strong>not</strong> checked, and click
-on <cite>Update Settings</cite>.</p>
+Volumen. We make sure that the <cite>Reformat</cite> checkbox is <strong>not</strong> checked, and
+click on <cite>Update Settings</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0017.png" />
 <p>In the following image we can see that the logical volume <cite>fedora_lilit-home</cite>
 was reassigned to <cite>New Fedora 25 Installation</cite>.</p>
@@ -276,16 +278,17 @@ was reassigned to <cite>New Fedora 25 Installation</cite>.</p>
 in this case would be <cite>/boot/efi</cite>. we make sure that the checkbox <cite>Reformat</cite> is
 <strong>not</strong> checked, and click on <cite>Update Settings</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0019.png" />
-<p>We select <cite>/</cite>, this logical volume served as <cite>/</cite> for F23, so to be able to reuse
-it we must mark it to format. we assign <cite>/</cite> as the point, I assign a file system
-ext4, we ensure that the checkbox <cite>Reformat</cite> <strong>is</strong> marked, and click on
+<p>We select <cite>/</cite>, this logical volume served as <cite>/</cite> for F23, so to be able to
+reuse it we must mark it to format. we assign <cite>/</cite> as the point, I assign a file
+system ext4, we ensure that the checkbox <cite>Reformat</cite> <strong>is</strong> marked, and click on
 <cite>Update Settings</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0023.png" />
 <p>Select <cite>swap</cite>, mark the checkbox and click <cite>Update Settings</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0025.png" />
 <p>We select <cite>/boot</cite>, here is where the F23 kernels were stored, so to reuse this
 partition it is required to format it. we assign a <cite>Mount Point</cite> <cite>/boot</cite>, then
-click <cite>Reformat</cite>, in my case I assign an ext4 file system and click <cite>Update Settings</cite>.</p>
+click <cite>Reformat</cite>, in my case I assign an ext4 file system and click <cite>Update
+Settings</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0030.png" />
 <p>Click on <cite>Done</cite> and accept the changes that will be made.</p>
 <p>To finish just click on <cite>Begin Installation</cite>.</p>
@@ -295,8 +298,8 @@ download of the packages and their installation to finish:</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0037.png" />
 <p>After done, click <cite>Reboot</cite>.</p>
 <img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0053.png" />
-<p>In my case I had to do a series of steps after the installation that the
-we will see in the next post.</p>
+<p>In my case I had to do a series of steps after the installation that the we
+will see in the next post.</p>
 </div>
 
   </div>

@@ -61,18 +61,19 @@
     <h1><a href="../../../../posts/2016/11/03/irc-with-irssi.html">IRC with irssi</a></h1>
   </div>
   <div class="article_text">
-    <p>From my beginnings in the Free Software and GNU/Linux, one of the features
-that caught my attention is the power of the command line in this operating
-system. From moving between different directories or installing an operating
-system completely from scratch, these are some of the routine tasks you can
-achive from the terminal.</p>
+    <p>From my beginnings in the Free Software and GNU/Linux, one of the features that
+caught my attention is the power of the command line in this operating system.
+From moving between different directories or installing an operating system
+completely from scratch, these are some of the routine tasks you can achive
+from the terminal.</p>
 <!-- TEASER_END -->
-<p>In this post I will show how to configure irssi to automate some of the steps to
-carry out in order to access a chat room, as it is connecting to the server,
+<p>In this post I will show how to configure irssi to automate some of the steps
+to carry out in order to access a chat room, as it is connecting to the server,
 authenticate and then joining the differents channels that are of interest.</p>
 <div class="section" id="installing-irssi">
 <h2>Installing irssi</h2>
-<p>To install irssi in fedora, just open a terminal and type the following command:</p>
+<p>To install irssi in fedora, just open a terminal and type the following
+command:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install irssi&#39;</span>
 </pre></div>
 <p>And to install irssi in debian:</p>
@@ -90,8 +91,8 @@ authenticate and then joining the differents channels that are of interest.</p>
 <div class="section" id="server-configurations">
 <h3>Server Configurations</h3>
 <p>All these commands must be executed on a irssi session.</p>
-<p>First we will remove the existing server configuration that we want to automate.
-With <tt class="docutils literal">/server list</tt> we can view existing servers:</p>
+<p>First we will remove the existing server configuration that we want to
+automate.  With <tt class="docutils literal">/server list</tt> we can view existing servers:</p>
 <div class="highlight"><pre><span></span><span class="go">/server list</span>
 </pre></div>
 <p>In our case we will remove the existing configuration of Freenode.</p>
@@ -106,8 +107,8 @@ automatic and <tt class="docutils literal">your_nick_password</tt> is your user 
 <div class="section" id="adding-channels">
 <h3>Adding Channels</h3>
 <p>Similarly, it is possible to add channels to this server in order to get
-connected automatically on each login, for this run the following command in our
-irssi session:</p>
+connected automatically on each login, for this run the following command in
+our irssi session:</p>
 <div class="highlight"><pre><span></span><span class="go">/channel add -auto #fedora Freenode</span>
 </pre></div>
 <p>In which <tt class="docutils literal"><span class="pre">-auto</span></tt> allows us joining to <tt class="docutils literal">#fedora</tt> channel at <tt class="docutils literal">Freenode</tt>
