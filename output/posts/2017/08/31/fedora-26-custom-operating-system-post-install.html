@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/ico" href="../../../../theme/images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="dnf, fc26, fedora, postinstall">
+
+  <title>
+    porfirio's blog
+&ndash; Fedora 26 Custom Operating System post install  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">Porfirio Páiz</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2017/08/31/fedora-26-custom-operating-system-post-install.html">Fedora 26 Custom Operating System post install</a></h1>
+  </div>
+  <div class="article_text">
+    <p>On the last post I explained how make a Minimal install of Fedora 25, months
+has passed by since the last post and Fedora 26 was released, following the
+same steps I installed it on my laptop and next I will document my postinstall.</p>
+<p>Given this is a minimal install, the set of packages installed does not
+provides support for Wireless Network Cards. It is true that during the
+installation process Anaconda provides such support, but onces you have
+installed the minimal set of packages, these does not provides the required
+drivers, for this matter I must get my laptop connected to a Wired Network.</p>
+<div class="section" id="dnf-configuration">
+<h2><tt class="docutils literal">dnf</tt> configuration</h2>
+<p>After checking the Wired Network, first I did was to edit dnf's configuration
+file and add the next lines to it:</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;fastestmirror=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+
+<span class="go">echo &#39;deltarpm=false&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+
+<span class="go">echo &#39;keepcache=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+</pre></div>
+<p>This way I make sure <tt class="docutils literal">dnf</tt> will always use the more efficient mirror; will
+not use <cite>*.drpm's</cite> for upgrades, instead it will always download <cite>*.rpm's</cite>; and
+will keep any package it downloads in its cache.</p>
+<p>Now let's reboot:</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+<div class="section" id="disablle-dnf-makecache-service-and-dnf-makecache-timer">
+<h2>Disablle dnf-makecache.service and dnf-makecache.timer</h2>
+<p><tt class="docutils literal">dnf</tt> has this service and timer that annoys me, both makes sure of keeping
+the package metadata cache up to date with a certain frequence, this is
+something I like to do when I want and when I need it, not at <tt class="docutils literal">dnf</tt> please,
+so this behaviour is fixed with the next command:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;systemctl disable dnf-makecache.service&#39;</span>
+
+<span class="go">su -c &#39;systemctl disable dnf-makecache.timer&#39;</span>
+</pre></div>
+<p>Let's reboot again:</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+<div class="section" id="rebuilding-packages-metadata-cache-s">
+<h2>Rebuilding packages metadata cache's</h2>
+<p>Once <tt class="docutils literal">dnf</tt> configuration file is customized, service and timer are disabled,
+I clean the old cache and rebuild it. This time the commands are run as normal
+user, Fedora keeps to differents cache: one for the normal user and one for the
+root user:</p>
+<p>This will rebuild packages metadata cache for my normal user:</p>
+<div class="highlight"><pre><span></span><span class="go">dnf clean all</span>
+
+<span class="go">dnf makecache</span>
+</pre></div>
+<p>This will rebuild packages metadata cache for the root user:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf clean all&#39;</span>
+
+<span class="go">su -c &#39;dnf makecache&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="available-upgrades">
+<h2>Available Upgrades</h2>
+<p>During the installation is possible to mark a checkbox for the option to
+download and install the packages with the most recent version, to verify if
+there aren't any upgrades:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf --refresh check-upgrade&#39;</span>
+</pre></div>
+<p>To download and apply the upgrades if availables:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
+</pre></div>
+<p>After the upgrade let's reboot to make use of latest version of any package if
+upgraded.</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+<div class="section" id="workstation-product-environment-installation">
+<h2>Workstation Product Environment Installation</h2>
+<p>On my laptop I use GNOME Shell as desktop environment, so I install it make use
+of a package group that provides all the required packages to make of this
+Fedora Custom Operating System install a Fedora Workstation:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf group install workstation-product-environment&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="graphical-boot-mode">
+<h2>Graphical Boot Mode</h2>
+<p>After downloading and installing all the packages, We must change the default
+<cite>init</cite> mode from <tt class="docutils literal"><span class="pre">multi-user.target</span></tt> to <tt class="docutils literal">graphical.target</tt>, otherwise, when
+We reboot our system will not start in graphical mode.</p>
+<p>Also We must enable the service for the graphical login manager, if no, despite
+enabling the graphical mode our login will still a text based prompt:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;systemctl set-default graphical.target&#39;</span>
+
+<span class="go">su -c &#39;systemctl enable gdm.service&#39;</span>
+
+<span class="go">reboot</span>
+</pre></div>
+<p>If nothing goes wrong, you might be running Fedora 26 Workstation with GNONE
+Shell.</p>
+</div>
+<div class="section" id="fixing-nautilus-behaviour">
+<h2>Fixing Nautilus Behaviour</h2>
+<p>Before opening any other application, I like to fix how Nautilus sorts files, I
+like to have them sorted by type or file extension:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.gnome.nautilus.preferences default-sort-order type</span>
+</pre></div>
+<p>This way when opening Nautilus it will show the files sorted by extension.</p>
+</div>
+<div class="section" id="repositories">
+<h2>Repositories</h2>
+<div class="section" id="enabling-rpmfusion">
+<h3>Enabling RPMFusion:</h3>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&#39;</span>
+</pre></div>
+<p>Refresh the cache, this will download the RPMFusion packages metadata:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf check-upgrade&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="enabling-google-chrome-s-repository">
+<h3>Enabling Google Chrome's repository:</h3>
+<p>I used to enable Google Chrome repository as explained on this post:</p>
+<p><a class="reference external" href="https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/">https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/</a>.</p>
+<p>But Mayorga presented me a more simple method, basically you just have to
+download Google Chrome <tt class="docutils literal">rpm</tt> package, install it from the command line
+indicating the path to the <tt class="docutils literal">rpm</tt> package and this by itself will add the
+<cite>*.repo</cite> file to the path <tt class="docutils literal">/etc/yum.repos.d/</tt>.</p>
+<div class="highlight"><pre><span></span><span class="go">cd ~/Downloads</span>
+
+<span class="go">wget -N -t 0 -c https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm</span>
+
+<span class="go">su -c &#39;dnf install google-chrome-stable_current_x86_64.rpm&#39;</span>
+
+<span class="go">su -c &#39;dnf check-update&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disabling-tracker">
+<h2>Disabling Tracker</h2>
+<p>Before copying back any file from my back up's, hay must disable the annoying
+<tt class="docutils literal">tracker</tt> and all his friends:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install tracker-preferences&#39;</span>
+
+<span class="go">mkdir ~/.config/autostart</span>
+
+<span class="go">cp /etc/xdg/autostart/tracker* ~/.config/autostart</span>
+
+<span class="go">cd ~/.config/autostart</span>
+
+<span class="go">sed -i &#39;s/X-GNOME-Autostart-enabled=true/X-GNOME-Autostart-enabled=false/&#39; tracker*</span>
+</pre></div>
+<p>Let's check <tt class="docutils literal">tracker</tt> status:</p>
+<div class="highlight"><pre><span></span><span class="go">tracker status</span>
+</pre></div>
+<p>Then we make a <tt class="docutils literal">hard reset</tt>:</p>
+<div class="highlight"><pre><span></span><span class="go">tracker reset --hard</span>
+</pre></div>
+</div>
+<div class="section" id="disabling-gnome-software-and-packagekit-download-updates">
+<h2>Disabling GNOME Software and PackageKit download-updates</h2>
+<p>GNOME Software downloads metadata and upgrades for the system in background, to
+disable it We execute the next commands:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.gnome.software download-updates false</span>
+
+<span class="go">su -c &#39;systemctl mask packagekit.service&#39;</span>
+</pre></div>
+<p>This should stop the autodownload upgrades and the PackageKit service.</p>
+</div>
+<div class="section" id="libraries-and-development-tools">
+<h2>Libraries and Development Tools</h2>
+<p>Now install the package groups that provides the required software and
+libraries for compiling other software from source code, as well as making from
+<tt class="docutils literal">vim</tt> and <cite>IDE</cite>, on another post I will explain how to do so:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y groups install c-development&#39;</span>
+
+<span class="go">su -c &#39;dnf -y groups install development-libs&#39;</span>
+
+<span class="go">su -c &#39;dnf -y groups install development-tools&#39;</span>
+
+<span class="go">su -c &#39;dnf -y groups install fedora-packager&#39;</span>
+
+<span class="go">su -c &#39;dnf -y groups install rpm-development-tools&#39;</span>
+
+<span class="go">su -c &#39;dnf install automake gcc gcc-c++ kernel-devel cmake&#39;</span>
+
+<span class="go">su -c &#39;dnf install python-devel python3-devel&#39;</span>
+
+<span class="go">su -c &#39;dnf install monodevelop&#39;</span>
+
+<span class="go">su -c &#39;dnf install golang&#39;</span>
+
+<span class="go">su -c &#39;dnf install nodejs&#39;</span>
+
+<span class="go">su -c &#39;dnf install rust&#39;</span>
+
+<span class="go">su -c &#39;dnf install cargo&#39;</span>
+
+<span class="go">su -c &#39;dnf install python3-virtualenv&#39;</span>
+
+<span class="go">su -c &#39;dnf install python3-pip&#39;</span>
+</pre></div>
+<p>And finally the spellcheckers:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install hunspell&#39;</span>
+
+<span class="go">su -c &#39;dnf install hunspell-en&#39;</span>
+
+<span class="go">su -c &#39;dnf install hunspell-es&#39;</span>
+
+<span class="go">su -c &#39;dnf install aspell&#39;</span>
+
+<span class="go">su -c &#39;dnf install aspell-es&#39;</span>
+
+<span class="go">su -c &#39;dnf install aspell-en&#39;</span>
+
+<span class="go">su -c &#39;dnf install autocorr-es&#39;</span>
+
+<span class="go">su -c &#39;dnf install autocorr-en&#39;</span>
+</pre></div>
+<p>On the next post I will make shorts reviews on the other tools I use on Fedora.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 31 August 2017</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/dnf.html">dnf</a>,      <a href="../../../../tag/fc26.html">fc26</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/postinstall.html">postinstall</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2017/08/31/fedora-26-custom-operating-system-post-install.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
