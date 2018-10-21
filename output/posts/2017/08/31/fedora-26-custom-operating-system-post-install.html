@@ -66,7 +66,7 @@ has passed by since the last post and Fedora 26 was released, following the
 same steps I installed it on my laptop and next I will document my postinstall.</p>
 <p>Given this is a minimal install, the set of packages installed does not
 provides support for Wireless Network Cards. It is true that during the
-installation process Anaconda provides such support, but onces you have
+installation process Anaconda provides such support, but once you have
 installed the minimal set of packages, these does not provides the required
 drivers, for this matter I must get my laptop connected to a Wired Network.</p>
 <div class="section" id="dnf-configuration">
@@ -104,8 +104,8 @@ so this behaviour is fixed with the next command:</p>
 <h2>Rebuilding packages metadata cache's</h2>
 <p>Once <tt class="docutils literal">dnf</tt> configuration file is customized, service and timer are disabled,
 I clean the old cache and rebuild it. This time the commands are run as normal
-user, Fedora keeps to differents cache: one for the normal user and one for the
-root user:</p>
+user, Fedora keeps two differents cache: one for the normal user and other for
+the root user:</p>
 <p>This will rebuild packages metadata cache for my normal user:</p>
 <div class="highlight"><pre><span></span><span class="go">dnf clean all</span>
 
@@ -119,7 +119,7 @@ root user:</p>
 </div>
 <div class="section" id="available-upgrades">
 <h2>Available Upgrades</h2>
-<p>During the installation is possible to mark a checkbox for the option to
+<p>During the installation it is possible to mark a checkbox for the option to
 download and install the packages with the most recent version, to verify if
 there aren't any upgrades:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf --refresh check-upgrade&#39;</span>
@@ -134,7 +134,7 @@ upgraded.</p>
 </div>
 <div class="section" id="workstation-product-environment-installation">
 <h2>Workstation Product Environment Installation</h2>
-<p>On my laptop I use GNOME Shell as desktop environment, so I install it make use
+<p>On my laptop I use GNOME Shell as desktop environment, to install it I make use
 of a package group that provides all the required packages to make of this
 Fedora Custom Operating System install a Fedora Workstation:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf group install workstation-product-environment&#39;</span>
@@ -226,7 +226,7 @@ disable it We execute the next commands:</p>
 <div class="section" id="libraries-and-development-tools">
 <h2>Libraries and Development Tools</h2>
 <p>Now install the package groups that provides the required software and
-libraries for compiling other software from source code, as well as making from
+libraries for compiling other software from source code, as well as making of
 <tt class="docutils literal">vim</tt> and <cite>IDE</cite>, on another post I will explain how to do so:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y groups install c-development&#39;</span>
 
