@@ -14,7 +14,7 @@ same steps I installed it on my laptop and next I will document my postinstall.
 
 Given this is a minimal install, the set of packages installed does not
 provides support for Wireless Network Cards. It is true that during the
-installation process Anaconda provides such support, but onces you have
+installation process Anaconda provides such support, but once you have
 installed the minimal set of packages, these does not provides the required
 drivers, for this matter I must get my laptop connected to a Wired Network.
 
@@ -67,8 +67,8 @@ Rebuilding packages metadata cache's
 
 Once ``dnf`` configuration file is customized, service and timer are disabled,
 I clean the old cache and rebuild it. This time the commands are run as normal
-user, Fedora keeps to differents cache: one for the normal user and one for the
-root user:
+user, Fedora keeps two differents cache: one for the normal user and other for
+the root user:
 
 This will rebuild packages metadata cache for my normal user:
 
@@ -89,7 +89,7 @@ This will rebuild packages metadata cache for the root user:
 Available Upgrades
 ==================
 
-During the installation is possible to mark a checkbox for the option to
+During the installation it is possible to mark a checkbox for the option to
 download and install the packages with the most recent version, to verify if
 there aren't any upgrades:
 
@@ -113,7 +113,7 @@ upgraded.
 Workstation Product Environment Installation
 ============================================
 
-On my laptop I use GNOME Shell as desktop environment, so I install it make use
+On my laptop I use GNOME Shell as desktop environment, to install it I make use
 of a package group that provides all the required packages to make of this
 Fedora Custom Operating System install a Fedora Workstation:
 
@@ -240,7 +240,7 @@ Libraries and Development Tools
 ===============================
 
 Now install the package groups that provides the required software and
-libraries for compiling other software from source code, as well as making from
+libraries for compiling other software from source code, as well as making of
 ``vim`` and `IDE`, on another post I will explain how to do so:
 
 .. code-block:: console
