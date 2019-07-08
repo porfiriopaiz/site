@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2017-11-17T19:10:00-06:00</updated><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2018-11-29T02:53:00-06:00</updated><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"></link><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling wm&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
+window manager. It is common to see installation guides for i3, but they assume
+that you already have another desktop environment previously installed.&lt;/p&gt;
+&lt;p&gt;In this post we will see how to build a fully functional environment from a
+minimal installation as I have explained in other publications.&lt;/p&gt;
+&lt;div class="section" id="creating-an-installation-medium"&gt;
+&lt;h2&gt;Creating an installation medium&lt;/h2&gt;
+&lt;div class="section" id="download-the-iso-fedora-everything-netinstall"&gt;
+&lt;h3&gt;Download the ISO Fedora Everything Netinstall&lt;/h3&gt;
+&lt;p&gt;From the site: &lt;a class="reference external" href="https://alt.fedoraproject.org/"&gt;https://alt.fedoraproject.org/&lt;/a&gt; download the file of the All
+section, this is an ISO that works as a means of installation by network that
+downloads all the packages that will be part of the system from the Internet,
+as well as gives the option to choose which package collections to install,
+unlike Lives media whose software selection has been previously defined.&lt;/p&gt;
+&lt;p&gt;Download the ISO with wget:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We also download the integrity check file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check the integrity of the file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="create-the-installation-media-with-fedora-media-writer"&gt;
+&lt;h3&gt;Create the installation media with Fedora Media Writer&lt;/h3&gt;
+&lt;p&gt;Fedora Media Writer is available for different operating systems, download the
+corresponding one.&lt;/p&gt;
+&lt;p&gt;It is very important to create the installation medium with Fedora Media Writer
+since this tool guarantees that the installation medium will have support to
+boot on computers that have both UEFI or BIOS.&lt;/p&gt;
+&lt;p&gt;How it will start will depend on which of the two has the highest priority
+during startup. I always use UEFI only, so all my systems are installed in UEFI
+mode.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1"&gt;https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When Fedora Media Writer is installed on our computer, we connect our USB
+memory, run Fedora Media Writer and use the Custom Image option to navigate to
+the path where the ISO is, the one we just downloaded, select it, select
+carefully the USB memory we will use and record the image in the USB memory.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;I have followed the installation steps described in this previous post, making
+sure I have access to a wireless network or a wired network.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html"&gt;https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This time I had to use my mobile phone, although it is true I had access to a
+wireless network during the installation of the base system (Fedora Custom
+Install), after installation the packages collection of does not provide the
+network drivers required to access wireless networks since they are not
+included in the Custom Install selection.&lt;/p&gt;
+&lt;p&gt;That's why I created a wired network via USB with my mobile phone. To make it
+work you have to make sure of the following right after the first boot once the
+installation finishes:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Log in in the system.&lt;/li&gt;
+&lt;li&gt;Connect the USB cable to the computer.&lt;/li&gt;
+&lt;li&gt;Connect the other end to the mobile phone.&lt;/li&gt;
+&lt;li&gt;Make sure the phone is connected to a wireless network or that the data plan
+is activated. As a note, consider that you need at least 800MB of data in
+RPM packages that must be downloaded for a minimum installation of Fedora
+with support for the graphical environment with i3wm.&lt;/li&gt;
+&lt;li&gt;Make sure the phone is in USB or MTP data transfer mode.&lt;/li&gt;
+&lt;li&gt;Activate a wired network or Tethered Wired Network from your mobile phone.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After this, you should have access to the Internet. Check it by pinging Google:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;ping 8.8.8.8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-configurations"&gt;
+&lt;h2&gt;Basic configurations&lt;/h2&gt;
+&lt;div class="section" id="configuring-dnf"&gt;
+&lt;h3&gt;Configuring dnf&lt;/h3&gt;
+&lt;p&gt;The next step is optional, as root, the first thing I do is configure dnf, so
+that it uses the most efficient packages mirrors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then I disable the use of deltarpm's for future updates. If you prefer to
+reduce the amount of data to be downloaded in each of the future updates, skip
+this step:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I always keep each of the packages from which any program is installed on my
+system, including those that are downloaded as part of the updates and to
+maintain the packages cache throughout the period I use a Fedora release. This
+step is optional and you can skip it if you want:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now I proceed to disable a service and a dnf timer. The service makes sure to
+refresh the metadata cache to be able to make checks on the versions of the
+packages that are in the repos and then check if there are updates available.
+The timer is responsible for executing the service periodically.&lt;/p&gt;
+&lt;p&gt;I always disable both to avoid annoying bandwidth consumptions and dnf locks
+while the cache is refreshed. If you have a limited bandwidth or data plan this
+will help you reduce the consumption of it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.service&lt;/span&gt;
+&lt;span class="go"&gt;systemctl disable dnf-makecache.timer&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally to make sure that the changes take effect we must restart:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="regenerate-the-cache-and-install-available-updates"&gt;
+&lt;h3&gt;Regenerate the cache and install available updates&lt;/h3&gt;
+&lt;p&gt;During the installation, you may have omitted to check the option that allows
+you to install the most recent version of the mirrors packages, so your system
+could be outdated even if you have used the network installation medium.&lt;/p&gt;
+&lt;p&gt;To apply the most recent updates and use the most efficient mirrors it is
+necessary to regenerate the metadata cache.&lt;/p&gt;
+&lt;p&gt;Fedora maintains a cache for each user, one for the root user, another for the
+normal user, in my case pionen. So we must regenerate both caches if you want
+to perform tasks as administrator or simple queries that do not require
+administrator privileges:&lt;/p&gt;
+&lt;p&gt;As a normal non-root user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
+
+&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, as a normal non-root user, we execute the following commands, where we
+pass the statement in quotes as a parameter to the root user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+
+&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We check for available updates and enter our root password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If there are updates available, we apply them with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If updates have been applied, it is recommended to restart the system in order
+to make use of the most recent version of all the programs, for example the
+kernel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs that I install after the first boot of
 any fresh install.&lt;/p&gt;
 &lt;p&gt;In the next post I will show how to install KeePassXC on Fedora and Debian, its
