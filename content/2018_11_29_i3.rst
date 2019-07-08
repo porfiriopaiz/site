@@ -1,0 +1,212 @@
+i3
+##
+
+:date: 2018-11-29 2:53
+:tags: dnf, fc29, fedora, postinstall
+:category: floss
+:slug: i3
+:summary: Improved tiling wm
+:lang: en
+
+In this post I will explain how to do a Fedora 29 installation with the i3
+window manager. It is common to see installation guides for i3, but they assume
+that you already have another desktop environment previously installed.
+
+In this post we will see how to build a fully functional environment from a
+minimal installation as I have explained in other publications.
+
+
+Creating an installation medium
+===============================
+
+Download the ISO Fedora Everything Netinstall
+---------------------------------------------
+
+From the site: https://alt.fedoraproject.org/ download the file of the All
+section, this is an ISO that works as a means of installation by network that
+downloads all the packages that will be part of the system from the Internet,
+as well as gives the option to choose which package collections to install,
+unlike Lives media whose software selection has been previously defined.
+
+Download the ISO with wget:
+
+.. code-block:: console
+
+   wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso
+
+We also download the integrity check file:
+
+.. code-block:: console
+
+   wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM
+
+Check the integrity of the file:
+
+.. code-block:: console
+
+   sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM
+
+Create the installation media with Fedora Media Writer
+------------------------------------------------------
+
+Fedora Media Writer is available for different operating systems, download the
+corresponding one.
+
+It is very important to create the installation medium with Fedora Media Writer
+since this tool guarantees that the installation medium will have support to
+boot on computers that have both UEFI or BIOS.
+
+How it will start will depend on which of the two has the highest priority
+during startup. I always use UEFI only, so all my systems are installed in UEFI
+mode.
+
+https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1
+
+When Fedora Media Writer is installed on our computer, we connect our USB
+memory, run Fedora Media Writer and use the Custom Image option to navigate to
+the path where the ISO is, the one we just downloaded, select it, select
+carefully the USB memory we will use and record the image in the USB memory.
+
+Installation
+============
+
+I have followed the installation steps described in this previous post, making
+sure I have access to a wireless network or a wired network.
+
+https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html
+
+This time I had to use my mobile phone, although it is true I had access to a
+wireless network during the installation of the base system (Fedora Custom
+Install), after installation the packages collection of does not provide the
+network drivers required to access wireless networks since they are not
+included in the Custom Install selection.
+
+That's why I created a wired network via USB with my mobile phone. To make it
+work you have to make sure of the following right after the first boot once the
+installation finishes:
+
+1. Log in in the system.
+2. Connect the USB cable to the computer.
+3. Connect the other end to the mobile phone.
+4. Make sure the phone is connected to a wireless network or that the data plan
+   is activated. As a note, consider that you need at least 800MB of data in
+   RPM packages that must be downloaded for a minimum installation of Fedora
+   with support for the graphical environment with i3wm.
+5. Make sure the phone is in USB or MTP data transfer mode.
+6. Activate a wired network or Tethered Wired Network from your mobile phone.
+
+After this, you should have access to the Internet. Check it by pinging Google:
+
+.. code-block:: console
+
+   ping 8.8.8.8
+
+Basic configurations
+====================
+
+Configuring dnf
+---------------
+
+The next step is optional, as root, the first thing I do is configure dnf, so
+that it uses the most efficient packages mirrors:
+
+.. code-block:: console
+
+   echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
+
+Then I disable the use of deltarpm's for future updates. If you prefer to
+reduce the amount of data to be downloaded in each of the future updates, skip
+this step:
+
+.. code-block:: console
+
+   echo 'deltarpm=false' >> /etc/dnf/dnf.conf
+
+I always keep each of the packages from which any program is installed on my
+system, including those that are downloaded as part of the updates and to
+maintain the packages cache throughout the period I use a Fedora release. This
+step is optional and you can skip it if you want:
+
+.. code-block:: console
+
+   echo 'keepcache=true' >> /etc/dnf/dnf.conf
+
+Now I proceed to disable a service and a dnf timer. The service makes sure to
+refresh the metadata cache to be able to make checks on the versions of the
+packages that are in the repos and then check if there are updates available.
+The timer is responsible for executing the service periodically.
+
+I always disable both to avoid annoying bandwidth consumptions and dnf locks
+while the cache is refreshed. If you have a limited bandwidth or data plan this
+will help you reduce the consumption of it.
+
+.. code-block:: console
+
+   systemctl disable dnf-makecache.service
+   systemctl disable dnf-makecache.timer
+
+Finally to make sure that the changes take effect we must restart:
+
+.. code-block:: console
+
+   reboot
+
+Regenerate the cache and install available updates
+--------------------------------------------------
+
+During the installation, you may have omitted to check the option that allows
+you to install the most recent version of the mirrors packages, so your system
+could be outdated even if you have used the network installation medium.
+
+To apply the most recent updates and use the most efficient mirrors it is
+necessary to regenerate the metadata cache.
+
+Fedora maintains a cache for each user, one for the root user, another for the
+normal user, in my case pionen. So we must regenerate both caches if you want
+to perform tasks as administrator or simple queries that do not require
+administrator privileges:
+
+As a normal non-root user:
+
+.. code-block:: console
+
+   dnf clean all
+
+   dnf makecache
+
+Then, as a normal non-root user, we execute the following commands, where we
+pass the statement in quotes as a parameter to the root user:
+
+.. code-block:: console
+
+   su -c 'dnf clean all'
+
+   su -c 'dnf makecache'
+
+We check for available updates and enter our root password:
+
+.. code-block:: console
+
+   su -c 'dnf --refresh check-upgrade'
+
+If there are updates available, we apply them with:
+
+.. code-block:: console
+
+   su -c 'dnf upgrade'
+
+If updates have been applied, it is recommended to restart the system in order
+to make use of the most recent version of all the programs, for example the
+kernel:
+
+.. code-block:: console
+
+   reboot
+
+
+
+
+
+
+
+
