@@ -19,6 +19,11 @@ hr {
 img {
   max-width: 100%;
 }
+.round-img {
+  border-radius: 50%;
+  padding: 2px;
+  border: 10px solid;
+}
 aside div#user_meta {
   padding: 40px;
   text-align: center;
@@ -92,6 +97,19 @@ main article div.article_text blockquote {
   padding-left: 40px;
   color: #999999;
   font-style: italic;
+}
+main article div.article_text div.quoteblock {
+  border-left: 5px solid #eeeeee;
+  color: #999999;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  margin-right: 10%;
+  margin-top: 1em;
+  padding-left: 1em;
+}
+main article div.article_text div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
 }
 main article div.gist {
   line-height: .875em;
