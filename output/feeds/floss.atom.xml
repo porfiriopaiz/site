@@ -137,6 +137,168 @@ kernel:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="section" id="installing-i3"&gt;
+&lt;h2&gt;Installing i3&lt;/h2&gt;
+&lt;p&gt;Now, the step by step with all the requirements for a Fedora 29 minimal
+installation with i3wm.&lt;/p&gt;
+&lt;p&gt;For it we will make use of packages collections that have been grouped in a
+very specialized way. Next commands must be executed as root user.&lt;/p&gt;
+&lt;div class="section" id="common-networkmanager-submodules"&gt;
+&lt;h3&gt;Common NetworkManager Submodules&lt;/h3&gt;
+&lt;p&gt;This group contains NetworkManager submodules that are commonly used, but may
+not be wanted in some streamlined configurations.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install networkmanager-submodules&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="core"&gt;
+&lt;h3&gt;Core&lt;/h3&gt;
+&lt;p&gt;Smallest possible installation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install core&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dial-up-networking-support"&gt;
+&lt;h3&gt;Dial-up Networking Support&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install dial-up&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fonts"&gt;
+&lt;h3&gt;Fonts&lt;/h3&gt;
+&lt;p&gt;Fonts packages for rendering text on the desktop.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install fonts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="guest-desktop-agents"&gt;
+&lt;h3&gt;Guest Desktop Agents&lt;/h3&gt;
+&lt;p&gt;Agents used when running as a virtualized desktop.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install guest-desktop-agents&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hardware-support"&gt;
+&lt;h3&gt;Hardware Support&lt;/h3&gt;
+&lt;p&gt;This group is a collection of tools for various hardware specific utilities.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install hardware-support&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="multimedia"&gt;
+&lt;h3&gt;Multimedia&lt;/h3&gt;
+&lt;p&gt;Audio/video framework common to desktops.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install multimedia&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="standard"&gt;
+&lt;h3&gt;Standard&lt;/h3&gt;
+&lt;p&gt;Common set of utilities that extend the minimal installation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install standard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="base-x"&gt;
+&lt;h3&gt;base-x&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install base-x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="input-methods"&gt;
+&lt;h3&gt;Input Methods&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install input-methods&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fedora-icons-theme"&gt;
+&lt;h3&gt;Fedora Icons Theme&lt;/h3&gt;
+&lt;p&gt;This package provides the Fedora icons theme.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install fedora-icon-theme&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="gnome-icons-theme"&gt;
+&lt;h3&gt;GNOME Icons Theme&lt;/h3&gt;
+&lt;p&gt;This package provides the default icon theme used by the GNOME Desktop.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install gnome-icon-theme&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="gnome-icons-theme-extra"&gt;
+&lt;h3&gt;GNOME Icons Theme extra&lt;/h3&gt;
+&lt;p&gt;This package provides additional mime type and devices icons for the GNOME
+Desktop.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install gnome-icon-theme-extras&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="i3-window-manager"&gt;
+&lt;h3&gt;i3 Window Manager&lt;/h3&gt;
+&lt;p&gt;Finally we can install the i3 window manager.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install i3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-the-graphical-login-manager"&gt;
+&lt;h3&gt;Installing the graphical login manager&lt;/h3&gt;
+&lt;p&gt;We will need a graphical login manager where we can pick our user and type our
+password so we can get authenticated. From here we can also select other
+desktop environments that we might install in the future.&lt;/p&gt;
+&lt;p&gt;LightDM is a display manager that welcomes the user and uses the GTK3 tool kit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install lightdm-gtk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="xdg-user-dirs"&gt;
+&lt;h3&gt;xdg-user-dirs&lt;/h3&gt;
+&lt;p&gt;Contains xdg-user-dirs-update that updates and creates the directories at
+/home/, according to the predefined values configured by the administrator.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install xdg-user-dirs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enabling-the-graphical-mode-boot"&gt;
+&lt;h3&gt;Enabling the graphical mode boot&lt;/h3&gt;
+&lt;p&gt;Our system already has all the requirements to work as a graphical environment
+using i3 as a window manager. But before it, we need to change some
+configurations that make our system boot from runlevel 3 mode or
+multi-user.target to runlevel 5 or graphical.target.&lt;/p&gt;
+&lt;p&gt;We can fix that with the next command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl set-default graphical.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Also we must enable the system service that provides the option to access the
+system via a graphical loging that we just installed, lightdm:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl enable lightdm.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally we can reboot our system and then after we should be able to get logged
+in makeing use of the graphical session manager and our window manager i3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="first-graphical-session"&gt;
+&lt;h2&gt;First graphical session&lt;/h2&gt;
+&lt;p&gt;Once logged in, i3 will ask if you want to generate a new config file for i3,
+press Enter to answer affirmatively.&lt;/p&gt;
+&lt;p&gt;Next it ask which key you want to use as modifier key to trigger the i3
+keyboard shortcuts, I always pick the &lt;cite&gt;Win&lt;/cite&gt; or the Windows key, also known as
+&lt;cite&gt;Meta key&lt;/cite&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-command-line"&gt;
+&lt;h2&gt;Terminal command line&lt;/h2&gt;
+&lt;p&gt;This setup does not provides any presintalled tool for web browsing, file
+manager, image viewer or pdf reader.&lt;/p&gt;
+&lt;p&gt;It is up to you what to use and install.&lt;/p&gt;
+&lt;p&gt;― But, how do I install those?&lt;/p&gt;
+&lt;p&gt;If you selected the Windows key as modifier for i3, pressing:&lt;/p&gt;
+&lt;p&gt;&amp;lt;Win&amp;gt; + Enter&lt;/p&gt;
+&lt;p&gt;You will be able to run a command line terminal. I prefer to use GNOME
+Terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then by pressing:&lt;/p&gt;
+&lt;p&gt;&amp;lt;Win&amp;gt; + d&lt;/p&gt;
+&lt;p&gt;Trigger &lt;cite&gt;dmenu&lt;/cite&gt; from where you can invoke GNOME Terminal by typing
+&lt;cite&gt;gnome-terminal&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;In the next post I will explain my i3 post-install.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="login-out-and-powering-off"&gt;
+&lt;h2&gt;Login out and powering off&lt;/h2&gt;
+&lt;p&gt;To log out from our session:&lt;/p&gt;
+&lt;p&gt;&amp;lt;Win&amp;gt; + &amp;lt;Shift&amp;gt; + e&lt;/p&gt;
+&lt;p&gt;This triggers a dialogue asking for if you want to end your i3 user session.
+Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lightdm&lt;/cite&gt; press:&lt;/p&gt;
+&lt;p&gt;&amp;lt;Alt&amp;gt; + &amp;lt;F4&amp;gt;&lt;/p&gt;
+&lt;p&gt;To turn off your system.&lt;/p&gt;
+&lt;p&gt;I hope this post help you to achive a minimal install. This is a good and cheap
+way to setup virtual machines, without expending lot of resources or even for a
+working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
+&lt;/div&gt;
 </content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs that I install after the first boot of
 any fresh install.&lt;/p&gt;
