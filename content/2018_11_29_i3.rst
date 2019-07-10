@@ -203,10 +203,246 @@ kernel:
 
    reboot
 
+Installing i3
+=============
+
+Now, the step by step with all the requirements for a Fedora 29 minimal
+installation with i3wm.
+
+For it we will make use of packages collections that have been grouped in a
+very specialized way. Next commands must be executed as root user.
+
+Common NetworkManager Submodules
+--------------------------------
+
+This group contains NetworkManager submodules that are commonly used, but may
+not be wanted in some streamlined configurations.
+
+.. code-block:: console
+
+   dnf -y group install networkmanager-submodules
+
+Core
+----
+
+Smallest possible installation.
+
+.. code-block:: console
+
+   dnf -y group install core
+
+Dial-up Networking Support
+--------------------------
+
+.. code-block:: console
+
+   dnf -y install dial-up
+
+Fonts
+-----
+
+Fonts packages for rendering text on the desktop.
+
+.. code-block:: console
+
+   dnf -y group install fonts
+
+Guest Desktop Agents
+--------------------
+
+Agents used when running as a virtualized desktop.
+
+.. code-block:: console
+
+   dnf -y group install guest-desktop-agents
+
+Hardware Support
+----------------
+
+This group is a collection of tools for various hardware specific utilities.
+
+.. code-block:: console
+
+   dnf -y group install hardware-support
+
+Multimedia
+----------
+
+Audio/video framework common to desktops.
+
+.. code-block:: console
+
+   dnf -y group install multimedia
+
+Standard
+--------
+
+Common set of utilities that extend the minimal installation.
+
+.. code-block:: console
+
+   dnf -y group install standard
+
+base-x
+------
 
 
 
+.. code-block:: console
+
+   dnf -y group install base-x
+
+Input Methods
+-------------
 
 
 
+.. code-block:: console
 
+   dnf -y group install input-methods
+
+Fedora Icons Theme
+------------------
+
+This package provides the Fedora icons theme.
+
+.. code-block:: console
+
+   dnf -y install fedora-icon-theme
+
+GNOME Icons Theme
+-----------------
+
+This package provides the default icon theme used by the GNOME Desktop.
+
+.. code-block:: console
+
+   dnf -y install gnome-icon-theme
+
+GNOME Icons Theme extra
+-----------------------
+
+This package provides additional mime type and devices icons for the GNOME
+Desktop.
+
+.. code-block:: console
+
+   dnf -y install gnome-icon-theme-extras
+
+i3 Window Manager
+-----------------
+
+Finally we can install the i3 window manager.
+
+.. code-block:: console
+
+   dnf -y install i3
+
+Installing the graphical login manager
+--------------------------------------
+
+We will need a graphical login manager where we can pick our user and type our
+password so we can get authenticated. From here we can also select other
+desktop environments that we might install in the future.
+
+LightDM is a display manager that welcomes the user and uses the GTK3 tool kit.
+
+.. code-block:: console
+
+   dnf -y install lightdm-gtk
+
+xdg-user-dirs
+-------------
+
+Contains xdg-user-dirs-update that updates and creates the directories at
+/home/, according to the predefined values configured by the administrator.
+
+.. code-block:: console
+
+   dnf -y install xdg-user-dirs
+
+Enabling the graphical mode boot
+--------------------------------
+
+Our system already has all the requirements to work as a graphical environment
+using i3 as a window manager. But before it, we need to change some
+configurations that make our system boot from runlevel 3 mode or
+multi-user.target to runlevel 5 or graphical.target.
+
+We can fix that with the next command:
+
+.. code-block:: console
+
+   systemctl set-default graphical.target
+
+Also we must enable the system service that provides the option to access the
+system via a graphical loging that we just installed, lightdm:
+
+.. code-block:: console
+
+   systemctl enable lightdm.service
+
+Finally we can reboot our system and then after we should be able to get logged
+in makeing use of the graphical session manager and our window manager i3.
+
+.. code-block:: console
+
+   reboot
+
+First graphical session
+=======================
+
+Once logged in, i3 will ask if you want to generate a new config file for i3,
+press Enter to answer affirmatively.
+
+Next it ask which key you want to use as modifier key to trigger the i3
+keyboard shortcuts, I always pick the `Win` or the Windows key, also known as
+`Meta key`.
+
+Terminal command line
+=====================
+
+This setup does not provides any presintalled tool for web browsing, file
+manager, image viewer or pdf reader.
+
+It is up to you what to use and install.
+
+― But, how do I install those?
+
+If you selected the Windows key as modifier for i3, pressing:
+
+<Win> + Enter
+
+You will be able to run a command line terminal. I prefer to use GNOME
+Terminal:
+
+.. code-block:: console
+
+   su -c 'dnf install gnome-terminal'
+
+Then by pressing:
+
+<Win> + d
+
+Trigger `dmenu` from where you can invoke GNOME Terminal by typing
+`gnome-terminal`.
+
+In the next post I will explain my i3 post-install.
+
+Login out and powering off
+==========================
+
+To log out from our session:
+
+<Win> + <Shift> + e
+
+This triggers a dialogue asking for if you want to end your i3 user session.
+Click on `Yes, exit i3` and then while on `lightdm` press:
+
+<Alt> + <F4>
+
+To turn off your system.
+
+I hope this post help you to achive a minimal install. This is a good and cheap
+way to setup virtual machines, without expending lot of resources or even for a
+working environemt for ancient devices with minimum and limited resources.
