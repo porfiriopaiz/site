@@ -197,6 +197,168 @@ kernel:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="installing-i3">
+<h2>Installing i3</h2>
+<p>Now, the step by step with all the requirements for a Fedora 29 minimal
+installation with i3wm.</p>
+<p>For it we will make use of packages collections that have been grouped in a
+very specialized way. Next commands must be executed as root user.</p>
+<div class="section" id="common-networkmanager-submodules">
+<h3>Common NetworkManager Submodules</h3>
+<p>This group contains NetworkManager submodules that are commonly used, but may
+not be wanted in some streamlined configurations.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install networkmanager-submodules</span>
+</pre></div>
+</div>
+<div class="section" id="core">
+<h3>Core</h3>
+<p>Smallest possible installation.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install core</span>
+</pre></div>
+</div>
+<div class="section" id="dial-up-networking-support">
+<h3>Dial-up Networking Support</h3>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install dial-up</span>
+</pre></div>
+</div>
+<div class="section" id="fonts">
+<h3>Fonts</h3>
+<p>Fonts packages for rendering text on the desktop.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install fonts</span>
+</pre></div>
+</div>
+<div class="section" id="guest-desktop-agents">
+<h3>Guest Desktop Agents</h3>
+<p>Agents used when running as a virtualized desktop.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install guest-desktop-agents</span>
+</pre></div>
+</div>
+<div class="section" id="hardware-support">
+<h3>Hardware Support</h3>
+<p>This group is a collection of tools for various hardware specific utilities.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install hardware-support</span>
+</pre></div>
+</div>
+<div class="section" id="multimedia">
+<h3>Multimedia</h3>
+<p>Audio/video framework common to desktops.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install multimedia</span>
+</pre></div>
+</div>
+<div class="section" id="standard">
+<h3>Standard</h3>
+<p>Common set of utilities that extend the minimal installation.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install standard</span>
+</pre></div>
+</div>
+<div class="section" id="base-x">
+<h3>base-x</h3>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install base-x</span>
+</pre></div>
+</div>
+<div class="section" id="input-methods">
+<h3>Input Methods</h3>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install input-methods</span>
+</pre></div>
+</div>
+<div class="section" id="fedora-icons-theme">
+<h3>Fedora Icons Theme</h3>
+<p>This package provides the Fedora icons theme.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install fedora-icon-theme</span>
+</pre></div>
+</div>
+<div class="section" id="gnome-icons-theme">
+<h3>GNOME Icons Theme</h3>
+<p>This package provides the default icon theme used by the GNOME Desktop.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install gnome-icon-theme</span>
+</pre></div>
+</div>
+<div class="section" id="gnome-icons-theme-extra">
+<h3>GNOME Icons Theme extra</h3>
+<p>This package provides additional mime type and devices icons for the GNOME
+Desktop.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install gnome-icon-theme-extras</span>
+</pre></div>
+</div>
+<div class="section" id="i3-window-manager">
+<h3>i3 Window Manager</h3>
+<p>Finally we can install the i3 window manager.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install i3</span>
+</pre></div>
+</div>
+<div class="section" id="installing-the-graphical-login-manager">
+<h3>Installing the graphical login manager</h3>
+<p>We will need a graphical login manager where we can pick our user and type our
+password so we can get authenticated. From here we can also select other
+desktop environments that we might install in the future.</p>
+<p>LightDM is a display manager that welcomes the user and uses the GTK3 tool kit.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install lightdm-gtk</span>
+</pre></div>
+</div>
+<div class="section" id="xdg-user-dirs">
+<h3>xdg-user-dirs</h3>
+<p>Contains xdg-user-dirs-update that updates and creates the directories at
+/home/, according to the predefined values configured by the administrator.</p>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install xdg-user-dirs</span>
+</pre></div>
+</div>
+<div class="section" id="enabling-the-graphical-mode-boot">
+<h3>Enabling the graphical mode boot</h3>
+<p>Our system already has all the requirements to work as a graphical environment
+using i3 as a window manager. But before it, we need to change some
+configurations that make our system boot from runlevel 3 mode or
+multi-user.target to runlevel 5 or graphical.target.</p>
+<p>We can fix that with the next command:</p>
+<div class="highlight"><pre><span></span><span class="go">systemctl set-default graphical.target</span>
+</pre></div>
+<p>Also we must enable the system service that provides the option to access the
+system via a graphical loging that we just installed, lightdm:</p>
+<div class="highlight"><pre><span></span><span class="go">systemctl enable lightdm.service</span>
+</pre></div>
+<p>Finally we can reboot our system and then after we should be able to get logged
+in makeing use of the graphical session manager and our window manager i3.</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="first-graphical-session">
+<h2>First graphical session</h2>
+<p>Once logged in, i3 will ask if you want to generate a new config file for i3,
+press Enter to answer affirmatively.</p>
+<p>Next it ask which key you want to use as modifier key to trigger the i3
+keyboard shortcuts, I always pick the <cite>Win</cite> or the Windows key, also known as
+<cite>Meta key</cite>.</p>
+</div>
+<div class="section" id="terminal-command-line">
+<h2>Terminal command line</h2>
+<p>This setup does not provides any presintalled tool for web browsing, file
+manager, image viewer or pdf reader.</p>
+<p>It is up to you what to use and install.</p>
+<p>― But, how do I install those?</p>
+<p>If you selected the Windows key as modifier for i3, pressing:</p>
+<p>&lt;Win&gt; + Enter</p>
+<p>You will be able to run a command line terminal. I prefer to use GNOME
+Terminal:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install gnome-terminal&#39;</span>
+</pre></div>
+<p>Then by pressing:</p>
+<p>&lt;Win&gt; + d</p>
+<p>Trigger <cite>dmenu</cite> from where you can invoke GNOME Terminal by typing
+<cite>gnome-terminal</cite>.</p>
+<p>In the next post I will explain my i3 post-install.</p>
+</div>
+<div class="section" id="login-out-and-powering-off">
+<h2>Login out and powering off</h2>
+<p>To log out from our session:</p>
+<p>&lt;Win&gt; + &lt;Shift&gt; + e</p>
+<p>This triggers a dialogue asking for if you want to end your i3 user session.
+Click on <cite>Yes, exit i3</cite> and then while on <cite>lightdm</cite> press:</p>
+<p>&lt;Alt&gt; + &lt;F4&gt;</p>
+<p>To turn off your system.</p>
+<p>I hope this post help you to achive a minimal install. This is a good and cheap
+way to setup virtual machines, without expending lot of resources or even for a
+working environemt for ancient devices with minimum and limited resources.</p>
+</div>
 
   </div>
   <div class="article_meta">
