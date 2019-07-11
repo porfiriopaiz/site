@@ -28,7 +28,7 @@ In the previous post we installed a set of packages provided by the group
 networking hardware.  We also install the group of packages corresponding to
 NetworkManager.
 
-`` nmcli`` is a command-line program that will allow us to activate by software
+``nmcli`` is a command-line program that will allow us to activate by software
 the network hardware of our device, scan the networks that are around us and
 connect to them.
 

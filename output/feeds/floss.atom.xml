@@ -15,7 +15,7 @@ any of the networks we have available?&lt;/p&gt;
 &amp;quot;Hardware Support&amp;quot;, this group provides support for a wide variety of
 networking hardware.  We also install the group of packages corresponding to
 NetworkManager.&lt;/p&gt;
-&lt;p&gt;`` nmcli`` is a command-line program that will allow us to activate by software
+&lt;p&gt;&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; is a command-line program that will allow us to activate by software
 the network hardware of our device, scan the networks that are around us and
 connect to them.&lt;/p&gt;
 &lt;p&gt;We will need a terminal, by pressing &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt; we get a Terminal.&lt;/p&gt;
