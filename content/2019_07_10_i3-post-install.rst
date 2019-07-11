@@ -160,7 +160,7 @@ the one you prefer.
 
 ``i3`` has the key combination <Start> + <Enter> assigned to the emulator
 ``urxvt``, to launch GNOME Terminal instead, you need to edit the configuration
-file for  ``i3`` (``~ /.config/i3/config``), look for the line:
+file for  ``i3`` (``~/.config/i3/config``), look for the line:
 
 .. code-block:: console
 
