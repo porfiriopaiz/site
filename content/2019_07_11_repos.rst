@@ -1,0 +1,96 @@
+repos
+#####
+
+:date: 2019-7-11 23:32
+:tags: fc30, fedora, postinstall, repositories
+:category: floss
+:slug: repos
+:summary: A list of the software repositories I use on Fedora
+:lang: en
+
+Software Repositories
+=====================
+
+Once we solved the problem of getting connected to the Internet and how to
+launch a terminal, you might want to install all the software you use.
+
+The software comes from somewhere, on Fedora these are called *Software
+Repositories*, next I detail which are the ones I enable on all my Fedora
+installs apart of the officials that comes preinstalled and enabled by default.
+
+Open a terminal and enable some of these.
+
+RPMFusion
+---------
+
+RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL maintained
+by a group of volunteers. RPM Fusion is not a standalone repository, but an
+extension of Fedora. RPM Fusion distributes packages that have been deemed
+unacceptable to Fedora.
+
+More about RPMFusion on its official website: https://rpmfusion.org/FAQ
+
+.. code-block:: console
+
+   su -c 'dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+
+Fedora Workstation Repositories
+-------------------------------
+
+From the Fedora wiki page corresponding to Fedora Workstation Repositories:
+
+The Fedora community strongly promotes free and open source resources. The
+Fedora Workstation, in its out of the box configuration, therefore, only
+includes free and open source software. To make the Fedora Workstation more
+usable, we've made it possible to easily install a curated set of third party
+(external) sources that supply software not included in Fedora via an
+additional package.
+
+Read more at: https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories
+
+Please note that this will only install the \*.repo files, it will not enable
+the provided repos:
+
+.. code-block:: console
+
+   su -c 'dnf install fedora-workstation-repositories'
+
+Fedora Rawhide's Repositories
+-----------------------------
+
+Rawhide is the name given to the current development version of Fedora. It
+consists of a package repository called "rawhide" and contains the latest build
+of all Fedora packages updated on a daily basis. Each day, an attempt is made
+to create a full set of 'deliverables' (installation images and so on), and all
+that compose successfully are included in the Rawhide tree for that day.
+
+It is possible to install its repository files and just temporarily enable it
+for just a single transaction, let us say, to simple install or upgrade a
+single package and its dependencies, maybe, to give a try to its new version
+that is not currently available on any of the stable and maintained versions of
+Fedora.
+
+This is useful when a bug was fixed on Rawhide but it has not landed yet on the
+stable branch of Fedora and the urge for it cannot wait.
+
+Again, this will just install the \*.repo file under ``/etc/yum.repos.d/``,
+this will not enable it. Later we will see how to handle, disable and enable
+this repositories for just one transaction.
+
+More on Rawhide on its wiki page: https://fedoraproject.org/wiki/Releases/Rawhide
+
+.. code-block:: console
+
+   su -c 'dnf install fedora-repos-rawhide'
+
+COPR
+----
+
+neteler/remarkable
+~~~~~~~~~~~~~~~~~~
+
+philfry/gajim
+~~~~~~~~~~~~~
+
+dani/qgis
+~~~~~~~~~
