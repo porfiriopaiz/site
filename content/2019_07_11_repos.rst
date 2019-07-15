@@ -160,7 +160,7 @@ Now create the vscodium.repo file:
 Verification
 ============
 
-Now check that all the repos has been successfully installed and some of the
+Now check that all the repos has been successfully installed and some of them
 enabled by refreshing the ``dnf`` metadata.
 
 .. code-block:: console
