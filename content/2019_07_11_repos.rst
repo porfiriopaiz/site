@@ -127,7 +127,7 @@ This provides the .NET CLI tools and runtime for Fedora.
 
 .. code-block:: console
 
-   su -c 'dnf copr enable dotnet-sig/dotnet'
+   su -c 'dnf copr enable @dotnet-sig/dotnet'
 
 VSCodium
 --------
