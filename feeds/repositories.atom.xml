@@ -82,7 +82,7 @@ dependencies not available in the official Fedora repo.&lt;/p&gt;
 &lt;div class="section" id="donet-sig-dotnet"&gt;
 &lt;h4&gt;donet-sig/dotnet&lt;/h4&gt;
 &lt;p&gt;This provides the .NET CLI tools and runtime for Fedora.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf copr enable dotnet-sig/dotnet&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf copr enable @dotnet-sig/dotnet&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
