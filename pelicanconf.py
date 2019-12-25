@@ -33,7 +33,7 @@ SOCIAL = (('Twitter', 'https://twitter.com/porfiriopaiz'),
           ('Google+', 'https://plus.google.com/+PorfirioAndresPaizCarrasco'),
           ('License', 'https://creativecommons.org/licenses/by-sa/4.0/'))
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True

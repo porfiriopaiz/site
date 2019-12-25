@@ -2,11 +2,11 @@ Fedora 30 Mate Desktop post-install
 ###################################
 
 :date: 2019-12-24 12:28
-:tags:
-:category:
+:tags: fc30, fedora, mate, postinstall
+:category: floss
 :slug: mate-desktop
-:summary:
-:lang:
+:summary: Fedora 30 Mate Desktop Post-install
+:lang: en
 
 dnf configuration
 =================
@@ -77,7 +77,7 @@ Reboot:
    reboot
 
 Check for available upgrades and enter your root password:
-=========================================================
+==========================================================
 
 .. code-block:: console
 
