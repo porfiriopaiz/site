@@ -44,4 +44,3 @@ I don't like to install Flatpaks on my root directory, so I always add the
 .. code-block:: console
 
    flatpak --user install flathub im.riot.Riot
-
