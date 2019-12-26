@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all-en.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-25T18:03:00-06:00</updated><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"></link><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repo&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, space consuming, high on ram
-consuming resources. But when it comes about installing propietary software not
-available on the official Fedora repos, Flatpaks are a good option as they add
-some sort of isolation.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, take up a lot of space and consuem a
+lot of resources in RAM. But when it comes to installing proprietary software
+that is not available in the official Fedora repositories, Flatpaks are a good
+option as some type of isolation is added.&lt;/p&gt;
 &lt;div class="section" id="flatpak-installation"&gt;
 &lt;h2&gt;Flatpak installation&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install flatpak&amp;#39;&lt;/span&gt;
