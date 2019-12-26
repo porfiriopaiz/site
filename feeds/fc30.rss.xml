@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - fc30</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 25 Dec 2019 18:03:00 -0600</lastBuildDate><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, take up a lot of space and consuem a
+<rss version="2.0"><channel><title>porfirio's blog - fc30</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 25 Dec 2019 18:03:00 -0600</lastBuildDate><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, take up a lot of space and consume a
 lot of resources in RAM. But when it comes to installing proprietary software
 that is not available in the official Fedora repositories, Flatpaks are a good
 option as some type of isolation is added.&lt;/p&gt;
