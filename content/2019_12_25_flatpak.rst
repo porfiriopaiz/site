@@ -1,0 +1,47 @@
+Flatpak
+#######
+
+:date: 2019-12-25 18:03
+:tags: fc30, fedora, flathub, flatpak
+:category: floss
+:slug: flatpak
+:summary: Flatpak and the Flathub repo
+:lang: en
+
+I don't like Flatpaks, Flatpaks are heavy, space consuming, high on ram
+consuming resources. But when it comes about installing propietary software not
+available on the official Fedora repos, Flatpaks are a good option as they add
+some sort of isolation.
+
+Flatpak installation
+====================
+
+.. code-block:: console
+
+   su -c 'dnf install flatpak'
+
+Enable Flathub repo
+===================
+
+Add the Flathub repo:
+
+.. code-block:: console
+
+   flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+Some good examples are:
+
+- `Riot <https://flathub.org/apps/details/im.riot.Riot>`_
+- `Skype <https://flathub.org/apps/details/com.skype.Client>`_
+- `Signal <https://flathub.org/apps/details/org.signal.Signal>`_
+- `Slack <https://flathub.org/apps/details/com.slack.Slack>`_
+- `Spotify <https://flathub.org/apps/details/com.spotify.Client>`_
+- `Wire <https://flathub.org/apps/details/com.wire.WireDesktop>`_
+
+I don't like to install Flatpaks on my root directory, so I always add the
+``--user`` flag to make sure Flatpaks are installed under my ``~/`` directory.
+
+.. code-block:: console
+
+   flatpak --user install flathub im.riot.Riot
+
