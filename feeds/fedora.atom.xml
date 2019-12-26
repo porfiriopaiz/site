@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fedora</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/fedora.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-24T12:28:00-06:00</updated><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fedora</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/fedora.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-25T18:03:00-06:00</updated><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"></link><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repo&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, space consuming, high on ram
+consuming resources. But when it comes about installing propietary software not
+available on the official Fedora repos, Flatpaks are a good option as they add
+some sort of isolation.&lt;/p&gt;
+&lt;div class="section" id="flatpak-installation"&gt;
+&lt;h2&gt;Flatpak installation&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install flatpak&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enable-flathub-repo"&gt;
+&lt;h2&gt;Enable Flathub repo&lt;/h2&gt;
+&lt;p&gt;Add the Flathub repo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some good examples are:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/im.riot.Riot"&gt;Riot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.skype.Client"&gt;Skype&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/org.signal.Signal"&gt;Signal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.slack.Slack"&gt;Slack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.spotify.Client"&gt;Spotify&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.wire.WireDesktop"&gt;Wire&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I don't like to install Flatpaks on my root directory, so I always add the
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&gt;&lt;/tt&gt; flag to make sure Flatpaks are installed under my &lt;tt class="docutils literal"&gt;~/&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;dnf configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
