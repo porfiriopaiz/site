@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - distribution</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/distribution.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-14T16:38:00-06:00</updated><entry><title>Setup Debian keyboard layout and distribution</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html" rel="alternate"></link><published>2021-07-14T16:38:00-06:00</published><updated>2021-07-14T16:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html</id><summary type="html">&lt;p class="first last"&gt;How to setup English International with AltGr dead keys&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;During the Debian installation process we are offered to setup our keyboard
+layout and distribution; sadly my favorite one is not listed as one the
+possible options.&lt;/p&gt;
+&lt;p&gt;I would like to be able to set it up as English International with AltGr dead
+keys.&lt;/p&gt;
+&lt;p&gt;This is something I have to do as a post-install setting by running the next
+command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;localectl set-x11-keymap us thinkpad altgr-intl&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This sets the layout as English US; the model compatible with my Lenovo
+ThinkPad T440p; the variant as Dead keys via AltGr, which means I can input
+characters as á or ñ by just pressing: AltGr + a or AltGr + n respectively.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;localectl
+&lt;span class="go"&gt;System Locale: LANG=en_US.UTF-8&lt;/span&gt;
+&lt;span class="go"&gt;               LANGUAGE=en_US:en&lt;/span&gt;
+&lt;span class="go"&gt;    VC Keymap: n/a&lt;/span&gt;
+&lt;span class="go"&gt;   X11 Layout: us&lt;/span&gt;
+&lt;span class="go"&gt;    X11 Model: thinkpad&lt;/span&gt;
+&lt;span class="go"&gt;  X11 Variant: altgr-intl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This way I can continue using the English US keyboard layout when writing in
+either English or Spanish without having to change the variant or physical
+layout.&lt;/p&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="keyboard"></category><category term="layout"></category><category term="distribution"></category></entry></feed>

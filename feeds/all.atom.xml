@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-25T18:03:00-06:00</updated><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"></link><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repo&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-14T16:38:00-06:00</updated><entry><title>Setup Debian keyboard layout and distribution</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html" rel="alternate"></link><published>2021-07-14T16:38:00-06:00</published><updated>2021-07-14T16:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html</id><summary type="html">&lt;p class="first last"&gt;How to setup English International with AltGr dead keys&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;During the Debian installation process we are offered to setup our keyboard
+layout and distribution; sadly my favorite one is not listed as one the
+possible options.&lt;/p&gt;
+&lt;p&gt;I would like to be able to set it up as English International with AltGr dead
+keys.&lt;/p&gt;
+&lt;p&gt;This is something I have to do as a post-install setting by running the next
+command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;localectl set-x11-keymap us thinkpad altgr-intl&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This sets the layout as English US; the model compatible with my Lenovo
+ThinkPad T440p; the variant as Dead keys via AltGr, which means I can input
+characters as á or ñ by just pressing: AltGr + a or AltGr + n respectively.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;localectl
+&lt;span class="go"&gt;System Locale: LANG=en_US.UTF-8&lt;/span&gt;
+&lt;span class="go"&gt;               LANGUAGE=en_US:en&lt;/span&gt;
+&lt;span class="go"&gt;    VC Keymap: n/a&lt;/span&gt;
+&lt;span class="go"&gt;   X11 Layout: us&lt;/span&gt;
+&lt;span class="go"&gt;    X11 Model: thinkpad&lt;/span&gt;
+&lt;span class="go"&gt;  X11 Variant: altgr-intl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This way I can continue using the English US keyboard layout when writing in
+either English or Spanish without having to change the variant or physical
+layout.&lt;/p&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="keyboard"></category><category term="layout"></category><category term="distribution"></category></entry><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"></link><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repo&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, take up a lot of space and consume a
 lot of resources in RAM. But when it comes to installing proprietary software
 that is not available in the official Fedora repositories, Flatpaks are a good
@@ -28,7 +52,7 @@ option as some type of isolation is added.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;dnf configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
@@ -198,7 +222,7 @@ dependencies not available in the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="mate"></category><category term="postinstall"></category></entry><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"></link><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="mate"></category><category term="postinstall"></category></entry><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"></link><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once we solved the problem of getting connected to the Internet and how to
@@ -318,7 +342,7 @@ temporarilly disable  and enable some other for just a single transaction, how
 to install or upgrade certain packages from an specific repo and many repo
 administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="postinstall"></category><category term="repositories"></category></entry><entry><title>i3 post install</title><link href="https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html" rel="alternate"></link><published>2018-12-09T21:26:00-06:00</published><updated>2018-12-09T21:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 29 i3 window manager post-install&lt;/p&gt;
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="postinstall"></category><category term="repositories"></category></entry><entry><title>i3 post install</title><link href="https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html" rel="alternate"></link><published>2018-12-09T21:26:00-06:00</published><updated>2018-12-09T21:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 29 i3 window manager post-install&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;After installing Fedora 29 with i3 window manager, we need to install many
 other programs that will ease our user experience.&lt;/p&gt;
 &lt;p&gt;The first problem we have to solve is how are we going to connect to Internet,
@@ -435,7 +459,7 @@ file for  &lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; (&lt;tt class="docuti
 29 with i3wm. At the moment you already have the necessary to install other
 interesting programs such as Web browser and others.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"></link><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling wm&lt;/p&gt;
+</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"></link><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling wm&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
 window manager. It is common to see installation guides for i3, but they assume
 that you already have another desktop environment previously installed.&lt;/p&gt;
@@ -735,7 +759,7 @@ Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lig
 way to setup virtual machines, without expending lot of resources or even for a
 working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
+</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs that I install after the first boot of
 any fresh install.&lt;/p&gt;
 &lt;p&gt;In the next post I will show how to install KeePassXC on Fedora and Debian, its
@@ -898,7 +922,7 @@ user, jump to the next field, insert the password, to finally and automatically
 &amp;quot;press&amp;quot; &lt;tt class="docutils literal"&gt;Log In&lt;/tt&gt; and log in.&lt;/p&gt;
 &lt;p&gt;I hope this post is useful for you.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="debian"></category><category term="fc27"></category><category term="fedora"></category><category term="keepassxc"></category><category term="password"></category></entry><entry><title>Fedora 26 Custom Operating System post install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"></link><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
+</content><category term="floss"></category><category term="debian"></category><category term="fc27"></category><category term="fedora"></category><category term="keepassxc"></category><category term="password"></category></entry><entry><title>Fedora 26 Custom Operating System post install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"></link><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
 has passed by since the last post and Fedora 26 was released, following the
 same steps I installed it on my laptop and next I will document my postinstall.&lt;/p&gt;
 &lt;p&gt;Given this is a minimal install, the set of packages installed does not
@@ -1112,7 +1136,7 @@ libraries for compiling other software from source code, as well as making of
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On the next post I will make shorts reviews on the other tools I use on Fedora.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc26"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>This was Fedora at CS50x.ni</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html" rel="alternate"></link><published>2017-03-31T15:07:00-06:00</published><updated>2017-03-31T15:07:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-31:/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
+</content><category term="floss"></category><category term="dnf"></category><category term="fc26"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>This was Fedora at CS50x.ni</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html" rel="alternate"></link><published>2017-03-31T15:07:00-06:00</published><updated>2017-03-31T15:07:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-31:/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
 community and the &lt;a class="reference external" href="http://code-fu.net.ni/"&gt;CS50x.ni&lt;/a&gt; staff, with the support
 from &lt;a class="reference external" href="http://fundacionuno.org/en/"&gt;Fundación UNO&lt;/a&gt; and the Fedora Project, we
 had the opportunity to meet to see a series of lectures in which the speakers
@@ -1182,7 +1206,7 @@ help and interest to those who are entering the wonderful world of programming
 thanks to the CS50x.ni.&lt;/p&gt;
 &lt;p&gt;Sorry for the late post here is a happy Hot Dog:&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/beefy_miracle.gif" /&gt;
-</content><category term="cs50x.ni"></category><category term="events"></category><category term="fedora"></category></entry><entry><title>Anaconda and LVM on LUKS</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html" rel="alternate"></link><published>2017-03-30T21:00:00-06:00</published><updated>2017-03-30T21:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
+</content><category term="floss"></category><category term="cs50x.ni"></category><category term="events"></category><category term="fedora"></category></entry><entry><title>Anaconda and LVM on LUKS</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html" rel="alternate"></link><published>2017-03-30T21:00:00-06:00</published><updated>2017-03-30T21:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
 more than 6 months since it reached its End of Life, it is also possible reuse
 partitions created for F22 so that they can be used to install the new Fedora
 release and keep all the files contained in the Logical Volume that serves as
@@ -1422,7 +1446,7 @@ download of the packages and their installation to finish:&lt;/p&gt;
 &lt;p&gt;In my case I had to do a series of steps after the installation that the we
 will see in the next post.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="anaconda"></category><category term="fc25"></category><category term="fedora"></category><category term="luks"></category><category term="lvm"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
+</content><category term="floss"></category><category term="anaconda"></category><category term="fc25"></category><category term="fedora"></category><category term="luks"></category><category term="lvm"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
 Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
 July 19th of 2016 F22 entered &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt; status, which means that you
 will not receive any further security or maintenance updates, so upgrading to a
@@ -1505,7 +1529,7 @@ by executing the following command:&lt;/p&gt;
 to Fedora 23.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:/site/posts/2016/11/03/irc-with-irssi.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From my beginnings in the Free Software and GNU/Linux, one of the features that
+</content><category term="floss"></category><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:/site/posts/2016/11/03/irc-with-irssi.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From my beginnings in the Free Software and GNU/Linux, one of the features that
 caught my attention is the power of the command line in this operating system.
 From moving between different directories or installing an operating system
 completely from scratch, these are some of the routine tasks you can achive
@@ -1575,5 +1599,5 @@ added without needing to authenticate manually and without risking anyone from
 reading your password while you type it. All this from a terminal.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="cli"></category><category term="irc"></category></entry><entry><title>Hello World!</title><link href="https://porfiriopaiz.github.io/site/posts/2016/10/09/hello-world.html" rel="alternate"></link><published>2016-10-09T20:49:00-06:00</published><updated>2016-10-09T20:49:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-10-09:/site/posts/2016/10/09/hello-world.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Hello World from Pelican!&lt;/p&gt;
-</content></entry></feed>
+</content><category term="floss"></category><category term="cli"></category><category term="irc"></category></entry><entry><title>Hello World!</title><link href="https://porfiriopaiz.github.io/site/posts/2016/10/09/hello-world.html" rel="alternate"></link><published>2016-10-09T20:49:00-06:00</published><updated>2016-10-09T20:49:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-10-09:/site/posts/2016/10/09/hello-world.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Hello World from Pelican!&lt;/p&gt;
+</content><category term="misc"></category></entry></feed>

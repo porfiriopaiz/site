@@ -115,7 +115,7 @@ file for  &lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; (&lt;tt class="docuti
 29 with i3wm. At the moment you already have the necessary to install other
 interesting programs such as Web browser and others.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
 window manager. It is common to see installation guides for i3, but they assume
 that you already have another desktop environment previously installed.&lt;/p&gt;
 &lt;p&gt;In this post we will see how to build a fully functional environment from a
@@ -414,4 +414,4 @@ Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lig
 way to setup virtual machines, without expending lot of resources or even for a
 working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item></channel></rss>

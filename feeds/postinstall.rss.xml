@@ -168,7 +168,7 @@ dependencies not available in the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once we solved the problem of getting connected to the Internet and how to
 launch a terminal, you might want to install all the software you use.&lt;/p&gt;
@@ -287,7 +287,7 @@ temporarilly disable  and enable some other for just a single transaction, how
 to install or upgrade certain packages from an specific repo and many repo
 administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item><item><title>i3 post install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with i3 window manager, we need to install many
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item><item><title>i3 post install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with i3 window manager, we need to install many
 other programs that will ease our user experience.&lt;/p&gt;
 &lt;p&gt;The first problem we have to solve is how are we going to connect to Internet,
 you might have noticed that we don't have any program or applet that allows us
@@ -403,7 +403,7 @@ file for  &lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; (&lt;tt class="docuti
 29 with i3wm. At the moment you already have the necessary to install other
 interesting programs such as Web browser and others.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
 window manager. It is common to see installation guides for i3, but they assume
 that you already have another desktop environment previously installed.&lt;/p&gt;
 &lt;p&gt;In this post we will see how to build a fully functional environment from a
@@ -702,7 +702,7 @@ Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lig
 way to setup virtual machines, without expending lot of resources or even for a
 working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>Fedora 26 Custom Operating System post install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>Fedora 26 Custom Operating System post install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
 has passed by since the last post and Fedora 26 was released, following the
 same steps I installed it on my laptop and next I will document my postinstall.&lt;/p&gt;
 &lt;p&gt;Given this is a minimal install, the set of packages installed does not
@@ -916,4 +916,4 @@ libraries for compiling other software from source code, as well as making of
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On the next post I will make shorts reviews on the other tools I use on Fedora.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 31 Aug 2017 16:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</guid><category>dnf</category><category>fc26</category><category>fedora</category><category>postinstall</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 31 Aug 2017 16:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</guid><category>floss</category><category>dnf</category><category>fc26</category><category>fedora</category><category>postinstall</category></item></channel></rss>
