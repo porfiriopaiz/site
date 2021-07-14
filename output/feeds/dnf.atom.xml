@@ -116,7 +116,7 @@ file for  &lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; (&lt;tt class="docuti
 29 with i3wm. At the moment you already have the necessary to install other
 interesting programs such as Web browser and others.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"></link><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling wm&lt;/p&gt;
+</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"></link><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling wm&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In this post I will explain how to do a Fedora 29 installation with the i3
 window manager. It is common to see installation guides for i3, but they assume
 that you already have another desktop environment previously installed.&lt;/p&gt;
@@ -416,7 +416,7 @@ Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lig
 way to setup virtual machines, without expending lot of resources or even for a
 working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>Fedora 26 Custom Operating System post install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"></link><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
+</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>Fedora 26 Custom Operating System post install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"></link><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"></summary><content type="html">&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
 has passed by since the last post and Fedora 26 was released, following the
 same steps I installed it on my laptop and next I will document my postinstall.&lt;/p&gt;
 &lt;p&gt;Given this is a minimal install, the set of packages installed does not
@@ -630,7 +630,7 @@ libraries for compiling other software from source code, as well as making of
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On the next post I will make shorts reviews on the other tools I use on Fedora.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="fc26"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
+</content><category term="floss"></category><category term="dnf"></category><category term="fc26"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th in 2015 to November 22th in 2016 I was using Fedora 22 on my
 Lenovo ThinkPad T440p, which is equivalent to a year and a half running F22. On
 July 19th of 2016 F22 entered &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;EOL&lt;/a&gt; status, which means that you
 will not receive any further security or maintenance updates, so upgrading to a
@@ -713,4 +713,4 @@ by executing the following command:&lt;/p&gt;
 to Fedora 23.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry></feed>
+</content><category term="floss"></category><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry></feed>

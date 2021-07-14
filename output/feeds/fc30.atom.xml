@@ -28,7 +28,7 @@ option as some type of isolation is added.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry><entry><title>Fedora 30 Mate Desktop post-install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-install&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;dnf configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
@@ -198,7 +198,7 @@ dependencies not available in the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="mate"></category><category term="postinstall"></category></entry><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"></link><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="mate"></category><category term="postinstall"></category></entry><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"></link><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once we solved the problem of getting connected to the Internet and how to
@@ -318,4 +318,4 @@ temporarilly disable  and enable some other for just a single transaction, how
 to install or upgrade certain packages from an specific repo and many repo
 administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="fc30"></category><category term="fedora"></category><category term="postinstall"></category><category term="repositories"></category></entry></feed>
+</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="postinstall"></category><category term="repositories"></category></entry></feed>

@@ -27,7 +27,7 @@ option as some type of isolation is added.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 25 Dec 2019 18:03:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</guid><category>fc30</category><category>fedora</category><category>flathub</category><category>flatpak</category></item><item><title>Fedora 30 Mate Desktop post-install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 25 Dec 2019 18:03:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>flathub</category><category>flatpak</category></item><item><title>Fedora 30 Mate Desktop post-install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;dnf configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
 &lt;h3&gt;dnf.conf&lt;/h3&gt;
@@ -196,7 +196,7 @@ dependencies not available in the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once we solved the problem of getting connected to the Internet and how to
 launch a terminal, you might want to install all the software you use.&lt;/p&gt;
@@ -315,4 +315,4 @@ temporarilly disable  and enable some other for just a single transaction, how
 to install or upgrade certain packages from an specific repo and many repo
 administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item></channel></rss>
