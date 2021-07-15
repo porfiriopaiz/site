@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - debian</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 14 Jul 2021 17:37:00 -0600</lastBuildDate><item><title>K8</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html</link><description>&lt;p&gt;Back in February Guido van Rossum posted on Twitter a picture of his desk with
+<rss version="2.0"><channel><title>porfirio's blog - debian</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 15 Jul 2021 20:53:00 -0600</lastBuildDate><item><title>UTC</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html</link><description>&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p I could not find the
+option to setup the local time, RTC time and the Time zone to UTC as the
+default configuration.&lt;/p&gt;
+&lt;p&gt;To fix this I need to run the next commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This lists the current configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 14:45:28 CST&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 20:45:28 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 20:44:47&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: America/Managua (CST, -0600)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: yes&lt;/span&gt;
+
+&lt;span class="go"&gt;Warning: The system is configured to read the RTC time in the local time zone.&lt;/span&gt;
+&lt;span class="go"&gt;         This mode cannot be fully supported. It will create various problems&lt;/span&gt;
+&lt;span class="go"&gt;         with time zone changes and daylight saving time adjustments. The RTC&lt;/span&gt;
+&lt;span class="go"&gt;         time is never updated, it relies on external facilities to maintain it.&lt;/span&gt;
+&lt;span class="go"&gt;         If at all possible, use RTC in UTC by calling&lt;/span&gt;
+&lt;span class="go"&gt;         &amp;#39;timedatectl set-local-rtc 0&amp;#39;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First of all let's update the RTC in UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-local-rtc 0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then let's set the time zone and the local time zone to UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-timezone UTC&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now our system will be set entirely to be in sync with UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 21:31:52&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: UTC (UTC, +0000)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: no&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 15 Jul 2021 20:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-15:/site/posts/2021/07/15/utc.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>timedatectl</category><category>utc</category></item><item><title>K8</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html</link><description>&lt;p&gt;Back in February Guido van Rossum posted on Twitter a picture of his desk with
 a large mouse pad.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897/"&gt;https://twitter.com/gvanrossum/status/1365796969617104897/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What got my attention from this picture was the keyboard, down on the comment

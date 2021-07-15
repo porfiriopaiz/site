@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - debian</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/debian.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-14T17:37:00-06:00</updated><entry><title>K8</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html" rel="alternate"></link><published>2021-07-14T17:37:00-06:00</published><updated>2021-07-14T17:37:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</id><summary type="html">&lt;p class="first last"&gt;Swap from multimedia keys to function keys as the primary option&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - debian</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/debian.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-15T20:53:00-06:00</updated><entry><title>UTC</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html" rel="alternate"></link><published>2021-07-15T20:53:00-06:00</published><updated>2021-07-15T20:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-15:/site/posts/2021/07/15/utc.html</id><summary type="html">&lt;p class="first last"&gt;Set Local time, RTC time and Time zone to UTC&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p I could not find the
+option to setup the local time, RTC time and the Time zone to UTC as the
+default configuration.&lt;/p&gt;
+&lt;p&gt;To fix this I need to run the next commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This lists the current configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 14:45:28 CST&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 20:45:28 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 20:44:47&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: America/Managua (CST, -0600)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: yes&lt;/span&gt;
+
+&lt;span class="go"&gt;Warning: The system is configured to read the RTC time in the local time zone.&lt;/span&gt;
+&lt;span class="go"&gt;         This mode cannot be fully supported. It will create various problems&lt;/span&gt;
+&lt;span class="go"&gt;         with time zone changes and daylight saving time adjustments. The RTC&lt;/span&gt;
+&lt;span class="go"&gt;         time is never updated, it relies on external facilities to maintain it.&lt;/span&gt;
+&lt;span class="go"&gt;         If at all possible, use RTC in UTC by calling&lt;/span&gt;
+&lt;span class="go"&gt;         &amp;#39;timedatectl set-local-rtc 0&amp;#39;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First of all let's update the RTC in UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-local-rtc 0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then let's set the time zone and the local time zone to UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-timezone UTC&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now our system will be set entirely to be in sync with UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 21:31:52&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: UTC (UTC, +0000)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: no&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="timedatectl"></category><category term="utc"></category></entry><entry><title>K8</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html" rel="alternate"></link><published>2021-07-14T17:37:00-06:00</published><updated>2021-07-14T17:37:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</id><summary type="html">&lt;p class="first last"&gt;Swap from multimedia keys to function keys as the primary option&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Back in February Guido van Rossum posted on Twitter a picture of his desk with
 a large mouse pad.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897/"&gt;https://twitter.com/gvanrossum/status/1365796969617104897/&lt;/a&gt;&lt;/p&gt;
