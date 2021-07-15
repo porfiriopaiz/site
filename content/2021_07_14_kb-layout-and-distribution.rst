@@ -2,9 +2,9 @@ Setup Debian keyboard layout and distribution
 #############################################
 
 :date: 2021-7-14 16:38
-:tags: deb11, debian, keyboard, layout, distribution
+:tags: deb11, debian, distribution, keyboard, layout
 :category: floss
-:slug: setup-debian-kb-layout-and-distribution
+:slug: kb-layout-and-distribution
 :summary: How to setup English International with AltGr dead keys
 :lang: en
 
