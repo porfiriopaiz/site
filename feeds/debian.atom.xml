@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - debian</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/debian.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-14T16:38:00-06:00</updated><entry><title>Setup Debian keyboard layout and distribution</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html" rel="alternate"></link><published>2021-07-14T16:38:00-06:00</published><updated>2021-07-14T16:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/setup-debian-kb-layout-and-distribution.html</id><summary type="html">&lt;p class="first last"&gt;How to setup English International with AltGr dead keys&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - debian</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/debian.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-14T17:37:00-06:00</updated><entry><title>K8</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html" rel="alternate"></link><published>2021-07-14T17:37:00-06:00</published><updated>2021-07-14T17:37:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</id><summary type="html">&lt;p class="first last"&gt;Swap from multimedia keys to function keys as the primary option&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Back in February Guido van Rossum posted on Twitter a picture of his desk with
+a large mouse pad.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897/"&gt;https://twitter.com/gvanrossum/status/1365796969617104897/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What got my attention from this picture was the keyboard, down on the comment
+section I found the manufacturer and model of this keyboard.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273"&gt;https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have always wanted to give a try to mechanical keyboards, but never knew
+exactly which one to get or try. Seeing that this is the preferred one from a
+respectable developer I decided to go for this same model.&lt;/p&gt;
+&lt;p&gt;The very specific configuration I wanted was not available at the time I was
+ordering it, so I subscribed myself to get a notification via email when the
+same configuration became available again.&lt;/p&gt;
+&lt;p&gt;I ordered mine in June 3rd, the keyboard was shipped from Hong Kong to Miami
+and arrived in the next 5 days. And the keyboard arrived to Nicaragua 25 days
+after.&lt;/p&gt;
+&lt;p&gt;The first thing I tried to do was to setup the keyboard with my T440p running
+Debian 11 Bullseye via Bluetooth, for this I installed Blueman, which provides
+a Mate applet:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install blueman&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the switches from the keyboard as Windows and Bluetooth, the Blueman
+applet running and following the instructions booklet included on the box, I
+was able to pair my Keychron K8 via Bluetooth with my T440p running Debian.&lt;/p&gt;
+&lt;p&gt;I had to manually add my keyboard as a new device with the applet and then pair
+both devices.&lt;/p&gt;
+&lt;p&gt;Over Bluetooth and on Windows mode the swap from multimedia keys to function
+keys did work, but on wired mode this did not work.&lt;/p&gt;
+&lt;p&gt;I found some hints on how to fix this on the official Facebook support group
+for Linux users of Keychron, that led me to this very specific command that has
+to be run on every start up so that the primary option for the F1 to F12 keys
+to become functions keys instead of multimedia keys.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Later I found this documentation that provides at least 3 different ways to
+make sure this command is executed on every start up:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior"&gt;https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;From the 3 options listed there I decided to go for the one that makes use of
+the sysfs.conf file. So I installed &lt;tt class="docutils literal"&gt;sysfsutils&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install sysfsutils&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And added this line at the end of the file &lt;strong&gt;/etc/sysfs.conf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;module/hid_apple/parameters/fnmode = 0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restarted the computer and then while in cable and Windows mode I pressed the
+key combination:&lt;/p&gt;
+&lt;p&gt;Fn + x + l&lt;/p&gt;
+&lt;p&gt;After doing this the primary option for the F1 to F12 key will be the functions
+keys instead of the multimedia keys.&lt;/p&gt;
+&lt;p&gt;To modify the screen brightness, to turn on and off the keyboard backlight,
+mute and unmute the audio you must press the Fn key plus the function key (Fn +
+F1 or Fn + F2) and that should allows you to continue using your K8 on Linux
+with the switches in Windows/Android mode, in wired or Bluetooth mode with the
+Functions key as the primary option instead of the multimedia keys.&lt;/p&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="keychron"></category><category term="k8"></category></entry><entry><title>Setup Debian keyboard layout and distribution</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/kb-layout-and-distribution.html" rel="alternate"></link><published>2021-07-14T16:38:00-06:00</published><updated>2021-07-14T16:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</id><summary type="html">&lt;p class="first last"&gt;How to setup English International with AltGr dead keys&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;During the Debian installation process we are offered to setup our keyboard
 layout and distribution; sadly my favorite one is not listed as one the
 possible options.&lt;/p&gt;
@@ -23,7 +77,7 @@ characters as á or ñ by just pressing: AltGr + a or AltGr + n respectively.&lt
 &lt;p&gt;This way I can continue using the English US keyboard layout when writing in
 either English or Spanish without having to change the variant or physical
 layout.&lt;/p&gt;
-</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="keyboard"></category><category term="layout"></category><category term="distribution"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="distribution"></category><category term="keyboard"></category><category term="layout"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs that I install after the first boot of
 any fresh install.&lt;/p&gt;
 &lt;p&gt;In the next post I will show how to install KeePassXC on Fedora and Debian, its
