@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>porfirio's blog - debian</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 22 Jul 2021 20:46:00 -0600</lastBuildDate><item><title>JOSM</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html</link><description>&lt;p&gt;JOSM is in my opinion the best editor for OpenStreetMap I have ever used and it
 is also the best Java software I have ever used too.&lt;/p&gt;
-&lt;p&gt;On this post I will cover how to get it installed on Debian and how to proper
-configur it for mapping on OSM and what plugins to install and use.&lt;/p&gt;
+&lt;p&gt;In this post, I will cover how to get it installed on Debian and how to
+properly configure it for mapping on OSM and what plugins to install and use.&lt;/p&gt;
 &lt;div class="section" id="installing-josm-on-debian"&gt;
 &lt;h2&gt;Installing JOSM on Debian&lt;/h2&gt;
-&lt;p&gt;JOSM is available on the Debian official repository, so for its installation
-you just need to open a terminal and type in the next command:&lt;/p&gt;
+&lt;p&gt;JOSM is available on the Debian official repository, so for its installation,
+you just need to open a terminal and type the next command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install josm&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="solving-josm-outdated-version-on-debian"&gt;
 &lt;h2&gt;Solving JOSM outdated version on Debian&lt;/h2&gt;
 &lt;p&gt;Installing JOSM from the official Debian repositories solves the dependency
-issue we would find if we ran the most up to date version from the official
+issue we would find if we ran the most up-to-date version from the official
 .jar build.&lt;/p&gt;
-&lt;p&gt;To run the most up to date stable version we need to download it from the
-official JOSM website as a JAR file, but first we need to run at least for once
-the version installed from the Debian repository.&lt;/p&gt;
+&lt;p&gt;To run the most up-to-date stable version we need to download it from the
+official JOSM website as a JAR file, but first, we need to run at least once
+the version is installed from the Debian repository.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;josm&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is going to create the next directory structure associated to it:&lt;/p&gt;
+&lt;p&gt;This is going to create the next directory structure associated with it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;~/.config/JOSM&lt;/span&gt;
 &lt;span class="go"&gt;~/.cache/JOSM&lt;/span&gt;
 &lt;span class="go"&gt;~/.local/share/JOSM&lt;/span&gt;
@@ -34,13 +34,13 @@ the version installed from the Debian repository.&lt;/p&gt;
 &lt;p&gt;Now let's download the most up to date version of the JOSM editor using wget:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://josm.openstreetmap.de/josm-tested.jar&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now to run the new version up to date version we just download:&lt;/p&gt;
+&lt;p&gt;Now, to run the new version up to date version, we download:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;java -jar ~/.cache/JOSM/jar/josm-tested.jar&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="script-launcher"&gt;
 &lt;h2&gt;Script launcher&lt;/h2&gt;
-&lt;p&gt;To launch the JAR file we can add the previous line to a file with executable
+&lt;p&gt;To launch the JAR file, we can add the last command to a file with executable
 permissions:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;touch ~/.local/bin/tested-josm.sh&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -51,7 +51,7 @@ permissions:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="adding-a-launcher"&gt;
 &lt;h2&gt;Adding a launcher&lt;/h2&gt;
-&lt;p&gt;To make this easier let's create a launcher for the manually downloaded JOSM
+&lt;p&gt;To make this easier, let's create a launcher for the manually downloaded JOSM
 JAR file and previously created script:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;touch ~/.local/share/applications/org.openstreetmap.josm.desktop&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -71,9 +71,9 @@ JAR file and previously created script:&lt;/p&gt;
 &lt;span class="go"&gt;StartupWMClass=org-openstreetmap-josm-MainApplication&lt;/span&gt;
 &lt;span class="go"&gt;Keywords=OpenStreetMap;OSM;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This way the next time you restart your computer you will find the new launcher
-and by just clicking on it you will start the most up to date version of JOSM
-on Debian.&lt;/p&gt;
+&lt;p&gt;The next time you restart your computer, you will find the new launcher, and by
+just clicking on it, you will start the most up-to-date version of JOSM on
+Debian.&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 20:46:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</guid><category>floss, gis</category><category>deb11</category><category>debian</category><category>josm</category></item><item><title>Mate Desktop on Debian</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html</link><description>&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
 &lt;h2&gt;Mate Desktop Tips and Tricks&lt;/h2&gt;
