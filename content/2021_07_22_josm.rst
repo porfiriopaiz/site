@@ -3,7 +3,7 @@ JOSM
 
 :date: 2021-7-22 20:46
 :tags: deb11, debian, josm
-:category: floss, gis
+:category: gis
 :slug: josm
 :summary: The Java OpenStreetMap editor
 :lang: en
