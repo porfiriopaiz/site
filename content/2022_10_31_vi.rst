@@ -58,21 +58,21 @@ behavior, exclusively sources the file located at '/etc/vim/vimrc.tiny'.
 
 Now, let's explore the contents of the '/etc/vim/vimrc.tiny' file:
 
-```plaintext
-" Vim configuration file, in effect when invoked as "vi". The aim of this
-" configuration file is to provide a Vim environment as compatible with the
-" original vi as possible. Note that ~/.vimrc configuration files as other
-" configuration files in the runtimepath are still sourced.
-" When Vim is invoked differently ("vim", "view", "evim", ...) this file is
-" _not_ sourced; /etc/vim/vimrc and/or /etc/vim/gvimrc are.
+.. code-block:: console
 
-" Debian system-wide default configuration Vim
-set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
-
-set compatible
-
-" vim: set ft=vim:
-```
+   " Vim configuration file, in effect when invoked as "vi". The aim of this
+   " configuration file is to provide a Vim environment as compatible with the
+   " original vi as possible. Note that ~/.vimrc configuration files as other
+   " configuration files in the runtimepath are still sourced.
+   " When Vim is invoked differently ("vim", "view", "evim", ...) this file is
+   " _not_ sourced; /etc/vim/vimrc and/or /etc/vim/gvimrc are.
+   
+   " Debian system-wide default configuration Vim
+   set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
+   
+   set compatible
+   
+   " vim: set ft=vim:
 
 Essentially, this configuration ensures that 'vi' (which invokes 'vim.tiny')
 closely mimics the behavior of the original "vi." Furthermore, it automatically
@@ -90,154 +90,155 @@ appending the "set compatible" directive to the end of the configuration file.
 In the absence of any other Vim versions installed on the system, "vi" will
 naturally point to "vim.tiny" by default.
 
-```plaintext
-pionen@lilit:~$ ls -la /etc/alternatives/vi
-lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -> /usr/bin/vim.tiny
-```
+.. code-block:: console
+
+   pionen@lilit:~$ ls -la /etc/alternatives/vi
+   lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -> /usr/bin/vim.tiny
 
 Conversely, if 'Vim' is explicitly installed and invoked as 'vim,' or via
 aliases such as 'view' or 'evim' (note that none of these aliases are available
 in this minimal setup), the configuration files '/etc/vim/vimrc' and
 '/etc/gvimrc' are activated and sourced.
 
-```plaintext
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
-" the call to :runtime you can find below.  If you wish to change any of those
-" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
-" will be overwritten everytime an upgrade of the vim packages is performed.
-" It is recommended to make changes after sourcing debian.vim since it alters
-" the value of the 'compatible' option.
+.. code-block:: console
 
-runtime! debian.vim
-
-" Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
-" This happens after /etc/vim/vimrc(.local) are loaded, so it will override
-" any settings in these files.
-" If you don't want that to happen, uncomment the below line to prevent
-" defaults.vim from being loaded.
-" let g:skip_defaults_vim = 1
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-"syntax on
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-"filetype plugin indent on
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
-```
+   " All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
+   " the call to :runtime you can find below.  If you wish to change any of those
+   " settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
+   " will be overwritten everytime an upgrade of the vim packages is performed.
+   " It is recommended to make changes after sourcing debian.vim since it alters
+   " the value of the 'compatible' option.
+   
+   runtime! debian.vim
+   
+   " Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
+   " This happens after /etc/vim/vimrc(.local) are loaded, so it will override
+   " any settings in these files.
+   " If you don't want that to happen, uncomment the below line to prevent
+   " defaults.vim from being loaded.
+   " let g:skip_defaults_vim = 1
+   
+   " Uncomment the next line to make Vim more Vi-compatible
+   " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
+   " options, so any other options should be set AFTER setting 'compatible'.
+   "set compatible
+   
+   " Vim5 and later versions support syntax highlighting. Uncommenting the next
+   " line enables syntax highlighting by default.
+   "syntax on
+   
+   " If using a dark background within the editing area and syntax highlighting
+   " turn on this option as well
+   "set background=dark
+   
+   " Uncomment the following to have Vim jump to the last position when
+   " reopening a file
+   "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+   
+   " Uncomment the following to have Vim load indentation rules and plugins
+   " according to the detected filetype.
+   "filetype plugin indent on
+   
+   " The following are commented out as they cause vim to behave a lot
+   " differently from regular Vi. They are highly recommended though.
+   "set showcmd		" Show (partial) command in status line.
+   "set showmatch		" Show matching brackets.
+   "set ignorecase		" Do case insensitive matching
+   "set smartcase		" Do smart case matching
+   "set incsearch		" Incremental search
+   "set autowrite		" Automatically save before commands like :next and :make
+   "set hidden		" Hide buffers when they are abandoned
+   "set mouse=a		" Enable mouse usage (all modes)
+   
+   " Source a global configuration file if available
+   if filereadable("/etc/vim/vimrc.local")
+     source /etc/vim/vimrc.local
+   endif
 
 When we execute "vim" in the command line, and subsequently issue the "vim"
 command:
 
-```plaintext
-:echo $VIMRUNTIME
-```
+.. code-block:: console
+
+   :echo $VIMRUNTIME
 
 The following output will be displayed:
 
-```plaintext
-/usr/share/vim/vim82
-```
+.. code-block:: console
+
+   /usr/share/vim/vim82
 
 Inside Vim, when we execute the command:
 
-```plaintext
-:scriptnames
-```
+.. code-block:: console
+
+   :scriptnames
 
 It will display a list of all the script files that are loaded based on the
 "/etc/vim/vimrc" configuration file:
 
-```plaintext
-  1: /usr/share/vim/vimrc
-  2: /usr/share/vim/vim82/debian.vim
-  3: /usr/share/vim/vim82/defaults.vim
-  4: /usr/share/vim/vim82/filetype.vim
-  5: /usr/share/vim/vim82/ftplugin.vim
-  6: /usr/share/vim/vim82/indent.vim
-  7: /usr/share/vim/vim82/syntax/syntax.vim
-  8: /usr/share/vim/vim82/syntax/synload.vim
-  9: /usr/share/vim/vim82/syntax/syncolor.vim
- 10: /usr/share/vim/vim82/plugin/getscriptPlugin.vim
- 11: /usr/share/vim/vim82/plugin/gzip.vim
- 12: /usr/share/vim/vim82/plugin/logiPat.vim
- 13: /usr/share/vim/vim82/plugin/manpager.vim
- 14: /usr/share/vim/vim82/plugin/matchparen.vim
- 15: /usr/share/vim/vim82/plugin/netrwPlugin.vim
- 16: /usr/share/vim/vim82/plugin/rrhelper.vim
- 17: /usr/share/vim/vim82/plugin/spellfile.vim
- 18: /usr/share/vim/vim82/plugin/tarPlugin.vim
- 19: /usr/share/vim/vim82/plugin/tohtml.vim
- 20: /usr/share/vim/vim82/plugin/vimballPlugin.vim
- 21: /usr/share/vim/vim82/plugin/zipPlugin.vim
-Press ENTER or type command to continue
-```
+.. code-block:: console
+
+     1: /usr/share/vim/vimrc
+     2: /usr/share/vim/vim82/debian.vim
+     3: /usr/share/vim/vim82/defaults.vim
+     4: /usr/share/vim/vim82/filetype.vim
+     5: /usr/share/vim/vim82/ftplugin.vim
+     6: /usr/share/vim/vim82/indent.vim
+     7: /usr/share/vim/vim82/syntax/syntax.vim
+     8: /usr/share/vim/vim82/syntax/synload.vim
+     9: /usr/share/vim/vim82/syntax/syncolor.vim
+    10: /usr/share/vim/vim82/plugin/getscriptPlugin.vim
+    11: /usr/share/vim/vim82/plugin/gzip.vim
+    12: /usr/share/vim/vim82/plugin/logiPat.vim
+    13: /usr/share/vim/vim82/plugin/manpager.vim
+    14: /usr/share/vim/vim82/plugin/matchparen.vim
+    15: /usr/share/vim/vim82/plugin/netrwPlugin.vim
+    16: /usr/share/vim/vim82/plugin/rrhelper.vim
+    17: /usr/share/vim/vim82/plugin/spellfile.vim
+    18: /usr/share/vim/vim82/plugin/tarPlugin.vim
+    19: /usr/share/vim/vim82/plugin/tohtml.vim
+    20: /usr/share/vim/vim82/plugin/vimballPlugin.vim
+    21: /usr/share/vim/vim82/plugin/zipPlugin.vim
+   Press ENTER or type command to continue
 
 If, for any reason, we have already created a "~/.vimrc" file, the inclusion of
 "/usr/share/vim/vim82/defaults.vim" will be skipped:
 
 Inside Vim, upon executing the command:
 
-```plaintext
-:scriptnames
-```
+.. code-block:: console
+
+   :scriptnames
 
 You'll observe that instead, "~/.vimrc" takes precedence and gets sourced:
 
-```plaintext
-  1: /usr/share/vim/vimrc
-  2: /usr/share/vim/vim82/debian.vim
-  3: ~/.vimrc
-  4: /usr/share/vim/vim82/syntax/syntax.vim
-  5: /usr/share/vim/vim82/syntax/synload.vim
-  6: /usr/share/vim/vim82/syntax/syncolor.vim
-  7: /usr/share/vim/vim82/filetype.vim
-  8: /usr/share/vim/vim82/ftplugin.vim
-  9: /usr/share/vim/vim82/indent.vim
- 10: /usr/share/vim/vim82/syntax/nosyntax.vim
- 11: /usr/share/vim/vim82/plugin/getscriptPlugin.vim
- 12: /usr/share/vim/vim82/plugin/gzip.vim
- 13: /usr/share/vim/vim82/plugin/logiPat.vim
- 14: /usr/share/vim/vim82/plugin/manpager.vim
- 15: /usr/share/vim/vim82/plugin/matchparen.vim
- 16: /usr/share/vim/vim82/plugin/netrwPlugin.vim
- 17: /usr/share/vim/vim82/plugin/rrhelper.vim
- 18: /usr/share/vim/vim82/plugin/spellfile.vim
- 19: /usr/share/vim/vim82/plugin/tarPlugin.vim
- 20: /usr/share/vim/vim82/plugin/tohtml.vim
- 21: /usr/share/vim/vim82/plugin/vimballPlugin.vim
- 22: /usr/share/vim/vim82/plugin/zipPlugin.vim
-Press ENTER or type command to continue
-```
+.. code-block:: console
+
+     1: /usr/share/vim/vimrc
+     2: /usr/share/vim/vim82/debian.vim
+     3: ~/.vimrc
+     4: /usr/share/vim/vim82/syntax/syntax.vim
+     5: /usr/share/vim/vim82/syntax/synload.vim
+     6: /usr/share/vim/vim82/syntax/syncolor.vim
+     7: /usr/share/vim/vim82/filetype.vim
+     8: /usr/share/vim/vim82/ftplugin.vim
+     9: /usr/share/vim/vim82/indent.vim
+    10: /usr/share/vim/vim82/syntax/nosyntax.vim
+    11: /usr/share/vim/vim82/plugin/getscriptPlugin.vim
+    12: /usr/share/vim/vim82/plugin/gzip.vim
+    13: /usr/share/vim/vim82/plugin/logiPat.vim
+    14: /usr/share/vim/vim82/plugin/manpager.vim
+    15: /usr/share/vim/vim82/plugin/matchparen.vim
+    16: /usr/share/vim/vim82/plugin/netrwPlugin.vim
+    17: /usr/share/vim/vim82/plugin/rrhelper.vim
+    18: /usr/share/vim/vim82/plugin/spellfile.vim
+    19: /usr/share/vim/vim82/plugin/tarPlugin.vim
+    20: /usr/share/vim/vim82/plugin/tohtml.vim
+    21: /usr/share/vim/vim82/plugin/vimballPlugin.vim
+    22: /usr/share/vim/vim82/plugin/zipPlugin.vim
+   Press ENTER or type command to continue
+
 This implies that if we require specific settings from the
 "/usr/share/vim/vim82/defaults.vim" file, we should incorporate them into the
 "~/.vimrc" configuration file.

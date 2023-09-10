@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - vi</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/vi.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2022-10-31T03:32:00-06:00</updated><entry><title>vi</title><link href="https://porfiriopaiz.github.io/site/posts/2022/10/31/vi.html" rel="alternate"></link><published>2022-10-31T03:32:00-06:00</published><updated>2022-10-31T03:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2022-10-31:/site/posts/2022/10/31/vi.html</id><summary type="html">&lt;p class="first last"&gt;The Vi text editor&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="understanding-vi-and-vim-on-debian"&gt;
+&lt;h2&gt;Understanding vi and vim on Debian&lt;/h2&gt;
+&lt;p&gt;Since 2011, I've steadfastly embraced vi as my primary text editor. My journey
+into the realm of mastering the command line interface and transitioning away
+from the comfort of the graphical user interface began early on. Among the
+foundational skills I aimed to acquire, one of the first was the efficient
+editing of text files.&lt;/p&gt;
+&lt;p&gt;Surprisingly, the exact catalyst that initially led me to embrace vi has faded
+into the distant recesses of my memory. Nevertheless, over eleven years later,
+my loyalty to vi remains unwavering. It has been a constant companion
+throughout this journey, and I've never strayed into the world of alternative
+text editors. In fact, I've even employed vi for basic Python programming
+tasks, underscoring its versatility and enduring utility in my daily computing
+endeavors.&lt;/p&gt;
+&lt;p&gt;In this post, I intend to delve deep into the intricacies of how Debian manages
+the functionality of vi and vim right from a basic, uncustomized Debian
+installation.&lt;/p&gt;
+&lt;p&gt;My objective is to gain a profound understanding of the fundamental behaviors
+exhibited by vi and vim in their most minimalist configurations, as they are
+presented immediately after a fresh Debian installation.&lt;/p&gt;
+&lt;p&gt;It's worth noting that Debian does not include vim by default in this scenario.
+I opted for a network install using the minimal tasksel profile, selecting only
+the 'mate-desktop-environment' package. This illustrates one of the aspects I
+greatly appreciate about Debian – its commitment to delivering essential
+software components, allowing users the freedom to shape and personalize their
+tools and environments according to their specific needs, without making any
+presumptions about what's best for them.&lt;/p&gt;
+&lt;div class="section" id="vi-1"&gt;
+&lt;h3&gt;vi&lt;/h3&gt;
+&lt;p&gt;A pristine Debian installation defaults to including only the 'vim-tiny'
+package. Within this package, two critical configuration files are stored in
+'/etc/vim/': 'vimrc' and 'vimrc.tiny'.&lt;/p&gt;
+&lt;p&gt;This setup is intentionally minimalist, devoid of any symbolic links, aliases,
+or binary files associated with 'vim'. Consequently, the sole alias present is
+'vi', which is directly linked to 'vim.tiny'.&lt;/p&gt;
+&lt;p&gt;When 'vi' is invoked, it effectively calls 'vim.tiny', which, as the default
+behavior, exclusively sources the file located at '/etc/vim/vimrc.tiny'.&lt;/p&gt;
+&lt;p&gt;Now, let's explore the contents of the '/etc/vim/vimrc.tiny' file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;&amp;quot; Vim configuration file, in effect when invoked as &amp;quot;vi&amp;quot;. The aim of this&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; configuration file is to provide a Vim environment as compatible with the&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; original vi as possible. Note that ~/.vimrc configuration files as other&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; configuration files in the runtimepath are still sourced.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; When Vim is invoked differently (&amp;quot;vim&amp;quot;, &amp;quot;view&amp;quot;, &amp;quot;evim&amp;quot;, ...) this file is&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; _not_ sourced; /etc/vim/vimrc and/or /etc/vim/gvimrc are.&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Debian system-wide default configuration Vim&lt;/span&gt;
+&lt;span class="go"&gt;set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after&lt;/span&gt;
+
+&lt;span class="go"&gt;set compatible&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; vim: set ft=vim:&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Essentially, this configuration ensures that 'vi' (which invokes 'vim.tiny')
+closely mimics the behavior of the original &amp;quot;vi.&amp;quot; Furthermore, it automatically
+loads configuration files found under the &amp;quot;$VIMRUNTIME&amp;quot; directory, which
+includes both &amp;quot;~/.vimrc&amp;quot; and any configuration files specified in the
+&amp;quot;runtimepath&amp;quot; variable.&lt;/p&gt;
+&lt;p&gt;In this specific case, it prioritizes the inclusion of
+&amp;quot;/usr/share/vim/vim82/debian.vim&amp;quot; and then &amp;quot;/usr/share/vim/vim82/defaults.vim.&amp;quot;&lt;/p&gt;
+&lt;p&gt;As a final touch, it enforces compatibility with the original &amp;quot;vi,&amp;quot; even if
+other configuration files in the &amp;quot;runtimepath&amp;quot; attempt to disable it, by
+appending the &amp;quot;set compatible&amp;quot; directive to the end of the configuration file.&lt;/p&gt;
+&lt;p&gt;In the absence of any other Vim versions installed on the system, &amp;quot;vi&amp;quot; will
+naturally point to &amp;quot;vim.tiny&amp;quot; by default.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/etc/alternatives/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&amp;gt; /usr/bin/vim.tiny&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Conversely, if 'Vim' is explicitly installed and invoked as 'vim,' or via
+aliases such as 'view' or 'evim' (note that none of these aliases are available
+in this minimal setup), the configuration files '/etc/vim/vimrc' and
+'/etc/gvimrc' are activated and sourced.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;&amp;quot; All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; the call to :runtime you can find below.  If you wish to change any of those&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; settings, you should do it in this file (/etc/vim/vimrc), since debian.vim&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; will be overwritten everytime an upgrade of the vim packages is performed.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; It is recommended to make changes after sourcing debian.vim since it alters&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; the value of the &amp;#39;compatible&amp;#39; option.&lt;/span&gt;
+
+&lt;span class="go"&gt;runtime! debian.vim&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; This happens after /etc/vim/vimrc(.local) are loaded, so it will override&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; any settings in these files.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; If you don&amp;#39;t want that to happen, uncomment the below line to prevent&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; defaults.vim from being loaded.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; let g:skip_defaults_vim = 1&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Uncomment the next line to make Vim more Vi-compatible&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; NOTE: debian.vim sets &amp;#39;nocompatible&amp;#39;.  Setting &amp;#39;compatible&amp;#39; changes numerous&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; options, so any other options should be set AFTER setting &amp;#39;compatible&amp;#39;.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set compatible&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Vim5 and later versions support syntax highlighting. Uncommenting the next&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; line enables syntax highlighting by default.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;syntax on&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; If using a dark background within the editing area and syntax highlighting&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; turn on this option as well&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set background=dark&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Uncomment the following to have Vim jump to the last position when&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; reopening a file&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;au BufReadPost * if line(&amp;quot;&amp;#39;\&amp;quot;&amp;quot;) &amp;gt; 1 &amp;amp;&amp;amp; line(&amp;quot;&amp;#39;\&amp;quot;&amp;quot;) &amp;lt;= line(&amp;quot;$&amp;quot;) | exe &amp;quot;normal! g&amp;#39;\&amp;quot;&amp;quot; | endif&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Uncomment the following to have Vim load indentation rules and plugins&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; according to the detected filetype.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;filetype plugin indent on&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; The following are commented out as they cause vim to behave a lot&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; differently from regular Vi. They are highly recommended though.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set showcmd         &amp;quot; Show (partial) command in status line.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set showmatch               &amp;quot; Show matching brackets.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set ignorecase              &amp;quot; Do case insensitive matching&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set smartcase               &amp;quot; Do smart case matching&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set incsearch               &amp;quot; Incremental search&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set autowrite               &amp;quot; Automatically save before commands like :next and :make&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set hidden          &amp;quot; Hide buffers when they are abandoned&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;set mouse=a         &amp;quot; Enable mouse usage (all modes)&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Source a global configuration file if available&lt;/span&gt;
+&lt;span class="go"&gt;if filereadable(&amp;quot;/etc/vim/vimrc.local&amp;quot;)&lt;/span&gt;
+&lt;span class="go"&gt;  source /etc/vim/vimrc.local&lt;/span&gt;
+&lt;span class="go"&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we execute &amp;quot;vim&amp;quot; in the command line, and subsequently issue the &amp;quot;vim&amp;quot;
+command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;:echo $VIMRUNTIME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The following output will be displayed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/usr/share/vim/vim82&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Inside Vim, when we execute the command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;:scriptnames&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It will display a list of all the script files that are loaded based on the
+&amp;quot;/etc/vim/vimrc&amp;quot; configuration file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;  1: /usr/share/vim/vimrc&lt;/span&gt;
+&lt;span class="go"&gt;  2: /usr/share/vim/vim82/debian.vim&lt;/span&gt;
+&lt;span class="go"&gt;  3: /usr/share/vim/vim82/defaults.vim&lt;/span&gt;
+&lt;span class="go"&gt;  4: /usr/share/vim/vim82/filetype.vim&lt;/span&gt;
+&lt;span class="go"&gt;  5: /usr/share/vim/vim82/ftplugin.vim&lt;/span&gt;
+&lt;span class="go"&gt;  6: /usr/share/vim/vim82/indent.vim&lt;/span&gt;
+&lt;span class="go"&gt;  7: /usr/share/vim/vim82/syntax/syntax.vim&lt;/span&gt;
+&lt;span class="go"&gt;  8: /usr/share/vim/vim82/syntax/synload.vim&lt;/span&gt;
+&lt;span class="go"&gt;  9: /usr/share/vim/vim82/syntax/syncolor.vim&lt;/span&gt;
+&lt;span class="go"&gt; 10: /usr/share/vim/vim82/plugin/getscriptPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 11: /usr/share/vim/vim82/plugin/gzip.vim&lt;/span&gt;
+&lt;span class="go"&gt; 12: /usr/share/vim/vim82/plugin/logiPat.vim&lt;/span&gt;
+&lt;span class="go"&gt; 13: /usr/share/vim/vim82/plugin/manpager.vim&lt;/span&gt;
+&lt;span class="go"&gt; 14: /usr/share/vim/vim82/plugin/matchparen.vim&lt;/span&gt;
+&lt;span class="go"&gt; 15: /usr/share/vim/vim82/plugin/netrwPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 16: /usr/share/vim/vim82/plugin/rrhelper.vim&lt;/span&gt;
+&lt;span class="go"&gt; 17: /usr/share/vim/vim82/plugin/spellfile.vim&lt;/span&gt;
+&lt;span class="go"&gt; 18: /usr/share/vim/vim82/plugin/tarPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 19: /usr/share/vim/vim82/plugin/tohtml.vim&lt;/span&gt;
+&lt;span class="go"&gt; 20: /usr/share/vim/vim82/plugin/vimballPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 21: /usr/share/vim/vim82/plugin/zipPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt;Press ENTER or type command to continue&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If, for any reason, we have already created a &amp;quot;~/.vimrc&amp;quot; file, the inclusion of
+&amp;quot;/usr/share/vim/vim82/defaults.vim&amp;quot; will be skipped:&lt;/p&gt;
+&lt;p&gt;Inside Vim, upon executing the command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;:scriptnames&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You'll observe that instead, &amp;quot;~/.vimrc&amp;quot; takes precedence and gets sourced:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;  1: /usr/share/vim/vimrc&lt;/span&gt;
+&lt;span class="go"&gt;  2: /usr/share/vim/vim82/debian.vim&lt;/span&gt;
+&lt;span class="go"&gt;  3: ~/.vimrc&lt;/span&gt;
+&lt;span class="go"&gt;  4: /usr/share/vim/vim82/syntax/syntax.vim&lt;/span&gt;
+&lt;span class="go"&gt;  5: /usr/share/vim/vim82/syntax/synload.vim&lt;/span&gt;
+&lt;span class="go"&gt;  6: /usr/share/vim/vim82/syntax/syncolor.vim&lt;/span&gt;
+&lt;span class="go"&gt;  7: /usr/share/vim/vim82/filetype.vim&lt;/span&gt;
+&lt;span class="go"&gt;  8: /usr/share/vim/vim82/ftplugin.vim&lt;/span&gt;
+&lt;span class="go"&gt;  9: /usr/share/vim/vim82/indent.vim&lt;/span&gt;
+&lt;span class="go"&gt; 10: /usr/share/vim/vim82/syntax/nosyntax.vim&lt;/span&gt;
+&lt;span class="go"&gt; 11: /usr/share/vim/vim82/plugin/getscriptPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 12: /usr/share/vim/vim82/plugin/gzip.vim&lt;/span&gt;
+&lt;span class="go"&gt; 13: /usr/share/vim/vim82/plugin/logiPat.vim&lt;/span&gt;
+&lt;span class="go"&gt; 14: /usr/share/vim/vim82/plugin/manpager.vim&lt;/span&gt;
+&lt;span class="go"&gt; 15: /usr/share/vim/vim82/plugin/matchparen.vim&lt;/span&gt;
+&lt;span class="go"&gt; 16: /usr/share/vim/vim82/plugin/netrwPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 17: /usr/share/vim/vim82/plugin/rrhelper.vim&lt;/span&gt;
+&lt;span class="go"&gt; 18: /usr/share/vim/vim82/plugin/spellfile.vim&lt;/span&gt;
+&lt;span class="go"&gt; 19: /usr/share/vim/vim82/plugin/tarPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 20: /usr/share/vim/vim82/plugin/tohtml.vim&lt;/span&gt;
+&lt;span class="go"&gt; 21: /usr/share/vim/vim82/plugin/vimballPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt; 22: /usr/share/vim/vim82/plugin/zipPlugin.vim&lt;/span&gt;
+&lt;span class="go"&gt;Press ENTER or type command to continue&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This implies that if we require specific settings from the
+&amp;quot;/usr/share/vim/vim82/defaults.vim&amp;quot; file, we should incorporate them into the
+&amp;quot;~/.vimrc&amp;quot; configuration file.&lt;/p&gt;
+&lt;p&gt;It's important to note that any configurations from &amp;quot;/usr/share/vim/vimrc&amp;quot; and
+&amp;quot;/usr/share/vim/vim82/debian.vim&amp;quot; will be overridden by settings in &amp;quot;~/.vimrc.&amp;quot;&lt;/p&gt;
+&lt;p&gt;Having this understanding, I now have clarity on what to adopt from
+&amp;quot;/usr/share/vim/vim82/defaults.vim&amp;quot; if the need arises.&lt;/p&gt;
+&lt;p&gt;In the upcoming post, I will explain my choice of &amp;quot;vim&amp;quot; versions available in
+the Debian repository and the rationale behind my selection.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="vi"></category></entry></feed>
