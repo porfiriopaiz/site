@@ -45,7 +45,7 @@ presumptions about what's best for them.
 ``vi``
 ======
 
-A pristine Debian installation defaults to including only the 'vim-tiny'
+A pristine Debian installation defaults to including only the ``vim-tiny``
 package. Within this package, two critical configuration files are stored in
 ``/etc/vim/``: ``vimrc`` and ``vimrc.tiny``.
 

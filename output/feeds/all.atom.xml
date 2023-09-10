@@ -29,7 +29,7 @@ tools and environments according to their specific needs, without making any
 presumptions about what's best for them.&lt;/p&gt;
 &lt;div class="section" id="vi-1"&gt;
 &lt;h3&gt;&lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;&lt;/h3&gt;
-&lt;p&gt;A pristine Debian installation defaults to including only the 'vim-tiny'
+&lt;p&gt;A pristine Debian installation defaults to including only the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt;
 package. Within this package, two critical configuration files are stored in
 &lt;tt class="docutils literal"&gt;/etc/vim/&lt;/tt&gt;: &lt;tt class="docutils literal"&gt;vimrc&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vimrc.tiny&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;This setup is intentionally minimalist, devoid of any symbolic links, aliases,
