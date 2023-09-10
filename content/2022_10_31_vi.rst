@@ -1,5 +1,5 @@
-`vi`
-####
+``vi``
+######
 
 :date: 2022-10-31 3:32
 :tags: deb11, debian, vi
@@ -12,51 +12,52 @@
  Understanding vi and vim on Debian 
 ====================================
 
-Since 2011, I've steadfastly embraced `vi` as my primary text editor. My journey
-into the realm of mastering the command line interface and transitioning away
-from the comfort of the graphical user interface began early on. Among the
-foundational skills I aimed to acquire, one of the first was the efficient
-editing of text files.
+Since 2011, I've steadfastly embraced ``vi`` as my primary text editor. My
+journey into the realm of mastering the command line interface and
+transitioning away from the comfort of the graphical user interface began early
+on. Among the foundational skills I aimed to acquire, one of the first was the
+efficient editing of text files.
 
-Surprisingly, the exact catalyst that initially led me to embrace `vi` has faded
-into the distant recesses of my memory. Nevertheless, over eleven years later,
-my loyalty to `vi` remains unwavering. It has been a constant companion
-throughout this journey, and I've never strayed into the world of alternative
-text editors. In fact, I've even employed `vi` for basic Python programming
-tasks, underscoring its versatility and enduring utility in my daily computing
-endeavors.
+Surprisingly, the exact catalyst that initially led me to embrace ``vi`` has
+faded into the distant recesses of my memory. Nevertheless, over eleven years
+later, my loyalty to ``vi`` remains unwavering. It has been a constant
+companion throughout this journey, and I've never strayed into the world of
+alternative text editors. In fact, I've even employed ``vi`` for basic Python
+programming tasks, underscoring its versatility and enduring utility in my
+daily computing endeavors.
 
 In this post, I intend to delve deep into the intricacies of how Debian manages
-the functionality of `vi` and vim right from a basic, uncustomized Debian
+the functionality of ``vi`` and vim right from a basic, uncustomized Debian
 installation.
 
 My objective is to gain a profound understanding of the fundamental behaviors
-exhibited by `vi` and vim in their most minimalist configurations, as they are
-presented immediately after a fresh Debian installation.
+exhibited by ``vi`` and vim in their most minimalist configurations, as they
+are presented immediately after a fresh Debian installation.
 
 It's worth noting that Debian does not include vim by default in this scenario.
 I opted for a network install using the minimal tasksel profile, selecting only
-the 'mate-desktop-environment' package. This illustrates one of the aspects I
+the ``mate-desktop-environment`` package. This illustrates one of the aspects I
 greatly appreciate about Debian – its commitment to delivering essential
 software components, allowing users the freedom to shape and personalize their
 tools and environments according to their specific needs, without making any
 presumptions about what's best for them.
 
-`vi`
-==
+``vi``
+======
 
 A pristine Debian installation defaults to including only the 'vim-tiny'
 package. Within this package, two critical configuration files are stored in
-'/etc/vim/': 'vimrc' and 'vimrc.tiny'.
+``/etc/vim/``: ``vimrc`` and ``vimrc.tiny``.
 
 This setup is intentionally minimalist, devoid of any symbolic links, aliases,
-or binary files associated with 'vim'. Consequently, the sole alias present is
-`vi`, which is directly linked to 'vim.tiny'.
+or binary files associated with ``vim``. Consequently, the sole alias present
+is ``vi``, which is directly linked to ``vim.tiny``.
 
-When `vi` is invoked, it effectively calls 'vim.tiny', which, as the default
-behavior, exclusively sources the file located at '/etc/vim/vimrc.tiny'.
+When ``vi`` is invoked, it effectively calls ``vim.tiny``, which, as the
+default behavior, exclusively sources the file located at
+``/etc/vim/vimrc.tiny``.
 
-Now, let's explore the contents of the '/etc/vim/vimrc.tiny' file:
+Now, let's explore the contents of the ``/etc/vim/vimrc.tiny`` file:
 
 .. code-block:: console
 
@@ -74,31 +75,33 @@ Now, let's explore the contents of the '/etc/vim/vimrc.tiny' file:
    
    " vim: set ft=vim:
 
-Essentially, this configuration ensures that `vi` (which invokes 'vim.tiny')
-closely mimics the behavior of the original `vi`. Furthermore, it automatically
-loads configuration files found under the "$VIMRUNTIME" directory, which
-includes both "~/.vimrc" and any configuration files specified in the
-"runtimepath" variable.
+Essentially, this configuration ensures that ``vi`` (which invokes
+``vim.tiny``) closely mimics the behavior of the original ``vi``. Furthermore,
+it automatically loads configuration files found under the ``$VIMRUNTIME``
+directory, which includes both ``~/.vimrc`` and any configuration files
+specified in the ``runtimepath`` variable.
 
 In this specific case, it prioritizes the inclusion of
-"/usr/share/vim/vim82/debian.vim" and then "/usr/share/vim/vim82/defaults.vim."
+``/usr/share/vim/vim82/debian.vim`` and then
+``/usr/share/vim/vim82/defaults.vim.``
 
-As a final touch, it enforces compatibility with the original `vi`, even if
-other configuration files in the "runtimepath" attempt to disable it, by
-appending the "set compatible" directive to the end of the configuration file.
+As a final touch, it enforces compatibility with the original ``vi``, even if
+other configuration files in the ``runtimepath`` attempt to disable it, by
+appending the ``set compatible`` directive to the end of the configuration
+file.
 
-In the absence of any other `vim` versions installed on the system, `vi` will
-naturally point to "vim.tiny" by default.
+In the absence of any other ``vim`` versions installed on the system, ``vi``
+will naturally point to ``vim.tiny`` by default.
 
 .. code-block:: console
 
    pionen@lilit:~$ ls -la /etc/alternatives/vi
    lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -> /usr/bin/vim.tiny
 
-Conversely, if `vim` is explicitly installed and invoked as 'vim,' or via
-aliases such as 'view' or 'evim' (note that none of these aliases are available
-in this minimal setup), the configuration files '/etc/vim/vimrc' and
-'/etc/gvimrc' are activated and sourced.
+Conversely, if ``vim`` is explicitly installed and invoked as ``vim``, or via
+aliases such as ``view`` or ``evim`` (note that none of these aliases are
+available in this minimal setup), the configuration files ``/etc/vim/vimrc``
+and ``/etc/gvimrc`` are activated and sourced.
 
 .. code-block:: console
 
@@ -155,7 +158,7 @@ in this minimal setup), the configuration files '/etc/vim/vimrc' and
      source /etc/vim/vimrc.local
    endif
 
-When we execute "vim" in the command line, and subsequently issue the "vim"
+When we execute ``vim`` in the command line, and subsequently issue the ``vim``
 command:
 
 .. code-block:: console
@@ -168,14 +171,14 @@ The following output will be displayed:
 
    /usr/share/vim/vim82
 
-Inside `vim`, when we execute the command:
+Inside ``vim``, when we execute the command:
 
 .. code-block:: console
 
    :scriptnames
 
 It will display a list of all the script files that are loaded based on the
-"/etc/vim/vimrc" configuration file:
+``/etc/vim/vimrc`` configuration file:
 
 .. code-block:: console
 
@@ -202,16 +205,16 @@ It will display a list of all the script files that are loaded based on the
     21: /usr/share/vim/vim82/plugin/zipPlugin.vim
    Press ENTER or type command to continue
 
-If, for any reason, we have already created a "~/.vimrc" file, the inclusion of
-"/usr/share/vim/vim82/defaults.vim" will be skipped:
+If, for any reason, we have already created a ``~/.vimrc`` file, the inclusion
+of ``/usr/share/vim/vim82/defaults.vim`` will be skipped:
 
-Inside `vim`, upon executing the command:
+Inside ``vim``, upon executing the command:
 
 .. code-block:: console
 
    :scriptnames
 
-You'll observe that instead, "~/.vimrc" takes precedence and gets sourced:
+You'll observe that instead, ``~/.vimrc`` takes precedence and gets sourced:
 
 .. code-block:: console
 
@@ -240,14 +243,15 @@ You'll observe that instead, "~/.vimrc" takes precedence and gets sourced:
    Press ENTER or type command to continue
 
 This implies that if we require specific settings from the
-"/usr/share/vim/vim82/defaults.vim" file, we should incorporate them into the
-"~/.vimrc" configuration file.
+``/usr/share/vim/vim82/defaults.vim`` file, we should incorporate them into the
+``~/.vimrc`` configuration file.
 
-It's important to note that any configurations from "/usr/share/vim/vimrc" and
-"/usr/share/vim/vim82/debian.vim" will be overridden by settings in "~/.vimrc."
+It's important to note that any configurations from ``/usr/share/vim/vimrc``
+and ``/usr/share/vim/vim82/debian.vim`` will be overridden by settings in
+``~/.vimrc.``
 
 Having this understanding, I now have clarity on what to adopt from
-"/usr/share/vim/vim82/defaults.vim" if the need arises.
+``/usr/share/vim/vim82/defaults.vim`` if the need arises.
 
-In the upcoming post, I will explain my choice of "vim" versions available in
+In the upcoming post, I will explain my choice of ``vim`` versions available in
 the Debian repository and the rationale behind my selection.
