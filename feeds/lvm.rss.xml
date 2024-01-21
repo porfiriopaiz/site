@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - lvm</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;Previously I had updated my laptop from Fedora 22 to Fedora 23 when F22 had
-more than 6 months since it reached its End of Life, it is also possible reuse
-partitions created for F22 so that they can be used to install the new Fedora
-release and keep all the files contained in the Logical Volume that serves as
-&lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;In this post I will explain how to achieve this without compromising the
-integrity of our information or the other operating systems installed in our
+<rss version="2.0"><channel><title>porfirio's blog - lvm</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;I previously upgraded my laptop from Fedora 22 to Fedora 23 after F22 had been
+in its End of Life state for over six months. Notably, you can efficiently
+reuse partitions originally configured for F22, ensuring they seamlessly
+accommodate the installation of the new Fedora release while preserving all
+files within the Logical Volume designated as &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In this post, I'll guide you through achieving this without compromising the
+integrity of our data or other operating systems installed on your
 Desktop/Laptop.&lt;/p&gt;
-&lt;p&gt;As we saw in the previous post, it is possible to make an upgrade, this is
-great to have the ability to do this, but the idea of downloading all packages,
-and then updating them at once, is something I do not know if I want do,
-frankly, doing fresh installs and setting everything to as it was before is
-something I like and enjoy doing. It also represents less burden for the
-computer, since it only downloads the minimum packages to have a functional
-system, anything else I may need can be later installed on demand.&lt;/p&gt;
-&lt;p&gt;Once all the files contained in our systems have a proper backup, we can begin
-with the installation process without the fear of something going wrong, you
-never know what could go wrong until it goes wrong XD.&lt;/p&gt;
+&lt;p&gt;As discussed in the earlier post, while upgrades are an option, I'm personally
+inclined towards fresh installs. Resetting everything to its prior state brings
+a sense of satisfaction. Moreover, it places less strain on the computer,
+downloading only the essential packages for a functional system. Additional
+software can be installed on demand later.&lt;/p&gt;
+&lt;p&gt;Once a proper backup of all our system files is secured, we can embark on the
+installation process without the nagging fear of the unknown. After all, you
+never truly know what could go wrong until it does – that's the beauty of it!
+XD&lt;/p&gt;
 &lt;div class="section" id="creating-an-installation-media"&gt;
 &lt;h2&gt;Creating an Installation Media&lt;/h2&gt;
-&lt;p&gt;The first step is to create an installation medium, for this we must download
-the Fedora 25 ISO file. Since Fedora 21 I have been using the netinstall image,
-according to Chapter 2 of the &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Installation_Guide/chap-downloading-fedora.html"&gt;Fedora Installation Guide&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Our initial step involves crafting an installation medium, and to kickstart
+this process, we need to download the Fedora 25 ISO file. For consistency, I've
+been relying on the netinstall image since Fedora 21, as highlighted in Chapter
+2 of the &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Installation_Guide/chap-downloading-fedora.html"&gt;Fedora Installation Guide&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The netinstall image boots directly into the installation environment, and
 uses the online Fedora package repositories as the installation source.
@@ -32,131 +32,134 @@ install any Fedora flavor or your own set of favorite packages.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class="section" id="downloading-the-image-everything-netinstall"&gt;
 &lt;h3&gt;Downloading the image Everything netinstall&lt;/h3&gt;
-&lt;p&gt;I'd rather use the netinstall ISO image of &lt;a class="reference external" href="https://alt.fedoraproject.org/en/"&gt;Fedora Everything&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Apparently, the Everything netinstall image does not have a torrent seeder for
-download:&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://torrent.fedoraproject.org/"&gt;https://torrent.fedoraproject.org/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So we must use the conventional method of direct download, for this we will
-make use of the command line.&lt;/p&gt;
-&lt;p&gt;To download the image for 32bit systems use the following command:&lt;/p&gt;
+&lt;p&gt;I prefer utilizing the netinstall ISO image of &lt;a class="reference external" href="https://alt.fedoraproject.org/en/"&gt;Fedora Everything&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Unfortunately, it seems that the Everything netinstall image lacks a torrent
+seeder for download, as indicated by the absence on the &lt;a class="reference external" href="https://torrent.fedoraproject.org/"&gt;Fedora torrent page&lt;/a&gt;. As a result, we'll have to resort to
+the conventional method of direct download, and for this, we'll leverage the
+command line.&lt;/p&gt;
+&lt;p&gt;For 32-bit systems, employ the following command to download the image:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/i386/iso/Fedora-Everything-netinst-i386-25-1.3.iso&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To download the image for 64bit systems use the following command:&lt;/p&gt;
+&lt;p&gt;For 64-bit systems, employ the following command to initiate the image
+download:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-25-1.3.iso&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Where:&lt;/p&gt;
+&lt;p&gt;Here's a breakdown of the command options:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;cite&gt;-N&lt;/cite&gt; downloads the file with the same time and date stamp when it was first
-uploaded to the servers.&lt;/p&gt;
-&lt;p&gt;&lt;cite&gt;-t 0&lt;/cite&gt; in case the download is interrupted due to problems of connection
-this will attempt to make an automatic reconnection, if we leave the time
-in &lt;cite&gt;0&lt;/cite&gt; will reconnect immediately.&lt;/p&gt;
-&lt;p&gt;&lt;cite&gt;-c&lt;/cite&gt; indicates that the download must be continued in the byte that was
-left pending when the donwload was interrupted.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-N&lt;/cite&gt; ensures the downloaded file retains the original time and date stamp
+from its initial upload to the servers.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-t 0&lt;/cite&gt; serves as a safety net; if the download encounters connectivity
+issues, it will automatically attempt to reconnect. Leaving the time at &lt;cite&gt;0&lt;/cite&gt;
+ensures an immediate reconnection.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-c&lt;/cite&gt; signals that the download should resume from the byte where it was
+left pending in case of interruptions. This precaution is particularly useful
+for scenarios with less stable network connections.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;This is a small contingency measure in case we do not have access to a network
-stable enough.&lt;/p&gt;
-&lt;p&gt;we can also verify the integrity of the downloaded image using the checksum
-file. we only have to download the file and save it in the same directory
-containing the ISO image:&lt;/p&gt;
+&lt;p&gt;This provides a small contingency measure in the event of an unstable network.&lt;/p&gt;
+&lt;p&gt;Additionally, we can verify the integrity of the downloaded image using the
+checksum file. Simply download the checksum file and save it in the same
+directory as the ISO image:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://alt.fedoraproject.org/es/static/checksums/Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Then we execute the following command:&lt;/p&gt;
+&lt;p&gt;Next, execute the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="writing-the-iso-image-on-a-usb"&gt;
 &lt;h3&gt;Writing the ISO image on a USB&lt;/h3&gt;
-&lt;p&gt;To burn the ISO image to an USB drive we will use the &lt;strong&gt;Fedora Media Writer&lt;/strong&gt;
-tool. If you are using Windows you can install Fedora Media Writer using the
-next link:&lt;/p&gt;
+&lt;p&gt;To write the ISO image onto a USB drive, we'll employ the &lt;strong&gt;Fedora Media
+Writer&lt;/strong&gt; tool. If you're on Windows, you can install Fedora Media Writer using
+the following link:&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe"&gt;https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For MacOS:&lt;/p&gt;
+&lt;p&gt;For MacOS users, the link is:&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg"&gt;https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;If you are using Fedora 23 or higher you can install Fedora Media Writer with
-following command:&lt;/p&gt;
+&lt;p&gt;If you're using Fedora 23 or a later version, you can install Fedora Media
+Writer with the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install mediawriter&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Before running Fedora Media Writer it is advisable to disconnect any removable
-storage device that may be plugged in our system, this to avoid possible
-confusion. Then we connect the USB memory that we will use and until then run
-Fedora Media Writer.&lt;/p&gt;
-&lt;p&gt;The steps to follow are very simple, we select:&lt;/p&gt;
+&lt;p&gt;Before launching Fedora Media Writer, it's recommended to disconnect any
+removable storage devices currently plugged into your system. This precaution
+helps avoid potential confusion. Once that's done, connect the USB memory you
+intend to use and proceed to run Fedora Media Writer.&lt;/p&gt;
+&lt;p&gt;The steps are straightforward:&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
-&lt;li&gt;Custom image.&lt;/li&gt;
-&lt;li&gt;Navigate to the directory where the ISO image was previously downloaded.&lt;/li&gt;
-&lt;li&gt;Select the USB.&lt;/li&gt;
-&lt;li&gt;Click &lt;cite&gt;Write to disk&lt;/cite&gt;.&lt;/li&gt;
-&lt;li&gt;Enter your user password if you are in the &lt;cite&gt;wheel&lt;/cite&gt; group or the &lt;cite&gt;root&lt;/cite&gt;
-password in case we are not in the admins group.&lt;/li&gt;
-&lt;li&gt;Done.&lt;/li&gt;
+&lt;li&gt;Choose &amp;quot;Custom image.&amp;quot;&lt;/li&gt;
+&lt;li&gt;Navigate to the directory where the ISO image was downloaded.&lt;/li&gt;
+&lt;li&gt;Select the USB drive.&lt;/li&gt;
+&lt;li&gt;Click on &lt;cite&gt;Write to disk&lt;/cite&gt;.&lt;/li&gt;
+&lt;li&gt;Enter your user password if you belong to the &lt;cite&gt;wheel&lt;/cite&gt; group, or provide the
+&lt;cite&gt;root&lt;/cite&gt; password if you are not in the admins group.&lt;/li&gt;
+&lt;li&gt;That's it!&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;div class="section" id="booting-from-usb"&gt;
 &lt;h3&gt;Booting from USB&lt;/h3&gt;
-&lt;p&gt;In my case I have configured my laptop to start in &lt;cite&gt;UEFI mode&lt;/cite&gt; and with &lt;cite&gt;Secure
-Boot&lt;/cite&gt; enabled.&lt;/p&gt;
-&lt;p&gt;Creating our installation media with Fedora Media Writer guarantees that the
-installation medium will work in any possible scenario.&lt;/p&gt;
-&lt;p&gt;To access the Boot Manager on my laptop, I only need to press the &lt;strong&gt;Enter&lt;/strong&gt; key
-while the &lt;strong&gt;Lenovo&lt;/strong&gt; logo is displayed, this is a indicator, in my case, that
-the machine is booting in UEFI mode.&lt;/p&gt;
+&lt;p&gt;In configuring my laptop, I've set it to start up in &lt;cite&gt;UEFI mode&lt;/cite&gt; while keeping
+the trusty &lt;cite&gt;Secure Boot&lt;/cite&gt; feature engaged.&lt;/p&gt;
+&lt;p&gt;When crafting the installation media using Fedora Media Writer, it serves as a
+reliable assurance that it'll seamlessly adapt to various scenarios.&lt;/p&gt;
+&lt;p&gt;To access the Boot Manager on my laptop, a simple press of the &lt;strong&gt;Enter&lt;/strong&gt; key
+during the appearance of the &lt;strong&gt;Lenovo&lt;/strong&gt; logo is indicative of the system's
+initiation in UEFI mode.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="starting-the-fedora-25-installation-process"&gt;
 &lt;h2&gt;Starting the Fedora 25 Installation Process&lt;/h2&gt;
-&lt;p&gt;For this section of the post I will use screenshots and a brief description of
-them.&lt;/p&gt;
-&lt;p&gt;First, the Internet connection.&lt;/p&gt;
-&lt;p&gt;Installation media created from netinstall images depends exclusively on an
-Internet connection, either wired via RJ45 port (Ethernet) or via Wireless
-(Using our WiFi card), in my case the netinstall setup detects both network
-cards. Fedora netinstall contain a set of drivers that allow us to make use of
-certain network cards, in case our network card is not detected it might be due
-to our device is not supported by Fedora, this is for legal reasons. Fedora
-only includes FLOSS drivers or that its manufacturers make explicit mention of
-its terms of use and distribution policy.&lt;/p&gt;
-&lt;p&gt;My T440p comes equipped with an &lt;a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM"&gt;Intel® Ethernet Wired Network Card Connection
+&lt;p&gt;In this section of the post, I'll provide screenshots along with brief
+descriptions.&lt;/p&gt;
+&lt;p&gt;Let's start with the Internet connection.&lt;/p&gt;
+&lt;p&gt;The installation media created from netinstall images relies solely on an
+Internet connection, which can be established either through a wired connection
+via the RJ45 port (Ethernet) or wirelessly using our WiFi card. In my case, the
+netinstall setup effortlessly detects both network cards. Fedora netinstall
+includes a range of drivers that enable the utilization of certain network
+cards. If your network card isn't detected, it may be due to the device not
+being supported by Fedora, typically for legal reasons. Fedora strictly
+incorporates FLOSS (Free/Libre and Open Source Software) drivers or drivers
+whose manufacturers explicitly outline their terms of use and distribution
+policy.&lt;/p&gt;
+&lt;p&gt;My T440p is equipped with an &lt;a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM"&gt;Intel® Ethernet Wired Network Card Connection
 I217-LM&lt;/a&gt; and
-an &lt;a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260"&gt;Intel® Wireless-N 7260 Wireless Network Card&lt;/a&gt;, both cards were
-detected during installation, in the office I only have access to WiFi networks
-so I used the Wireless card.&lt;/p&gt;
+an &lt;a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260"&gt;Intel® Wireless-N 7260 Wireless Network Card&lt;/a&gt;. During
+installation, both cards were promptly detected. As I have access only to WiFi
+networks in the office, I opted to use the Wireless card.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0000.png" /&gt;
-&lt;p&gt;In this first image of the installation summary, the first thing we must do is
-to get connected to any of the available networks whether we use a Wired
-network or WiFi network, for this we click on the &lt;cite&gt;NETWORK &amp;amp; HOST NAME&lt;/cite&gt;.&lt;/p&gt;
-&lt;p&gt;Then selecting Wireless and activating the card; we select one Network of those
-available; we change the name of our Desktop/Laptop and click &lt;cite&gt;Apply&lt;/cite&gt;...&lt;/p&gt;
+&lt;p&gt;In this initial image of the installation summary, our first step is to
+establish a connection to any of the available networks, be it through a wired
+or WiFi network. To achieve this, click on &lt;cite&gt;NETWORK &amp;amp; HOST NAME&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Next, choose Wireless and enable the corresponding network card. From the list
+of available networks, select one, alter the name of your Desktop/Laptop as
+desired, and then click &lt;cite&gt;Apply&lt;/cite&gt;...&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0002.png" /&gt;
 &lt;p&gt;Click &lt;cite&gt;Done&lt;/cite&gt;.&lt;/p&gt;
-&lt;p&gt;In the &lt;cite&gt;LOCALIZATION&lt;/cite&gt; section I added the &lt;tt class="docutils literal"&gt;French (International (AltGr dead
-keys)&lt;/tt&gt; and removed &lt;tt class="docutils literal"&gt;English (US)&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;LOCALIZATION&lt;/cite&gt; section, I included the option for &lt;tt class="docutils literal"&gt;French
+(International, AltGr dead keys)&lt;/tt&gt; while removing &lt;tt class="docutils literal"&gt;English (US)&lt;/tt&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0005.png" /&gt;
-&lt;p&gt;You can see a short test, when by pressing the &lt;cite&gt;AltGr + a&lt;/cite&gt; key and other
-vowels, the result is accentuated vowels.&lt;/p&gt;
-&lt;p&gt;In the &lt;cite&gt;TIME &amp;amp; DATE&lt;/cite&gt; section I always enable &lt;cite&gt;Network Time&lt;/cite&gt;...&lt;/p&gt;
+&lt;p&gt;You can perform a quick test by pressing the &lt;cite&gt;AltGr + a&lt;/cite&gt; key and other vowels
+to observe the accentuated vowels.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;TIME &amp;amp; DATE&lt;/cite&gt; section, I consistently enable &lt;cite&gt;Network Time&lt;/cite&gt;...&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0007.png" /&gt;
-&lt;p&gt;We also select our &lt;cite&gt;Region&lt;/cite&gt; and &lt;cite&gt;City&lt;/cite&gt;, based on this, the time and date are
-set.&lt;/p&gt;
-&lt;p&gt;Up to now we have configured the following sections:&lt;/p&gt;
+&lt;p&gt;Additionally, we choose our &lt;cite&gt;Region&lt;/cite&gt; and &lt;cite&gt;City&lt;/cite&gt;, and based on this selection,
+the time and date are automatically set.&lt;/p&gt;
+&lt;p&gt;So far, we've configured the following sections:&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0008.png" /&gt;
-&lt;p&gt;Now we must configure the &lt;cite&gt;SOFTWARE&lt;/cite&gt; section, specifically &lt;cite&gt;INSTALLATION
-SOURCE&lt;/cite&gt;...&lt;/p&gt;
-&lt;p&gt;In this section we mark &lt;cite&gt;On the Network:&lt;/cite&gt; and select &lt;cite&gt;Closest mirror&lt;/cite&gt;, we also
-make sure to uncheck the &lt;cite&gt;Updates&lt;/cite&gt; option...&lt;/p&gt;
+&lt;p&gt;Now, let's proceed to configure the &lt;cite&gt;SOFTWARE&lt;/cite&gt; section, focusing on the
+&lt;cite&gt;INSTALLATION SOURCE&lt;/cite&gt;...&lt;/p&gt;
+&lt;p&gt;In this section, we check &lt;cite&gt;On the Network:&lt;/cite&gt; and choose &lt;cite&gt;Closest mirror&lt;/cite&gt;.
+Additionally, ensure to uncheck the &lt;cite&gt;Updates&lt;/cite&gt; option...&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0009.png" /&gt;
-&lt;p&gt;This way the installer will use the online repositories to download the
-required packages for the installation, using the nearest server that commonly
-is not the closest geographically, but the most efficient and with better times
-in terms of data transfer.&lt;/p&gt;
-&lt;p&gt;By unchecking &lt;cite&gt;Updates&lt;/cite&gt; we are telling the installer to use the latest packages
-that are available in the repo.&lt;/p&gt;
-&lt;p&gt;We wait for the package group metadata to be downloaded, the section &lt;cite&gt;SOFTWARE
-SELECTION&lt;/cite&gt; depends on this:&lt;/p&gt;
+&lt;p&gt;This setup ensures that the installer utilizes online repositories to download
+the necessary packages for installation. It dynamically selects the nearest
+server, which may not necessarily be the closest geographically but is
+typically the most efficient with optimal data transfer times.&lt;/p&gt;
+&lt;p&gt;By leaving &lt;cite&gt;Updates&lt;/cite&gt; unchecked, we instruct the installer to deploy the latest
+available packages from the repository.&lt;/p&gt;
+&lt;p&gt;We patiently wait for the download of package group metadata as the &lt;cite&gt;SOFTWARE
+SELECTION&lt;/cite&gt; section depends on this step.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0011.png" /&gt;
-&lt;p&gt;In &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt; I chose &lt;cite&gt;Fedora Custom Operating System&lt;/cite&gt;, which
-represents a very minimal package selection, with no graphical environment,
-only a few packages groups as follows:&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt; section, I opted for &lt;cite&gt;Fedora Custom Operating
+System&lt;/cite&gt;, representing a minimal package selection. This choice excludes a
+graphical environment, including only a few essential package groups, such as:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;Environment Group: Fedora Custom Operating System&lt;/span&gt;
 &lt;span class="go"&gt; Environment-Id: custom-environment&lt;/span&gt;
 &lt;span class="go"&gt; Description: Basic building block for a custom Fedora system.&lt;/span&gt;
@@ -166,13 +169,13 @@ only a few packages groups as follows:&lt;/p&gt;
 &lt;span class="go"&gt;   Guest Agents&lt;/span&gt;
 &lt;span class="go"&gt;   Standard&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Finally we have reached the &lt;cite&gt;SYSTEM&lt;/cite&gt; section, select &lt;cite&gt;INSTALLATION
-DESTINATION&lt;/cite&gt;.  In &lt;cite&gt;Device Selection&lt;/cite&gt;, in &lt;cite&gt;Local Stardard Disk&lt;/cite&gt; select the hard
-disk that has the Fedora installation with the existing partitions we want to
-reuse.&lt;/p&gt;
-&lt;p&gt;In the &lt;cite&gt;Other Storage Options&lt;/cite&gt; section, under &lt;cite&gt;Partitioning&lt;/cite&gt; we select &lt;cite&gt;I will
-Configure partitioning&lt;/cite&gt;.&lt;/p&gt;
-&lt;p&gt;The following menu is shown below, in which we will click on &lt;cite&gt;Unknown&lt;/cite&gt;:&lt;/p&gt;
+&lt;p&gt;Finally, we've arrived at the &lt;cite&gt;SYSTEM&lt;/cite&gt; section. Choose &lt;cite&gt;INSTALLATION
+DESTINATION&lt;/cite&gt;. Under &lt;cite&gt;Device Selection&lt;/cite&gt;, in &lt;cite&gt;Local Standard Disk&lt;/cite&gt;, select the
+hard disk containing the existing Fedora installation with the partitions you
+wish to reuse.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;Other Storage Options&lt;/cite&gt; section, within the &lt;cite&gt;Partitioning&lt;/cite&gt; category,
+select &lt;cite&gt;I will Configure partitioning&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;The subsequent menu is displayed below, where we'll click on &lt;cite&gt;Unknown&lt;/cite&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0013.png" /&gt;
 &lt;/blockquote&gt;
@@ -181,62 +184,61 @@ will focus on the partitions &lt;strong&gt;sda2&lt;/strong&gt;, &lt;strong&gt;sd
 &lt;blockquote&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0014.png" /&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Where:&lt;/p&gt;
+&lt;p&gt;Here's a detailed breakdown:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;sda2&lt;/strong&gt; is the ESP (EFI Partition System) partition, this partition
-contains the other *.efi files; every OS that has been installed on our
-computer in UEFI mode has an *.efi file that will be linked to our GRUB,
-which allows us to choose which OS to boot during the first few seconds
-after our computer is turned on. &lt;strong&gt;You should never mark&lt;/strong&gt; this partition
-to be formatted. &lt;strong&gt;sda2&lt;/strong&gt; will be mounted on &lt;cite&gt;/boot/efi&lt;/cite&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;sda9&lt;/strong&gt; is the partition I will mount in &lt;cite&gt;/boot&lt;/cite&gt;, this partition should
-not be encrypted, since inside there are files needed for the OS to be
-loaded, in example the kernel. If we encrypt this partition we will not be
-able  to load the kernels on boot.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;sda10&lt;/strong&gt; is the partition that was encrypted using LUKS, which contains
-the &lt;cite&gt;Volume Group&lt;/cite&gt; which contains the other logical volumes that serve as
-&lt;cite&gt;/&lt;/cite&gt;, &lt;cite&gt;/home&lt;/cite&gt; and &lt;cite&gt;swap&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda2&lt;/strong&gt;: This is the ESP (EFI System Partition), housing other *.efi files.
+Each OS installed in UEFI mode has an *.efi file linked to our GRUB. It
+enables us to choose the OS during the initial seconds after turning on our
+computer. &lt;strong&gt;Never mark&lt;/strong&gt; this partition for formatting. &lt;strong&gt;sda2&lt;/strong&gt; will be
+mounted on &lt;cite&gt;/boot/efi&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda9&lt;/strong&gt;: This partition will be mounted in &lt;cite&gt;/boot&lt;/cite&gt; and should not be
+encrypted. It contains crucial files needed for the OS to load, such as the
+kernel. Encrypting this partition would prevent the loading of kernels during
+boot.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda10&lt;/strong&gt;: This partition is encrypted using LUKS and houses the &lt;cite&gt;Volume
+Group&lt;/cite&gt;, which, in turn, contains other logical volumes serving as &lt;cite&gt;/&lt;/cite&gt;, &lt;cite&gt;/home&lt;/cite&gt;,
+and &lt;cite&gt;swap&lt;/cite&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;After selecting &lt;strong&gt;sda10&lt;/strong&gt; you are prompted for the encryption password that
-will grant you access to the &lt;cite&gt;Volume Group&lt;/cite&gt; containing the mentioned
-partitions. It is shown as the existing Fedora 23 installation, which was
-originally the F22 that we updated in the previous post.&lt;/p&gt;
+&lt;p&gt;Once &lt;strong&gt;sda10&lt;/strong&gt; is selected, you'll be prompted for the encryption password
+granting access to the &lt;cite&gt;Volume Group&lt;/cite&gt;, which includes the mentioned partitions.
+This section reflects the existing Fedora 23 installation, originally the F22
+that we updated in the previous post.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0015.png" /&gt;
-&lt;p&gt;We click on &lt;cite&gt;Fedora Linux 23 for x86_64&lt;/cite&gt; and we can see the logical volumes
-that we will reuse.&lt;/p&gt;
-&lt;p&gt;By clicking &lt;cite&gt;/home&lt;/cite&gt;, we make sure to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical
-Volumen. We make sure that the &lt;cite&gt;Reformat&lt;/cite&gt; checkbox is &lt;strong&gt;not&lt;/strong&gt; checked, and
+&lt;p&gt;Click on &lt;cite&gt;Fedora Linux 23 for x86_64&lt;/cite&gt;, and you'll be able to view the logical
+volumes slated for reuse.&lt;/p&gt;
+&lt;p&gt;When selecting &lt;cite&gt;/home&lt;/cite&gt;, ensure to allocate a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical
+Volume. Make certain that the &lt;cite&gt;Reformat&lt;/cite&gt; checkbox is &lt;strong&gt;not&lt;/strong&gt; selected, then
 click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0017.png" /&gt;
-&lt;p&gt;In the following image we can see that the logical volume &lt;cite&gt;fedora_lilit-home&lt;/cite&gt;
-was reassigned to &lt;cite&gt;New Fedora 25 Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;In the subsequent image, you'll observe that the logical volume
+&lt;cite&gt;fedora_lilit-home&lt;/cite&gt; has been reallocated to the &lt;cite&gt;New Fedora 25 Installation&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0018.png" /&gt;
-&lt;p&gt;We select &lt;cite&gt;/boot/efi&lt;/cite&gt;, which is nothing more than the ESP partition located in
-&lt;strong&gt;sda2&lt;/strong&gt;, we make sure to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical Volume, which
-in this case would be &lt;cite&gt;/boot/efi&lt;/cite&gt;. we make sure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; is
-&lt;strong&gt;not&lt;/strong&gt; checked, and click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Choose &lt;cite&gt;/boot/efi&lt;/cite&gt;, equivalent to the ESP partition located in &lt;strong&gt;sda2&lt;/strong&gt;. Ensure
+to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical Volume, which, in this case, would
+be &lt;cite&gt;/boot/efi&lt;/cite&gt;. Confirm that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; is &lt;strong&gt;not&lt;/strong&gt; selected, then
+click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0019.png" /&gt;
-&lt;p&gt;We select &lt;cite&gt;/&lt;/cite&gt;, this logical volume served as &lt;cite&gt;/&lt;/cite&gt; for F23, so to be able to
-reuse it we must mark it to format. we assign &lt;cite&gt;/&lt;/cite&gt; as the point, I assign a file
-system ext4, we ensure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; &lt;strong&gt;is&lt;/strong&gt; marked, and click on
-&lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Choose &lt;cite&gt;/&lt;/cite&gt;. This logical volume previously served as the &lt;cite&gt;/&lt;/cite&gt; for F23, so for
+reuse, we need to mark it for formatting. Assign &lt;cite&gt;/&lt;/cite&gt; as the mount point, select
+the file system as ext4, ensure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; &lt;strong&gt;is&lt;/strong&gt; marked, and
+then click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0023.png" /&gt;
 &lt;p&gt;Select &lt;cite&gt;swap&lt;/cite&gt;, mark the checkbox and click &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0025.png" /&gt;
-&lt;p&gt;We select &lt;cite&gt;/boot&lt;/cite&gt;, here is where the F23 kernels were stored, so to reuse this
-partition it is required to format it. we assign a &lt;cite&gt;Mount Point&lt;/cite&gt; &lt;cite&gt;/boot&lt;/cite&gt;, then
-click &lt;cite&gt;Reformat&lt;/cite&gt;, in my case I assign an ext4 file system and click &lt;cite&gt;Update
-Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Opt for &lt;cite&gt;/boot&lt;/cite&gt;. This is where the F23 kernels were stored, so to repurpose
+this partition, formatting is necessary. Allocate the &lt;cite&gt;Mount Point&lt;/cite&gt; as &lt;cite&gt;/boot&lt;/cite&gt;,
+check the &lt;cite&gt;Reformat&lt;/cite&gt; option, specify the file system as ext4 (in my case), and
+click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0030.png" /&gt;
-&lt;p&gt;Click on &lt;cite&gt;Done&lt;/cite&gt; and accept the changes that will be made.&lt;/p&gt;
-&lt;p&gt;To finish just click on &lt;cite&gt;Begin Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Click on &lt;cite&gt;Done&lt;/cite&gt; and confirm the impending changes.&lt;/p&gt;
+&lt;p&gt;To conclude, simply click on &lt;cite&gt;Begin Installation&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0032.png" /&gt;
-&lt;p&gt;We assign a user password and ROOT password. And wait, now we must wait for the
-download of the packages and their installation to finish:&lt;/p&gt;
+&lt;p&gt;Assign both a user password and a ROOT password. Now, patiently wait for the
+download and installation of the packages to complete.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0037.png" /&gt;
-&lt;p&gt;After done, click &lt;cite&gt;Reboot&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Once everything is set, click on &lt;cite&gt;Reboot&lt;/cite&gt;.&lt;/p&gt;
 &lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0053.png" /&gt;
-&lt;p&gt;In my case I had to do a series of steps after the installation that the we
-will see in the next post.&lt;/p&gt;
+&lt;p&gt;In my case, I had to perform a series of post-installation steps, which I'll
+elaborate on in the next post.&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 30 Mar 2017 21:00:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</guid><category>floss</category><category>anaconda</category><category>fc25</category><category>fedora</category><category>luks</category><category>lvm</category></item></channel></rss>
