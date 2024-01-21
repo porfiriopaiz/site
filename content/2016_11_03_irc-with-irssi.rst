@@ -8,17 +8,18 @@ IRC with irssi
 :summary:
 :lang: en
 
-From my beginnings in the Free Software and GNU/Linux, one of the features that
-caught my attention is the power of the command line in this operating system.
-From moving between different directories or installing an operating system
-completely from scratch, these are some of the routine tasks you can achive
-from the terminal.
+Since my introduction to the realm of Free Software and GNU/Linux, one aspect
+that has consistently captivated me is the formidable prowess of the command
+line within this operating system. Whether it involves seamlessly navigating
+through diverse directories or orchestrating the installation of an entire
+operating system from the ground up, the terminal empowers users to
+effortlessly accomplish a myriad of routine tasks.
 
 .. TEASER_END
 
-In this post I will show how to configure irssi to automate some of the steps
-to carry out in order to access a chat room, as it is connecting to the server,
-authenticate and then joining the differents channels that are of interest.
+This post will guide you through configuring irssi to automate several
+essential steps required to access a chat room. This includes connecting to the
+server, authenticating, and seamlessly joining various channels of interest.
 
 Installing irssi
 ================
@@ -39,7 +40,7 @@ And to install irssi in debian:
 Running irssi
 -------------
 
-To run irssi, open a terminal and type the following command:
+Initiate irssi by opening a terminal and entering the following command:
 
 .. code-block:: console
 
@@ -51,65 +52,66 @@ Configurations
 Server Configurations
 ---------------------
 
-All these commands must be executed on a irssi session.
+All these commands must be executed within an irssi session.
 
-First we will remove the existing server configuration that we want to
-automate.  With ``/server list`` we can view existing servers:
+To begin, let's remove the current server configuration we aim to automate.
+Utilize the command ``/server list`` list to display the list of existing servers:
 
 .. code-block:: console
 
     /server list
 
-In our case we will remove the existing configuration of Freenode.
+In our case, we will eliminate the current configuration for Freenode.
 
 .. code-block:: console
 
     /server remove chat.freenode.net
 
-And add the new configuration with the following command:
+Subsequently, incorporate the new configuration using the following command:
 
 .. code-block:: console
 
     /SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password
 
-In which ``-auto`` defines the connection to the ``Freenode`` server as
-automatic and ``your_nick_password`` is your user password.
+In this context, the ``-auto`` flag designates the connection to the
+``Freenode`` server as automatic, while ``your_nick_password`` corresponds to
+your user password.
 
 Adding Channels
 ---------------
 
-Similarly, it is possible to add channels to this server in order to get
-connected automatically on each login, for this run the following command in
-our irssi session:
+Likewise, you can append channels to this server to facilitate automatic
+connection upon each login. To achieve this, execute the following command
+within our irssi session:
 
 .. code-block:: console
 
     /channel add -auto #fedora Freenode
 
-In which ``-auto`` allows us joining to ``#fedora`` channel at ``Freenode``
-server automatically at each login.
+Where ``-auto`` enables automatic joining to the ``#fedora`` channel at the
+``Freenode`` server upon every login.
 
-Finally, every time we make a change in our configuration, we must save changes
-with the command:
-
+Concluding, after making any configuration adjustments, it is imperative to
+save the changes using the command:
 
 .. code-block:: console
 
     /save
 
-irssi takes the user name of your current session on the system as the user for
-your session in irc, to prevent this from happening if the name of your session
-in the system does not match your user at Freenode, you should run irssi with
-the following parameter:
+Irssi automatically takes the username of your current system session as the
+IRC user. To avoid discrepancies when your system username differs from your
+Freenode user, run irssi with the following parameter:
 
 .. code-block:: console
 
     irssi -n nick
 
-Where ``nick`` is your user nick on Freenode IRC.
+Replace ``nick`` with your Freenode IRC username.
 
-Once you've added all your channels of interest from the Freenode server and
-saved the changes, you only need to run in a terminal the ``irssi`` command and
-automatically you will be connected to the server and all the channels you've
-added without needing to authenticate manually and without risking anyone from
-reading your password while you type it. All this from a terminal.
+After successfully adding all your preferred channels from the Freenode server
+and saving the modifications, simply execute the ``irssi`` command in a
+terminal. You will be seamlessly connected to the server, and all the
+designated channels will be accessible without the need for manual
+authentication. This not only eliminates the risk of exposing your password
+while typing but also streamlines the entire process—all from the convenience
+of a terminal.
