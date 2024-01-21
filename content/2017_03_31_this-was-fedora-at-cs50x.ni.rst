@@ -34,6 +34,7 @@ internationally.
 
 .. image:: {filename}/images/fedora_at_cs50xni/mayorga.jpg
    :align: center
+   :alt: Eduardo Mayorga speaking.
 
 The second talk was given by `Neville Cross
 <https://fedoraproject.org/wiki/User:Yn1v>`_, Founder and Leader of Fedora
@@ -48,6 +49,7 @@ monitoring resources, all this remotely.
 
 .. image:: {filename}/images/fedora_at_cs50xni/yn1v.jpg
    :align: center
+   :alt: Neville, Fedora Nicaragua Leader.
 
 The third talk was facilitated by `Daniel Drake <http://reactivated.net/>`_.
 Daniel is an operating system developer originally from the UK settled in
@@ -68,6 +70,7 @@ working with talented people from all over the world.
 
 .. image:: {filename}/images/fedora_at_cs50xni/dsd.jpg
    :align: center
+   :alt: dsd sharing his experiences as Kernel Developer.
 
 In the last block of talks `Porfirio Páiz
 <https://fedoraproject.org/wiki/User:Porfiriopaiz>`_, contributor of the Fedora
@@ -91,6 +94,7 @@ between the Fedora software repositories, as well as other tools.
 
 .. image:: {filename}/images/fedora_at_cs50xni/porfiriopaiz.jpg
    :align: center
+   :alt: Me talking about git, Docker, and the Fedora Workstation.
 
 And as a final surprise, the members of Fedora Nicaragua, together with the
 staff of the CS50x.ni, shared with the audience a pleasant time full of talks,
@@ -99,6 +103,7 @@ pizza, which was kindly sponsored by the Fedora Project.
 
 .. image:: {filename}/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg
    :align: center
+   :alt: Group picture.
 
 The Fedora Project Users and Contributors Community are keen to continue with
 these sessions of talks and conversations focused on topics that are of great
@@ -109,3 +114,4 @@ Sorry for the late post here is a happy Hot Dog:
 
 .. image:: {filename}/images/fedora_at_cs50xni/beefy_miracle.gif
    :align: center
+   :alt: A happy hotdog.
