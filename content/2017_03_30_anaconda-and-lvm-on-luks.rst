@@ -177,6 +177,7 @@ networks in the office, I opted to use the Wireless card.
 
 .. image:: {filename}/images/anaconda-screenshots/0000.png
    :align: center
+   :alt: Configuring Network and Host Name
 
 In this initial image of the installation summary, our first step is to
 establish a connection to any of the available networks, be it through a wired
@@ -188,6 +189,7 @@ desired, and then click `Apply`...
 
 .. image:: {filename}/images/anaconda-screenshots/0002.png
    :align: center
+   :alt: Turned on the Wireless Network Card and set the Host Name
 
 Click `Done`.
 
@@ -196,6 +198,7 @@ In the `LOCALIZATION` section, I included the option for ``French
 
 .. image:: {filename}/images/anaconda-screenshots/0005.png
    :align: center
+   :alt: Setting the keyboard layout as English International with Alt-Gr dead keys
 
 You can perform a quick test by pressing the `AltGr + a` key and other vowels
 to observe the accentuated vowels.
@@ -204,6 +207,7 @@ In the `TIME & DATE` section, I consistently enable `Network Time`...
 
 .. image:: {filename}/images/anaconda-screenshots/0007.png
    :align: center
+   :alt: Set the time zone to my region and the source for it as Network Time on
 
 Additionally, we choose our `Region` and `City`, and based on this selection,
 the time and date are automatically set.
@@ -212,6 +216,7 @@ So far, we've configured the following sections:
 
 .. image:: {filename}/images/anaconda-screenshots/0008.png
    :align: center
+   :alt: Keyboard, Language Support, Time and Date, Network and Host Name are set
 
 Now, let's proceed to configure the `SOFTWARE` section, focusing on the
 `INSTALLATION SOURCE`...
@@ -221,6 +226,7 @@ Additionally, ensure to uncheck the `Updates` option...
 
 .. image:: {filename}/images/anaconda-screenshots/0009.png
    :align: center
+   :alt: Setting the installation source
 
 This setup ensures that the installer utilizes online repositories to download
 the necessary packages for installation. It dynamically selects the nearest
@@ -235,6 +241,7 @@ SELECTION` section depends on this step.
 
 .. image:: {filename}/images/anaconda-screenshots/0011.png
    :align: center
+   :alt: Pending Software Selection and Installation Destination
 
 In the `SOFTWARE SELECTION` section, I opted for `Fedora Custom Operating
 System`, representing a minimal package selection. This choice excludes a
@@ -263,12 +270,14 @@ The subsequent menu is displayed below, where we'll click on `Unknown`:
 
  .. image:: {filename}/images/anaconda-screenshots/0013.png
     :align: center
+    :alt: Reusing the old partition table
 
 Once we click `Unknown` the other existing partitions will be displayed. we
 will focus on the partitions **sda2**, **sda9** and **sda10**:
 
  .. image:: {filename}/images/anaconda-screenshots/0014.png
     :align: center
+    :alt: Partitions to be reused and unlocking the encrypted one
 
 Here's a detailed breakdown:
 
@@ -294,6 +303,7 @@ that we updated in the previous post.
 
 .. image:: {filename}/images/anaconda-screenshots/0015.png
    :align: center
+   :alt: Now we can see the volume group and the logical volumes from the encrypted partition
 
 Click on `Fedora Linux 23 for x86_64`, and you'll be able to view the logical
 volumes slated for reuse.
@@ -304,12 +314,14 @@ click on `Update Settings`.
 
 .. image:: {filename}/images/anaconda-screenshots/0017.png
    :align: center
+   :alt: Reusing the old home volume group
 
 In the subsequent image, you'll observe that the logical volume
 `fedora_lilit-home` has been reallocated to the `New Fedora 25 Installation`.
 
 .. image:: {filename}/images/anaconda-screenshots/0018.png
    :align: center
+   :alt: Old /home volume group has been reallocated to the new Fedora 25 clean install
 
 Choose `/boot/efi`, equivalent to the ESP partition located in **sda2**. Ensure
 to assign a `Mount Point` for this Logical Volume, which, in this case, would
@@ -318,6 +330,7 @@ click on `Update Settings`.
 
 .. image:: {filename}/images/anaconda-screenshots/0019.png
    :align: center
+   :alt: Reusing the one and the only /boot/efi partition shared by different system
 
 Choose `/`. This logical volume previously served as the `/` for F23, so for
 reuse, we need to mark it for formatting. Assign `/` as the mount point, select
@@ -326,11 +339,13 @@ then click on `Update Settings`.
 
 .. image:: {filename}/images/anaconda-screenshots/0023.png
    :align: center
+   :alt: Setting the old / partition, this is going to be reformated for the new install
 
 Select `swap`, mark the checkbox and click `Update Settings`.
 
 .. image:: {filename}/images/anaconda-screenshots/0025.png
    :align: center
+   :alt: Reformation the Swap volume
 
 Opt for `/boot`. This is where the F23 kernels were stored, so to repurpose
 this partition, formatting is necessary. Allocate the `Mount Point` as `/boot`,
@@ -339,6 +354,7 @@ click on `Update Settings`.
 
 .. image:: {filename}/images/anaconda-screenshots/0030.png
    :align: center
+   :alt: Reformatting the old /boot partition to remove the old kernels
 
 Click on `Done` and confirm the impending changes.
 
@@ -346,17 +362,20 @@ To conclude, simply click on `Begin Installation`.
 
 .. image:: {filename}/images/anaconda-screenshots/0032.png
    :align: center
+   :alt: All is set and we are ready to begin the clean installation
 
 Assign both a user password and a ROOT password. Now, patiently wait for the
 download and installation of the packages to complete.
 
 .. image:: {filename}/images/anaconda-screenshots/0037.png
    :align: center
+   :alt: Set a user and a root password
 
 Once everything is set, click on `Reboot`.
 
 .. image:: {filename}/images/anaconda-screenshots/0053.png
    :align: center
+   :alt: Once it is complete it is ready to reboot
 
 In my case, I had to perform a series of post-installation steps, which I'll
 elaborate on in the next post.
