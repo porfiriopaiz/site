@@ -1869,31 +1869,31 @@ I217-LM&lt;/a&gt; and
 an &lt;a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260"&gt;Intel® Wireless-N 7260 Wireless Network Card&lt;/a&gt;. During
 installation, both cards were promptly detected. As I have access only to WiFi
 networks in the office, I opted to use the Wireless card.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0000.png" /&gt;
+&lt;img alt="Configuring Network and Host Name" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0000.png" /&gt;
 &lt;p&gt;In this initial image of the installation summary, our first step is to
 establish a connection to any of the available networks, be it through a wired
 or WiFi network. To achieve this, click on &lt;cite&gt;NETWORK &amp;amp; HOST NAME&lt;/cite&gt;.&lt;/p&gt;
 &lt;p&gt;Next, choose Wireless and enable the corresponding network card. From the list
 of available networks, select one, alter the name of your Desktop/Laptop as
 desired, and then click &lt;cite&gt;Apply&lt;/cite&gt;...&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0002.png" /&gt;
+&lt;img alt="Turned on the Wireless Network Card and set the Host Name" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0002.png" /&gt;
 &lt;p&gt;Click &lt;cite&gt;Done&lt;/cite&gt;.&lt;/p&gt;
 &lt;p&gt;In the &lt;cite&gt;LOCALIZATION&lt;/cite&gt; section, I included the option for &lt;tt class="docutils literal"&gt;French
 (International, AltGr dead keys)&lt;/tt&gt; while removing &lt;tt class="docutils literal"&gt;English (US)&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0005.png" /&gt;
+&lt;img alt="Setting the keyboard layout as English International with Alt-Gr dead keys" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0005.png" /&gt;
 &lt;p&gt;You can perform a quick test by pressing the &lt;cite&gt;AltGr + a&lt;/cite&gt; key and other vowels
 to observe the accentuated vowels.&lt;/p&gt;
 &lt;p&gt;In the &lt;cite&gt;TIME &amp;amp; DATE&lt;/cite&gt; section, I consistently enable &lt;cite&gt;Network Time&lt;/cite&gt;...&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0007.png" /&gt;
+&lt;img alt="Set the time zone to my region and the source for it as Network Time on" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0007.png" /&gt;
 &lt;p&gt;Additionally, we choose our &lt;cite&gt;Region&lt;/cite&gt; and &lt;cite&gt;City&lt;/cite&gt;, and based on this selection,
 the time and date are automatically set.&lt;/p&gt;
 &lt;p&gt;So far, we've configured the following sections:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0008.png" /&gt;
+&lt;img alt="Keyboard, Language Support, Time and Date, Network and Host Name are set" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0008.png" /&gt;
 &lt;p&gt;Now, let's proceed to configure the &lt;cite&gt;SOFTWARE&lt;/cite&gt; section, focusing on the
 &lt;cite&gt;INSTALLATION SOURCE&lt;/cite&gt;...&lt;/p&gt;
 &lt;p&gt;In this section, we check &lt;cite&gt;On the Network:&lt;/cite&gt; and choose &lt;cite&gt;Closest mirror&lt;/cite&gt;.
 Additionally, ensure to uncheck the &lt;cite&gt;Updates&lt;/cite&gt; option...&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0009.png" /&gt;
+&lt;img alt="Setting the installation source" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0009.png" /&gt;
 &lt;p&gt;This setup ensures that the installer utilizes online repositories to download
 the necessary packages for installation. It dynamically selects the nearest
 server, which may not necessarily be the closest geographically but is
@@ -1902,7 +1902,7 @@ typically the most efficient with optimal data transfer times.&lt;/p&gt;
 available packages from the repository.&lt;/p&gt;
 &lt;p&gt;We patiently wait for the download of package group metadata as the &lt;cite&gt;SOFTWARE
 SELECTION&lt;/cite&gt; section depends on this step.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0011.png" /&gt;
+&lt;img alt="Pending Software Selection and Installation Destination" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0011.png" /&gt;
 &lt;p&gt;In the &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt; section, I opted for &lt;cite&gt;Fedora Custom Operating
 System&lt;/cite&gt;, representing a minimal package selection. This choice excludes a
 graphical environment, including only a few essential package groups, such as:&lt;/p&gt;
@@ -1923,12 +1923,12 @@ wish to reuse.&lt;/p&gt;
 select &lt;cite&gt;I will Configure partitioning&lt;/cite&gt;.&lt;/p&gt;
 &lt;p&gt;The subsequent menu is displayed below, where we'll click on &lt;cite&gt;Unknown&lt;/cite&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0013.png" /&gt;
+&lt;img alt="Reusing the old partition table" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0013.png" /&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Once we click &lt;cite&gt;Unknown&lt;/cite&gt; the other existing partitions will be displayed. we
 will focus on the partitions &lt;strong&gt;sda2&lt;/strong&gt;, &lt;strong&gt;sda9&lt;/strong&gt; and &lt;strong&gt;sda10&lt;/strong&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0014.png" /&gt;
+&lt;img alt="Partitions to be reused and unlocking the encrypted one" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0014.png" /&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Here's a detailed breakdown:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1949,41 +1949,41 @@ and &lt;cite&gt;swap&lt;/cite&gt;.&lt;/p&gt;
 granting access to the &lt;cite&gt;Volume Group&lt;/cite&gt;, which includes the mentioned partitions.
 This section reflects the existing Fedora 23 installation, originally the F22
 that we updated in the previous post.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0015.png" /&gt;
+&lt;img alt="Now we can see the volume group and the logical volumes from the encrypted partition" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0015.png" /&gt;
 &lt;p&gt;Click on &lt;cite&gt;Fedora Linux 23 for x86_64&lt;/cite&gt;, and you'll be able to view the logical
 volumes slated for reuse.&lt;/p&gt;
 &lt;p&gt;When selecting &lt;cite&gt;/home&lt;/cite&gt;, ensure to allocate a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical
 Volume. Make certain that the &lt;cite&gt;Reformat&lt;/cite&gt; checkbox is &lt;strong&gt;not&lt;/strong&gt; selected, then
 click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0017.png" /&gt;
+&lt;img alt="Reusing the old home volume group" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0017.png" /&gt;
 &lt;p&gt;In the subsequent image, you'll observe that the logical volume
 &lt;cite&gt;fedora_lilit-home&lt;/cite&gt; has been reallocated to the &lt;cite&gt;New Fedora 25 Installation&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0018.png" /&gt;
+&lt;img alt="Old /home volume group has been reallocated to the new Fedora 25 clean install" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0018.png" /&gt;
 &lt;p&gt;Choose &lt;cite&gt;/boot/efi&lt;/cite&gt;, equivalent to the ESP partition located in &lt;strong&gt;sda2&lt;/strong&gt;. Ensure
 to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical Volume, which, in this case, would
 be &lt;cite&gt;/boot/efi&lt;/cite&gt;. Confirm that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; is &lt;strong&gt;not&lt;/strong&gt; selected, then
 click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0019.png" /&gt;
+&lt;img alt="Reusing the one and the only /boot/efi partition shared by different system" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0019.png" /&gt;
 &lt;p&gt;Choose &lt;cite&gt;/&lt;/cite&gt;. This logical volume previously served as the &lt;cite&gt;/&lt;/cite&gt; for F23, so for
 reuse, we need to mark it for formatting. Assign &lt;cite&gt;/&lt;/cite&gt; as the mount point, select
 the file system as ext4, ensure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; &lt;strong&gt;is&lt;/strong&gt; marked, and
 then click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0023.png" /&gt;
+&lt;img alt="Setting the old / partition, this is going to be reformated for the new install" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0023.png" /&gt;
 &lt;p&gt;Select &lt;cite&gt;swap&lt;/cite&gt;, mark the checkbox and click &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0025.png" /&gt;
+&lt;img alt="Reformation the Swap volume" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0025.png" /&gt;
 &lt;p&gt;Opt for &lt;cite&gt;/boot&lt;/cite&gt;. This is where the F23 kernels were stored, so to repurpose
 this partition, formatting is necessary. Allocate the &lt;cite&gt;Mount Point&lt;/cite&gt; as &lt;cite&gt;/boot&lt;/cite&gt;,
 check the &lt;cite&gt;Reformat&lt;/cite&gt; option, specify the file system as ext4 (in my case), and
 click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0030.png" /&gt;
+&lt;img alt="Reformatting the old /boot partition to remove the old kernels" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0030.png" /&gt;
 &lt;p&gt;Click on &lt;cite&gt;Done&lt;/cite&gt; and confirm the impending changes.&lt;/p&gt;
 &lt;p&gt;To conclude, simply click on &lt;cite&gt;Begin Installation&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0032.png" /&gt;
+&lt;img alt="All is set and we are ready to begin the clean installation" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0032.png" /&gt;
 &lt;p&gt;Assign both a user password and a ROOT password. Now, patiently wait for the
 download and installation of the packages to complete.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0037.png" /&gt;
+&lt;img alt="Set a user and a root password" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0037.png" /&gt;
 &lt;p&gt;Once everything is set, click on &lt;cite&gt;Reboot&lt;/cite&gt;.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0053.png" /&gt;
+&lt;img alt="Once it is complete it is ready to reboot" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0053.png" /&gt;
 &lt;p&gt;In my case, I had to perform a series of post-installation steps, which I'll
 elaborate on in the next post.&lt;/p&gt;
 &lt;/div&gt;

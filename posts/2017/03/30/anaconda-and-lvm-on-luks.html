@@ -185,31 +185,31 @@ I217-LM</a> and
 an <a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260">Intel® Wireless-N 7260 Wireless Network Card</a>. During
 installation, both cards were promptly detected. As I have access only to WiFi
 networks in the office, I opted to use the Wireless card.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0000.png" />
+<img alt="Configuring Network and Host Name" class="align-center" src="../../../../images/anaconda-screenshots/0000.png" />
 <p>In this initial image of the installation summary, our first step is to
 establish a connection to any of the available networks, be it through a wired
 or WiFi network. To achieve this, click on <cite>NETWORK &amp; HOST NAME</cite>.</p>
 <p>Next, choose Wireless and enable the corresponding network card. From the list
 of available networks, select one, alter the name of your Desktop/Laptop as
 desired, and then click <cite>Apply</cite>...</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0002.png" />
+<img alt="Turned on the Wireless Network Card and set the Host Name" class="align-center" src="../../../../images/anaconda-screenshots/0002.png" />
 <p>Click <cite>Done</cite>.</p>
 <p>In the <cite>LOCALIZATION</cite> section, I included the option for <tt class="docutils literal">French
 (International, AltGr dead keys)</tt> while removing <tt class="docutils literal">English (US)</tt>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0005.png" />
+<img alt="Setting the keyboard layout as English International with Alt-Gr dead keys" class="align-center" src="../../../../images/anaconda-screenshots/0005.png" />
 <p>You can perform a quick test by pressing the <cite>AltGr + a</cite> key and other vowels
 to observe the accentuated vowels.</p>
 <p>In the <cite>TIME &amp; DATE</cite> section, I consistently enable <cite>Network Time</cite>...</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0007.png" />
+<img alt="Set the time zone to my region and the source for it as Network Time on" class="align-center" src="../../../../images/anaconda-screenshots/0007.png" />
 <p>Additionally, we choose our <cite>Region</cite> and <cite>City</cite>, and based on this selection,
 the time and date are automatically set.</p>
 <p>So far, we've configured the following sections:</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0008.png" />
+<img alt="Keyboard, Language Support, Time and Date, Network and Host Name are set" class="align-center" src="../../../../images/anaconda-screenshots/0008.png" />
 <p>Now, let's proceed to configure the <cite>SOFTWARE</cite> section, focusing on the
 <cite>INSTALLATION SOURCE</cite>...</p>
 <p>In this section, we check <cite>On the Network:</cite> and choose <cite>Closest mirror</cite>.
 Additionally, ensure to uncheck the <cite>Updates</cite> option...</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0009.png" />
+<img alt="Setting the installation source" class="align-center" src="../../../../images/anaconda-screenshots/0009.png" />
 <p>This setup ensures that the installer utilizes online repositories to download
 the necessary packages for installation. It dynamically selects the nearest
 server, which may not necessarily be the closest geographically but is
@@ -218,7 +218,7 @@ typically the most efficient with optimal data transfer times.</p>
 available packages from the repository.</p>
 <p>We patiently wait for the download of package group metadata as the <cite>SOFTWARE
 SELECTION</cite> section depends on this step.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0011.png" />
+<img alt="Pending Software Selection and Installation Destination" class="align-center" src="../../../../images/anaconda-screenshots/0011.png" />
 <p>In the <cite>SOFTWARE SELECTION</cite> section, I opted for <cite>Fedora Custom Operating
 System</cite>, representing a minimal package selection. This choice excludes a
 graphical environment, including only a few essential package groups, such as:</p>
@@ -239,12 +239,12 @@ wish to reuse.</p>
 select <cite>I will Configure partitioning</cite>.</p>
 <p>The subsequent menu is displayed below, where we'll click on <cite>Unknown</cite>:</p>
 <blockquote>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0013.png" />
+<img alt="Reusing the old partition table" class="align-center" src="../../../../images/anaconda-screenshots/0013.png" />
 </blockquote>
 <p>Once we click <cite>Unknown</cite> the other existing partitions will be displayed. we
 will focus on the partitions <strong>sda2</strong>, <strong>sda9</strong> and <strong>sda10</strong>:</p>
 <blockquote>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0014.png" />
+<img alt="Partitions to be reused and unlocking the encrypted one" class="align-center" src="../../../../images/anaconda-screenshots/0014.png" />
 </blockquote>
 <p>Here's a detailed breakdown:</p>
 <blockquote>
@@ -265,41 +265,41 @@ and <cite>swap</cite>.</p>
 granting access to the <cite>Volume Group</cite>, which includes the mentioned partitions.
 This section reflects the existing Fedora 23 installation, originally the F22
 that we updated in the previous post.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0015.png" />
+<img alt="Now we can see the volume group and the logical volumes from the encrypted partition" class="align-center" src="../../../../images/anaconda-screenshots/0015.png" />
 <p>Click on <cite>Fedora Linux 23 for x86_64</cite>, and you'll be able to view the logical
 volumes slated for reuse.</p>
 <p>When selecting <cite>/home</cite>, ensure to allocate a <cite>Mount Point</cite> for this Logical
 Volume. Make certain that the <cite>Reformat</cite> checkbox is <strong>not</strong> selected, then
 click on <cite>Update Settings</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0017.png" />
+<img alt="Reusing the old home volume group" class="align-center" src="../../../../images/anaconda-screenshots/0017.png" />
 <p>In the subsequent image, you'll observe that the logical volume
 <cite>fedora_lilit-home</cite> has been reallocated to the <cite>New Fedora 25 Installation</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0018.png" />
+<img alt="Old /home volume group has been reallocated to the new Fedora 25 clean install" class="align-center" src="../../../../images/anaconda-screenshots/0018.png" />
 <p>Choose <cite>/boot/efi</cite>, equivalent to the ESP partition located in <strong>sda2</strong>. Ensure
 to assign a <cite>Mount Point</cite> for this Logical Volume, which, in this case, would
 be <cite>/boot/efi</cite>. Confirm that the checkbox <cite>Reformat</cite> is <strong>not</strong> selected, then
 click on <cite>Update Settings</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0019.png" />
+<img alt="Reusing the one and the only /boot/efi partition shared by different system" class="align-center" src="../../../../images/anaconda-screenshots/0019.png" />
 <p>Choose <cite>/</cite>. This logical volume previously served as the <cite>/</cite> for F23, so for
 reuse, we need to mark it for formatting. Assign <cite>/</cite> as the mount point, select
 the file system as ext4, ensure that the checkbox <cite>Reformat</cite> <strong>is</strong> marked, and
 then click on <cite>Update Settings</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0023.png" />
+<img alt="Setting the old / partition, this is going to be reformated for the new install" class="align-center" src="../../../../images/anaconda-screenshots/0023.png" />
 <p>Select <cite>swap</cite>, mark the checkbox and click <cite>Update Settings</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0025.png" />
+<img alt="Reformation the Swap volume" class="align-center" src="../../../../images/anaconda-screenshots/0025.png" />
 <p>Opt for <cite>/boot</cite>. This is where the F23 kernels were stored, so to repurpose
 this partition, formatting is necessary. Allocate the <cite>Mount Point</cite> as <cite>/boot</cite>,
 check the <cite>Reformat</cite> option, specify the file system as ext4 (in my case), and
 click on <cite>Update Settings</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0030.png" />
+<img alt="Reformatting the old /boot partition to remove the old kernels" class="align-center" src="../../../../images/anaconda-screenshots/0030.png" />
 <p>Click on <cite>Done</cite> and confirm the impending changes.</p>
 <p>To conclude, simply click on <cite>Begin Installation</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0032.png" />
+<img alt="All is set and we are ready to begin the clean installation" class="align-center" src="../../../../images/anaconda-screenshots/0032.png" />
 <p>Assign both a user password and a ROOT password. Now, patiently wait for the
 download and installation of the packages to complete.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0037.png" />
+<img alt="Set a user and a root password" class="align-center" src="../../../../images/anaconda-screenshots/0037.png" />
 <p>Once everything is set, click on <cite>Reboot</cite>.</p>
-<img alt="" class="align-center" src="../../../../images/anaconda-screenshots/0053.png" />
+<img alt="Once it is complete it is ready to reboot" class="align-center" src="../../../../images/anaconda-screenshots/0053.png" />
 <p>In my case, I had to perform a series of post-installation steps, which I'll
 elaborate on in the next post.</p>
 </div>
