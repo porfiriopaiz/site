@@ -61,59 +61,60 @@
     <h1><a href="../../../../posts/2021/07/14/k8.html">K8</a></h1>
   </div>
   <div class="article_text">
-    <p>Back in February Guido van Rossum posted on Twitter a picture of his desk with
+    <p>Back in February, Guido van Rossum posted on Twitter a picture of his desk with
 a large mouse pad.</p>
-<p><a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897/">https://twitter.com/gvanrossum/status/1365796969617104897/</a></p>
-<p>What got my attention from this picture was the keyboard, down on the comment
-section I found the manufacturer and model of this keyboard.</p>
-<p><a class="reference external" href="https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273">https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273</a></p>
-<p>I have always wanted to give a try to mechanical keyboards, but never knew
+<p><a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897">Guido van Rossum's tweet</a></p>
+<p>What got my attention from this picture was the keyboard. Down in the comment
+section, I found the manufacturer and model of this keyboard.</p>
+<p><a class="reference external" href="https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273">Keychron K8 Product</a></p>
+<p>I have always wanted to try mechanical keyboards but never knew
 exactly which one to get or try. Seeing that this is the preferred one from a
-respectable developer I decided to go for this same model.</p>
+respectable developer, I decided to go for this same model.</p>
 <p>The very specific configuration I wanted was not available at the time I was
-ordering it, so I subscribed myself to get a notification via email when the
+ordering it, so I subscribed to get a notification via email when the
 same configuration became available again.</p>
-<p>I ordered mine in June 3rd, the keyboard was shipped from Hong Kong to Miami
-and arrived in the next 5 days. And the keyboard arrived to Nicaragua 25 days
-after.</p>
-<p>The first thing I tried to do was to setup the keyboard with my T440p running
-Debian 11 Bullseye via Bluetooth, for this I installed Blueman, which provides
-a Mate applet:</p>
+<p>I ordered mine on June 3rd, the keyboard was shipped from Hong Kong to Miami
+and arrived in the next 5 days. The keyboard arrived in Nicaragua 25 days
+later.</p>
+<p>The first thing I tried to do was to set up the keyboard with my T440p running
+Debian 11 Bullseye via Bluetooth. For this, I installed Blueman, which provides
+a MATE applet:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install blueman&#39;</span>
 </pre></div>
-<p>With the switches from the keyboard as Windows and Bluetooth, the Blueman
-applet running and following the instructions booklet included on the box, I
-was able to pair my Keychron K8 via Bluetooth with my T440p running Debian.</p>
+<p>With the switches on the keyboard set to Windows and Bluetooth, the Blueman
+applet running, and following the instructions in the booklet included in the box,
+I was able to pair my Keychron K8 via Bluetooth with my T440p running Debian.</p>
 <p>I had to manually add my keyboard as a new device with the applet and then pair
 both devices.</p>
-<p>Over Bluetooth and on Windows mode the swap from multimedia keys to function
-keys did work, but on wired mode this did not work.</p>
-<p>I found some hints on how to fix this on the official Facebook support group
-for Linux users of Keychron, that led me to this very specific command that has
-to be run on every start up so that the primary option for the F1 to F12 keys
-to become functions keys instead of multimedia keys.</p>
+<p>Over Bluetooth and in Windows mode, the swap from multimedia keys to function
+keys worked, but in wired mode, this did not work.</p>
+<p>I found some hints on how to fix this in the official Facebook support group
+for Linux users of Keychron, which led me to this very specific command that must
+be run on every startup so that the primary option for the F1 to F12 keys
+becomes function keys instead of multimedia keys.</p>
 <div class="highlight"><pre><span></span><span class="go">echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode</span>
 </pre></div>
-<p>Later I found this documentation that provides at least 3 different ways to
-make sure this command is executed on every start up:</p>
-<p><a class="reference external" href="https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior">https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior</a></p>
-<p>From the 3 options listed there I decided to go for the one that makes use of
-the sysfs.conf file. So I installed <tt class="docutils literal">sysfsutils</tt>:</p>
+<p>Later, I found this documentation that provides at least 3 different ways to
+ensure this command is executed on every startup:</p>
+<p><a class="reference external" href="https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior">Ubuntu Keyboard Configuration Help</a></p>
+<p>From the 3 options listed there, I decided to go for the one that makes use of
+the sysfs.conf file. So, I installed <tt class="docutils literal">sysfsutils</tt>:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install sysfsutils&#39;</span>
 </pre></div>
 <p>And added this line at the end of the file <strong>/etc/sysfs.conf</strong>:</p>
 <div class="highlight"><pre><span></span><span class="go">module/hid_apple/parameters/fnmode = 0</span>
 </pre></div>
-<p>Restarted the computer and then while in cable and Windows mode I pressed the
+<p>I then restarted the computer, and while in cable and Windows mode, I pressed the
 key combination:</p>
-<p>Fn + x + l</p>
-<p>After doing this the primary option for the F1 to F12 key will be the functions
+<div class="highlight"><pre><span></span>Fn + x + l
+</pre></div>
+<p>After doing this, the primary option for the F1 to F12 keys will be the function
 keys instead of the multimedia keys.</p>
-<p>To modify the screen brightness, to turn on and off the keyboard backlight,
-mute and unmute the audio you must press the Fn key plus the function key (Fn +
-F1 or Fn + F2) and that should allows you to continue using your K8 on Linux
-with the switches in Windows/Android mode, in wired or Bluetooth mode with the
-Functions key as the primary option instead of the multimedia keys.</p>
+<p>To modify the screen brightness, turn the keyboard backlight on and off, or mute
+and unmute the audio, you must press the Fn key plus the function key (Fn +
+F1 or Fn + F2). This will allow you to continue using your K8 on Linux
+with the switches in Windows/Android mode, in wired or Bluetooth mode, with the
+function keys as the primary option instead of the multimedia keys.</p>
 
   </div>
   <div class="article_meta">
