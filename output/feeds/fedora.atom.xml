@@ -735,13 +735,11 @@ Click on &lt;cite&gt;Yes, exit i3&lt;/cite&gt; and then while on &lt;cite&gt;lig
 way to setup virtual machines, without expending lot of resources or even for a
 working environemt for ancient devices with minimum and limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC, the password manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A password manager Free and secure.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs that I install after the first boot of
-any fresh install.&lt;/p&gt;
-&lt;p&gt;In the next post I will show how to install KeePassXC on Fedora and Debian, its
-use and how it makes easier the management of hundreds of accounts and the
-associated passwords, and how to generate secure passwords with the highest
-levels of entropy.&lt;/p&gt;
+</content><category term="floss"></category><category term="dnf"></category><category term="fc29"></category><category term="fedora"></category><category term="postinstall"></category></entry><entry><title>KeePassXC: The Password Manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"></link><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A free and secure password manager.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs I install after booting a fresh system.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll show you how to install KeePassXC on Fedora and Debian, how
+to use it, how it simplifies managing hundreds of accounts and associated
+passwords, and how to generate secure passwords with high entropy.&lt;/p&gt;
 &lt;div class="section" id="installation"&gt;
 &lt;h2&gt;Installation&lt;/h2&gt;
 &lt;div class="section" id="fedora"&gt;
@@ -755,148 +753,99 @@ levels of entropy.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="create-a-password-database"&gt;
-&lt;h2&gt;Create a password database&lt;/h2&gt;
-&lt;p&gt;The first thing we must do is create our first database in which we will keep
-all the passwords that we generate for each account.&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Execute KeePassXC:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Create a new database:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Assign a name to the &lt;cite&gt;*.kdbx&lt;/cite&gt; file, our database:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;It is time to assign a password, this will be the master password that We
-will use to decrypt the file &lt;cite&gt;Passwords.kdbx&lt;/cite&gt;, we click on &lt;cite&gt;OK&lt;/cite&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;To add a new account and its respective password, click on the icon of the
-&lt;cite&gt;Key&lt;/cite&gt; with a green arrow:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Add a title to identify what this password corresponds to, add the username
-to which the password We are going to create will belong:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png" /&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p class="first"&gt;Then click on the black dots icon, notice how a new menu with options is
-displayed:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p class="first"&gt;Click on the password tab, increase the amount of characters desired for
-our password, the more characters the higher the entropy level.&lt;/p&gt;
+&lt;div class="section" id="creating-a-password-database"&gt;
+&lt;h2&gt;Creating a Password Database&lt;/h2&gt;
+&lt;p&gt;The first step is to create your first database, where all generated passwords
+for your accounts will be stored.&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Launch KeePassXC:&lt;/p&gt;
+&lt;img alt="Screenshot showing GNOME Shell overview mode and KeePassXC launcher" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png" /&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;In the &lt;strong&gt;Characters Types&lt;/strong&gt; section, We can select the different groups of
-characters We want to be present in our password:&lt;/p&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create a new database:&lt;/p&gt;
+&lt;img alt="KeePassXC interface with the option to create a new database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Assign a name to the &lt;cite&gt;*.kdbx&lt;/cite&gt; file (the database):&lt;/p&gt;
+&lt;img alt="Nautilus file explorer showing the new database file being saved" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Set a master password to encrypt the database (&lt;cite&gt;Passwords.kdbx&lt;/cite&gt;) and click &lt;cite&gt;OK&lt;/cite&gt;:&lt;/p&gt;
+&lt;img alt="KeePassXC while assigning the master password for the database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Add a new account and password by clicking the &lt;cite&gt;Key&lt;/cite&gt; icon with a green arrow:&lt;/p&gt;
+&lt;img alt="Button to add a new account to the database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Fill in the details:
+- Add a title to identify the account.
+- Specify the username for the account.&lt;/p&gt;
+&lt;img alt="Adding a title, username, and password for a new account entry" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Generate a secure password:
+- Click the black dice icon to open the password generator.
+- Adjust the character length for stronger passwords.
+- Select the character groups to include:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Characters from &lt;cite&gt;A&lt;/cite&gt; to &lt;cite&gt;Z&lt;/cite&gt;, in capital letters: &lt;cite&gt;A-Z&lt;/cite&gt;&lt;/li&gt;
-&lt;li&gt;Characters from &lt;cite&gt;a&lt;/cite&gt; to &lt;cite&gt;z&lt;/cite&gt;, in lower case: &lt;cite&gt;a-z&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Uppercase letters: &lt;cite&gt;A-Z&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Lowercase letters: &lt;cite&gt;a-z&lt;/cite&gt;&lt;/li&gt;
 &lt;li&gt;Numbers: &lt;cite&gt;0-9&lt;/cite&gt;&lt;/li&gt;
 &lt;li&gt;Special characters: &lt;cite&gt;/*_ ...&lt;/cite&gt;&lt;/li&gt;
-&lt;li&gt;Characters from &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Extended_ASCII"&gt;Extended ASCII&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Extended ASCII characters (optional).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;I marked them all.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p class="first"&gt;With the mouse scroll go down and mark with a check:&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;Exclude look alike characters&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Enable:&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exclude look-alike characters&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Pick characters from every group&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Click &lt;cite&gt;Generate&lt;/cite&gt; to create the password, then click &lt;cite&gt;Copy&lt;/cite&gt; to copy it to the clipboard.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Random password generated based on selected criteria" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Paste the generated password into the &lt;strong&gt;Password&lt;/strong&gt; and &lt;strong&gt;Repeat&lt;/strong&gt; fields using &lt;cite&gt;Ctrl-v&lt;/cite&gt;:&lt;/p&gt;
+&lt;img alt="Pasting the password into the required fields" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Verify the password by clicking the &lt;cite&gt;Eye&lt;/cite&gt; icon, then click &lt;cite&gt;Apply&lt;/cite&gt; and &lt;cite&gt;OK&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Verifying passwords match in both fields" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png" /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;10. Save your changes by clicking the blue save icon. Confirm that the asterisk
+(*) at the top disappears, indicating the changes have been saved.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Database changes successfully saved" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png" /&gt;
 &lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;Finally click &lt;tt class="docutils literal"&gt;Generate&lt;/tt&gt; to generate the password with the combination
-of selected characters and then &lt;tt class="docutils literal"&gt;Copy&lt;/tt&gt; to copy the password to the
-clipboard.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Now pressing &lt;cite&gt;Ctrl-v&lt;/cite&gt; paste the password in the &lt;strong&gt;Password&lt;/strong&gt; field and
-&lt;cite&gt;Ctrl-V&lt;/cite&gt; in &lt;strong&gt;Repeat&lt;/strong&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;By clicking on the &lt;cite&gt;eye&lt;/cite&gt; icon we can reveal the password we have generated,
-copied and pasted in the &lt;strong&gt;Password&lt;/strong&gt; and &lt;strong&gt;Repeat&lt;/strong&gt; fields, click &lt;cite&gt;Apply&lt;/cite&gt;
-and then &lt;cite&gt;OK&lt;/cite&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Note the asterisk in the upper border of the window at the end of
-&lt;cite&gt;Passwords.kdbx&lt;/cite&gt;, this means that the changes have not been saved in the
-database:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-58.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Click on the icon of the blue file to save the changes in the database:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_16-21-04.png" /&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Note that the asterisk at the top edge of the screen at the end of
-&lt;cite&gt;Passwords.kdbx&lt;/cite&gt; has disappeared, this means that the changes have already
-been saved in the database:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="useful-keyboard-shortcuts"&gt;
-&lt;h2&gt;Useful keyboard shortcuts&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;b&lt;/strong&gt; Copy the user to the clipboard.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;c&lt;/strong&gt; Copy the user's password to the clipboard.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;e&lt;/strong&gt; Open the menu to make modifications to the different accounts
-that we have in our database.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;n&lt;/strong&gt; Allows you to add a new account to the database.&lt;/p&gt;
+&lt;h2&gt;Useful Keyboard Shortcuts&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-b&lt;/strong&gt;: Copy the username to the clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-c&lt;/strong&gt;: Copy the password to the clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-e&lt;/strong&gt;: Edit the selected account entry.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-n&lt;/strong&gt;: Add a new account to the database.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="self-writing-shortcut"&gt;
-&lt;h2&gt;Self-writing shortcut&lt;/h2&gt;
-&lt;p&gt;This keyboard shortcut is my favorite. It allows you to write the user and
-password of an entry in our database directly to the page where that user and
-password is used, so it is not necessary to use three shortcuts to achieve the
-same result.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;v&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In order for it to work as it should, both KeePassXC and the field where the
-user and password are introduced, must be a shot away from &lt;strong&gt;Alt&lt;/strong&gt; - &lt;strong&gt;Tab&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;By this I mean that if you press &lt;strong&gt;Alt&lt;/strong&gt; - &lt;strong&gt;Tab&lt;/strong&gt; you should move from the
-&lt;tt class="docutils literal"&gt;KeePassXC&lt;/tt&gt; window to the browser window, for example:&lt;/p&gt;
-&lt;p&gt;Note that the account has a URL linked:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png" /&gt;
-&lt;p&gt;Go to our &lt;tt class="docutils literal"&gt;KeePassXC&lt;/tt&gt;, we select the entry of our database that corresponds
-to the account in which we want to log in.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_15-55-41.png" /&gt;
-&lt;p&gt;Press:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;u&lt;/strong&gt; to open the tab in which you will log in, this will open the
-browser that we have configured as our default Web Browser, this page is
-configured to locate the keyboard entry in the user field.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png" /&gt;
-&lt;p&gt;Press:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Atl&lt;/strong&gt; - &lt;strong&gt;Tab&lt;/strong&gt; to select the &lt;tt class="docutils literal"&gt;KeePassXC&lt;/tt&gt; window back:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_15-55-41.png" /&gt;
-&lt;p&gt;And then, making sure We still have selected the same entry in the database,
-press:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ctrl&lt;/strong&gt; - &lt;strong&gt;v&lt;/strong&gt;&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png" /&gt;
-&lt;p&gt;The final result should make &lt;tt class="docutils literal"&gt;KeePassXC&lt;/tt&gt; return to the browser, insert the
-user, jump to the next field, insert the password, to finally and automatically
-&amp;quot;press&amp;quot; &lt;tt class="docutils literal"&gt;Log In&lt;/tt&gt; and log in.&lt;/p&gt;
-&lt;p&gt;I hope this post is useful for you.&lt;/p&gt;
+&lt;div class="section" id="auto-type-shortcut"&gt;
+&lt;h2&gt;Auto-Type Shortcut&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;Auto-Type&lt;/strong&gt; shortcut, &lt;cite&gt;Ctrl-v&lt;/cite&gt;, is my favorite. It allows KeePassXC to
+enter the username and password for an account directly into the login fields
+of a webpage or application.&lt;/p&gt;
+&lt;p&gt;For it to work, KeePassXC and the target field must be adjacent in the
+task-switching order (&lt;cite&gt;Alt-Tab&lt;/cite&gt;).&lt;/p&gt;
+&lt;p&gt;Example:
+1. Select an entry with a URL:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Database entry with a linked URL" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png" /&gt;
+&lt;/blockquote&gt;
+&lt;ol class="arabic" start="2"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Press &lt;strong&gt;Ctrl-u&lt;/strong&gt; to open the login page in your default web browser:&lt;/p&gt;
+&lt;img alt="Opening the linked URL in a web browser" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png" /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;3. Switch back to KeePassXC using &lt;cite&gt;Alt-Tab&lt;/cite&gt; and press &lt;cite&gt;Ctrl-v&lt;/cite&gt; to enter the
+username and password automatically:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Auto-Type entering the username and password" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;KeePassXC will then complete the login process for you.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="floss"></category><category term="debian"></category><category term="fc27"></category><category term="fedora"></category><category term="keepassxc"></category><category term="password"></category></entry><entry><title>Fedora 26 Custom Operating System Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"></link><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"></summary><content type="html">&lt;p&gt;In the last post, I explained how to make a minimal installation of Fedora 25.
 Months have passed since then, and Fedora 26 has been released. Following the

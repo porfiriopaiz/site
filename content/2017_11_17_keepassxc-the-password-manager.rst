@@ -1,20 +1,18 @@
-KeePassXC, the password manager
+KeePassXC: The Password Manager
 ###############################
 
 :date: 2017-11-17 19:10
 :tags: debian, fc27, fedora, keepassxc, password
 :category: floss
 :slug: keepassxc-password-manager
-:summary: A password manager Free and secure.
+:summary: A free and secure password manager.
 :lang: en
 
-KeePassXC is one of the first programs that I install after the first boot of
-any fresh install.
+KeePassXC is one of the first programs I install after booting a fresh system.
 
-In the next post I will show how to install KeePassXC on Fedora and Debian, its
-use and how it makes easier the management of hundreds of accounts and the
-associated passwords, and how to generate secure passwords with the highest
-levels of entropy.
+In this post, I’ll show you how to install KeePassXC on Fedora and Debian, how
+to use it, how it simplifies managing hundreds of accounts and associated
+passwords, and how to generate secure passwords with high entropy.
 
 Installation
 ============
@@ -33,176 +31,127 @@ Debian
 
    su -c 'apt-get install keepassx'
 
-Create a password database
-==========================
+Creating a Password Database
+============================
 
-The first thing we must do is create our first database in which we will keep
-all the passwords that we generate for each account.
+The first step is to create your first database, where all generated passwords
+for your accounts will be stored.
 
-* Execute KeePassXC:
+1. Launch KeePassXC:
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png
+      :align: center
+      :alt: Screenshot showing GNOME Shell overview mode and KeePassXC launcher
 
-* Create a new database:
+2. Create a new database:
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png
+      :align: center
+      :alt: KeePassXC interface with the option to create a new database
 
-* Assign a name to the `*.kdbx` file, our database:
+3. Assign a name to the `*.kdbx` file (the database):
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png
+      :align: center
+      :alt: Nautilus file explorer showing the new database file being saved
 
-* It is time to assign a password, this will be the master password that We
-  will use to decrypt the file `Passwords.kdbx`, we click on `OK`:
+4. Set a master password to encrypt the database (`Passwords.kdbx`) and click `OK`:
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png
+      :align: center
+      :alt: KeePassXC while assigning the master password for the database
 
-* To add a new account and its respective password, click on the icon of the
-  `Key` with a green arrow:
+5. Add a new account and password by clicking the `Key` icon with a green arrow:
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png
+      :align: center
+      :alt: Button to add a new account to the database
 
-* Add a title to identify what this password corresponds to, add the username
-  to which the password We are going to create will belong:
+6. Fill in the details:
+   - Add a title to identify the account.
+   - Specify the username for the account.
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png
-   :align: center
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png
+      :align: center
+      :alt: Adding a title, username, and password for a new account entry
 
-* Then click on the black dots icon, notice how a new menu with options is
-  displayed:
+7. Generate a secure password:
+   - Click the black dice icon to open the password generator.
+   - Adjust the character length for stronger passwords.
+   - Select the character groups to include:
 
-   - Click on the password tab, increase the amount of characters desired for
-     our password, the more characters the higher the entropy level.
+     - Uppercase letters: `A-Z`
+     - Lowercase letters: `a-z`
+     - Numbers: `0-9`
+     - Special characters: `/*_ ...`
+     - Extended ASCII characters (optional).
 
-   - In the **Characters Types** section, We can select the different groups of
-     characters We want to be present in our password:
+   - Enable:
 
-      + Characters from `A` to `Z`, in capital letters: `A-Z`
+     - **Exclude look-alike characters**
+     - **Pick characters from every group**
 
-      + Characters from `a` to `z`, in lower case: `a-z`
+   - Click `Generate` to create the password, then click `Copy` to copy it to the clipboard.
 
-      + Numbers: `0-9`
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png
+      :align: center
+      :alt: Random password generated based on selected criteria
 
-      + Special characters: `/*_ ...`
+8. Paste the generated password into the **Password** and **Repeat** fields using `Ctrl-v`:
 
-      + Characters from `Extended ASCII <https://en.wikipedia.org/wiki/Extended_ASCII>`_
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png
+      :align: center
+      :alt: Pasting the password into the required fields
 
-   - I marked them all.
+9. Verify the password by clicking the `Eye` icon, then click `Apply` and `OK`.
 
-      + With the mouse scroll go down and mark with a check:
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png
+      :align: center
+      :alt: Verifying passwords match in both fields
 
-         * **Exclude look alike characters**
+10. Save your changes by clicking the blue save icon. Confirm that the asterisk
+(*) at the top disappears, indicating the changes have been saved.
 
-         * **Pick characters from every group**
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png
+      :align: center
+      :alt: Database changes successfully saved
 
-   - Finally click ``Generate`` to generate the password with the combination
-     of selected characters and then ``Copy`` to copy the password to the
-     clipboard.
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png
-   :align: center
-
-* Now pressing `Ctrl-v` paste the password in the **Password** field and
-  `Ctrl-V` in **Repeat**:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png
-   :align: center
-
-* By clicking on the `eye` icon we can reveal the password we have generated,
-  copied and pasted in the **Password** and **Repeat** fields, click `Apply`
-  and then `OK`:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png
-   :align: center
-
-* Note the asterisk in the upper border of the window at the end of
-  `Passwords.kdbx`, this means that the changes have not been saved in the
-  database:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-58.png
-   :align: center
-
-* Click on the icon of the blue file to save the changes in the database:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_16-21-04.png
-   :align: center
-
-* Note that the asterisk at the top edge of the screen at the end of
-  `Passwords.kdbx` has disappeared, this means that the changes have already
-  been saved in the database:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png
-   :align: center
-
-Useful keyboard shortcuts
+Useful Keyboard Shortcuts
 =========================
 
-**Ctrl** - **b** Copy the user to the clipboard.
+- **Ctrl-b**: Copy the username to the clipboard.
+- **Ctrl-c**: Copy the password to the clipboard.
+- **Ctrl-e**: Edit the selected account entry.
+- **Ctrl-n**: Add a new account to the database.
 
-**Ctrl** - **c** Copy the user's password to the clipboard.
+Auto-Type Shortcut
+==================
 
-**Ctrl** - **e** Open the menu to make modifications to the different accounts
-that we have in our database.
+The **Auto-Type** shortcut, `Ctrl-v`, is my favorite. It allows KeePassXC to
+enter the username and password for an account directly into the login fields
+of a webpage or application.
 
-**Ctrl** - **n** Allows you to add a new account to the database.
+For it to work, KeePassXC and the target field must be adjacent in the
+task-switching order (`Alt-Tab`).
 
-Self-writing shortcut
-=====================
+Example:
+1. Select an entry with a URL:
 
-This keyboard shortcut is my favorite. It allows you to write the user and
-password of an entry in our database directly to the page where that user and
-password is used, so it is not necessary to use three shortcuts to achieve the
-same result.
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png
+      :align: center
+      :alt: Database entry with a linked URL
 
-**Ctrl** - **v**
+2. Press **Ctrl-u** to open the login page in your default web browser:
 
-In order for it to work as it should, both KeePassXC and the field where the
-user and password are introduced, must be a shot away from **Alt** - **Tab**.
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png
+      :align: center
+      :alt: Opening the linked URL in a web browser
 
-By this I mean that if you press **Alt** - **Tab** you should move from the
-``KeePassXC`` window to the browser window, for example:
+3. Switch back to KeePassXC using `Alt-Tab` and press `Ctrl-v` to enter the
+username and password automatically:
 
-Note that the account has a URL linked:
+   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png
+      :align: center
+      :alt: Auto-Type entering the username and password
 
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png
-   :align: center
-
-Go to our ``KeePassXC``, we select the entry of our database that corresponds
-to the account in which we want to log in.
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_15-55-41.png
-   :align: center
-
-Press:
-
-**Ctrl** - **u** to open the tab in which you will log in, this will open the
-browser that we have configured as our default Web Browser, this page is
-configured to locate the keyboard entry in the user field.
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png
-   :align: center
-
-Press:
-
-**Atl** - **Tab** to select the ``KeePassXC`` window back:
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_15-55-41.png
-   :align: center
-
-And then, making sure We still have selected the same entry in the database,
-press:
-
-**Ctrl** - **v**
-
-.. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png
-   :align: center
-
-The final result should make ``KeePassXC`` return to the browser, insert the
-user, jump to the next field, insert the password, to finally and automatically
-"press" ``Log In`` and log in.
-
-I hope this post is useful for you.
+KeePassXC will then complete the login process for you.
