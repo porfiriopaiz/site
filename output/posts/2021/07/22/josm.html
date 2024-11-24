@@ -61,63 +61,64 @@
     <h1><a href="../../../../posts/2021/07/22/josm.html">JOSM</a></h1>
   </div>
   <div class="article_text">
-    <p>JOSM is in my opinion the best editor for OpenStreetMap I have ever used and it
-is also the best Java software I have ever used too.</p>
-<p>In this post, I will cover how to get it installed on Debian and how to
-properly configure it for mapping on OSM and what plugins to install and use.</p>
+    <p>JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
+it is also the best Java software I have ever used.</p>
+<p>In this post, I will cover how to get it installed on Debian, how to properly
+configure it for mapping on OSM, and which plugins to install and use.</p>
 <div class="section" id="installing-josm-on-debian">
 <h2>Installing JOSM on Debian</h2>
-<p>JOSM is available on the Debian official repository, so for its installation,
-you just need to open a terminal and type the next command:</p>
+<p>JOSM is available in the Debian official repository, so to install it, you just
+need to open a terminal and run the following command:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install josm&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="solving-josm-outdated-version-on-debian">
-<h2>Solving JOSM outdated version on Debian</h2>
-<p>Installing JOSM from the official Debian repositories solves the dependency
-issue we would find if we ran the most up-to-date version from the official
-.jar build.</p>
-<p>To run the most up-to-date stable version we need to download it from the
-official JOSM website as a JAR file, but first, we need to run at least once
-the version is installed from the Debian repository.</p>
+<h2>Solving JOSM Outdated Version on Debian</h2>
+<p>Installing JOSM from the official Debian repositories resolves the dependency
+issue you would encounter when using the most up-to-date version from the
+official .jar build.</p>
+<p>To run the latest stable version, you need to download it from the official
+JOSM website as a JAR file. However, before doing that, you need to run the
+version installed from the Debian repository at least once.</p>
 <div class="highlight"><pre><span></span><span class="go">josm</span>
 </pre></div>
-<p>This is going to create the next directory structure associated with it:</p>
+<p>This will create the following directory structure:</p>
 <div class="highlight"><pre><span></span><span class="go">~/.config/JOSM</span>
 <span class="go">~/.cache/JOSM</span>
 <span class="go">~/.local/share/JOSM</span>
 </pre></div>
-<p>Under <tt class="docutils literal"><span class="pre">~/.cache/JOSM/</span></tt> will create a directory named <tt class="docutils literal">jar</tt>:</p>
+<p>Under <tt class="docutils literal"><span class="pre">~/.cache/JOSM/</span></tt>, a directory named <tt class="docutils literal">jar</tt> will be created:</p>
 <div class="highlight"><pre><span></span><span class="go">mkdir -p ~/.cache/JOSM/jar</span>
 </pre></div>
-<p>Now let us move to that directory:</p>
+<p>Now, navigate to that directory:</p>
 <div class="highlight"><pre><span></span><span class="go">cd ~/.cache/JOSM/jar</span>
 </pre></div>
-<p>Now let's download the most up to date version of the JOSM editor using wget:</p>
+<p>Next, download the latest version of the JOSM editor using wget:</p>
 <div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://josm.openstreetmap.de/josm-tested.jar</span>
 </pre></div>
-<p>Now, to run the new version up to date version, we download:</p>
+<p>To run the newly downloaded version, use the following command:</p>
 <div class="highlight"><pre><span></span><span class="go">java -jar ~/.cache/JOSM/jar/josm-tested.jar</span>
 </pre></div>
 </div>
 <div class="section" id="script-launcher">
-<h2>Script launcher</h2>
-<p>To launch the JAR file, we can add the last command to a file with executable
-permissions:</p>
+<h2>Script Launcher</h2>
+<p>To launch the JAR file easily, you can create a script. First, create an
+executable file:</p>
 <div class="highlight"><pre><span></span><span class="go">touch ~/.local/bin/tested-josm.sh</span>
 </pre></div>
-<p>Then add the following to it:</p>
+<p>Then, add the following content to the script:</p>
 <div class="highlight"><pre><span></span><span class="gp">#</span>!<span class="w"> </span>/bin/bash
 <span class="go">java -jar ~/.cache/JOSM/jar/josm-tested.jar</span>
 </pre></div>
 </div>
 <div class="section" id="adding-a-launcher">
-<h2>Adding a launcher</h2>
-<p>To make this easier, let's create a launcher for the manually downloaded JOSM
-JAR file and previously created script:</p>
+<h2>Adding a Launcher</h2>
+<p>To make this process even easier, let's create a launcher for the manually
+downloaded JOSM JAR file and the previously created script.</p>
+<p>Create a new desktop entry file:</p>
 <div class="highlight"><pre><span></span><span class="go">touch ~/.local/share/applications/org.openstreetmap.josm.desktop</span>
 </pre></div>
-<p>And add the following:</p>
+<p>Then, add the following content to the file:</p>
 <div class="highlight"><pre><span></span><span class="go">[Desktop Entry]</span>
 <span class="go">Type=Application</span>
 <span class="go">Version=1.0</span>
@@ -133,9 +134,8 @@ JAR file and previously created script:</p>
 <span class="go">StartupWMClass=org-openstreetmap-josm-MainApplication</span>
 <span class="go">Keywords=OpenStreetMap;OSM;</span>
 </pre></div>
-<p>The next time you restart your computer, you will find the new launcher, and by
-just clicking on it, you will start the most up-to-date version of JOSM on
-Debian.</p>
+<p>The next time you restart your computer, you will find the new launcher. By
+clicking on it, you will launch the most up-to-date version of JOSM on Debian.</p>
 </div>
 
   </div>
