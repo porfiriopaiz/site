@@ -555,21 +555,22 @@ characters as á or ñ by just pressing: AltGr + a or AltGr + n respectively.&lt
 &lt;p&gt;This way I can continue using the English US keyboard layout when writing in
 either English or Spanish without having to change the variant or physical
 layout.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 16:38:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>distribution</category><category>keyboard</category><category>layout</category></item><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks, Flatpaks are heavy, take up a lot of space and consume a
-lot of resources in RAM. But when it comes to installing proprietary software
-that is not available in the official Fedora repositories, Flatpaks are a good
-option as some type of isolation is added.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 16:38:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>distribution</category><category>keyboard</category><category>layout</category></item><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
+significant amount of RAM. However, when it comes to installing proprietary
+software that is not available in the official Fedora repositories, Flatpaks
+can be a good option since they provide a certain level of isolation.&lt;/p&gt;
 &lt;div class="section" id="flatpak-installation"&gt;
-&lt;h2&gt;Flatpak installation&lt;/h2&gt;
+&lt;h2&gt;Flatpak Installation&lt;/h2&gt;
+&lt;p&gt;To install Flatpak, run:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install flatpak&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="enable-flathub-repo"&gt;
-&lt;h2&gt;Enable Flathub repo&lt;/h2&gt;
-&lt;p&gt;Add the Flathub repo:&lt;/p&gt;
+&lt;div class="section" id="enable-flathub-repository"&gt;
+&lt;h2&gt;Enable Flathub Repository&lt;/h2&gt;
+&lt;p&gt;To enable the Flathub repository, use the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Some good examples are:&lt;/p&gt;
+&lt;p&gt;Some popular examples of software available via Flathub include:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/im.riot.Riot"&gt;Riot&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.skype.Client"&gt;Skype&lt;/a&gt;&lt;/li&gt;
@@ -578,8 +579,9 @@ option as some type of isolation is added.&lt;/p&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.spotify.Client"&gt;Spotify&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.wire.WireDesktop"&gt;Wire&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I don't like to install Flatpaks on my root directory, so I always add the
-&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&gt;&lt;/tt&gt; flag to make sure Flatpaks are installed under my &lt;tt class="docutils literal"&gt;~/&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;p&gt;I prefer not to install Flatpaks in the root directory. Instead, I always use
+the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&gt;&lt;/tt&gt; flag to ensure Flatpaks are installed under my &lt;tt class="docutils literal"&gt;~/&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;p&gt;Example command to install a Flatpak:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
