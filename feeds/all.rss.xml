@@ -440,10 +440,10 @@ Debian.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general theme &amp;#39;Arc-Dark&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>mate-desktop</category></item><item><title>UTC</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html</link><description>&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p I could not find the
-option to setup the local time, RTC time and the Time zone to UTC as the
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>mate-desktop</category></item><item><title>UTC</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html</link><description>&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p, I could not find the
+option to set up the local time, RTC time, and time zone to UTC as the
 default configuration.&lt;/p&gt;
-&lt;p&gt;To fix this I need to run the next commands:&lt;/p&gt;
+&lt;p&gt;To fix this, I need to run the following commands:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This lists the current configuration:&lt;/p&gt;
@@ -459,17 +459,17 @@ default configuration.&lt;/p&gt;
 &lt;span class="go"&gt;Warning: The system is configured to read the RTC time in the local time zone.&lt;/span&gt;
 &lt;span class="go"&gt;         This mode cannot be fully supported. It will create various problems&lt;/span&gt;
 &lt;span class="go"&gt;         with time zone changes and daylight saving time adjustments. The RTC&lt;/span&gt;
-&lt;span class="go"&gt;         time is never updated, it relies on external facilities to maintain it.&lt;/span&gt;
+&lt;span class="go"&gt;         time is never updated; it relies on external facilities to maintain it.&lt;/span&gt;
 &lt;span class="go"&gt;         If at all possible, use RTC in UTC by calling&lt;/span&gt;
 &lt;span class="go"&gt;         &amp;#39;timedatectl set-local-rtc 0&amp;#39;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;First of all let's update the RTC in UTC:&lt;/p&gt;
+&lt;p&gt;First, let's update the RTC to use UTC:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-local-rtc 0&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Then let's set the time zone and the local time zone to UTC:&lt;/p&gt;
+&lt;p&gt;Next, let's set the time zone and the local time zone to UTC:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-timezone UTC&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now our system will be set entirely to be in sync with UTC:&lt;/p&gt;
+&lt;p&gt;Now, our system will be fully synchronized with UTC:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
 &lt;span class="go"&gt;               Local time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
 &lt;span class="go"&gt;           Universal time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;

@@ -61,10 +61,10 @@
     <h1><a href="../../../../posts/2021/07/15/utc.html">UTC</a></h1>
   </div>
   <div class="article_text">
-    <p>When I was installing Debian on my Lenovo ThinkPad T440p I could not find the
-option to setup the local time, RTC time and the Time zone to UTC as the
+    <p>When I was installing Debian on my Lenovo ThinkPad T440p, I could not find the
+option to set up the local time, RTC time, and time zone to UTC as the
 default configuration.</p>
-<p>To fix this I need to run the next commands:</p>
+<p>To fix this, I need to run the following commands:</p>
 <div class="highlight"><pre><span></span><span class="go">timedatectl</span>
 </pre></div>
 <p>This lists the current configuration:</p>
@@ -80,17 +80,17 @@ default configuration.</p>
 <span class="go">Warning: The system is configured to read the RTC time in the local time zone.</span>
 <span class="go">         This mode cannot be fully supported. It will create various problems</span>
 <span class="go">         with time zone changes and daylight saving time adjustments. The RTC</span>
-<span class="go">         time is never updated, it relies on external facilities to maintain it.</span>
+<span class="go">         time is never updated; it relies on external facilities to maintain it.</span>
 <span class="go">         If at all possible, use RTC in UTC by calling</span>
 <span class="go">         &#39;timedatectl set-local-rtc 0&#39;.</span>
 </pre></div>
-<p>First of all let's update the RTC in UTC:</p>
+<p>First, let's update the RTC to use UTC:</p>
 <div class="highlight"><pre><span></span><span class="go">timedatectl set-local-rtc 0</span>
 </pre></div>
-<p>Then let's set the time zone and the local time zone to UTC:</p>
+<p>Next, let's set the time zone and the local time zone to UTC:</p>
 <div class="highlight"><pre><span></span><span class="go">timedatectl set-timezone UTC</span>
 </pre></div>
-<p>Now our system will be set entirely to be in sync with UTC:</p>
+<p>Now, our system will be fully synchronized with UTC:</p>
 <div class="highlight"><pre><span></span><span class="gp">pionen@lilit:~$ </span>timedatectl
 <span class="go">               Local time: Thu 2021-07-15 21:31:52 UTC</span>
 <span class="go">           Universal time: Thu 2021-07-15 21:31:52 UTC</span>
