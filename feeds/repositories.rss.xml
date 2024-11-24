@@ -1,99 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>porfirio's blog - repositories</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 11 Jul 2019 23:32:00 -0600</lastBuildDate><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
-&lt;p&gt;Once we solved the problem of getting connected to the Internet and how to
-launch a terminal, you might want to install all the software you use.&lt;/p&gt;
-&lt;p&gt;The software comes from somewhere, on Fedora these are called &lt;em&gt;Software
-Repositories&lt;/em&gt;, next I detail which are the ones I enable on all my Fedora
-installs apart of the officials that comes preinstalled and enabled by default.&lt;/p&gt;
-&lt;p&gt;Open a terminal and enable some of these.&lt;/p&gt;
-&lt;div class="section" id="rpmfusion"&gt;
-&lt;h3&gt;RPMFusion&lt;/h3&gt;
-&lt;p&gt;RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL maintained
-by a group of volunteers. RPM Fusion is not a standalone repository, but an
-extension of Fedora. RPM Fusion distributes packages that have been deemed
-unacceptable to Fedora.&lt;/p&gt;
-&lt;p&gt;More about RPMFusion on its official website: &lt;a class="reference external" href="https://rpmfusion.org/FAQ"&gt;https://rpmfusion.org/FAQ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Once you have resolved the problem of connecting to the Internet and launching
+a terminal, you might want to install all the software you need.&lt;/p&gt;
+&lt;p&gt;Software in Fedora comes from repositories, referred to as &lt;em&gt;Software
+Repositories&lt;/em&gt;. Below, I detail the repositories I enable on all my Fedora
+installations, apart from the official ones that come preinstalled and enabled
+by default.&lt;/p&gt;
+&lt;p&gt;Open a terminal and enable some of these repositories.&lt;/p&gt;
+&lt;div class="section" id="rpm-fusion"&gt;
+&lt;h3&gt;RPM Fusion&lt;/h3&gt;
+&lt;p&gt;RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL,
+maintained by a group of volunteers. It is not a standalone repository but an
+extension of Fedora. RPM Fusion distributes packages that are not acceptable
+for inclusion in Fedora.&lt;/p&gt;
+&lt;p&gt;Learn more about RPM Fusion on its official website: &lt;a class="reference external" href="https://rpmfusion.org/FAQ"&gt;https://rpmfusion.org/FAQ&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="fedora-workstation-repositories"&gt;
 &lt;h3&gt;Fedora Workstation Repositories&lt;/h3&gt;
-&lt;p&gt;From the Fedora wiki page corresponding to Fedora Workstation Repositories:&lt;/p&gt;
-&lt;p&gt;The Fedora community strongly promotes free and open source resources. The
-Fedora Workstation, in its out of the box configuration, therefore, only
-includes free and open source software. To make the Fedora Workstation more
-usable, we've made it possible to easily install a curated set of third party
-(external) sources that supply software not included in Fedora via an
-additional package.&lt;/p&gt;
-&lt;p&gt;Read more at: &lt;a class="reference external" href="https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories"&gt;https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Please note that this will only install the *.repo files, it will not enable
-the provided repos:&lt;/p&gt;
+&lt;p&gt;From the Fedora Wiki page for Fedora Workstation Repositories:&lt;/p&gt;
+&lt;p&gt;The Fedora community strongly promotes free and open source resources.
+Therefore, the Fedora Workstation, in its default configuration, only includes
+free and open source software. To make Fedora Workstation more usable, we’ve
+made it easy to install a curated set of third-party (external) sources that
+supply software not included in Fedora through an additional package.&lt;/p&gt;
+&lt;p&gt;Read more at:
+&lt;a class="reference external" href="https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories"&gt;https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note: This will only install the &lt;cite&gt;.repo&lt;/cite&gt; files; it will not enable the provided
+repositories:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-workstation-repositories&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="fedora-rawhide-s-repositories"&gt;
 &lt;h3&gt;Fedora Rawhide's Repositories&lt;/h3&gt;
-&lt;p&gt;Rawhide is the name given to the current development version of Fedora. It
-consists of a package repository called &amp;quot;rawhide&amp;quot; and contains the latest build
-of all Fedora packages updated on a daily basis. Each day, an attempt is made
-to create a full set of 'deliverables' (installation images and so on), and all
-that compose successfully are included in the Rawhide tree for that day.&lt;/p&gt;
-&lt;p&gt;It is possible to install its repository files and just temporarily enable it
-for just a single transaction, let us say, to simple install or upgrade a
-single package and its dependencies, maybe, to give a try to its new version
-that is not currently available on any of the stable and maintained versions of
-Fedora.&lt;/p&gt;
-&lt;p&gt;This is useful when a bug was fixed on Rawhide but it has not landed yet on the
-stable branch of Fedora and the urge for it cannot wait.&lt;/p&gt;
-&lt;p&gt;Again, this will just install the *.repo file under &lt;tt class="docutils literal"&gt;/etc/yum.repos.d/&lt;/tt&gt;,
-this will not enable it. Later we will see how to handle, disable and enable
-this repositories for just one transaction.&lt;/p&gt;
-&lt;p&gt;More on Rawhide on its wiki page: &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;https://fedoraproject.org/wiki/Releases/Rawhide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rawhide is the name of the current development version of Fedora. It consists
+of a package repository called &amp;quot;rawhide,&amp;quot; containing the latest builds of all
+Fedora packages, updated daily. Each day, an attempt is made to create a full
+set of &amp;quot;deliverables&amp;quot; (installation images and so on), and all successfully
+composed packages are included in the Rawhide tree for that day.&lt;/p&gt;
+&lt;p&gt;You can install its repository files and temporarily enable it for a single
+transaction—for example, to install or upgrade a single package and its
+dependencies. This is particularly useful when a bug fix exists in Rawhide but
+has not yet reached the stable branches of Fedora.&lt;/p&gt;
+&lt;p&gt;Note: This will only install the &lt;cite&gt;.repo&lt;/cite&gt; file under &lt;tt class="docutils literal"&gt;/etc/yum.repos.d/&lt;/tt&gt;; it
+will not enable the repository. Later, we will see how to handle enabling and
+disabling repositories for single transactions.&lt;/p&gt;
+&lt;p&gt;Learn more about Rawhide on its Wiki page:
+&lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;https://fedoraproject.org/wiki/Releases/Rawhide&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-repos-rawhide&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="copr"&gt;
 &lt;h3&gt;COPR&lt;/h3&gt;
-&lt;p&gt;Copr is an easy-to-use automatic build system providing a package repository as
-its output.&lt;/p&gt;
-&lt;p&gt;Here are some of the repos I rely on for some packages:&lt;/p&gt;
+&lt;p&gt;COPR is an easy-to-use automatic build system that provides a package
+repository as its output.&lt;/p&gt;
+&lt;p&gt;Here are some of the repositories I rely on:&lt;/p&gt;
 &lt;div class="section" id="neteler-remarkable"&gt;
 &lt;h4&gt;neteler/remarkable&lt;/h4&gt;
-&lt;p&gt;Remarkable is a free fully featured markdown editor.&lt;/p&gt;
+&lt;p&gt;Remarkable is a free, fully featured markdown editor.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable neteler/remarkable&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="philfry-gajim"&gt;
 &lt;h4&gt;philfry/gajim&lt;/h4&gt;
-&lt;p&gt;Gajim is a Jabber client written in PyGTK, currently it provides support for
-the OMEMO encryption method which I use. This repo provides tools and
-dependencies not available in the official Fedora repo.&lt;/p&gt;
+&lt;p&gt;Gajim is a Jabber client written in PyGTK. It currently provides support for
+the OMEMO encryption method, which I use. This repository provides tools and
+dependencies not available in the official Fedora repository.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable philfry/gajim&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dani-qgis"&gt;
 &lt;h4&gt;dani/qgis&lt;/h4&gt;
-&lt;p&gt;QGIS is a user friendly Open Source Geographic Information System.&lt;/p&gt;
+&lt;p&gt;QGIS is a user-friendly open source Geographic Information System.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable dani/qgis&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="donet-sig-dotnet"&gt;
 &lt;h4&gt;donet-sig/dotnet&lt;/h4&gt;
-&lt;p&gt;This provides the .NET CLI tools and runtime for Fedora.&lt;/p&gt;
+&lt;p&gt;This repository provides the .NET CLI tools and runtime for Fedora.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf copr enable @dotnet-sig/dotnet&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="vscodium"&gt;
 &lt;h3&gt;VSCodium&lt;/h3&gt;
-&lt;p&gt;Few weeks ago I decided to give a try to VSCodium, a fork of VSCode, here is
-how to enable its repo for Fedora.&lt;/p&gt;
-&lt;p&gt;First import its gpg key, so you can check the packages retrieved from the
-repo:&lt;/p&gt;
+&lt;p&gt;A few weeks ago, I decided to try VSCodium, a fork of VSCode. Here is how to
+enable its repository for Fedora.&lt;/p&gt;
+&lt;p&gt;First, import its GPG key so you can verify the packages retrieved from the
+repository:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now create the vscodium.repo file:&lt;/p&gt;
+&lt;p&gt;Now create the &lt;cite&gt;vscodium.repo&lt;/cite&gt; file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;tee -a /etc/yum.repos.d/vscodium.repo &amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;&lt;/span&gt;
 &lt;span class="go"&gt;[gitlab.com_paulcarroty_vscodium_repo]&lt;/span&gt;
 &lt;span class="go"&gt;name=gitlab.com_paulcarroty_vscodium_repo&lt;/span&gt;
@@ -109,13 +108,13 @@ repo:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="verification"&gt;
 &lt;h2&gt;Verification&lt;/h2&gt;
-&lt;p&gt;Now check that all the repos has been successfully installed and some of them
-enabled by refreshing the &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; metadata.&lt;/p&gt;
+&lt;p&gt;Now check that all the repositories have been successfully installed and some
+of them enabled by refreshing the &lt;cite&gt;dnf&lt;/cite&gt; metadata:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-update&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Thats all, in the next post will see how to enable some of this repos, how
-temporarilly disable  and enable some other for just a single transaction, how
-to install or upgrade certain packages from an specific repo and many repo
-administration tasks.&lt;/p&gt;
+&lt;p&gt;That’s all. In the next post, we will see how to enable some of these
+repositories, temporarily disable and enable others for single transactions,
+install or upgrade specific packages from a particular repository, and perform
+many repository administration tasks.&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item></channel></rss>
