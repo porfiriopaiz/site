@@ -1874,95 +1874,92 @@ download and installation of the packages to complete.&lt;/p&gt;
 &lt;p&gt;In my case, I had to perform a series of post-installation steps, which I'll
 elaborate on in the next post.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="anaconda"></category><category term="fc25"></category><category term="fedora"></category><category term="luks"></category><category term="lvm"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html"></summary><content type="html">&lt;p&gt;From May 26th, 2015, to November 22nd, 2016, I was rocking Fedora 22 on my
-Lenovo ThinkPad T440p – a solid year and a half of tech bliss. However, on July
-19th, 2016, Fedora 22 gracefully entered its &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;End of Life (EOL)&lt;/a&gt; phase. This translates to no
-more security or maintenance updates coming our way, signaling the friendly
-nudge to upgrade to a newer, stable version.&lt;/p&gt;
-&lt;p&gt;So, in this post, I'm spilling the beans on how to smoothly transition to
-Fedora 23 using the ever-reliable dnf package manager. Let's keep that Fedora
-love alive and kicking! 🚀&lt;/p&gt;
+</content><category term="floss"></category><category term="anaconda"></category><category term="fc25"></category><category term="fedora"></category><category term="luks"></category><category term="lvm"></category></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"></link><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html">&lt;p class="first last"&gt;A guide to upgrading from Fedora 22 to Fedora 23 using the DNF package manager.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;From May 26, 2015, to November 22, 2016, I enjoyed a smooth experience running
+Fedora 22 on my Lenovo ThinkPad T440p—a solid year and a half of tech bliss.
+However, on July 19, 2016, Fedora 22 officially entered its &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;End of Life (EOL)&lt;/a&gt; phase. This meant no more
+security or maintenance updates, prompting the need to upgrade to a newer,
+stable version.&lt;/p&gt;
+&lt;p&gt;In this post, I'll walk you through the process of upgrading to Fedora 23 using
+the reliable DNF package manager. Let’s keep your Fedora system running fresh
+and secure! 🚀&lt;/p&gt;
 &lt;!-- TEASER_END --&gt;
-&lt;p&gt;Following a year and a half of utilizing Fedora 22, the package cache had
-accumulated roughly 10GB of space on my hard drive.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
-&lt;p&gt;To instruct dnf to retain the downloaded packages in the cache, you need to
-append the following line to the dnf configuration file located at
-&lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Over the course of 18 months using Fedora 22, the package cache had accumulated
+approximately 10 GB of space on my hard drive.&lt;/p&gt;
+&lt;img alt="A year and a half of packages stored in the DNF cache" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
+&lt;p&gt;To instruct DNF to retain downloaded packages in the cache, add the following
+line to the DNF configuration file located at &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="upgrading-fedora-23"&gt;
-&lt;h2&gt;Upgrading Fedora 23&lt;/h2&gt;
+&lt;div class="section" id="upgrading-to-fedora-23"&gt;
+&lt;h2&gt;Upgrading to Fedora 23&lt;/h2&gt;
 &lt;div class="section" id="prerequisites-for-upgrading"&gt;
-&lt;h3&gt;Prerequisites for upgrading&lt;/h3&gt;
-&lt;p&gt;Firstly, it's crucial to ensure ample space on our &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition. This is
-particularly important because the update process entails downloading the
-latest version of every single package installed in our system. While there's a
-chance that our cache might be brimming, it's advisable to clear out stored
-packages to free up space, just in case it's needed:&lt;/p&gt;
+&lt;h3&gt;Prerequisites for Upgrading&lt;/h3&gt;
+&lt;p&gt;1. Ensure there is sufficient space on your &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition. This is necessary
+because the upgrade process involves downloading the latest version of every
+package installed on your system. To free up space, if needed, you can clear
+the stored package cache:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Before we proceed, it's essential to verify that our system is up-to-date with
-the latest available updates from the enabled repositories. To accomplish this,
-we need to rebuild the packages' metadata cache and subsequently apply the
-recent upgrades:&lt;/p&gt;
+&lt;p&gt;2. Ensure your system is up-to-date by rebuilding the metadata cache and
+applying any pending updates:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
+&lt;img alt="Rebuilding the package cache" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="install-the-dnf-plugin-system-upgrade-plugin"&gt;
-&lt;h3&gt;Install the dnf-plugin-system-upgrade plugin&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;DNF System Upgrade&lt;/strong&gt; facilitates the transition to a newer version of Fedora,
-employing a mechanism akin to offline package updates. Packages are downloaded
-while the system operates normally, followed by a restart into a dedicated
-environment (implemented as a systemd target) for installation. Once the
-package installation concludes, the system reboots, ushering in the new Fedora
-version.&lt;/p&gt;
-&lt;p&gt;To kickstart the process, the initial step involves installing the
-&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-plugin-system-upgrade&lt;/span&gt;&lt;/tt&gt; plugin:&lt;/p&gt;
+&lt;div class="section" id="install-the-dnf-system-upgrade-plugin"&gt;
+&lt;h3&gt;Install the DNF System Upgrade Plugin&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;DNF System Upgrade&lt;/strong&gt; enables the upgrade to a newer Fedora version using a
+mechanism similar to offline updates. Packages are downloaded during regular
+system operation, and a reboot triggers their installation in a dedicated
+environment.&lt;/p&gt;
+&lt;p&gt;Install the required plugin with the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install dnf-plugin-system-upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now, let's move on to acquiring the necessary packages for the upgrade to
-Fedora 23.&lt;/p&gt;
-&lt;p&gt;This operation entails fetching each and every package currently installed in
-our system, ensuring we obtain the latest version compatible with the specified
-release – in this instance, the release is designated as &lt;tt class="docutils literal"&gt;23&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="download-the-packages"&gt;
+&lt;h3&gt;Download the Packages&lt;/h3&gt;
+&lt;p&gt;Next, download the necessary packages for the upgrade to Fedora 23. This step
+ensures that every package currently installed on your system is replaced with
+its latest version for Fedora 23:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=23&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the following screenshot, you'll find details on the number of packages
-slated for download and the corresponding data volume associated with fetching
-them:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
-&lt;p&gt;Similarly, upgrading to Fedora 24 is feasible, although I would advise against
-leaping directly from Fedora 22 to Fedora 24 (a &lt;tt class="docutils literal"&gt;(n + 2)&lt;/tt&gt; version jump). As
-of now, the latest stable versions are Fedora 24 and Fedora 25; Fedora 26 is
-currently in the &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched"&gt;Branched&lt;/a&gt;
-state, and &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;Rawhide&lt;/a&gt;
-represents the continuously developing version.&lt;/p&gt;
-&lt;p&gt;To transition to any of the mentioned versions, you simply need to modify the
-&lt;tt class="docutils literal"&gt;number&lt;/tt&gt; parameter in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever=number&lt;/span&gt;&lt;/tt&gt; option. Use 24 for Fedora
-24, 25 for Fedora 25, 26 for Fedora Branched, and &amp;quot;rawhide&amp;quot; to upgrade to
-Rawhide. It's worth noting that both Branched and Rawhide are not stable
-versions of Fedora, so their use is recommended primarily for more seasoned
-users.&lt;/p&gt;
-&lt;p&gt;Upgrading to Fedora 24:&lt;/p&gt;
+&lt;p&gt;The screenshot below shows the details of the packages to be downloaded and
+their total size:&lt;/p&gt;
+&lt;img alt="DNF downloading packages for the upgrade" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
+&lt;p&gt;You can also upgrade to newer versions such as Fedora 24, 25, or even Rawhide.
+However, I recommend avoiding skipping more than one release (a &lt;tt class="docutils literal"&gt;n + 2&lt;/tt&gt;
+jump). At the time of writing, the latest stable versions are Fedora 24 and 25,
+with Fedora 26 in the &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched"&gt;Branched&lt;/a&gt; state and &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;Rawhide&lt;/a&gt; as the rolling development
+version.&lt;/p&gt;
+&lt;p&gt;To upgrade to another version, adjust the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever&lt;/span&gt;&lt;/tt&gt; parameter:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Fedora 24:&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Upgrading to Fedora 25:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Fedora 25:&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=25&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Upgrading to Fedora Rawhide:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Rawhide:&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lastly, after the packages are successfully downloaded, it's imperative to
-restart the system by executing the following command:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot-to-apply-the-upgrade"&gt;
+&lt;h3&gt;Reboot to Apply the Upgrade&lt;/h3&gt;
+&lt;p&gt;After downloading the packages, reboot your system to initiate the upgrade
+process:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade reboot&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Executing this command initiates a system restart. Upon reboot, the system will
-utilize the same (newer) kernel, triggering the upgrade process from Fedora 22
-to Fedora 23.&lt;/p&gt;
+&lt;p&gt;This command will restart the system. Upon reboot, the upgrade process will
+begin, using the newly downloaded packages. Once complete, your system will be
+running Fedora 23.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </content><category term="floss"></category><category term="dnf"></category><category term="eol"></category><category term="fc22"></category><category term="fc23"></category><category term="fedora"></category><category term="system-upgrade"></category></entry><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html" rel="alternate"></link><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:/site/posts/2016/11/03/irc-with-irssi.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Since my introduction to the realm of Free Software and GNU/Linux, one aspect
