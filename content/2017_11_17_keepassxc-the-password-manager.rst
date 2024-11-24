@@ -68,7 +68,9 @@ for your accounts will be stored.
       :alt: Button to add a new account to the database
 
 6. Fill in the details:
+
    - Add a title to identify the account.
+
    - Specify the username for the account.
 
    .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png
@@ -76,8 +78,11 @@ for your accounts will be stored.
       :alt: Adding a title, username, and password for a new account entry
 
 7. Generate a secure password:
+
    - Click the black dice icon to open the password generator.
+
    - Adjust the character length for stronger passwords.
+
    - Select the character groups to include:
 
      - Uppercase letters: `A-Z`
