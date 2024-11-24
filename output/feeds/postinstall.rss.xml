@@ -287,121 +287,109 @@ temporarilly disable  and enable some other for just a single transaction, how
 to install or upgrade certain packages from an specific repo and many repo
 administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item><item><title>i3 post install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with i3 window manager, we need to install many
-other programs that will ease our user experience.&lt;/p&gt;
-&lt;p&gt;The first problem we have to solve is how are we going to connect to Internet,
-you might have noticed that we don't have any program or applet that allows us
-to activate the Wi-Fi card or even the NetworkManager service to use the wired
-wetwork card or manage the different networks that are within our reach.&lt;/p&gt;
-&lt;p&gt;Assuming that you are already logged in and that your hardware is supported by
-Fedora, the wireless network card should be activated, but how do we connect to
-any of the networks we have available?&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item><item><title>i3 Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with the i3 Window Manager, additional programs are
+necessary to enhance the user experience.&lt;/p&gt;
+&lt;p&gt;The first issue to address is how to connect to the Internet. You may have
+noticed that there is no program or applet to activate the Wi-Fi card or manage
+the NetworkManager service for a wired network card or available networks.&lt;/p&gt;
+&lt;p&gt;Assuming you are logged in and your hardware is supported by Fedora, the
+wireless network card should already be activated. But how do you connect to
+the networks within range?&lt;/p&gt;
 &lt;div class="section" id="nmcli"&gt;
 &lt;h2&gt;nmcli&lt;/h2&gt;
-&lt;p&gt;In the previous post we installed a set of packages provided by the group
-&amp;quot;Hardware Support&amp;quot;, this group provides support for a wide variety of
-networking hardware.  We also install the group of packages corresponding to
-NetworkManager.&lt;/p&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; is a command-line program that will allow us to activate by software
-the network hardware of our device, scan the networks that are around us and
-connect to them.&lt;/p&gt;
-&lt;p&gt;We will need a terminal, by pressing &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt; we get a Terminal.&lt;/p&gt;
-&lt;p&gt;If our device has a switch that allows to activate or deactivate the
-network card, we make sure it is activated.&lt;/p&gt;
-&lt;p&gt;Then on the terminal we execute the following command to verify that it is
-already activated by software:&lt;/p&gt;
+&lt;p&gt;In a previous post, we installed a set of packages from the &amp;quot;Hardware Support&amp;quot;
+group. This group provides support for various networking hardware. We also
+installed the package group for NetworkManager.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; is a command-line utility that allows us to activate network
+hardware, scan for available networks, and connect to them.&lt;/p&gt;
+&lt;p&gt;To get started, open a terminal by pressing &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;.&lt;/p&gt;
+&lt;p&gt;Ensure your device’s physical network card switch (if present) is enabled.
+Then, in the terminal, verify that networking is activated via software with
+the following command:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli networking on&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This should activate the wired network connection of our device in case we were
-accessing one and we wanted to use it.&lt;/p&gt;
-&lt;p&gt;To activate the wireless network hardware from the terminal, we execute the
-following command:&lt;/p&gt;
+&lt;p&gt;This will activate the wired network connection if available and ready for use.&lt;/p&gt;
+&lt;p&gt;To activate the wireless network hardware, execute:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli radio wifi on&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This should activate our network card, then we verify which are the networks
-that we have available at our reach:&lt;/p&gt;
+&lt;p&gt;This activates the wireless card. Next, scan for available networks:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi list&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Example output:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;IN-USE  SSID           MODE   CHAN  RATE        SIGNAL  BARS  SECURITY&lt;/span&gt;
-&lt;span class="go"&gt;        RED_WIFI_2     Infra  5     130 Mbit/s  100     ▂▄▆█  WPA2&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_1     Infra  5     130 Mbit/s  100     ▂▄▆█  WPA2&lt;/span&gt;
 &lt;span class="go"&gt;        RED_WIFI_2     Infra  1     130 Mbit/s  29      ▂___  WPA2&lt;/span&gt;
 &lt;span class="go"&gt;        RED_WIFI_3     Infra  1     54 Mbit/s   17      ▂___  WPA1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In case you need to scan again to verify other connections:&lt;/p&gt;
+&lt;p&gt;To refresh the network list, use:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi rescan&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Assuming that &lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; does not require an access password, to get
-connected we just execute the following command:&lt;/p&gt;
+&lt;p&gt;If the network &lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; does not require a password, connect using:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In case that we might need to provide a password:&lt;/p&gt;
+&lt;p&gt;For networks requiring a password, use:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1 password &amp;quot;1234567890&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Where:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;connect&lt;/tt&gt; is the task we want to accomplish.&lt;/p&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; this argument tells the network we want to get connected.&lt;/p&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;password&lt;/tt&gt; a parameter that tells we are going to provide a password to
-get authenticated.&lt;/p&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;1234567890&lt;/tt&gt; this is the argument passed for the previous parameter, the
-password of the nextwork. Here you must provided the password that works for
-you.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;By now, you should be connected to the network. Now proceed to install any
-other program that will help you to ease you user experience with i3.&lt;/p&gt;
+&lt;p&gt;Explanation of parameters:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;connect&lt;/tt&gt; specifies the task to perform.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; identifies the target network.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;password&lt;/tt&gt; indicates that a password will be provided.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;1234567890&lt;/tt&gt; is the password (replace with your network’s password).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should now be connected to the network. Next, install programs to improve
+your experience with i3.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="networks"&gt;
 &lt;h2&gt;Networks&lt;/h2&gt;
-&lt;div class="section" id="mn-applet"&gt;
-&lt;h3&gt;mn-applet&lt;/h3&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is a very simple applet for NetworkManager that allows us to do
-in a very easy and intuitive way what we did with &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt;, but in a graphical
-way.&lt;/p&gt;
+&lt;div class="section" id="nm-applet"&gt;
+&lt;h3&gt;nm-applet&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is a simple graphical applet for NetworkManager. It provides an
+intuitive interface for managing network connections.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-applet&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; press &amp;lt;Start&amp;gt; + &amp;lt;d&amp;gt; and type &lt;cite&gt;nm-applet&lt;/cite&gt; and press
-&amp;lt;Enter&amp;gt;. In the lower right corner of our screen should appear an icon
-corresponding to this &lt;cite&gt;applet&lt;/cite&gt; from where we can manage our connection to the
-different networks that we have available to around us.&lt;/p&gt;
+&lt;p&gt;To launch &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt;, press &amp;lt;Start&amp;gt; + &amp;lt;d&amp;gt;, type &lt;cite&gt;nm-applet&lt;/cite&gt;, and press
+&amp;lt;Enter&amp;gt;. An icon should appear in the lower-right corner of your screen for
+managing network connections.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="networkmanager-tui"&gt;
 &lt;h3&gt;NetworkManager-tui&lt;/h3&gt;
-&lt;p&gt;This is an alternative for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; that make use of &lt;tt class="docutils literal"&gt;ncurses&lt;/tt&gt; to create
-a very friendly &lt;cite&gt;Text User Interface&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;NetworkManager-tui&lt;/span&gt;&lt;/tt&gt; is an alternative to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; that uses &lt;tt class="docutils literal"&gt;ncurses&lt;/tt&gt;
+to create a user-friendly Text User Interface.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install NetworkManager-tui&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="nm-connecion-editor"&gt;
-&lt;h3&gt;nm-connecion-editor&lt;/h3&gt;
-&lt;p&gt;&lt;cite&gt;NetworkManager Connection Editor&lt;/cite&gt; allows us to edit in a friendly way and
-intuitively the different networks to which we have accessed, or Well, create
-Hotspots in case our network card supports it.&lt;/p&gt;
+&lt;div class="section" id="nm-connection-editor"&gt;
+&lt;h3&gt;nm-connection-editor&lt;/h3&gt;
+&lt;p&gt;The &lt;cite&gt;NetworkManager Connection Editor&lt;/cite&gt; provides an intuitive interface for
+editing saved networks or creating hotspots (if supported by your network
+card).&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-connection-editor&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="terminal-emulator"&gt;
 &lt;h2&gt;Terminal Emulator&lt;/h2&gt;
-&lt;p&gt;You may have noticed that the emulator that is installed by default with i3 is
-&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt; and that is not very friendly to say, it is not very
-intuitive to first sight and it has a certain learning curve that we do not
-want to go through, possibly...&lt;/p&gt;
-&lt;p&gt;Ironically, my favorite terminal emulator is GNOME Terminal, you can install
-the one you prefer.&lt;/p&gt;
+&lt;p&gt;The default terminal emulator installed with i3 is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt;
+(&lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;). While powerful, it can be unintuitive and has a steep learning
+curve.&lt;/p&gt;
+&lt;p&gt;If you prefer a more user-friendly terminal emulator, such as GNOME Terminal,
+you can install it with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; has the key combination &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt; assigned to the emulator
-&lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;, to launch GNOME Terminal instead, you need to edit the configuration
-file for  &lt;tt class="docutils literal"&gt;i3&lt;/tt&gt; (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/i3/config&lt;/span&gt;&lt;/tt&gt;), look for the line:&lt;/p&gt;
+&lt;p&gt;To set GNOME Terminal as the default terminal for &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;, edit the
+i3 configuration file (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/i3/config&lt;/span&gt;&lt;/tt&gt;). Look for the line:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And replace with the command that calls our terminal emulator, in my case,
-&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gnome-terminal&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Replace it with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec gnome-terminal&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the following post I will share what other programs I use in my setup Fedora
-29 with i3wm. At the moment you already have the necessary to install other
-interesting programs such as Web browser and others.&lt;/p&gt;
+&lt;p&gt;In the next post, I will share other programs I use in my Fedora 29 i3wm setup.
+For now, you should have the tools necessary to install additional programs,
+such as a web browser.&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post, I will explain how to perform a Fedora 29 installation with the
 i3 window manager. It is common to find installation guides for i3, but they
