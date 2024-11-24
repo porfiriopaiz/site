@@ -24,7 +24,7 @@ and secure! 🚀
 Over the course of 18 months using Fedora 22, the package cache had accumulated
 approximately 10 GB of space on my hard drive.
 
-.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png
+.. image:: {static}/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png
    :align: center
    :alt: A year and a half of packages stored in the DNF cache
 
@@ -57,7 +57,7 @@ applying any pending updates:
 
    su -c 'dnf makecache'
 
-.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png
+.. image:: {static}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png
    :align: center
    :alt: Rebuilding the package cache
 
@@ -93,7 +93,7 @@ its latest version for Fedora 23:
 The screenshot below shows the details of the packages to be downloaded and
 their total size:
 
-.. image:: {filename}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png
+.. image:: {static}/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png
    :align: center
    :alt: DNF downloading packages for the upgrade
 

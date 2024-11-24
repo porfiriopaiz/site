@@ -39,31 +39,31 @@ for your accounts will be stored.
 
 1. Launch KeePassXC:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png
       :align: center
       :alt: Screenshot showing GNOME Shell overview mode and KeePassXC launcher
 
 2. Create a new database:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png
       :align: center
       :alt: KeePassXC interface with the option to create a new database
 
 3. Assign a name to the `*.kdbx` file (the database):
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png
       :align: center
       :alt: Nautilus file explorer showing the new database file being saved
 
 4. Set a master password to encrypt the database (`Passwords.kdbx`) and click `OK`:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png
       :align: center
       :alt: KeePassXC while assigning the master password for the database
 
 5. Add a new account and password by clicking the `Key` icon with a green arrow:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png
       :align: center
       :alt: Button to add a new account to the database
 
@@ -73,7 +73,7 @@ for your accounts will be stored.
 
    - Specify the username for the account.
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png
       :align: center
       :alt: Adding a title, username, and password for a new account entry
 
@@ -98,26 +98,26 @@ for your accounts will be stored.
 
    - Click `Generate` to create the password, then click `Copy` to copy it to the clipboard.
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png
       :align: center
       :alt: Random password generated based on selected criteria
 
 8. Paste the generated password into the **Password** and **Repeat** fields using `Ctrl-v`:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png
       :align: center
       :alt: Pasting the password into the required fields
 
 9. Verify the password by clicking the `Eye` icon, then click `Apply` and `OK`.
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png
       :align: center
       :alt: Verifying passwords match in both fields
 
 10. Save your changes by clicking the blue save icon. Confirm that the asterisk
 (*) at the top disappears, indicating the changes have been saved.
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png
       :align: center
       :alt: Database changes successfully saved
 
@@ -142,20 +142,20 @@ task-switching order (`Alt-Tab`).
 Example:
 1. Select an entry with a URL:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png
       :align: center
       :alt: Database entry with a linked URL
 
 2. Press **Ctrl-u** to open the login page in your default web browser:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png
       :align: center
       :alt: Opening the linked URL in a web browser
 
 3. Switch back to KeePassXC using `Alt-Tab` and press `Ctrl-v` to enter the
 username and password automatically:
 
-   .. image:: {filename}/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png
+   .. image:: {static}/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png
       :align: center
       :alt: Auto-Type entering the username and password
 

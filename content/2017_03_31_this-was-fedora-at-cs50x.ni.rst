@@ -30,7 +30,7 @@ explained the Fedora Project's mission and vision as a Free Software
 initiative. He also shared his experience of being part of the Fedora community
 at both local and international levels.
 
-.. image:: {filename}/images/fedora_at_cs50xni/mayorga.jpg
+.. image:: {static}/images/fedora_at_cs50xni/mayorga.jpg
    :align: center
    :alt: Eduardo Mayorga speaking.
 
@@ -43,7 +43,7 @@ use of `SSH remote management tools
 showcasing how to manage resources remotely via command line, and discussed
 additional tools for system monitoring.
 
-.. image:: {filename}/images/fedora_at_cs50xni/yn1v.jpg
+.. image:: {static}/images/fedora_at_cs50xni/yn1v.jpg
    :align: center
    :alt: Neville, Fedora Nicaragua Leader.
 
@@ -59,7 +59,7 @@ Software contributor and developer, offering advice on joining projects like
 Kernel
 <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=daniel+drake>`_.
 
-.. image:: {filename}/images/fedora_at_cs50xni/dsd.jpg
+.. image:: {static}/images/fedora_at_cs50xni/dsd.jpg
    :align: center
    :alt: Daniel sharing his experiences as a Kernel Developer.
 
@@ -78,7 +78,7 @@ How Docker simplifies programming environments for CS50x.ni participants.
 <https://porfiriopaiz.fedorapeople.org/Slides/estacion_de_trabajo.odp>`_: Tips
 on using Fedora to create an efficient development environment.
 
-.. image:: {filename}/images/fedora_at_cs50xni/porfiriopaiz.jpg
+.. image:: {static}/images/fedora_at_cs50xni/porfiriopaiz.jpg
    :align: center
    :alt: Porfirio Páiz discussing Git, Docker, and Fedora Workstation.
 
@@ -86,7 +86,7 @@ As a delightful conclusion, the Fedora Nicaragua team and CS50x.ni staff
 enjoyed a casual gathering with the audience, sharing ideas, experiences, cold
 drinks, and delicious pizza, generously sponsored by the Fedora Project.
 
-.. image:: {filename}/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg
+.. image:: {static}/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg
    :align: center
    :alt: Group picture.
 
@@ -96,6 +96,6 @@ world of programming through CS50x.ni.
 
 Sorry for the late post. Here's a cheerful Hot Dog to brighten your day:
 
-.. image:: {filename}/images/fedora_at_cs50xni/beefy_miracle.gif
+.. image:: {static}/images/fedora_at_cs50xni/beefy_miracle.gif
    :align: center
    :alt: A happy hotdog.
