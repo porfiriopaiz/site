@@ -63,10 +63,10 @@
   <div class="article_text">
     <div class="section" id="understanding-vim-on-debian">
 <h2>Understanding <tt class="docutils literal">vim</tt> on Debian</h2>
-<p>Now that I understand how Debian manages <tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim</tt> and I've grasped the
-purpose of the vim-tiny package, it's time to determine the requirements for
-obtaining a more advanced <tt class="docutils literal">vim</tt> binary with enhanced features or support for
-additional functionalities.</p>
+<p>Now that I understand how Debian manages <tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim</tt> and I've grasped
+the purpose of the <tt class="docutils literal"><span class="pre">vim-tiny</span></tt> package, it's time to determine the
+requirements for obtaining a more advanced <tt class="docutils literal">vim</tt> binary with enhanced
+features or support for additional functionalities.</p>
 <p>A brief search for additional information on <tt class="docutils literal"><span class="pre">vim-tiny</span></tt> suggests various
 alternatives for a more comprehensive <tt class="docutils literal">vim</tt> experience:</p>
 <div class="highlight"><pre><span></span><span class="gp">pionen@lilit:~$ </span>apt-cache<span class="w"> </span>show<span class="w"> </span>vim-tiny
@@ -99,9 +99,9 @@ alternatives for a more comprehensive <tt class="docutils literal">vim</tt> expe
 <span class="go">MD5sum: 3b101104ccb4e8367298e4ea9dc33d27</span>
 <span class="go">SHA256: 0cfc3ce179181f9c08f8460360a8bcba05c214d75ba51d78ecf021e42c9a4261</span>
 </pre></div>
-<p>Running both <tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-athena</span></tt> and <tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-gtk3</span></tt> reveals
-that both packages offer a graphical user interface, which I neither desire nor
-require.</p>
+<p>Running both <tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-athena</span></tt> and <tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-gtk3</span></tt>
+reveals that both packages offer a graphical user interface, which I neither
+desire nor require.</p>
 <p><tt class="docutils literal"><span class="pre">apt-cache</span> show vim</tt> displays information that suggests this could be the
 solution I've been searching for:</p>
 <div class="highlight"><pre><span></span><span class="gp">pionen@lilit:~$ </span>apt-cache<span class="w"> </span>show<span class="w"> </span>vim
@@ -121,8 +121,8 @@ solution I've been searching for:</p>
 <span class="go"> completion, block operations, folding, Unicode support, etc.</span>
 <span class="go"> .</span>
 <span class="go"> This package contains a version of vim compiled with a rather</span>
-<span class="go"> standard set of features.  This package does not provide a GUI</span>
-<span class="go"> version of Vim.  See the other vim-* packages if you need more</span>
+<span class="go"> standard set of features. This package does not provide a GUI</span>
+<span class="go"> version of Vim. See the other vim-* packages if you need more</span>
 <span class="go"> (or less).</span>
 <span class="go">Description-md5: 59e8b8f7757db8b53566d5d119872de8</span>
 <span class="go">Homepage: https://www.vim.org/</span>
@@ -136,15 +136,15 @@ solution I've been searching for:</p>
 <span class="go">MD5sum: f74e7886b6610f74d06c789eeb144b9c</span>
 <span class="go">SHA256: b06d11fdee525b919deb4778f7af352ebf3d6ce2591c8fb8e02e52f1ae90ef7d</span>
 </pre></div>
-<p>And <tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-nox</span></tt> shows me that <tt class="docutils literal"><span class="pre">vim-nox</span></tt> provides support for
-scripting languages, Python among them, which is missing from the bare minimum
-option provided by the <tt class="docutils literal">vim</tt> package.</p>
-<p>So I installed it:</p>
-<div class="highlight"><pre><span></span><span class="go">su -c “apt-get install vim-nox”</span>
+<p><tt class="docutils literal"><span class="pre">apt-cache</span> show <span class="pre">vim-nox</span></tt> reveals that <tt class="docutils literal"><span class="pre">vim-nox</span></tt> provides support for
+scripting languages, including Python, which is absent in the minimal <tt class="docutils literal">vim</tt>
+package.</p>
+<p>So, I installed it:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &quot;apt-get install vim-nox&quot;</span>
 </pre></div>
 <p>The first thing I noticed after installing <tt class="docutils literal"><span class="pre">vim-nox</span></tt> is that now <tt class="docutils literal">vi</tt>
-points to <tt class="docutils literal">vim.nox</tt>, meaning that when running <tt class="docutils literal">vi</tt> it will be actually
-running <tt class="docutils literal">vim.nox</tt>, which is not what I was expecting.</p>
+points to <tt class="docutils literal">vim.nox</tt>, meaning that when running <tt class="docutils literal">vi</tt> it actually runs
+<tt class="docutils literal">vim.nox</tt>, which was unexpected.</p>
 <div class="highlight"><pre><span></span><span class="gp">pionen@lilit:~$ </span>whereis<span class="w"> </span>vi
 <span class="go">vi: /usr/bin/vi /usr/share/man/man1/vi.1.gz</span>
 <span class="gp">pionen@lilit:~$ </span>ls<span class="w"> </span>-la<span class="w"> </span>/usr/bin/vi
@@ -152,33 +152,27 @@ running <tt class="docutils literal">vim.nox</tt>, which is not what I was expec
 <span class="gp">pionen@lilit:~$ </span>ls<span class="w"> </span>-la<span class="w"> </span>/etc/alternatives/vi
 <span class="go">lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&gt; /usr/bin/vim.nox</span>
 </pre></div>
-<p>I really struggled to find a fix for this, it took me a while to get to the
-answer, but I found it:</p>
+<p>I struggled to find a fix for this, but I eventually found the solution:</p>
 <p><a class="reference external" href="https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219">https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219</a></p>
-<p>I just need to run <tt class="docutils literal">vim</tt> and addition pass some parameters next to it:</p>
+<p>I just needed to run <tt class="docutils literal">vim</tt> and pass some parameters to avoid loading
+additional features:</p>
 <div class="highlight"><pre><span></span><span class="go">vim -u NONE</span>
 </pre></div>
-<p>Later I found the same suggestion on the <tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt>
+<p>Later, I found the same suggestion in the <tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt>
 file:</p>
 <div class="highlight"><pre><span></span><span class="go">&quot; This is loaded if no vimrc file was found.</span>
 <span class="go">&quot; Except when Vim is run with &quot;-u NONE&quot; or &quot;-C&quot;.</span>
 <span class="go">&quot; Individual settings can be reverted with &quot;:set option&amp;&quot;.</span>
 <span class="go">&quot; Other commands can be reverted as mentioned below.</span>
 </pre></div>
-<p>It's quite convenient to have the ability to run <tt class="docutils literal">vi</tt> without loading any
-additional features from <tt class="docutils literal"><span class="pre">vim-nox</span></tt> when you simply need to make a minor edit,
-without relying on plugins and such. To simplify this, I added the following
-line to my <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt> file. This ensures that when I run <tt class="docutils literal">vi</tt> it loads
-<tt class="docutils literal"><span class="pre">vim-nox</span></tt> without any settings or features from configuration files such as
-<tt class="docutils literal">/etc/vim/vimrc</tt> <tt class="docutils literal">/usr/share/vim/vim82/debian.vim</tt> or
-<tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt>:</p>
-<p>Here's the code snippet I added to my <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt> file to ensure <tt class="docutils literal">vi</tt>
-runs <tt class="docutils literal"><span class="pre">vim-nox</span></tt> without any additional settings:</p>
-<div class="highlight"><pre><span></span><span class="gp"># </span>Alias<span class="w"> </span>to<span class="w"> </span>run<span class="w"> </span>vi<span class="w"> </span>instead<span class="w"> </span>of<span class="w"> </span>vim.nox
-<span class="go">alias vi=&quot;vim -u NONE&quot;</span>
+<p>This setup allows me to run <tt class="docutils literal">vi</tt> without loading any additional features from
+<tt class="docutils literal"><span class="pre">vim-nox</span></tt>, which is useful for quick edits without plugins. To simplify this,
+I added the following alias to my <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt> file:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Alias to run vi without additional features</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">vi</span><span class="o">=</span><span class="s2">&quot;vim -u NONE&quot;</span>
 </pre></div>
-<p>With this configuration, I'm all set! In the future, I'll be sharing my
-<tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> file and its contents.</p>
+<p>With this configuration, I'm all set! In a future post, I’ll share my
+<tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> file and its configuration details.</p>
 </div>
 
   </div>
