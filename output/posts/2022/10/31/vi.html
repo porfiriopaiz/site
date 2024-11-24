@@ -22,7 +22,7 @@
 
   <title>
     porfirio's blog
-&ndash; <tt class="docutils literal">vi</tt>  </title>
+&ndash; vi  </title>
 
 </head>
 
@@ -58,211 +58,98 @@
 
 <article>
   <div class="article_title">
-    <h1><a href="../../../../posts/2022/10/31/vi.html"><tt class="docutils literal">vi</tt></a></h1>
+    <h1><a href="../../../../posts/2022/10/31/vi.html">vi</a></h1>
   </div>
   <div class="article_text">
     <div class="section" id="understanding-vi-and-vim-on-debian">
-<h2>Understanding vi and vim on Debian</h2>
-<p>Since 2011, I've steadfastly embraced <tt class="docutils literal">vi</tt> as my primary text editor. My
-journey into the realm of mastering the command line interface and
-transitioning away from the comfort of the graphical user interface began early
-on. Among the foundational skills I aimed to acquire, one of the first was the
-efficient editing of text files.</p>
-<p>Surprisingly, the exact catalyst that initially led me to embrace <tt class="docutils literal">vi</tt> has
-faded into the distant recesses of my memory. Nevertheless, over eleven years
-later, my loyalty to <tt class="docutils literal">vi</tt> remains unwavering. It has been a constant
-companion throughout this journey, and I've never strayed into the world of
-alternative text editors. In fact, I've even employed <tt class="docutils literal">vi</tt> for basic Python
-programming tasks, underscoring its versatility and enduring utility in my
-daily computing endeavors.</p>
-<p>In this post, I intend to delve deep into the intricacies of how Debian manages
-the functionality of <tt class="docutils literal">vi</tt> and vim right from a basic, uncustomized Debian
+<h2>Understanding <tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim</tt> on Debian</h2>
+<p>Since 2011, I have steadfastly embraced <tt class="docutils literal">vi</tt> as my primary text editor. My
+journey into mastering the command-line interface and transitioning away from
+the comfort of the graphical user interface began early. Among the foundational
+skills I sought to acquire, efficient text file editing was one of the first.</p>
+<p>Surprisingly, the exact catalyst that led me to embrace <tt class="docutils literal">vi</tt> has faded into
+the distant recesses of my memory. Nevertheless, over eleven years later, my
+loyalty to <tt class="docutils literal">vi</tt> remains unwavering. It has been a constant companion
+throughout my journey, and I have never strayed into the world of alternative
+text editors. I have even used <tt class="docutils literal">vi</tt> for basic Python programming tasks,
+underscoring its versatility and enduring utility in my daily computing
+endeavors.</p>
+<p>In this post, I will delve into the intricacies of how Debian manages the
+functionality of <tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim</tt> in a basic, uncustomized Debian
 installation.</p>
-<p>My objective is to gain a profound understanding of the fundamental behaviors
-exhibited by <tt class="docutils literal">vi</tt> and vim in their most minimalist configurations, as they
-are presented immediately after a fresh Debian installation.</p>
-<p>It's worth noting that Debian does not include vim by default in this scenario.
-I opted for a network install using the minimal tasksel profile, selecting only
-the <tt class="docutils literal"><span class="pre">mate-desktop-environment</span></tt> package. This illustrates one of the aspects I
-greatly appreciate about Debian – its commitment to delivering essential
-software components, allowing users the freedom to shape and personalize their
-tools and environments according to their specific needs, without making any
-presumptions about what's best for them.</p>
+<p>My objective is to gain a profound understanding of the default behavior of
+<tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim</tt> in their most minimalist configurations, as presented
+immediately after a fresh Debian installation.</p>
+<p>It's worth noting that Debian does not include <tt class="docutils literal">vim</tt> by default in this
+setup. I opted for a network installation using the minimal tasksel profile,
+selecting only the <tt class="docutils literal"><span class="pre">mate-desktop-environment</span></tt> package. This highlights one of
+the aspects I greatly appreciate about Debian—its commitment to providing
+essential software components while allowing users to shape and personalize
+their tools and environments without presumption.</p>
 <div class="section" id="vi-1">
 <h3><tt class="docutils literal">vi</tt></h3>
-<p>A pristine Debian installation defaults to including only the <tt class="docutils literal"><span class="pre">vim-tiny</span></tt>
-package. Within this package, two critical configuration files are stored in
-<tt class="docutils literal">/etc/vim/</tt>: <tt class="docutils literal">vimrc</tt> and <tt class="docutils literal">vimrc.tiny</tt>.</p>
+<p>A pristine Debian installation includes only the <tt class="docutils literal"><span class="pre">vim-tiny</span></tt> package. Within
+this package, two critical configuration files are stored in <tt class="docutils literal">/etc/vim/</tt>:
+<tt class="docutils literal">vimrc</tt> and <tt class="docutils literal">vimrc.tiny</tt>.</p>
 <p>This setup is intentionally minimalist, devoid of any symbolic links, aliases,
-or binary files associated with <tt class="docutils literal">vim</tt>. Consequently, the sole alias present
-is <tt class="docutils literal">vi</tt>, which is directly linked to <tt class="docutils literal">vim.tiny</tt>.</p>
-<p>When <tt class="docutils literal">vi</tt> is invoked, it effectively calls <tt class="docutils literal">vim.tiny</tt>, which, as the
-default behavior, exclusively sources the file located at
-<tt class="docutils literal">/etc/vim/vimrc.tiny</tt>.</p>
+or binary files associated with <tt class="docutils literal">vim</tt>. The only alias present is <tt class="docutils literal">vi</tt>,
+which is linked to <tt class="docutils literal">vim.tiny</tt>.</p>
+<p>When <tt class="docutils literal">vi</tt> is invoked, it calls <tt class="docutils literal">vim.tiny</tt>, which, by default, sources the
+file located at <tt class="docutils literal">/etc/vim/vimrc.tiny</tt>.</p>
 <p>Now, let's explore the contents of the <tt class="docutils literal">/etc/vim/vimrc.tiny</tt> file:</p>
-<div class="highlight"><pre><span></span><span class="go">&quot; Vim configuration file, in effect when invoked as &quot;vi&quot;. The aim of this</span>
-<span class="go">&quot; configuration file is to provide a Vim environment as compatible with the</span>
-<span class="go">&quot; original vi as possible. Note that ~/.vimrc configuration files as other</span>
-<span class="go">&quot; configuration files in the runtimepath are still sourced.</span>
-<span class="go">&quot; When Vim is invoked differently (&quot;vim&quot;, &quot;view&quot;, &quot;evim&quot;, ...) this file is</span>
-<span class="go">&quot; _not_ sourced; /etc/vim/vimrc and/or /etc/vim/gvimrc are.</span>
+<div class="highlight"><pre><span></span><span class="go">&quot; Vim configuration file in effect when invoked as &#39;vi&#39;. This configuration</span>
+<span class="go">&quot; aims to provide a Vim environment as compatible with the original &#39;vi&#39; as possible.</span>
+<span class="go">&quot; Note that ~/.vimrc and other runtimepath configuration files are still sourced.</span>
+<span class="go">&quot; When Vim is invoked as &#39;vim&#39;, &#39;view&#39;, &#39;evim&#39;, etc., this file is _not_ sourced.</span>
+<span class="go">&quot; In such cases, /etc/vim/vimrc and/or /etc/vim/gvimrc are used.</span>
 
-<span class="go">&quot; Debian system-wide default configuration Vim</span>
 <span class="go">set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after</span>
-
 <span class="go">set compatible</span>
-
 <span class="go">&quot; vim: set ft=vim:</span>
 </pre></div>
-<p>Essentially, this configuration ensures that <tt class="docutils literal">vi</tt> (which invokes
-<tt class="docutils literal">vim.tiny</tt>) closely mimics the behavior of the original <tt class="docutils literal">vi</tt>. Furthermore,
-it automatically loads configuration files found under the <tt class="docutils literal">$VIMRUNTIME</tt>
-directory, which includes both <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> and any configuration files
-specified in the <tt class="docutils literal">runtimepath</tt> variable.</p>
-<p>In this specific case, it prioritizes the inclusion of
-<tt class="docutils literal">/usr/share/vim/vim82/debian.vim</tt> and then
-<tt class="docutils literal">/usr/share/vim/vim82/defaults.vim.</tt></p>
-<p>As a final touch, it enforces compatibility with the original <tt class="docutils literal">vi</tt>, even if
-other configuration files in the <tt class="docutils literal">runtimepath</tt> attempt to disable it, by
-appending the <tt class="docutils literal">set compatible</tt> directive to the end of the configuration
-file.</p>
-<p>In the absence of any other <tt class="docutils literal">vim</tt> versions installed on the system, <tt class="docutils literal">vi</tt>
-will naturally point to <tt class="docutils literal">vim.tiny</tt> by default.</p>
+<p>This configuration ensures that <tt class="docutils literal">vi</tt> (invoking <tt class="docutils literal">vim.tiny</tt>) mimics the
+original <tt class="docutils literal">vi</tt>. It also loads configuration files from the <tt class="docutils literal">$VIMRUNTIME</tt>
+directory, including <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> and other runtimepath files. Specifically, it
+prioritizes:</p>
+<ul class="simple">
+<li><tt class="docutils literal">/usr/share/vim/vim82/debian.vim</tt></li>
+<li><tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt></li>
+</ul>
+<p>Finally, the <tt class="docutils literal">set compatible</tt> directive ensures compatibility with the
+original <tt class="docutils literal">vi</tt>, even if other configurations attempt to disable it.</p>
+<p>By default, <tt class="docutils literal">vi</tt> links to <tt class="docutils literal">vim.tiny</tt>:</p>
 <div class="highlight"><pre><span></span><span class="gp">pionen@lilit:~$ </span>ls<span class="w"> </span>-la<span class="w"> </span>/etc/alternatives/vi
 <span class="go">lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&gt; /usr/bin/vim.tiny</span>
 </pre></div>
-<p>Conversely, if <tt class="docutils literal">vim</tt> is explicitly installed and invoked as <tt class="docutils literal">vim</tt>, or via
-aliases such as <tt class="docutils literal">view</tt> or <tt class="docutils literal">evim</tt> (note that none of these aliases are
-available in this minimal setup), the configuration files <tt class="docutils literal">/etc/vim/vimrc</tt>
-and <tt class="docutils literal">/etc/gvimrc</tt> are activated and sourced.</p>
-<div class="highlight"><pre><span></span><span class="go">&quot; All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by</span>
-<span class="go">&quot; the call to :runtime you can find below.  If you wish to change any of those</span>
-<span class="go">&quot; settings, you should do it in this file (/etc/vim/vimrc), since debian.vim</span>
-<span class="go">&quot; will be overwritten everytime an upgrade of the vim packages is performed.</span>
-<span class="go">&quot; It is recommended to make changes after sourcing debian.vim since it alters</span>
-<span class="go">&quot; the value of the &#39;compatible&#39; option.</span>
+<p>If <tt class="docutils literal">vim</tt> is explicitly installed, additional aliases (e.g., <tt class="docutils literal">view</tt> or
+<tt class="docutils literal">evim</tt>) and configuration files, such as <tt class="docutils literal">/etc/vim/vimrc</tt> and
+<tt class="docutils literal">/etc/gvimrc</tt>, become active. These configurations enable enhanced features:</p>
+<div class="highlight"><pre><span></span><span class="go">runtime! debian.vim</span>
+<span class="go">&quot; Uncomment below to make Vim more Vi-compatible.</span>
+<span class="go">&quot; set compatible</span>
+<span class="go">&quot; Syntax highlighting example:</span>
+<span class="go">&quot; syntax on</span>
 
-<span class="go">runtime! debian.vim</span>
+<span class="go">&quot; Enable additional plugins or rules:</span>
+<span class="go">&quot; filetype plugin indent on</span>
 
-<span class="go">&quot; Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.</span>
-<span class="go">&quot; This happens after /etc/vim/vimrc(.local) are loaded, so it will override</span>
-<span class="go">&quot; any settings in these files.</span>
-<span class="go">&quot; If you don&#39;t want that to happen, uncomment the below line to prevent</span>
-<span class="go">&quot; defaults.vim from being loaded.</span>
-<span class="go">&quot; let g:skip_defaults_vim = 1</span>
-
-<span class="go">&quot; Uncomment the next line to make Vim more Vi-compatible</span>
-<span class="go">&quot; NOTE: debian.vim sets &#39;nocompatible&#39;.  Setting &#39;compatible&#39; changes numerous</span>
-<span class="go">&quot; options, so any other options should be set AFTER setting &#39;compatible&#39;.</span>
-<span class="go">&quot;set compatible</span>
-
-<span class="go">&quot; Vim5 and later versions support syntax highlighting. Uncommenting the next</span>
-<span class="go">&quot; line enables syntax highlighting by default.</span>
-<span class="go">&quot;syntax on</span>
-
-<span class="go">&quot; If using a dark background within the editing area and syntax highlighting</span>
-<span class="go">&quot; turn on this option as well</span>
-<span class="go">&quot;set background=dark</span>
-
-<span class="go">&quot; Uncomment the following to have Vim jump to the last position when</span>
-<span class="go">&quot; reopening a file</span>
-<span class="go">&quot;au BufReadPost * if line(&quot;&#39;\&quot;&quot;) &gt; 1 &amp;&amp; line(&quot;&#39;\&quot;&quot;) &lt;= line(&quot;$&quot;) | exe &quot;normal! g&#39;\&quot;&quot; | endif</span>
-
-<span class="go">&quot; Uncomment the following to have Vim load indentation rules and plugins</span>
-<span class="go">&quot; according to the detected filetype.</span>
-<span class="go">&quot;filetype plugin indent on</span>
-
-<span class="go">&quot; The following are commented out as they cause vim to behave a lot</span>
-<span class="go">&quot; differently from regular Vi. They are highly recommended though.</span>
-<span class="go">&quot;set showcmd         &quot; Show (partial) command in status line.</span>
-<span class="go">&quot;set showmatch               &quot; Show matching brackets.</span>
-<span class="go">&quot;set ignorecase              &quot; Do case insensitive matching</span>
-<span class="go">&quot;set smartcase               &quot; Do smart case matching</span>
-<span class="go">&quot;set incsearch               &quot; Incremental search</span>
-<span class="go">&quot;set autowrite               &quot; Automatically save before commands like :next and :make</span>
-<span class="go">&quot;set hidden          &quot; Hide buffers when they are abandoned</span>
-<span class="go">&quot;set mouse=a         &quot; Enable mouse usage (all modes)</span>
-
-<span class="go">&quot; Source a global configuration file if available</span>
-<span class="go">if filereadable(&quot;/etc/vim/vimrc.local&quot;)</span>
-<span class="go">  source /etc/vim/vimrc.local</span>
-<span class="go">endif</span>
+<span class="go">&quot; Uncomment to remember the last position in a file:</span>
+<span class="go">&quot; au BufReadPost * if line(&quot;&#39;\&quot;&quot;) &gt; 1 &amp;&amp; line(&quot;&#39;\&quot;&quot;) &lt;= line(&quot;$&quot;) | exe &quot;normal! g&#39;\&quot;&quot; | endif</span>
 </pre></div>
-<p>When we execute <tt class="docutils literal">vim</tt> in the command line, and subsequently issue the <tt class="docutils literal">vim</tt>
-command:</p>
+<p>When using <tt class="docutils literal">vim</tt>, you can check the runtime path and sourced scripts:</p>
 <div class="highlight"><pre><span></span><span class="go">:echo $VIMRUNTIME</span>
+<span class="go">/usr/share/vim/vim82</span>
 </pre></div>
-<p>The following output will be displayed:</p>
-<div class="highlight"><pre><span></span><span class="go">/usr/share/vim/vim82</span>
-</pre></div>
-<p>Inside <tt class="docutils literal">vim</tt>, when we execute the command:</p>
 <div class="highlight"><pre><span></span><span class="go">:scriptnames</span>
+<span class="go">1: /usr/share/vim/vimrc</span>
+<span class="go">2: /usr/share/vim/vim82/debian.vim</span>
+<span class="go">3: ~/.vimrc</span>
 </pre></div>
-<p>It will display a list of all the script files that are loaded based on the
-<tt class="docutils literal">/etc/vim/vimrc</tt> configuration file:</p>
-<div class="highlight"><pre><span></span><span class="go">  1: /usr/share/vim/vimrc</span>
-<span class="go">  2: /usr/share/vim/vim82/debian.vim</span>
-<span class="go">  3: /usr/share/vim/vim82/defaults.vim</span>
-<span class="go">  4: /usr/share/vim/vim82/filetype.vim</span>
-<span class="go">  5: /usr/share/vim/vim82/ftplugin.vim</span>
-<span class="go">  6: /usr/share/vim/vim82/indent.vim</span>
-<span class="go">  7: /usr/share/vim/vim82/syntax/syntax.vim</span>
-<span class="go">  8: /usr/share/vim/vim82/syntax/synload.vim</span>
-<span class="go">  9: /usr/share/vim/vim82/syntax/syncolor.vim</span>
-<span class="go"> 10: /usr/share/vim/vim82/plugin/getscriptPlugin.vim</span>
-<span class="go"> 11: /usr/share/vim/vim82/plugin/gzip.vim</span>
-<span class="go"> 12: /usr/share/vim/vim82/plugin/logiPat.vim</span>
-<span class="go"> 13: /usr/share/vim/vim82/plugin/manpager.vim</span>
-<span class="go"> 14: /usr/share/vim/vim82/plugin/matchparen.vim</span>
-<span class="go"> 15: /usr/share/vim/vim82/plugin/netrwPlugin.vim</span>
-<span class="go"> 16: /usr/share/vim/vim82/plugin/rrhelper.vim</span>
-<span class="go"> 17: /usr/share/vim/vim82/plugin/spellfile.vim</span>
-<span class="go"> 18: /usr/share/vim/vim82/plugin/tarPlugin.vim</span>
-<span class="go"> 19: /usr/share/vim/vim82/plugin/tohtml.vim</span>
-<span class="go"> 20: /usr/share/vim/vim82/plugin/vimballPlugin.vim</span>
-<span class="go"> 21: /usr/share/vim/vim82/plugin/zipPlugin.vim</span>
-<span class="go">Press ENTER or type command to continue</span>
-</pre></div>
-<p>If, for any reason, we have already created a <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> file, the inclusion
-of <tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt> will be skipped:</p>
-<p>Inside <tt class="docutils literal">vim</tt>, upon executing the command:</p>
-<div class="highlight"><pre><span></span><span class="go">:scriptnames</span>
-</pre></div>
-<p>You'll observe that instead, <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> takes precedence and gets sourced:</p>
-<div class="highlight"><pre><span></span><span class="go">  1: /usr/share/vim/vimrc</span>
-<span class="go">  2: /usr/share/vim/vim82/debian.vim</span>
-<span class="go">  3: ~/.vimrc</span>
-<span class="go">  4: /usr/share/vim/vim82/syntax/syntax.vim</span>
-<span class="go">  5: /usr/share/vim/vim82/syntax/synload.vim</span>
-<span class="go">  6: /usr/share/vim/vim82/syntax/syncolor.vim</span>
-<span class="go">  7: /usr/share/vim/vim82/filetype.vim</span>
-<span class="go">  8: /usr/share/vim/vim82/ftplugin.vim</span>
-<span class="go">  9: /usr/share/vim/vim82/indent.vim</span>
-<span class="go"> 10: /usr/share/vim/vim82/syntax/nosyntax.vim</span>
-<span class="go"> 11: /usr/share/vim/vim82/plugin/getscriptPlugin.vim</span>
-<span class="go"> 12: /usr/share/vim/vim82/plugin/gzip.vim</span>
-<span class="go"> 13: /usr/share/vim/vim82/plugin/logiPat.vim</span>
-<span class="go"> 14: /usr/share/vim/vim82/plugin/manpager.vim</span>
-<span class="go"> 15: /usr/share/vim/vim82/plugin/matchparen.vim</span>
-<span class="go"> 16: /usr/share/vim/vim82/plugin/netrwPlugin.vim</span>
-<span class="go"> 17: /usr/share/vim/vim82/plugin/rrhelper.vim</span>
-<span class="go"> 18: /usr/share/vim/vim82/plugin/spellfile.vim</span>
-<span class="go"> 19: /usr/share/vim/vim82/plugin/tarPlugin.vim</span>
-<span class="go"> 20: /usr/share/vim/vim82/plugin/tohtml.vim</span>
-<span class="go"> 21: /usr/share/vim/vim82/plugin/vimballPlugin.vim</span>
-<span class="go"> 22: /usr/share/vim/vim82/plugin/zipPlugin.vim</span>
-<span class="go">Press ENTER or type command to continue</span>
-</pre></div>
-<p>This implies that if we require specific settings from the
-<tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt> file, we should incorporate them into the
-<tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> configuration file.</p>
-<p>It's important to note that any configurations from <tt class="docutils literal">/usr/share/vim/vimrc</tt>
-and <tt class="docutils literal">/usr/share/vim/vim82/debian.vim</tt> will be overridden by settings in
-<tt class="docutils literal"><span class="pre">~/.vimrc.</span></tt></p>
-<p>Having this understanding, I now have clarity on what to adopt from
-<tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt> if the need arises.</p>
-<p>In the upcoming post, I will explain my choice of <tt class="docutils literal">vim</tt> versions available in
-the Debian repository and the rationale behind my selection.</p>
+<p>This confirms that user-defined configurations in <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> override
+defaults. Any required settings from <tt class="docutils literal">/usr/share/vim/vim82/defaults.vim</tt>
+should be manually incorporated into <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> if needed.</p>
+<p>In the next post, I will explain my choice of <tt class="docutils literal">vim</tt> versions available in the
+Debian repository and the rationale behind my selection.</p>
 </div>
 </div>
 
