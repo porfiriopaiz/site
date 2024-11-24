@@ -61,304 +61,174 @@
     <h1><a href="../../../../posts/2018/11/29/i3.html">i3</a></h1>
   </div>
   <div class="article_text">
-    <p>In this post I will explain how to do a Fedora 29 installation with the i3
-window manager. It is common to see installation guides for i3, but they assume
-that you already have another desktop environment previously installed.</p>
-<p>In this post we will see how to build a fully functional environment from a
-minimal installation as I have explained in other publications.</p>
+    <p>In this post, I will explain how to perform a Fedora 29 installation with the
+i3 window manager. It is common to find installation guides for i3, but they
+often assume you already have another desktop environment installed.</p>
+<p>Here, we will see how to build a fully functional environment starting from a
+minimal installation, as I have explained in previous posts.</p>
 <div class="section" id="creating-an-installation-medium">
-<h2>Creating an installation medium</h2>
-<div class="section" id="download-the-iso-fedora-everything-netinstall">
-<h3>Download the ISO Fedora Everything Netinstall</h3>
-<p>From the site: <a class="reference external" href="https://alt.fedoraproject.org/">https://alt.fedoraproject.org/</a> download the file of the All
-section, this is an ISO that works as a means of installation by network that
-downloads all the packages that will be part of the system from the Internet,
-as well as gives the option to choose which package collections to install,
-unlike Lives media whose software selection has been previously defined.</p>
-<p>Download the ISO with wget:</p>
+<h2>Creating an Installation Medium</h2>
+<div class="section" id="downloading-the-fedora-everything-netinstall-iso">
+<h3>Downloading the Fedora Everything Netinstall ISO</h3>
+<p>From the site: <a class="reference external" href="https://alt.fedoraproject.org/">https://alt.fedoraproject.org/</a>, download the file in the
+<em>Everything</em> section. This ISO allows network-based installation, downloading
+all necessary packages from the Internet. It also provides the option to choose
+which package collections to install, unlike Live media, which comes with
+predefined software selections.</p>
+<p>Download the ISO with <cite>wget</cite>:</p>
 <div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso</span>
 </pre></div>
-<p>We also download the integrity check file:</p>
+<p>Also, download the integrity check file:</p>
 <div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM</span>
 </pre></div>
-<p>Check the integrity of the file:</p>
+<p>Verify the integrity of the file:</p>
 <div class="highlight"><pre><span></span><span class="go">sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM</span>
 </pre></div>
 </div>
-<div class="section" id="create-the-installation-media-with-fedora-media-writer">
-<h3>Create the installation media with Fedora Media Writer</h3>
-<p>Fedora Media Writer is available for different operating systems, download the
-corresponding one.</p>
-<p>It is very important to create the installation medium with Fedora Media Writer
-since this tool guarantees that the installation medium will have support to
-boot on computers that have both UEFI or BIOS.</p>
-<p>How it will start will depend on which of the two has the highest priority
-during startup. I always use UEFI only, so all my systems are installed in UEFI
-mode.</p>
+<div class="section" id="creating-the-installation-medium-with-fedora-media-writer">
+<h3>Creating the Installation Medium with Fedora Media Writer</h3>
+<p>Fedora Media Writer is available for various operating systems. Download the
+appropriate version from:</p>
 <p><a class="reference external" href="https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1">https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1</a></p>
-<p>When Fedora Media Writer is installed on our computer, we connect our USB
-memory, run Fedora Media Writer and use the Custom Image option to navigate to
-the path where the ISO is, the one we just downloaded, select it, select
-carefully the USB memory we will use and record the image in the USB memory.</p>
+<p>Using Fedora Media Writer ensures the installation medium will support booting
+on both UEFI and BIOS systems. The boot mode depends on which has higher
+priority during startup. I always use UEFI exclusively, so all my systems are
+installed in UEFI mode.</p>
+<p>Once Fedora Media Writer is installed, connect your USB drive, run the
+application, and use the <em>Custom Image</em> option to navigate to the downloaded
+ISO. Select the USB drive carefully and write the image to the drive.</p>
 </div>
 </div>
 <div class="section" id="installation">
 <h2>Installation</h2>
-<p>I have followed the installation steps described in this previous post, making
-sure I have access to a wireless network or a wired network.</p>
+<p>Follow the installation steps described in this previous post, ensuring access
+to a wireless or wired network:</p>
 <p><a class="reference external" href="https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html">https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html</a></p>
-<p>This time I had to use my mobile phone, although it is true I had access to a
-wireless network during the installation of the base system (Fedora Custom
-Install), after installation the packages collection of does not provide the
-network drivers required to access wireless networks since they are not
-included in the Custom Install selection.</p>
-<p>That's why I created a wired network via USB with my mobile phone. To make it
-work you have to make sure of the following right after the first boot once the
-installation finishes:</p>
+<p>During installation, I used my mobile phone to create a wired network via USB.
+While I had wireless access during the base system installation (Fedora Custom
+Install), the selected package collection lacked the necessary drivers for
+wireless connectivity.</p>
+<p>To use a USB tethered network, follow these steps after the first boot:</p>
 <ol class="arabic simple">
-<li>Log in in the system.</li>
-<li>Connect the USB cable to the computer.</li>
-<li>Connect the other end to the mobile phone.</li>
-<li>Make sure the phone is connected to a wireless network or that the data plan
-is activated. As a note, consider that you need at least 800MB of data in
-RPM packages that must be downloaded for a minimum installation of Fedora
-with support for the graphical environment with i3wm.</li>
-<li>Make sure the phone is in USB or MTP data transfer mode.</li>
-<li>Activate a wired network or Tethered Wired Network from your mobile phone.</li>
+<li>Log in to the system.</li>
+<li>Connect the USB cable to your computer and mobile phone.</li>
+<li>Ensure the phone is connected to Wi-Fi or has an active data plan. You will need at least 800 MB of data for downloading the required RPM packages.</li>
+<li>Put the phone in USB or MTP data transfer mode.</li>
+<li>Enable a wired network (USB tethering) on your mobile phone.</li>
 </ol>
-<p>After this, you should have access to the Internet. Check it by pinging Google:</p>
+<p>Verify the connection by pinging Google:</p>
 <div class="highlight"><pre><span></span><span class="go">ping 8.8.8.8</span>
 </pre></div>
 </div>
 <div class="section" id="basic-configurations">
-<h2>Basic configurations</h2>
+<h2>Basic Configurations</h2>
 <div class="section" id="configuring-dnf">
-<h3>Configuring dnf</h3>
-<p>The next step is optional, as root, the first thing I do is configure dnf, so
-that it uses the most efficient packages mirrors:</p>
+<h3>Configuring <cite>dnf</cite></h3>
+<p>As root, I configure <cite>dnf</cite> for optimal performance. This step is optional:</p>
+<p>Enable the fastest mirrors:</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;fastestmirror=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
-<p>Then I disable the use of deltarpm's for future updates. If you prefer to
-reduce the amount of data to be downloaded in each of the future updates, skip
-this step:</p>
+<p>Disable delta RPMs for faster downloads (optional):</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;deltarpm=false&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
-<p>I always keep each of the packages from which any program is installed on my
-system, including those that are downloaded as part of the updates and to
-maintain the packages cache throughout the period I use a Fedora release. This
-step is optional and you can skip it if you want:</p>
+<p>Keep the package cache for the lifetime of the Fedora release (optional):</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;keepcache=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
-<p>Now I proceed to disable a service and a dnf timer. The service makes sure to
-refresh the metadata cache to be able to make checks on the versions of the
-packages that are in the repos and then check if there are updates available.
-The timer is responsible for executing the service periodically.</p>
-<p>I always disable both to avoid annoying bandwidth consumptions and dnf locks
-while the cache is refreshed. If you have a limited bandwidth or data plan this
-will help you reduce the consumption of it.</p>
+<p>Disable unnecessary <cite>dnf</cite> services and timers to save bandwidth and avoid
+locks:</p>
 <div class="highlight"><pre><span></span><span class="go">systemctl disable dnf-makecache.service</span>
-<span class="go">systemctl disable dnf-makecache.timer</span>
 </pre></div>
-<p>Finally to make sure that the changes take effect we must restart:</p>
+<div class="highlight"><pre><span></span><span class="go">systemctl disable dnf-makecache.timer</span>
+</pre></div>
+<p>Reboot to apply the changes:</p>
 <div class="highlight"><pre><span></span><span class="go">reboot</span>
 </pre></div>
 </div>
-<div class="section" id="regenerate-the-cache-and-install-available-updates">
-<h3>Regenerate the cache and install available updates</h3>
-<p>During the installation, you may have omitted to check the option that allows
-you to install the most recent version of the mirrors packages, so your system
-could be outdated even if you have used the network installation medium.</p>
-<p>To apply the most recent updates and use the most efficient mirrors it is
-necessary to regenerate the metadata cache.</p>
-<p>Fedora maintains a cache for each user, one for the root user, another for the
-normal user, in my case pionen. So we must regenerate both caches if you want
-to perform tasks as administrator or simple queries that do not require
-administrator privileges:</p>
-<p>As a normal non-root user:</p>
+<div class="section" id="updating-the-system">
+<h3>Updating the System</h3>
+<p>After installation, your system may not include the latest updates. Refresh the
+metadata cache and install updates:</p>
+<p>As a normal user:</p>
 <div class="highlight"><pre><span></span><span class="go">dnf clean all</span>
-
-<span class="go">dnf makecache</span>
 </pre></div>
-<p>Then, as a normal non-root user, we execute the following commands, where we
-pass the statement in quotes as a parameter to the root user:</p>
+<div class="highlight"><pre><span></span><span class="go">dnf makecache</span>
+</pre></div>
+<p>As root:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf clean all&#39;</span>
-
-<span class="go">su -c &#39;dnf makecache&#39;</span>
 </pre></div>
-<p>We check for available updates and enter our root password:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf makecache&#39;</span>
+</pre></div>
+<p>Check for updates:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf --refresh check-upgrade&#39;</span>
 </pre></div>
-<p>If there are updates available, we apply them with:</p>
+<p>If updates are available, install them:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
 </pre></div>
-<p>If updates have been applied, it is recommended to restart the system in order
-to make use of the most recent version of all the programs, for example the
-kernel:</p>
+<p>Reboot if updates include critical components like the kernel:</p>
 <div class="highlight"><pre><span></span><span class="go">reboot</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="installing-i3">
 <h2>Installing i3</h2>
-<p>Now, the step by step with all the requirements for a Fedora 29 minimal
-installation with i3wm.</p>
-<p>For it we will make use of packages collections that have been grouped in a
-very specialized way. Next commands must be executed as root user.</p>
-<div class="section" id="common-networkmanager-submodules">
-<h3>Common NetworkManager Submodules</h3>
-<p>This group contains NetworkManager submodules that are commonly used, but may
-not be wanted in some streamlined configurations.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y group install networkmanager-submodules</span>
-</pre></div>
-</div>
-<div class="section" id="core">
-<h3>Core</h3>
-<p>Smallest possible installation.</p>
+<p>Install the i3 window manager and necessary components. All commands must be
+executed as root.</p>
+<p>Install required groups and packages:</p>
 <div class="highlight"><pre><span></span><span class="go">dnf -y group install core</span>
 </pre></div>
-</div>
-<div class="section" id="dial-up-networking-support">
-<h3>Dial-up Networking Support</h3>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install dial-up</span>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install networkmanager-submodules</span>
 </pre></div>
-</div>
-<div class="section" id="fonts">
-<h3>Fonts</h3>
-<p>Fonts packages for rendering text on the desktop.</p>
 <div class="highlight"><pre><span></span><span class="go">dnf -y group install fonts</span>
 </pre></div>
-</div>
-<div class="section" id="guest-desktop-agents">
-<h3>Guest Desktop Agents</h3>
-<p>Agents used when running as a virtualized desktop.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y group install guest-desktop-agents</span>
-</pre></div>
-</div>
-<div class="section" id="hardware-support">
-<h3>Hardware Support</h3>
-<p>This group is a collection of tools for various hardware specific utilities.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y group install hardware-support</span>
-</pre></div>
-</div>
-<div class="section" id="multimedia">
-<h3>Multimedia</h3>
-<p>Audio/video framework common to desktops.</p>
 <div class="highlight"><pre><span></span><span class="go">dnf -y group install multimedia</span>
 </pre></div>
-</div>
-<div class="section" id="standard">
-<h3>Standard</h3>
-<p>Common set of utilities that extend the minimal installation.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y group install standard</span>
-</pre></div>
-</div>
-<div class="section" id="base-x">
-<h3>base-x</h3>
 <div class="highlight"><pre><span></span><span class="go">dnf -y group install base-x</span>
 </pre></div>
-</div>
-<div class="section" id="input-methods">
-<h3>Input Methods</h3>
+<div class="highlight"><pre><span></span><span class="go">dnf -y group install standard</span>
+</pre></div>
 <div class="highlight"><pre><span></span><span class="go">dnf -y group install input-methods</span>
 </pre></div>
-</div>
-<div class="section" id="fedora-icons-theme">
-<h3>Fedora Icons Theme</h3>
-<p>This package provides the Fedora icons theme.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install fedora-icon-theme</span>
+<div class="highlight"><pre><span></span><span class="go">dnf -y install i3 lightdm-gtk xdg-user-dirs</span>
 </pre></div>
-</div>
-<div class="section" id="gnome-icons-theme">
-<h3>GNOME Icons Theme</h3>
-<p>This package provides the default icon theme used by the GNOME Desktop.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install gnome-icon-theme</span>
-</pre></div>
-</div>
-<div class="section" id="gnome-icons-theme-extra">
-<h3>GNOME Icons Theme extra</h3>
-<p>This package provides additional mime type and devices icons for the GNOME
-Desktop.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install gnome-icon-theme-extras</span>
-</pre></div>
-</div>
-<div class="section" id="i3-window-manager">
-<h3>i3 Window Manager</h3>
-<p>Finally we can install the i3 window manager.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install i3</span>
-</pre></div>
-</div>
-<div class="section" id="installing-the-graphical-login-manager">
-<h3>Installing the graphical login manager</h3>
-<p>We will need a graphical login manager where we can pick our user and type our
-password so we can get authenticated. From here we can also select other
-desktop environments that we might install in the future.</p>
-<p>LightDM is a display manager that welcomes the user and uses the GTK3 tool kit.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install lightdm-gtk</span>
-</pre></div>
-</div>
-<div class="section" id="xdg-user-dirs">
-<h3>xdg-user-dirs</h3>
-<p>Contains xdg-user-dirs-update that updates and creates the directories at
-/home/, according to the predefined values configured by the administrator.</p>
-<div class="highlight"><pre><span></span><span class="go">dnf -y install xdg-user-dirs</span>
-</pre></div>
-</div>
-<div class="section" id="enabling-the-graphical-mode-boot">
-<h3>Enabling the graphical mode boot</h3>
-<p>Our system already has all the requirements to work as a graphical environment
-using i3 as a window manager. But before it, we need to change some
-configurations that make our system boot from runlevel 3 mode or
-multi-user.target to runlevel 5 or graphical.target.</p>
-<p>We can fix that with the next command:</p>
+<p>Enable the graphical boot mode and LightDM:</p>
 <div class="highlight"><pre><span></span><span class="go">systemctl set-default graphical.target</span>
 </pre></div>
-<p>Also we must enable the system service that provides the option to access the
-system via a graphical loging that we just installed, lightdm:</p>
 <div class="highlight"><pre><span></span><span class="go">systemctl enable lightdm.service</span>
 </pre></div>
-<p>Finally we can reboot our system and then after we should be able to get logged
-in makeing use of the graphical session manager and our window manager i3.</p>
+<p>Reboot the system:</p>
 <div class="highlight"><pre><span></span><span class="go">reboot</span>
 </pre></div>
 </div>
-</div>
 <div class="section" id="first-graphical-session">
-<h2>First graphical session</h2>
-<p>Once logged in, i3 will ask if you want to generate a new config file for i3,
-press Enter to answer affirmatively.</p>
-<p>Next it ask which key you want to use as modifier key to trigger the i3
-keyboard shortcuts, I always pick the <cite>Win</cite> or the Windows key, also known as
-<cite>Meta key</cite>.</p>
+<h2>First Graphical Session</h2>
+<p>Upon first login, i3 will prompt you to generate a configuration file. Press
+Enter to confirm. Choose your preferred modifier key (e.g., the Windows or Meta
+key).</p>
 </div>
-<div class="section" id="terminal-command-line">
-<h2>Terminal command line</h2>
-<p>This setup does not provides any presintalled tool for web browsing, file
-manager, image viewer or pdf reader.</p>
-<p>It is up to you what to use and install.</p>
-<p>― But, how do I install those?</p>
-<p>If you selected the Windows key as modifier for i3, pressing:</p>
-<p>&lt;Win&gt; + Enter</p>
-<p>You will be able to run a command line terminal. I prefer to use GNOME
+<div class="section" id="installing-additional-software">
+<h2>Installing Additional Software</h2>
+<p>This setup does not include preinstalled tools like a web browser or file
+manager. You can install them as needed. For example, to install GNOME
 Terminal:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install gnome-terminal&#39;</span>
 </pre></div>
-<p>Then by pressing:</p>
-<p>&lt;Win&gt; + d</p>
-<p>Trigger <cite>dmenu</cite> from where you can invoke GNOME Terminal by typing
-<cite>gnome-terminal</cite>.</p>
-<p>In the next post I will explain my i3 post-install.</p>
+<p>Use <cite>dmenu</cite> to launch applications:</p>
+<ul class="simple">
+<li>Press <cite>&lt;Win&gt; + d</cite> and type <cite>gnome-terminal</cite> to open the terminal.</li>
+</ul>
 </div>
-<div class="section" id="login-out-and-powering-off">
-<h2>Login out and powering off</h2>
-<p>To log out from our session:</p>
-<p>&lt;Win&gt; + &lt;Shift&gt; + e</p>
-<p>This triggers a dialogue asking for if you want to end your i3 user session.
-Click on <cite>Yes, exit i3</cite> and then while on <cite>lightdm</cite> press:</p>
-<p>&lt;Alt&gt; + &lt;F4&gt;</p>
-<p>To turn off your system.</p>
-<p>I hope this post help you to achive a minimal install. This is a good and cheap
-way to setup virtual machines, without expending lot of resources or even for a
-working environemt for ancient devices with minimum and limited resources.</p>
+<div class="section" id="logging-out-and-powering-off">
+<h2>Logging Out and Powering Off</h2>
+<p>To log out from i3:</p>
+<ul class="simple">
+<li>Press <cite>&lt;Win&gt; + &lt;Shift&gt; + e</cite> and confirm.</li>
+</ul>
+<p>To power off from LightDM:</p>
+<ul class="simple">
+<li>Press <cite>&lt;Alt&gt; + &lt;F4&gt;</cite>.</li>
+</ul>
+<p>This guide provides a streamlined way to set up i3 on Fedora 29, ideal for
+lightweight virtual machines or older hardware with limited resources.</p>
 </div>
 
   </div>
