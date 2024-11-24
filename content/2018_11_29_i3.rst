@@ -5,199 +5,172 @@ i3
 :tags: dnf, fc29, fedora, postinstall
 :category: floss
 :slug: i3
-:summary: Improved tiling wm
+:summary: Improved tiling WM
 :lang: en
 
-In this post I will explain how to do a Fedora 29 installation with the i3
-window manager. It is common to see installation guides for i3, but they assume
-that you already have another desktop environment previously installed.
+In this post, I will explain how to perform a Fedora 29 installation with the
+i3 window manager. It is common to find installation guides for i3, but they
+often assume you already have another desktop environment installed.
 
-In this post we will see how to build a fully functional environment from a
-minimal installation as I have explained in other publications.
+Here, we will see how to build a fully functional environment starting from a
+minimal installation, as I have explained in previous posts.
 
-
-Creating an installation medium
+Creating an Installation Medium
 ===============================
 
-Download the ISO Fedora Everything Netinstall
----------------------------------------------
+Downloading the Fedora Everything Netinstall ISO
+------------------------------------------------
 
-From the site: https://alt.fedoraproject.org/ download the file of the All
-section, this is an ISO that works as a means of installation by network that
-downloads all the packages that will be part of the system from the Internet,
-as well as gives the option to choose which package collections to install,
-unlike Lives media whose software selection has been previously defined.
+From the site: https://alt.fedoraproject.org/, download the file in the
+*Everything* section. This ISO allows network-based installation, downloading
+all necessary packages from the Internet. It also provides the option to choose
+which package collections to install, unlike Live media, which comes with
+predefined software selections.
 
-Download the ISO with wget:
+Download the ISO with `wget`:
 
 .. code-block:: console
 
    wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso
 
-We also download the integrity check file:
+Also, download the integrity check file:
 
 .. code-block:: console
 
    wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM
 
-Check the integrity of the file:
+Verify the integrity of the file:
 
 .. code-block:: console
 
    sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM
 
-Create the installation media with Fedora Media Writer
-------------------------------------------------------
+Creating the Installation Medium with Fedora Media Writer
+---------------------------------------------------------
 
-Fedora Media Writer is available for different operating systems, download the
-corresponding one.
-
-It is very important to create the installation medium with Fedora Media Writer
-since this tool guarantees that the installation medium will have support to
-boot on computers that have both UEFI or BIOS.
-
-How it will start will depend on which of the two has the highest priority
-during startup. I always use UEFI only, so all my systems are installed in UEFI
-mode.
+Fedora Media Writer is available for various operating systems. Download the
+appropriate version from:
 
 https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1
 
-When Fedora Media Writer is installed on our computer, we connect our USB
-memory, run Fedora Media Writer and use the Custom Image option to navigate to
-the path where the ISO is, the one we just downloaded, select it, select
-carefully the USB memory we will use and record the image in the USB memory.
+Using Fedora Media Writer ensures the installation medium will support booting
+on both UEFI and BIOS systems. The boot mode depends on which has higher
+priority during startup. I always use UEFI exclusively, so all my systems are
+installed in UEFI mode.
+
+Once Fedora Media Writer is installed, connect your USB drive, run the
+application, and use the *Custom Image* option to navigate to the downloaded
+ISO. Select the USB drive carefully and write the image to the drive.
 
 Installation
 ============
 
-I have followed the installation steps described in this previous post, making
-sure I have access to a wireless network or a wired network.
+Follow the installation steps described in this previous post, ensuring access
+to a wireless or wired network:
 
 https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html
 
-This time I had to use my mobile phone, although it is true I had access to a
-wireless network during the installation of the base system (Fedora Custom
-Install), after installation the packages collection of does not provide the
-network drivers required to access wireless networks since they are not
-included in the Custom Install selection.
+During installation, I used my mobile phone to create a wired network via USB.
+While I had wireless access during the base system installation (Fedora Custom
+Install), the selected package collection lacked the necessary drivers for
+wireless connectivity.
 
-That's why I created a wired network via USB with my mobile phone. To make it
-work you have to make sure of the following right after the first boot once the
-installation finishes:
+To use a USB tethered network, follow these steps after the first boot:
 
-1. Log in in the system.
-2. Connect the USB cable to the computer.
-3. Connect the other end to the mobile phone.
-4. Make sure the phone is connected to a wireless network or that the data plan
-   is activated. As a note, consider that you need at least 800MB of data in
-   RPM packages that must be downloaded for a minimum installation of Fedora
-   with support for the graphical environment with i3wm.
-5. Make sure the phone is in USB or MTP data transfer mode.
-6. Activate a wired network or Tethered Wired Network from your mobile phone.
+1. Log in to the system.
+2. Connect the USB cable to your computer and mobile phone.
+3. Ensure the phone is connected to Wi-Fi or has an active data plan. You will need at least 800 MB of data for downloading the required RPM packages.
+4. Put the phone in USB or MTP data transfer mode.
+5. Enable a wired network (USB tethering) on your mobile phone.
 
-After this, you should have access to the Internet. Check it by pinging Google:
+Verify the connection by pinging Google:
 
 .. code-block:: console
 
    ping 8.8.8.8
 
-Basic configurations
+Basic Configurations
 ====================
 
-Configuring dnf
----------------
+Configuring `dnf`
+-----------------
 
-The next step is optional, as root, the first thing I do is configure dnf, so
-that it uses the most efficient packages mirrors:
+As root, I configure `dnf` for optimal performance. This step is optional:
+
+Enable the fastest mirrors:
 
 .. code-block:: console
 
    echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
 
-Then I disable the use of deltarpm's for future updates. If you prefer to
-reduce the amount of data to be downloaded in each of the future updates, skip
-this step:
+Disable delta RPMs for faster downloads (optional):
 
 .. code-block:: console
 
    echo 'deltarpm=false' >> /etc/dnf/dnf.conf
 
-I always keep each of the packages from which any program is installed on my
-system, including those that are downloaded as part of the updates and to
-maintain the packages cache throughout the period I use a Fedora release. This
-step is optional and you can skip it if you want:
+Keep the package cache for the lifetime of the Fedora release (optional):
 
 .. code-block:: console
 
    echo 'keepcache=true' >> /etc/dnf/dnf.conf
 
-Now I proceed to disable a service and a dnf timer. The service makes sure to
-refresh the metadata cache to be able to make checks on the versions of the
-packages that are in the repos and then check if there are updates available.
-The timer is responsible for executing the service periodically.
-
-I always disable both to avoid annoying bandwidth consumptions and dnf locks
-while the cache is refreshed. If you have a limited bandwidth or data plan this
-will help you reduce the consumption of it.
+Disable unnecessary `dnf` services and timers to save bandwidth and avoid
+locks:
 
 .. code-block:: console
 
    systemctl disable dnf-makecache.service
+
+.. code-block:: console
+
    systemctl disable dnf-makecache.timer
 
-Finally to make sure that the changes take effect we must restart:
+Reboot to apply the changes:
 
 .. code-block:: console
 
    reboot
 
-Regenerate the cache and install available updates
---------------------------------------------------
+Updating the System
+-------------------
 
-During the installation, you may have omitted to check the option that allows
-you to install the most recent version of the mirrors packages, so your system
-could be outdated even if you have used the network installation medium.
+After installation, your system may not include the latest updates. Refresh the
+metadata cache and install updates:
 
-To apply the most recent updates and use the most efficient mirrors it is
-necessary to regenerate the metadata cache.
-
-Fedora maintains a cache for each user, one for the root user, another for the
-normal user, in my case pionen. So we must regenerate both caches if you want
-to perform tasks as administrator or simple queries that do not require
-administrator privileges:
-
-As a normal non-root user:
+As a normal user:
 
 .. code-block:: console
 
    dnf clean all
 
+.. code-block:: console
+
    dnf makecache
 
-Then, as a normal non-root user, we execute the following commands, where we
-pass the statement in quotes as a parameter to the root user:
+As root:
 
 .. code-block:: console
 
    su -c 'dnf clean all'
 
+.. code-block:: console
+
    su -c 'dnf makecache'
 
-We check for available updates and enter our root password:
+Check for updates:
 
 .. code-block:: console
 
    su -c 'dnf --refresh check-upgrade'
 
-If there are updates available, we apply them with:
+If updates are available, install them:
 
 .. code-block:: console
 
    su -c 'dnf upgrade'
 
-If updates have been applied, it is recommended to restart the system in order
-to make use of the most recent version of all the programs, for example the
-kernel:
+Reboot if updates include critical components like the kernel:
 
 .. code-block:: console
 
@@ -206,243 +179,91 @@ kernel:
 Installing i3
 =============
 
-Now, the step by step with all the requirements for a Fedora 29 minimal
-installation with i3wm.
+Install the i3 window manager and necessary components. All commands must be
+executed as root.
 
-For it we will make use of packages collections that have been grouped in a
-very specialized way. Next commands must be executed as root user.
-
-Common NetworkManager Submodules
---------------------------------
-
-This group contains NetworkManager submodules that are commonly used, but may
-not be wanted in some streamlined configurations.
-
-.. code-block:: console
-
-   dnf -y group install networkmanager-submodules
-
-Core
-----
-
-Smallest possible installation.
+Install required groups and packages:
 
 .. code-block:: console
 
    dnf -y group install core
 
-Dial-up Networking Support
---------------------------
-
 .. code-block:: console
 
-   dnf -y install dial-up
-
-Fonts
------
-
-Fonts packages for rendering text on the desktop.
+   dnf -y group install networkmanager-submodules
 
 .. code-block:: console
 
    dnf -y group install fonts
 
-Guest Desktop Agents
---------------------
-
-Agents used when running as a virtualized desktop.
-
-.. code-block:: console
-
-   dnf -y group install guest-desktop-agents
-
-Hardware Support
-----------------
-
-This group is a collection of tools for various hardware specific utilities.
-
-.. code-block:: console
-
-   dnf -y group install hardware-support
-
-Multimedia
-----------
-
-Audio/video framework common to desktops.
-
 .. code-block:: console
 
    dnf -y group install multimedia
-
-Standard
---------
-
-Common set of utilities that extend the minimal installation.
-
-.. code-block:: console
-
-   dnf -y group install standard
-
-base-x
-------
-
-
 
 .. code-block:: console
 
    dnf -y group install base-x
 
-Input Methods
--------------
+.. code-block:: console
 
-
+   dnf -y group install standard
 
 .. code-block:: console
 
    dnf -y group install input-methods
 
-Fedora Icons Theme
-------------------
-
-This package provides the Fedora icons theme.
-
 .. code-block:: console
 
-   dnf -y install fedora-icon-theme
+   dnf -y install i3 lightdm-gtk xdg-user-dirs
 
-GNOME Icons Theme
------------------
-
-This package provides the default icon theme used by the GNOME Desktop.
-
-.. code-block:: console
-
-   dnf -y install gnome-icon-theme
-
-GNOME Icons Theme extra
------------------------
-
-This package provides additional mime type and devices icons for the GNOME
-Desktop.
-
-.. code-block:: console
-
-   dnf -y install gnome-icon-theme-extras
-
-i3 Window Manager
------------------
-
-Finally we can install the i3 window manager.
-
-.. code-block:: console
-
-   dnf -y install i3
-
-Installing the graphical login manager
---------------------------------------
-
-We will need a graphical login manager where we can pick our user and type our
-password so we can get authenticated. From here we can also select other
-desktop environments that we might install in the future.
-
-LightDM is a display manager that welcomes the user and uses the GTK3 tool kit.
-
-.. code-block:: console
-
-   dnf -y install lightdm-gtk
-
-xdg-user-dirs
--------------
-
-Contains xdg-user-dirs-update that updates and creates the directories at
-/home/, according to the predefined values configured by the administrator.
-
-.. code-block:: console
-
-   dnf -y install xdg-user-dirs
-
-Enabling the graphical mode boot
---------------------------------
-
-Our system already has all the requirements to work as a graphical environment
-using i3 as a window manager. But before it, we need to change some
-configurations that make our system boot from runlevel 3 mode or
-multi-user.target to runlevel 5 or graphical.target.
-
-We can fix that with the next command:
+Enable the graphical boot mode and LightDM:
 
 .. code-block:: console
 
    systemctl set-default graphical.target
 
-Also we must enable the system service that provides the option to access the
-system via a graphical loging that we just installed, lightdm:
-
 .. code-block:: console
 
    systemctl enable lightdm.service
 
-Finally we can reboot our system and then after we should be able to get logged
-in makeing use of the graphical session manager and our window manager i3.
+Reboot the system:
 
 .. code-block:: console
 
    reboot
 
-First graphical session
+First Graphical Session
 =======================
 
-Once logged in, i3 will ask if you want to generate a new config file for i3,
-press Enter to answer affirmatively.
+Upon first login, i3 will prompt you to generate a configuration file. Press
+Enter to confirm. Choose your preferred modifier key (e.g., the Windows or Meta
+key).
 
-Next it ask which key you want to use as modifier key to trigger the i3
-keyboard shortcuts, I always pick the `Win` or the Windows key, also known as
-`Meta key`.
+Installing Additional Software
+==============================
 
-Terminal command line
-=====================
-
-This setup does not provides any presintalled tool for web browsing, file
-manager, image viewer or pdf reader.
-
-It is up to you what to use and install.
-
-― But, how do I install those?
-
-If you selected the Windows key as modifier for i3, pressing:
-
-<Win> + Enter
-
-You will be able to run a command line terminal. I prefer to use GNOME
+This setup does not include preinstalled tools like a web browser or file
+manager. You can install them as needed. For example, to install GNOME
 Terminal:
 
 .. code-block:: console
 
    su -c 'dnf install gnome-terminal'
 
-Then by pressing:
+Use `dmenu` to launch applications:
 
-<Win> + d
+- Press `<Win> + d` and type `gnome-terminal` to open the terminal.
 
-Trigger `dmenu` from where you can invoke GNOME Terminal by typing
-`gnome-terminal`.
+Logging Out and Powering Off
+============================
 
-In the next post I will explain my i3 post-install.
+To log out from i3:
 
-Login out and powering off
-==========================
+- Press `<Win> + <Shift> + e` and confirm.
 
-To log out from our session:
+To power off from LightDM:
 
-<Win> + <Shift> + e
+- Press `<Alt> + <F4>`.
 
-This triggers a dialogue asking for if you want to end your i3 user session.
-Click on `Yes, exit i3` and then while on `lightdm` press:
-
-<Alt> + <F4>
-
-To turn off your system.
-
-I hope this post help you to achive a minimal install. This is a good and cheap
-way to setup virtual machines, without expending lot of resources or even for a
-working environemt for ancient devices with minimum and limited resources.
+This guide provides a streamlined way to set up i3 on Fedora 29, ideal for
+lightweight virtual machines or older hardware with limited resources.
