@@ -1,7 +1,7 @@
 repos
 #####
 
-:date: 2019-7-11 23:32
+:date: 2019-07-11 23:32
 :tags: fc30, fedora, postinstall, repositories
 :category: floss
 :slug: repos
@@ -11,24 +11,25 @@ repos
 Software Repositories
 =====================
 
-Once we solved the problem of getting connected to the Internet and how to
-launch a terminal, you might want to install all the software you use.
+Once you have resolved the problem of connecting to the Internet and launching
+a terminal, you might want to install all the software you need.
 
-The software comes from somewhere, on Fedora these are called *Software
-Repositories*, next I detail which are the ones I enable on all my Fedora
-installs apart of the officials that comes preinstalled and enabled by default.
+Software in Fedora comes from repositories, referred to as *Software
+Repositories*. Below, I detail the repositories I enable on all my Fedora
+installations, apart from the official ones that come preinstalled and enabled
+by default.
 
-Open a terminal and enable some of these.
+Open a terminal and enable some of these repositories.
 
-RPMFusion
----------
+RPM Fusion
+----------
 
-RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL maintained
-by a group of volunteers. RPM Fusion is not a standalone repository, but an
-extension of Fedora. RPM Fusion distributes packages that have been deemed
-unacceptable to Fedora.
+RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL,
+maintained by a group of volunteers. It is not a standalone repository but an
+extension of Fedora. RPM Fusion distributes packages that are not acceptable
+for inclusion in Fedora.
 
-More about RPMFusion on its official website: https://rpmfusion.org/FAQ
+Learn more about RPM Fusion on its official website: https://rpmfusion.org/FAQ
 
 .. code-block:: console
 
@@ -37,19 +38,19 @@ More about RPMFusion on its official website: https://rpmfusion.org/FAQ
 Fedora Workstation Repositories
 -------------------------------
 
-From the Fedora wiki page corresponding to Fedora Workstation Repositories:
+From the Fedora Wiki page for Fedora Workstation Repositories:
 
-The Fedora community strongly promotes free and open source resources. The
-Fedora Workstation, in its out of the box configuration, therefore, only
-includes free and open source software. To make the Fedora Workstation more
-usable, we've made it possible to easily install a curated set of third party
-(external) sources that supply software not included in Fedora via an
-additional package.
+The Fedora community strongly promotes free and open source resources.
+Therefore, the Fedora Workstation, in its default configuration, only includes
+free and open source software. To make Fedora Workstation more usable, we’ve
+made it easy to install a curated set of third-party (external) sources that
+supply software not included in Fedora through an additional package.
 
-Read more at: https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories
+Read more at:
+https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories
 
-Please note that this will only install the \*.repo files, it will not enable
-the provided repos:
+Note: This will only install the `.repo` files; it will not enable the provided
+repositories:
 
 .. code-block:: console
 
@@ -58,26 +59,23 @@ the provided repos:
 Fedora Rawhide's Repositories
 -----------------------------
 
-Rawhide is the name given to the current development version of Fedora. It
-consists of a package repository called "rawhide" and contains the latest build
-of all Fedora packages updated on a daily basis. Each day, an attempt is made
-to create a full set of 'deliverables' (installation images and so on), and all
-that compose successfully are included in the Rawhide tree for that day.
+Rawhide is the name of the current development version of Fedora. It consists
+of a package repository called "rawhide," containing the latest builds of all
+Fedora packages, updated daily. Each day, an attempt is made to create a full
+set of "deliverables" (installation images and so on), and all successfully
+composed packages are included in the Rawhide tree for that day.
 
-It is possible to install its repository files and just temporarily enable it
-for just a single transaction, let us say, to simple install or upgrade a
-single package and its dependencies, maybe, to give a try to its new version
-that is not currently available on any of the stable and maintained versions of
-Fedora.
+You can install its repository files and temporarily enable it for a single
+transaction—for example, to install or upgrade a single package and its
+dependencies. This is particularly useful when a bug fix exists in Rawhide but
+has not yet reached the stable branches of Fedora.
 
-This is useful when a bug was fixed on Rawhide but it has not landed yet on the
-stable branch of Fedora and the urge for it cannot wait.
+Note: This will only install the `.repo` file under ``/etc/yum.repos.d/``; it
+will not enable the repository. Later, we will see how to handle enabling and
+disabling repositories for single transactions.
 
-Again, this will just install the \*.repo file under ``/etc/yum.repos.d/``,
-this will not enable it. Later we will see how to handle, disable and enable
-this repositories for just one transaction.
-
-More on Rawhide on its wiki page: https://fedoraproject.org/wiki/Releases/Rawhide
+Learn more about Rawhide on its Wiki page:
+https://fedoraproject.org/wiki/Releases/Rawhide
 
 .. code-block:: console
 
@@ -86,15 +84,15 @@ More on Rawhide on its wiki page: https://fedoraproject.org/wiki/Releases/Rawhid
 COPR
 ----
 
-Copr is an easy-to-use automatic build system providing a package repository as
-its output.
+COPR is an easy-to-use automatic build system that provides a package
+repository as its output.
 
-Here are some of the repos I rely on for some packages:
+Here are some of the repositories I rely on:
 
 neteler/remarkable
 ~~~~~~~~~~~~~~~~~~
 
-Remarkable is a free fully featured markdown editor.
+Remarkable is a free, fully featured markdown editor.
 
 .. code-block:: console
 
@@ -103,9 +101,9 @@ Remarkable is a free fully featured markdown editor.
 philfry/gajim
 ~~~~~~~~~~~~~
 
-Gajim is a Jabber client written in PyGTK, currently it provides support for
-the OMEMO encryption method which I use. This repo provides tools and
-dependencies not available in the official Fedora repo.
+Gajim is a Jabber client written in PyGTK. It currently provides support for
+the OMEMO encryption method, which I use. This repository provides tools and
+dependencies not available in the official Fedora repository.
 
 .. code-block:: console
 
@@ -114,7 +112,7 @@ dependencies not available in the official Fedora repo.
 dani/qgis
 ~~~~~~~~~
 
-QGIS is a user friendly Open Source Geographic Information System.
+QGIS is a user-friendly open source Geographic Information System.
 
 .. code-block:: console
 
@@ -123,7 +121,7 @@ QGIS is a user friendly Open Source Geographic Information System.
 donet-sig/dotnet
 ~~~~~~~~~~~~~~~~
 
-This provides the .NET CLI tools and runtime for Fedora.
+This repository provides the .NET CLI tools and runtime for Fedora.
 
 .. code-block:: console
 
@@ -132,17 +130,17 @@ This provides the .NET CLI tools and runtime for Fedora.
 VSCodium
 --------
 
-Few weeks ago I decided to give a try to VSCodium, a fork of VSCode, here is
-how to enable its repo for Fedora.
+A few weeks ago, I decided to try VSCodium, a fork of VSCode. Here is how to
+enable its repository for Fedora.
 
-First import its gpg key, so you can check the packages retrieved from the
-repo:
+First, import its GPG key so you can verify the packages retrieved from the
+repository:
 
 .. code-block:: console
 
    su -c 'rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg'
 
-Now create the vscodium.repo file:
+Now create the `vscodium.repo` file:
 
 .. code-block:: console
 
@@ -160,14 +158,14 @@ Now create the vscodium.repo file:
 Verification
 ============
 
-Now check that all the repos has been successfully installed and some of them
-enabled by refreshing the ``dnf`` metadata.
+Now check that all the repositories have been successfully installed and some
+of them enabled by refreshing the `dnf` metadata:
 
 .. code-block:: console
 
    su -c 'dnf check-update'
 
-Thats all, in the next post will see how to enable some of this repos, how
-temporarilly disable  and enable some other for just a single transaction, how
-to install or upgrade certain packages from an specific repo and many repo
-administration tasks.
+That’s all. In the next post, we will see how to enable some of these
+repositories, temporarily disable and enable others for single transactions,
+install or upgrade specific packages from a particular repository, and perform
+many repository administration tasks.
