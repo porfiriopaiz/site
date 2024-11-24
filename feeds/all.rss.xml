@@ -1448,108 +1448,104 @@ user, jump to the next field, insert the password, to finally and automatically
 &amp;quot;press&amp;quot; &lt;tt class="docutils literal"&gt;Log In&lt;/tt&gt; and log in.&lt;/p&gt;
 &lt;p&gt;I hope this post is useful for you.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Fri, 17 Nov 2017 19:10:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</guid><category>floss</category><category>debian</category><category>fc27</category><category>fedora</category><category>keepassxc</category><category>password</category></item><item><title>Fedora 26 Custom Operating System post install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;On the last post I explained how make a Minimal install of Fedora 25, months
-has passed by since the last post and Fedora 26 was released, following the
-same steps I installed it on my laptop and next I will document my postinstall.&lt;/p&gt;
-&lt;p&gt;Given this is a minimal install, the set of packages installed does not
-provides support for Wireless Network Cards. It is true that during the
-installation process Anaconda provides such support, but once you have
-installed the minimal set of packages, these does not provides the required
-drivers, for this matter I must get my laptop connected to a Wired Network.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Fri, 17 Nov 2017 19:10:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</guid><category>floss</category><category>debian</category><category>fc27</category><category>fedora</category><category>keepassxc</category><category>password</category></item><item><title>Fedora 26 Custom Operating System Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;In the last post, I explained how to make a minimal installation of Fedora 25.
+Months have passed since then, and Fedora 26 has been released. Following the
+same steps, I installed it on my laptop and will now document my
+post-installation process.&lt;/p&gt;
+&lt;p&gt;Since this is a minimal installation, the set of installed packages does not
+provide support for wireless network cards. Although Anaconda provides such
+support during the installation process, the minimal package set lacks the
+required drivers. To address this, I connected my laptop to a wired network.&lt;/p&gt;
 &lt;div class="section" id="dnf-configuration"&gt;
-&lt;h2&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; configuration&lt;/h2&gt;
-&lt;p&gt;After checking the Wired Network, first I did was to edit dnf's configuration
-file and add the next lines to it:&lt;/p&gt;
+&lt;h2&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; Configuration&lt;/h2&gt;
+&lt;p&gt;After connecting to a wired network, the first thing I did was edit &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt;'s
+configuration file and add the following lines:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
-
-&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
-
-&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This way I make sure &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; will always use the more efficient mirror; will
-not use &lt;cite&gt;*.drpm's&lt;/cite&gt; for upgrades, instead it will always download &lt;cite&gt;*.rpm's&lt;/cite&gt;; and
-will keep any package it downloads in its cache.&lt;/p&gt;
-&lt;p&gt;Now let's reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This ensures that &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; always uses the fastest mirror, avoids using &lt;cite&gt;*.drpm&lt;/cite&gt;
+files for upgrades (downloading &lt;cite&gt;*.rpm&lt;/cite&gt; files instead), and retains any
+downloaded packages in its cache.&lt;/p&gt;
+&lt;p&gt;Now, let's reboot:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="disablle-dnf-makecache-service-and-dnf-makecache-timer"&gt;
-&lt;h2&gt;Disablle dnf-makecache.service and dnf-makecache.timer&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; has this service and timer that annoys me, both makes sure of keeping
-the package metadata cache up to date with a certain frequence, this is
-something I like to do when I want and when I need it, not at &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; please,
-so this behaviour is fixed with the next command:&lt;/p&gt;
+&lt;div class="section" id="disable-dnf-makecache-service-and-dnf-makecache-timer"&gt;
+&lt;h2&gt;Disable &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-makecache.service&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-makecache.timer&lt;/span&gt;&lt;/tt&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; has a service and timer that keep the package metadata cache updated
+periodically. This behavior annoys me, as I prefer to update the cache when I
+want and need to. To disable these, I ran the following commands:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl disable dnf-makecache.service&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;systemctl disable dnf-makecache.timer&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl disable dnf-makecache.timer&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Let's reboot again:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="rebuilding-packages-metadata-cache-s"&gt;
-&lt;h2&gt;Rebuilding packages metadata cache's&lt;/h2&gt;
-&lt;p&gt;Once &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; configuration file is customized, service and timer are disabled,
-I clean the old cache and rebuild it. This time the commands are run as normal
-user, Fedora keeps two differents cache: one for the normal user and other for
-the root user:&lt;/p&gt;
-&lt;p&gt;This will rebuild packages metadata cache for my normal user:&lt;/p&gt;
+&lt;div class="section" id="rebuilding-package-metadata-cache"&gt;
+&lt;h2&gt;Rebuilding Package Metadata Cache&lt;/h2&gt;
+&lt;p&gt;After customizing the &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; configuration file and disabling the service and
+timer, I cleaned the old cache and rebuilt it. Fedora maintains two separate
+caches: one for the normal user and another for the root user.&lt;/p&gt;
+&lt;p&gt;To rebuild the cache for my normal user:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
-
-&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This will rebuild packages metadata cache for the root user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To rebuild the cache for the root user:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="available-upgrades"&gt;
 &lt;h2&gt;Available Upgrades&lt;/h2&gt;
-&lt;p&gt;During the installation it is possible to mark a checkbox for the option to
-download and install the packages with the most recent version, to verify if
-there aren't any upgrades:&lt;/p&gt;
+&lt;p&gt;During installation, there is an option to download and install the latest
+versions of packages. To check for any available upgrades:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To download and apply the upgrades if availables:&lt;/p&gt;
+&lt;p&gt;To download and apply the upgrades, if available:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;After the upgrade let's reboot to make use of latest version of any package if
-upgraded.&lt;/p&gt;
+&lt;p&gt;After upgrading, reboot to utilize the latest versions of any upgraded
+packages:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="workstation-product-environment-installation"&gt;
 &lt;h2&gt;Workstation Product Environment Installation&lt;/h2&gt;
-&lt;p&gt;On my laptop I use GNOME Shell as desktop environment, to install it I make use
-of a package group that provides all the required packages to make of this
-Fedora Custom Operating System install a Fedora Workstation:&lt;/p&gt;
+&lt;p&gt;On my laptop, I use GNOME Shell as my desktop environment. To install it, I
+used a package group that provides all the necessary packages to transform this
+minimal installation into a Fedora Workstation:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf group install workstation-product-environment&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="graphical-boot-mode"&gt;
 &lt;h2&gt;Graphical Boot Mode&lt;/h2&gt;
-&lt;p&gt;After downloading and installing all the packages, We must change the default
-&lt;cite&gt;init&lt;/cite&gt; mode from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;multi-user.target&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;graphical.target&lt;/tt&gt;, otherwise, when
-We reboot our system will not start in graphical mode.&lt;/p&gt;
-&lt;p&gt;Also We must enable the service for the graphical login manager, if no, despite
-enabling the graphical mode our login will still a text based prompt:&lt;/p&gt;
+&lt;p&gt;After installing the required packages, we must change the default &lt;cite&gt;init&lt;/cite&gt; mode
+from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;multi-user.target&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;graphical.target&lt;/tt&gt;. Otherwise, the system will
+not boot into graphical mode. Additionally, we need to enable the graphical
+login manager service. Without this, the login will remain a text-based prompt:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl set-default graphical.target&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;systemctl enable gdm.service&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;reboot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If nothing goes wrong, you might be running Fedora 26 Workstation with GNONE
-Shell.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl enable gdm.service&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If everything works correctly, Fedora 26 Workstation with GNOME Shell should
+now be running.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="fixing-nautilus-behaviour"&gt;
-&lt;h2&gt;Fixing Nautilus Behaviour&lt;/h2&gt;
-&lt;p&gt;Before opening any other application, I like to fix how Nautilus sorts files, I
-like to have them sorted by type or file extension:&lt;/p&gt;
+&lt;div class="section" id="fixing-nautilus-behavior"&gt;
+&lt;h2&gt;Fixing Nautilus Behavior&lt;/h2&gt;
+&lt;p&gt;Before opening any other application, I like to adjust how Nautilus sorts
+files. I prefer sorting by type or file extension:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.gnome.nautilus.preferences default-sort-order type&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This way when opening Nautilus it will show the files sorted by extension.&lt;/p&gt;
+&lt;p&gt;This ensures files are displayed sorted by extension when opening Nautilus.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="repositories"&gt;
 &lt;h2&gt;Repositories&lt;/h2&gt;
@@ -1557,110 +1553,68 @@ like to have them sorted by type or file extension:&lt;/p&gt;
 &lt;h3&gt;Enabling RPMFusion:&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Refresh the cache, this will download the RPMFusion packages metadata:&lt;/p&gt;
+&lt;p&gt;Refresh the cache to download the RPMFusion package metadata:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-upgrade&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="enabling-google-chrome-s-repository"&gt;
-&lt;h3&gt;Enabling Google Chrome's repository:&lt;/h3&gt;
-&lt;p&gt;I used to enable Google Chrome repository as explained on this post:&lt;/p&gt;
+&lt;h3&gt;Enabling Google Chrome's Repository:&lt;/h3&gt;
+&lt;p&gt;I used to enable the Google Chrome repository as explained in this post:&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/"&gt;https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But Mayorga presented me a more simple method, basically you just have to
-download Google Chrome &lt;tt class="docutils literal"&gt;rpm&lt;/tt&gt; package, install it from the command line
-indicating the path to the &lt;tt class="docutils literal"&gt;rpm&lt;/tt&gt; package and this by itself will add the
-&lt;cite&gt;*.repo&lt;/cite&gt; file to the path &lt;tt class="docutils literal"&gt;/etc/yum.repos.d/&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;However, a simpler method was introduced to me by Mayorga. Simply download the
+Google Chrome &lt;tt class="docutils literal"&gt;rpm&lt;/tt&gt; package, install it via the command line, and it will
+automatically add the &lt;cite&gt;*.repo&lt;/cite&gt; file to &lt;cite&gt;/etc/yum.repos.d/&lt;/cite&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cd ~/Downloads&lt;/span&gt;
-
-&lt;span class="go"&gt;wget -N -t 0 -c https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install google-chrome-stable_current_x86_64.rpm&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf check-update&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install google-chrome-stable_current_x86_64.rpm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-update&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="disabling-tracker"&gt;
 &lt;h2&gt;Disabling Tracker&lt;/h2&gt;
-&lt;p&gt;Before copying back any file from my back up's, hay must disable the annoying
-&lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt; and all his friends:&lt;/p&gt;
+&lt;p&gt;Before copying files from my backups, I disable the annoying &lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt;
+service:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install tracker-preferences&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;mkdir ~/.config/autostart&lt;/span&gt;
-
-&lt;span class="go"&gt;cp /etc/xdg/autostart/tracker* ~/.config/autostart&lt;/span&gt;
-
-&lt;span class="go"&gt;cd ~/.config/autostart&lt;/span&gt;
-
-&lt;span class="go"&gt;sed -i &amp;#39;s/X-GNOME-Autostart-enabled=true/X-GNOME-Autostart-enabled=false/&amp;#39; tracker*&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Let's check &lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt; status:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;mkdir ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cp /etc/xdg/autostart/tracker* ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cd ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sed -i &amp;#39;s/X-GNOME-Autostart-enabled=true/X-GNOME-Autostart-enabled=false/&amp;#39; tracker*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To check &lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt; status:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;tracker status&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Then we make a &lt;tt class="docutils literal"&gt;hard reset&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;To perform a &lt;tt class="docutils literal"&gt;hard reset&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;tracker reset --hard&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="disabling-gnome-software-and-packagekit-download-updates"&gt;
-&lt;h2&gt;Disabling GNOME Software and PackageKit download-updates&lt;/h2&gt;
-&lt;p&gt;GNOME Software downloads metadata and upgrades for the system in background, to
-disable it We execute the next commands:&lt;/p&gt;
+&lt;div class="section" id="disabling-gnome-software-and-packagekit-auto-updates"&gt;
+&lt;h2&gt;Disabling GNOME Software and PackageKit Auto-Updates&lt;/h2&gt;
+&lt;p&gt;GNOME Software downloads metadata and updates in the background. To disable
+this behavior:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.gnome.software download-updates false&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;systemctl mask packagekit.service&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This should stop the autodownload upgrades and the PackageKit service.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl mask packagekit.service&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="libraries-and-development-tools"&gt;
 &lt;h2&gt;Libraries and Development Tools&lt;/h2&gt;
-&lt;p&gt;Now install the package groups that provides the required software and
-libraries for compiling other software from source code, as well as making of
-&lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and &lt;cite&gt;IDE&lt;/cite&gt;, on another post I will explain how to do so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y groups install c-development&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf -y groups install development-libs&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf -y groups install development-tools&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf -y groups install fedora-packager&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf -y groups install rpm-development-tools&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install automake gcc gcc-c++ kernel-devel cmake&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install python-devel python3-devel&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install monodevelop&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install golang&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install nodejs&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install rust&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install cargo&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install python3-virtualenv&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install python3-pip&amp;#39;&lt;/span&gt;
+&lt;p&gt;Finally, I installed package groups and tools for development:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y group install c-development development-libs development-tools fedora-packager rpm-development-tools&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And finally the spellcheckers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install hunspell&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install hunspell-en&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install hunspell-es&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install aspell&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install aspell-es&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install aspell-en&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install autocorr-es&amp;#39;&lt;/span&gt;
-
-&lt;span class="go"&gt;su -c &amp;#39;dnf install autocorr-en&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install automake gcc gcc-c++ kernel-devel cmake python-devel python3-devel monodevelop golang nodejs rust cargo python3-virtualenv python3-pip&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On the next post I will make shorts reviews on the other tools I use on Fedora.&lt;/p&gt;
+&lt;p&gt;To install spell checkers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install hunspell hunspell-en hunspell-es aspell aspell-es aspell-en autocorr-es autocorr-en&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the next post, I will review additional tools I use on Fedora.&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 31 Aug 2017 16:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</guid><category>floss</category><category>dnf</category><category>fc26</category><category>fedora</category><category>postinstall</category></item><item><title>This was Fedora at CS50x.ni</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</link><description>&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
 community and the &lt;a class="reference external" href="http://code-fu.net.ni/"&gt;CS50x.ni&lt;/a&gt; staff, with the support
