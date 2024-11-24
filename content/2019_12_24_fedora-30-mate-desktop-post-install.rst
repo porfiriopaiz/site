@@ -1,14 +1,14 @@
-Fedora 30 Mate Desktop post-install
+Fedora 30 Mate Desktop Post-Install
 ###################################
 
 :date: 2019-12-24 12:28
 :tags: fc30, fedora, mate, postinstall
 :category: floss
 :slug: mate-desktop
-:summary: Fedora 30 Mate Desktop Post-install
+:summary: Fedora 30 Mate Desktop Post-Install
 :lang: en
 
-dnf configuration
+DNF Configuration
 =================
 
 dnf.conf
@@ -20,19 +20,19 @@ Enable Fastest Mirrors:
 
    echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
 
-Disable deltarpm's for future updates:
+Disable DeltaRPMs for Future Updates:
 
 .. code-block:: console
 
    echo 'deltarpm=false' >> /etc/dnf/dnf.conf
 
-Enable dnf packages caching:
+Enable DNF Package Caching:
 
 .. code-block:: console
 
    echo 'keepcache=true' >> /etc/dnf/dnf.conf
 
-Disable dnf makecache systemd service and timer
+Disable DNF Makecache Systemd Service and Timer
 -----------------------------------------------
 
 To disable the service:
@@ -47,10 +47,10 @@ To disable the timer:
 
    systemctl disable dnf-makecache.timer
 
-Regenerate the cache and install available updates
+Regenerate the Cache and Install Available Updates
 --------------------------------------------------
 
-As a normal non-root user:
+As a normal, non-root user:
 
 .. code-block:: console
 
@@ -76,14 +76,16 @@ Reboot:
 
    reboot
 
-Check for available upgrades and enter your root password:
-==========================================================
+Check for Available Upgrades
+============================
+
+Enter your root password:
 
 .. code-block:: console
 
    su -c 'dnf --refresh check-upgrade'
 
-If there are upgrades available, we apply them with:
+If upgrades are available, apply them:
 
 .. code-block:: console
 
@@ -98,56 +100,56 @@ Reboot:
 Mate Desktop Tips and Tricks
 ============================
 
-Enable windows composing:
+Enable Window Compositing:
 
 .. code-block:: console
 
    gsettings set org.mate.Marco.general compositing-manager true
 
-Enable new window centering:
+Enable New Window Centering:
 
 .. code-block:: console
 
    gsettings set org.mate.Marco.general center-new-windows true
 
-Enable window snapping
+Enable Window Snapping:
 
 .. code-block:: console
 
    gsettings set org.mate.Marco.general allow-tiling true
 
-Hide all desktop icons:
+Hide All Desktop Icons:
 
 .. code-block:: console
 
    gsettings set org.mate.background show-desktop-icons false
 
-Change window decoration button order:
+Change Window Decoration Button Order:
 
 .. code-block:: console
 
    gsettings set org.mate.Marco.general button-layout 'close,maximize,minimize:menu'
 
-Disable automount-open:
+Disable Automount-Open:
 
 .. code-block:: console
 
    gsettings set org.mate.media-handling automount-open false
 
-Disable automounting:
+Disable Automounting:
 
 .. code-block:: console
 
    gsettings set org.mate.media-handling automount false
 
-Caja default prefereces for sorting order:
+Set Default Caja Preferences for Sorting Order:
 
 .. code-block:: console
 
    gsettings set org.mate.caja.preferences default-sort-order type
 
-Create some working directories
-===============================
+Create Working Directories
+==========================
 
 .. code-block:: console
 
@@ -157,7 +159,7 @@ Create some working directories
 
    mkdir ~/projects
 
-Remove unneeded software
+Remove Unneeded Software
 ========================
 
 .. code-block:: console
@@ -216,39 +218,37 @@ COPR
 Copr is an easy-to-use automatic build system providing a package repository as
 its output.
 
-Here are some of the repos I rely on for some packages:
+`neteler/remarkable`
+~~~~~~~~~~~~~~~~~~~~
 
-neteler/remarkable
-~~~~~~~~~~~~~~~~~~
-
-Remarkable is a free fully featured markdown editor.
+Remarkable is a free, fully-featured Markdown editor.
 
 .. code-block:: console
 
    su -c 'dnf -y copr enable neteler/remarkable'
 
-philfry/gajim
-~~~~~~~~~~~~~
+`philfry/gajim`
+~~~~~~~~~~~~~~~
 
-Gajim is a Jabber client written in PyGTK, currently it provides support for
-the OMEMO encryption method which I use. This repo provides tools and
-dependencies not available in the official Fedora repo.
+Gajim is a Jabber client written in PyGTK. It provides support for the OMEMO
+encryption method. This repo includes tools and dependencies not available in
+the official Fedora repo.
 
 .. code-block:: console
 
    su -c 'dnf -y copr enable philfry/gajim'
 
-dani/qgis
-~~~~~~~~~
+`dani/qgis`
+~~~~~~~~~~~
 
-QGIS is a user friendly Open Source Geographic Information System.
+QGIS is a user-friendly, open-source Geographic Information System.
 
 .. code-block:: console
 
    su -c 'dnf -y copr enable dani/qgis'
 
-donet-sig/dotnet
-~~~~~~~~~~~~~~~~
+`@dotnet-sig/dotnet`
+~~~~~~~~~~~~~~~~~~~~~
 
 This provides the .NET CLI tools and runtime for Fedora.
 
@@ -259,13 +259,13 @@ This provides the .NET CLI tools and runtime for Fedora.
 VSCodium
 --------
 
-Import the gpg key.
+Import the GPG key:
 
 .. code-block:: console
 
    su -c 'rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg'
 
-Now create the vscodium.repo file:
+Now create the `vscodium.repo` file:
 
 .. code-block:: console
 

@@ -22,7 +22,7 @@
 
   <title>
     porfirio's blog
-&ndash; Fedora 30 Mate Desktop post-install  </title>
+&ndash; Fedora 30 Mate Desktop Post-Install  </title>
 
 </head>
 
@@ -58,25 +58,25 @@
 
 <article>
   <div class="article_title">
-    <h1><a href="../../../../posts/2019/12/24/mate-desktop.html">Fedora 30 Mate Desktop post-install</a></h1>
+    <h1><a href="../../../../posts/2019/12/24/mate-desktop.html">Fedora 30 Mate Desktop Post-Install</a></h1>
   </div>
   <div class="article_text">
     <div class="section" id="dnf-configuration">
-<h2>dnf configuration</h2>
+<h2>DNF Configuration</h2>
 <div class="section" id="dnf-conf">
 <h3>dnf.conf</h3>
 <p>Enable Fastest Mirrors:</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;fastestmirror=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
-<p>Disable deltarpm's for future updates:</p>
+<p>Disable DeltaRPMs for Future Updates:</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;deltarpm=false&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
-<p>Enable dnf packages caching:</p>
+<p>Enable DNF Package Caching:</p>
 <div class="highlight"><pre><span></span><span class="go">echo &#39;keepcache=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
 </pre></div>
 </div>
 <div class="section" id="disable-dnf-makecache-systemd-service-and-timer">
-<h3>Disable dnf makecache systemd service and timer</h3>
+<h3>Disable DNF Makecache Systemd Service and Timer</h3>
 <p>To disable the service:</p>
 <div class="highlight"><pre><span></span><span class="go">systemctl disable dnf-makecache.service</span>
 </pre></div>
@@ -85,8 +85,8 @@
 </pre></div>
 </div>
 <div class="section" id="regenerate-the-cache-and-install-available-updates">
-<h3>Regenerate the cache and install available updates</h3>
-<p>As a normal non-root user:</p>
+<h3>Regenerate the Cache and Install Available Updates</h3>
+<p>As a normal, non-root user:</p>
 <div class="highlight"><pre><span></span><span class="go">dnf clean all</span>
 </pre></div>
 <div class="highlight"><pre><span></span><span class="go">dnf makecache</span>
@@ -101,11 +101,12 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="check-for-available-upgrades-and-enter-your-root-password">
-<h2>Check for available upgrades and enter your root password:</h2>
+<div class="section" id="check-for-available-upgrades">
+<h2>Check for Available Upgrades</h2>
+<p>Enter your root password:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf --refresh check-upgrade&#39;</span>
 </pre></div>
-<p>If there are upgrades available, we apply them with:</p>
+<p>If upgrades are available, apply them:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
 </pre></div>
 <p>Reboot:</p>
@@ -114,40 +115,40 @@
 </div>
 <div class="section" id="mate-desktop-tips-and-tricks">
 <h2>Mate Desktop Tips and Tricks</h2>
-<p>Enable windows composing:</p>
+<p>Enable Window Compositing:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general compositing-manager true</span>
 </pre></div>
-<p>Enable new window centering:</p>
+<p>Enable New Window Centering:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general center-new-windows true</span>
 </pre></div>
-<p>Enable window snapping</p>
+<p>Enable Window Snapping:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general allow-tiling true</span>
 </pre></div>
-<p>Hide all desktop icons:</p>
+<p>Hide All Desktop Icons:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.background show-desktop-icons false</span>
 </pre></div>
-<p>Change window decoration button order:</p>
+<p>Change Window Decoration Button Order:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general button-layout &#39;close,maximize,minimize:menu&#39;</span>
 </pre></div>
-<p>Disable automount-open:</p>
+<p>Disable Automount-Open:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount-open false</span>
 </pre></div>
-<p>Disable automounting:</p>
+<p>Disable Automounting:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount false</span>
 </pre></div>
-<p>Caja default prefereces for sorting order:</p>
+<p>Set Default Caja Preferences for Sorting Order:</p>
 <div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.caja.preferences default-sort-order type</span>
 </pre></div>
 </div>
-<div class="section" id="create-some-working-directories">
-<h2>Create some working directories</h2>
+<div class="section" id="create-working-directories">
+<h2>Create Working Directories</h2>
 <div class="highlight"><pre><span></span><span class="go">mkdir ~/git_repos</span>
 </pre></div>
 <div class="highlight"><pre><span></span><span class="go">mkdir ~/projects</span>
 </pre></div>
 </div>
 <div class="section" id="remove-unneeded-software">
-<h2>Remove unneeded software</h2>
+<h2>Remove Unneeded Software</h2>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove xfburn&#39;</span>
 </pre></div>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove exaile&#39;</span>
@@ -183,29 +184,28 @@
 <h3>COPR</h3>
 <p>Copr is an easy-to-use automatic build system providing a package repository as
 its output.</p>
-<p>Here are some of the repos I rely on for some packages:</p>
 <div class="section" id="neteler-remarkable">
-<h4>neteler/remarkable</h4>
-<p>Remarkable is a free fully featured markdown editor.</p>
+<h4><cite>neteler/remarkable</cite></h4>
+<p>Remarkable is a free, fully-featured Markdown editor.</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable neteler/remarkable&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="philfry-gajim">
-<h4>philfry/gajim</h4>
-<p>Gajim is a Jabber client written in PyGTK, currently it provides support for
-the OMEMO encryption method which I use. This repo provides tools and
-dependencies not available in the official Fedora repo.</p>
+<h4><cite>philfry/gajim</cite></h4>
+<p>Gajim is a Jabber client written in PyGTK. It provides support for the OMEMO
+encryption method. This repo includes tools and dependencies not available in
+the official Fedora repo.</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable philfry/gajim&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="dani-qgis">
-<h4>dani/qgis</h4>
-<p>QGIS is a user friendly Open Source Geographic Information System.</p>
+<h4><cite>dani/qgis</cite></h4>
+<p>QGIS is a user-friendly, open-source Geographic Information System.</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable dani/qgis&#39;</span>
 </pre></div>
 </div>
-<div class="section" id="donet-sig-dotnet">
-<h4>donet-sig/dotnet</h4>
+<div class="section" id="dotnet-sig-dotnet">
+<h4><cite>&#64;dotnet-sig/dotnet</cite></h4>
 <p>This provides the .NET CLI tools and runtime for Fedora.</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf copr enable @dotnet-sig/dotnet&#39;</span>
 </pre></div>
@@ -213,10 +213,10 @@ dependencies not available in the official Fedora repo.</p>
 </div>
 <div class="section" id="vscodium">
 <h3>VSCodium</h3>
-<p>Import the gpg key.</p>
+<p>Import the GPG key:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &#39;rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&#39;</span>
 </pre></div>
-<p>Now create the vscodium.repo file:</p>
+<p>Now create the <cite>vscodium.repo</cite> file:</p>
 <div class="highlight"><pre><span></span><span class="go">su -c &quot;tee -a /etc/yum.repos.d/vscodium.repo &lt;&lt; &#39;EOF&#39;</span>
 <span class="go">[gitlab.com_paulcarroty_vscodium_repo]</span>
 <span class="go">name=gitlab.com_paulcarroty_vscodium_repo</span>
