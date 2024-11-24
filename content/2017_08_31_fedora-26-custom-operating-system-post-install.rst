@@ -1,5 +1,5 @@
 Fedora 26 Custom Operating System Post-Install
-###############################################
+##############################################
 
 :date: 2017-8-31 16:26
 :tags: dnf, fc26, fedora, postinstall
@@ -27,7 +27,13 @@ configuration file and add the following lines:
 .. code-block:: console
 
    echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
+
+.. code-block:: console
+
    echo 'deltarpm=false' >> /etc/dnf/dnf.conf
+
+.. code-block:: console
+
    echo 'keepcache=true' >> /etc/dnf/dnf.conf
 
 This ensures that ``dnf`` always uses the fastest mirror, avoids using `*.drpm`
@@ -41,7 +47,7 @@ Now, let's reboot:
    reboot
 
 Disable ``dnf-makecache.service`` and ``dnf-makecache.timer``
-============================================================
+=============================================================
 
 ``dnf`` has a service and timer that keep the package metadata cache updated
 periodically. This behavior annoys me, as I prefer to update the cache when I
@@ -50,6 +56,9 @@ want and need to. To disable these, I ran the following commands:
 .. code-block:: console
 
    su -c 'systemctl disable dnf-makecache.service'
+
+.. code-block:: console
+
    su -c 'systemctl disable dnf-makecache.timer'
 
 Let's reboot again:
@@ -70,6 +79,9 @@ To rebuild the cache for my normal user:
 .. code-block:: console
 
    dnf clean all
+
+.. code-block:: console
+
    dnf makecache
 
 To rebuild the cache for the root user:
@@ -77,6 +89,9 @@ To rebuild the cache for the root user:
 .. code-block:: console
 
    su -c 'dnf clean all'
+
+.. code-block:: console
+
    su -c 'dnf makecache'
 
 Available Upgrades
@@ -124,14 +139,20 @@ login manager service. Without this, the login will remain a text-based prompt:
 .. code-block:: console
 
    su -c 'systemctl set-default graphical.target'
+
+.. code-block:: console
+
    su -c 'systemctl enable gdm.service'
+
+.. code-block:: console
+
    reboot
 
 If everything works correctly, Fedora 26 Workstation with GNOME Shell should
 now be running.
 
 Fixing Nautilus Behavior
-=========================
+========================
 
 Before opening any other application, I like to adjust how Nautilus sorts
 files. I prefer sorting by type or file extension:
@@ -172,8 +193,17 @@ automatically add the `*.repo` file to `/etc/yum.repos.d/`.
 .. code-block:: console
 
    cd ~/Downloads
+
+.. code-block:: console
+
    wget -N -t 0 -c https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
+.. code-block:: console
+
    su -c 'dnf install google-chrome-stable_current_x86_64.rpm'
+
+.. code-block:: console
+
    su -c 'dnf check-update'
 
 Disabling Tracker
@@ -185,9 +215,21 @@ service:
 .. code-block:: console
 
    su -c 'dnf install tracker-preferences'
+
+.. code-block:: console
+
    mkdir ~/.config/autostart
+
+.. code-block:: console
+
    cp /etc/xdg/autostart/tracker* ~/.config/autostart
+
+.. code-block:: console
+
    cd ~/.config/autostart
+
+.. code-block:: console
+
    sed -i 's/X-GNOME-Autostart-enabled=true/X-GNOME-Autostart-enabled=false/' tracker*
 
 To check ``tracker`` status:
@@ -211,6 +253,9 @@ this behavior:
 .. code-block:: console
 
    gsettings set org.gnome.software download-updates false
+
+.. code-block:: console
+
    su -c 'systemctl mask packagekit.service'
 
 Libraries and Development Tools
