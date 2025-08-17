@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - misc</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/misc.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-17T09:05:00-06:00</updated><entry><title>Checking for updates</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/17/checking-for-updates.html" rel="alternate"/><published>2025-08-17T09:05:00-06:00</published><updated>2025-08-17T09:05:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-17:/site/posts/2025/08/17/checking-for-updates.html</id><summary type="html">&lt;p class="first last"&gt;On macOS via command-line&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;In this post, we will explore the process of updating via the command-
+line.&lt;/p&gt;
+&lt;p&gt;First thing to explore would be disabling the automatic updates process
+on System Settings &amp;gt; General &amp;gt; Software Update &amp;gt; Automatic Updates &amp;gt; ⓘ.&lt;/p&gt;
+&lt;div class="section" id="updates-via-command-line"&gt;
+&lt;h2&gt;Updates via command-line&lt;/h2&gt;
+&lt;p&gt;You can install macOS updates from the built-in command line using the
+&lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; utility in Terminal. This is often preferred by power
+users and system administrators for its flexibility and ability to
+automate tasks.&lt;/p&gt;
+&lt;p&gt;Here's a breakdown of how to do it:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Open Terminal:&lt;/strong&gt;
+You can find Terminal in &lt;tt class="docutils literal"&gt;Applications/Utilities&lt;/tt&gt; or by searching for
+it using Spotlight (Cmd + Space, then type &amp;quot;Terminal&amp;quot;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Check for Available Updates:&lt;/strong&gt;
+Before installing, it's good practice to see what updates are available
+for your system. Use one of these commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;softwareupdate -l&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;softwareupdate --list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will list any pending updates, including macOS updates, Safari
+updates, security updates, and other Apple software. You'll see
+information like the update's name, version, and size. Look for items
+marked &lt;tt class="docutils literal"&gt;[Recommended]&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;[restart]&lt;/tt&gt; (indicating a restart is
+needed).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Install All Available Updates:&lt;/strong&gt;
+To download and install all available updates, use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -ia&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate --install --all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;``sudo``&lt;/strong&gt;: This grants administrative privileges, which are
+necessary for installing updates. You'll be prompted to enter your
+administrator password.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;``-i`` or ``--install``&lt;/strong&gt;: This flag tells &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; to
+install the updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;``-a`` or ``--all``&lt;/strong&gt;: This flag tells &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; to
+install all available updates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;4. Install Specific Updates:&lt;/strong&gt;
+If you only want to install a particular update from the list you saw
+in step 2, you can specify its identifier:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -i &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate --install &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Important Notes:&lt;/strong&gt;
+- The &amp;quot;Update Name-Version&amp;quot; is the exact identifier from the output of &lt;tt class="docutils literal"&gt;softwareupdate &lt;span class="pre"&gt;-l&lt;/span&gt;&lt;/tt&gt;.
+- If the update name contains spaces, you &lt;strong&gt;must&lt;/strong&gt; enclose it in single quotes (e.g., &lt;tt class="docutils literal"&gt;'macOS Ventura 13.5 &lt;span class="pre"&gt;Update-'&lt;/span&gt;&lt;/tt&gt;). Be precise with the name, including any trailing spaces if present in the output of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-l&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Download Updates Without Installing:&lt;/strong&gt;
+You can download updates to your system without immediately installing
+them. This can be useful if you want to prepare updates for later
+installation or for multiple machines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -d -a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -d &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Downloaded updates are usually stored in &lt;tt class="docutils literal"&gt;/Library/Updates&lt;/tt&gt;. You can
+then install them later using the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--install&lt;/span&gt;&lt;/tt&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Restart After Installation:&lt;/strong&gt;
+Many macOS updates require a restart to complete the installation. The
+&lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command will usually prompt you to restart or handle
+it automatically if you use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-R&lt;/span&gt;&lt;/tt&gt; flag.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -iaR&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It's generally a good idea to perform the restart when prompted or
+manually after the installation is complete.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="important-considerations"&gt;
+&lt;h2&gt;Important Considerations&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Backup Your Mac:&lt;/strong&gt; Before performing any major system update, it's
+always highly recommended to back up your Mac using Time Machine or
+another backup solution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Administrator Password:&lt;/strong&gt; You will need your administrator
+password to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; and install updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Internet Connection:&lt;/strong&gt; A stable internet connection is essential
+for downloading updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disk Space:&lt;/strong&gt; Ensure you have enough free disk space for the
+updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Third-Party Apps:&lt;/strong&gt; The &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command handles Apple
+system updates and built-in Apple apps. It does not update
+third-party apps from the Mac App Store or other sources.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Command Line Tools for Xcode:&lt;/strong&gt; If you develop or use certain
+development tools, you might also need to update the Xcode Command
+Line Tools. You can usually do this with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xcode-select&lt;/span&gt; &lt;span class="pre"&gt;--install&lt;/span&gt;&lt;/tt&gt;
+or through &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By using the &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command, you gain more control over when
+and how your macOS updates are applied, which can be particularly
+useful in automated environments or for troubleshooting.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="misc"/><category term="apple"/><category term="cli"/><category term="macOS"/></entry><entry><title>Hello World!</title><link href="https://porfiriopaiz.github.io/site/posts/2016/10/09/hello-world.html" rel="alternate"/><published>2016-10-09T20:49:00-06:00</published><updated>2016-10-09T20:49:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-10-09:/site/posts/2016/10/09/hello-world.html</id><summary type="html"/><content type="html">&lt;p&gt;Hello World from Pelican!&lt;/p&gt;
+</content><category term="misc"/></entry></feed>
