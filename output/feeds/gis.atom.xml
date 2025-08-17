@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - gis</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/gis.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-22T20:46:00-06:00</updated><entry><title>JOSM</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html" rel="alternate"></link><published>2021-07-22T20:46:00-06:00</published><updated>2021-07-22T20:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</id><summary type="html">&lt;p class="first last"&gt;The Java OpenStreetMap editor&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - gis</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/gis.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-22T20:46:00-06:00</updated><entry><title>JOSM</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html" rel="alternate"/><published>2021-07-22T20:46:00-06:00</published><updated>2021-07-22T20:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</id><summary type="html">&lt;p class="first last"&gt;The Java OpenStreetMap editor&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
 it is also the best Java software I have ever used.&lt;/p&gt;
 &lt;p&gt;In this post, I will cover how to get it installed on Debian, how to properly
@@ -76,4 +76,4 @@ downloaded JOSM JAR file and the previously created script.&lt;/p&gt;
 &lt;p&gt;The next time you restart your computer, you will find the new launcher. By
 clicking on it, you will launch the most up-to-date version of JOSM on Debian.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="gis"></category><category term="deb11"></category><category term="debian"></category><category term="josm"></category></entry></feed>
+</content><category term="gis"/><category term="deb11"/><category term="debian"/><category term="josm"/></entry></feed>

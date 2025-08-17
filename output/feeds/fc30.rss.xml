@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - fc30</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 25 Dec 2019 18:03:00 -0600</lastBuildDate><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - fc30</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/fc30.rss.xml" rel="self"/><lastBuildDate>Wed, 25 Dec 2019 18:03:00 -0600</lastBuildDate><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
 significant amount of RAM. However, when it comes to installing proprietary
 software that is not available in the official Fedora repositories, Flatpaks
 can be a good option since they provide a certain level of isolation.&lt;/p&gt;
@@ -29,7 +29,7 @@ the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&g
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 25 Dec 2019 18:03:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>flathub</category><category>flatpak</category></item><item><title>Fedora 30 Mate Desktop Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 25 Dec 2019 18:03:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>flathub</category><category>flatpak</category></item><item><title>Fedora 30 Mate Desktop Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;DNF Configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
 &lt;h3&gt;dnf.conf&lt;/h3&gt;
@@ -198,7 +198,7 @@ the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item><item><title>repos</title><link>https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html</link><description>&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once you have resolved the problem of connecting to the Internet and launching
 a terminal, you might want to install all the software you need.&lt;/p&gt;
@@ -316,4 +316,4 @@ repositories, temporarily disable and enable others for single transactions,
 install or upgrade specific packages from a particular repository, and perform
 many repository administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 11 Jul 2019 23:32:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>postinstall</category><category>repositories</category></item></channel></rss>

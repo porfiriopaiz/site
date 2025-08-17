@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - josm</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 22 Jul 2021 20:46:00 -0600</lastBuildDate><item><title>JOSM</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html</link><description>&lt;p&gt;JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - josm</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/josm.rss.xml" rel="self"/><lastBuildDate>Thu, 22 Jul 2021 20:46:00 -0600</lastBuildDate><item><title>JOSM</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html</link><description>&lt;p&gt;JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
 it is also the best Java software I have ever used.&lt;/p&gt;
 &lt;p&gt;In this post, I will cover how to get it installed on Debian, how to properly
 configure it for mapping on OSM, and which plugins to install and use.&lt;/p&gt;
@@ -75,4 +75,4 @@ downloaded JOSM JAR file and the previously created script.&lt;/p&gt;
 &lt;p&gt;The next time you restart your computer, you will find the new launcher. By
 clicking on it, you will launch the most up-to-date version of JOSM on Debian.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 20:46:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</guid><category>gis</category><category>deb11</category><category>debian</category><category>josm</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 20:46:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</guid><category>gis</category><category>deb11</category><category>debian</category><category>josm</category></item></channel></rss>

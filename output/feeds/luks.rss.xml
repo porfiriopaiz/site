@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - luks</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;I previously upgraded my laptop from Fedora 22 to Fedora 23 after F22 had been
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - luks</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/luks.rss.xml" rel="self"/><lastBuildDate>Thu, 30 Mar 2017 21:00:00 -0600</lastBuildDate><item><title>Anaconda and LVM on LUKS</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</link><description>&lt;p&gt;I previously upgraded my laptop from Fedora 22 to Fedora 23 after F22 had been
 in its End of Life state for over six months. Notably, you can efficiently
 reuse partitions originally configured for F22, ensuring they seamlessly
 accommodate the installation of the new Fedora release while preserving all
@@ -241,4 +241,4 @@ download and installation of the packages to complete.&lt;/p&gt;
 &lt;p&gt;In my case, I had to perform a series of post-installation steps, which I'll
 elaborate on in the next post.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 30 Mar 2017 21:00:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</guid><category>floss</category><category>anaconda</category><category>fc25</category><category>fedora</category><category>luks</category><category>lvm</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 30 Mar 2017 21:00:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</guid><category>floss</category><category>anaconda</category><category>fc25</category><category>fedora</category><category>luks</category><category>lvm</category></item></channel></rss>

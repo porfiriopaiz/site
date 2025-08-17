@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - flathub</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/flathub.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-25T18:03:00-06:00</updated><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"></link><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repository&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - flathub</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/flathub.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-25T18:03:00-06:00</updated><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"/><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repository&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
 significant amount of RAM. However, when it comes to installing proprietary
 software that is not available in the official Fedora repositories, Flatpaks
@@ -30,4 +30,4 @@ the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&g
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="flathub"></category><category term="flatpak"></category></entry></feed>
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="flathub"/><category term="flatpak"/></entry></feed>

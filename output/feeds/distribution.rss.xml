@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - distribution</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 14 Jul 2021 16:38:00 -0600</lastBuildDate><item><title>Setup Debian Keyboard Layout and Distribution</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/kb-layout-and-distribution.html</link><description>&lt;p&gt;During the Debian installation process, we are prompted to set up our keyboard
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - distribution</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/distribution.rss.xml" rel="self"/><lastBuildDate>Wed, 14 Jul 2021 16:38:00 -0600</lastBuildDate><item><title>Setup Debian Keyboard Layout and Distribution</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/kb-layout-and-distribution.html</link><description>&lt;p&gt;During the Debian installation process, we are prompted to set up our keyboard
 layout and distribution. Unfortunately, my preferred layout is not listed as
 one of the available options.&lt;/p&gt;
 &lt;p&gt;I would like to set it up as English International with AltGr dead keys.&lt;/p&gt;
@@ -22,4 +22,4 @@ respectively.&lt;/p&gt;
 &lt;p&gt;This way, I can continue using the English (US) keyboard layout when typing in
 either English or Spanish without needing to change the variant or physical
 layout.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 16:38:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>distribution</category><category>keyboard</category><category>layout</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 16:38:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>distribution</category><category>keyboard</category><category>layout</category></item></channel></rss>

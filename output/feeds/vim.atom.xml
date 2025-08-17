@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - vim</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/vim.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2023-09-11T04:39:00-06:00</updated><entry><title>vim</title><link href="https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html" rel="alternate"></link><published>2023-09-11T04:39:00-06:00</published><updated>2023-09-11T04:39:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</id><summary type="html">&lt;p class="first last"&gt;The Vim text editor&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - vim</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/vim.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2023-09-11T04:39:00-06:00</updated><entry><title>vim</title><link href="https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html" rel="alternate"/><published>2023-09-11T04:39:00-06:00</published><updated>2023-09-11T04:39:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</id><summary type="html">&lt;p class="first last"&gt;The Vim text editor&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="understanding-vim-on-debian"&gt;
 &lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
 &lt;p&gt;Now that I understand how Debian manages &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and I've grasped
@@ -113,4 +113,4 @@ I added the following alias to my &lt;tt class="docutils literal"&gt;&lt;span cl
 &lt;p&gt;With this configuration, I'm all set! In a future post, I’ll share my
 &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file and its configuration details.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="vim"></category></entry></feed>
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="vim"/></entry></feed>

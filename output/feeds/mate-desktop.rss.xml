@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - mate-desktop</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 22 Jul 2021 19:11:00 -0600</lastBuildDate><item><title>Mate Desktop on Debian</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html</link><description>&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - mate-desktop</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/mate-desktop.rss.xml" rel="self"/><lastBuildDate>Thu, 22 Jul 2021 19:11:00 -0600</lastBuildDate><item><title>Mate Desktop on Debian</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html</link><description>&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
 &lt;h2&gt;Mate Desktop Tips and Tricks&lt;/h2&gt;
 &lt;div class="section" id="notify-battery-discharging"&gt;
 &lt;h3&gt;Notify Battery Discharging&lt;/h3&gt;
@@ -86,4 +86,4 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>mate-desktop</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 22 Jul 2021 19:11:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>mate-desktop</category></item></channel></rss>

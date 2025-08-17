@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - mate</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/mate.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-24T12:28:00-06:00</updated><entry><title>Fedora 30 Mate Desktop Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"></link><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-Install&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - mate</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/mate.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2019-12-24T12:28:00-06:00</updated><entry><title>Fedora 30 Mate Desktop Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"/><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-Install&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;DNF Configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
@@ -169,4 +169,4 @@ the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="mate"></category><category term="postinstall"></category></entry></feed>
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="mate"/><category term="postinstall"/></entry></feed>

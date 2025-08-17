@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - mate</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Tue, 24 Dec 2019 12:28:00 -0600</lastBuildDate><item><title>Fedora 30 Mate Desktop Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - mate</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/mate.rss.xml" rel="self"/><lastBuildDate>Tue, 24 Dec 2019 12:28:00 -0600</lastBuildDate><item><title>Fedora 30 Mate Desktop Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html</link><description>&lt;div class="section" id="dnf-configuration"&gt;
 &lt;h2&gt;DNF Configuration&lt;/h2&gt;
 &lt;div class="section" id="dnf-conf"&gt;
 &lt;h3&gt;dnf.conf&lt;/h3&gt;
@@ -168,4 +168,4 @@ the official Fedora repo.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Tue, 24 Dec 2019 12:28:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</guid><category>floss</category><category>fc30</category><category>fedora</category><category>mate</category><category>postinstall</category></item></channel></rss>

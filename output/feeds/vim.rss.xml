@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - vim</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Mon, 11 Sep 2023 04:39:00 -0600</lastBuildDate><item><title>vim</title><link>https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html</link><description>&lt;div class="section" id="understanding-vim-on-debian"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - vim</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/vim.rss.xml" rel="self"/><lastBuildDate>Mon, 11 Sep 2023 04:39:00 -0600</lastBuildDate><item><title>vim</title><link>https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html</link><description>&lt;div class="section" id="understanding-vim-on-debian"&gt;
 &lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
 &lt;p&gt;Now that I understand how Debian manages &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and I've grasped
 the purpose of the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; package, it's time to determine the
@@ -112,4 +112,4 @@ I added the following alias to my &lt;tt class="docutils literal"&gt;&lt;span cl
 &lt;p&gt;With this configuration, I'm all set! In a future post, I’ll share my
 &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file and its configuration details.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Mon, 11 Sep 2023 04:39:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>vim</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Mon, 11 Sep 2023 04:39:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>vim</category></item></channel></rss>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - repositories</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/repositories.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2019-07-11T23:32:00-06:00</updated><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"></link><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - repositories</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/repositories.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2019-07-11T23:32:00-06:00</updated><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"/><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="software-repositories"&gt;
 &lt;h2&gt;Software Repositories&lt;/h2&gt;
 &lt;p&gt;Once you have resolved the problem of connecting to the Internet and launching
@@ -118,4 +118,4 @@ repositories, temporarily disable and enable others for single transactions,
 install or upgrade specific packages from a particular repository, and perform
 many repository administration tasks.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="fc30"></category><category term="fedora"></category><category term="postinstall"></category><category term="repositories"></category></entry></feed>
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="postinstall"/><category term="repositories"/></entry></feed>

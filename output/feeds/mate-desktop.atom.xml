@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - mate-desktop</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/mate-desktop.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-22T19:11:00-06:00</updated><entry><title>Mate Desktop on Debian</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html" rel="alternate"></link><published>2021-07-22T19:11:00-06:00</published><updated>2021-07-22T19:11:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</id><summary type="html">&lt;p class="first last"&gt;Configuration tips and tricks for Mate Desktop on my Debian setup.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - mate-desktop</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/mate-desktop.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2021-07-22T19:11:00-06:00</updated><entry><title>Mate Desktop on Debian</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html" rel="alternate"/><published>2021-07-22T19:11:00-06:00</published><updated>2021-07-22T19:11:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</id><summary type="html">&lt;p class="first last"&gt;Configuration tips and tricks for Mate Desktop on my Debian setup.&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
 &lt;h2&gt;Mate Desktop Tips and Tricks&lt;/h2&gt;
 &lt;div class="section" id="notify-battery-discharging"&gt;
@@ -87,4 +87,4 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="mate-desktop"></category></entry></feed>
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="mate-desktop"/></entry></feed>

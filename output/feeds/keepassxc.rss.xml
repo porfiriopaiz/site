@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - keepassxc</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Fri, 17 Nov 2017 19:10:00 -0600</lastBuildDate><item><title>KeePassXC: The Password Manager</title><link>https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html</link><description>&lt;p&gt;KeePassXC is one of the first programs I install after booting a fresh system.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - keepassxc</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/keepassxc.rss.xml" rel="self"/><lastBuildDate>Fri, 17 Nov 2017 19:10:00 -0600</lastBuildDate><item><title>KeePassXC: The Password Manager</title><link>https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html</link><description>&lt;p&gt;KeePassXC is one of the first programs I install after booting a fresh system.&lt;/p&gt;
 &lt;p&gt;In this post, I’ll show you how to install KeePassXC on Fedora and Debian, how
 to use it, how it simplifies managing hundreds of accounts and associated
 passwords, and how to generate secure passwords with high entropy.&lt;/p&gt;
@@ -110,4 +110,4 @@ username and password automatically:&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;KeePassXC will then complete the login process for you.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Fri, 17 Nov 2017 19:10:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</guid><category>floss</category><category>debian</category><category>fc27</category><category>fedora</category><category>keepassxc</category><category>password</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Fri, 17 Nov 2017 19:10:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</guid><category>floss</category><category>debian</category><category>fc27</category><category>fedora</category><category>keepassxc</category><category>password</category></item></channel></rss>

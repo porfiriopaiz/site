@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - timedatectl</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Thu, 15 Jul 2021 20:53:00 -0600</lastBuildDate><item><title>UTC</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html</link><description>&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p, I could not find the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - timedatectl</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/timedatectl.rss.xml" rel="self"/><lastBuildDate>Thu, 15 Jul 2021 20:53:00 -0600</lastBuildDate><item><title>UTC</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html</link><description>&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p, I could not find the
 option to set up the local time, RTC time, and time zone to UTC as the
 default configuration.&lt;/p&gt;
 &lt;p&gt;To fix this, I need to run the following commands:&lt;/p&gt;
@@ -38,4 +38,4 @@ default configuration.&lt;/p&gt;
 &lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
 &lt;span class="go"&gt;          RTC in local TZ: no&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 15 Jul 2021 20:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-15:/site/posts/2021/07/15/utc.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>timedatectl</category><category>utc</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 15 Jul 2021 20:53:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2021-07-15:/site/posts/2021/07/15/utc.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>timedatectl</category><category>utc</category></item></channel></rss>

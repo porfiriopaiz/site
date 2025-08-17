@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - dnf</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Sun, 09 Dec 2018 21:26:00 -0600</lastBuildDate><item><title>i3 Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with the i3 Window Manager, additional programs are
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - dnf</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/dnf.rss.xml" rel="self"/><lastBuildDate>Sun, 09 Dec 2018 21:26:00 -0600</lastBuildDate><item><title>i3 Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with the i3 Window Manager, additional programs are
 necessary to enhance the user experience.&lt;/p&gt;
 &lt;p&gt;The first issue to address is how to connect to the Internet. You may have
 noticed that there is no program or applet to activate the Wi-Fi card or manage
@@ -103,7 +103,7 @@ i3 configuration file (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&g
 For now, you should have the tools necessary to install additional programs,
 such as a web browser.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post, I will explain how to perform a Fedora 29 installation with the
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post, I will explain how to perform a Fedora 29 installation with the
 i3 window manager. It is common to find installation guides for i3, but they
 often assume you already have another desktop environment installed.&lt;/p&gt;
 &lt;p&gt;Here, we will see how to build a fully functional environment starting from a
@@ -272,7 +272,7 @@ Terminal:&lt;/p&gt;
 &lt;p&gt;This guide provides a streamlined way to set up i3 on Fedora 29, ideal for
 lightweight virtual machines or older hardware with limited resources.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>Fedora 26 Custom Operating System Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;In the last post, I explained how to make a minimal installation of Fedora 25.
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>Fedora 26 Custom Operating System Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</link><description>&lt;p&gt;In the last post, I explained how to make a minimal installation of Fedora 25.
 Months have passed since then, and Fedora 26 has been released. Following the
 same steps, I installed it on my laptop and will now document my
 post-installation process.&lt;/p&gt;
@@ -440,7 +440,7 @@ this behavior:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In the next post, I will review additional tools I use on Fedora.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 31 Aug 2017 16:26:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</guid><category>floss</category><category>dnf</category><category>fc26</category><category>fedora</category><category>postinstall</category></item><item><title>Upgrading from Fedora 22 to Fedora 23</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</link><description>&lt;p&gt;From May 26, 2015, to November 22, 2016, I enjoyed a smooth experience running
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 31 Aug 2017 16:26:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</guid><category>floss</category><category>dnf</category><category>fc26</category><category>fedora</category><category>postinstall</category></item><item><title>Upgrading from Fedora 22 to Fedora 23</title><link>https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</link><description>&lt;p&gt;From May 26, 2015, to November 22, 2016, I enjoyed a smooth experience running
 Fedora 22 on my Lenovo ThinkPad T440p—a solid year and a half of tech bliss.
 However, on July 19, 2016, Fedora 22 officially entered its &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;End of Life (EOL)&lt;/a&gt; phase. This meant no more
 security or maintenance updates, prompting the need to upgrade to a newer,
@@ -527,4 +527,4 @@ begin, using the newly downloaded packages. Once complete, your system will be
 running Fedora 23.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 26 Mar 2017 16:46:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</guid><category>floss</category><category>dnf</category><category>eol</category><category>fc22</category><category>fc23</category><category>fedora</category><category>system-upgrade</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 26 Mar 2017 16:46:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</guid><category>floss</category><category>dnf</category><category>eol</category><category>fc22</category><category>fc23</category><category>fedora</category><category>system-upgrade</category></item></channel></rss>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - vi</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"></link><link href="https://porfiriopaiz.github.io/site/feeds/vi.atom.xml" rel="self"></link><id>https://porfiriopaiz.github.io/site/</id><updated>2022-10-31T03:32:00-06:00</updated><entry><title>vi</title><link href="https://porfiriopaiz.github.io/site/posts/2022/10/31/vi.html" rel="alternate"></link><published>2022-10-31T03:32:00-06:00</published><updated>2022-10-31T03:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2022-10-31:/site/posts/2022/10/31/vi.html</id><summary type="html">&lt;p class="first last"&gt;The Vi text editor&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - vi</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/vi.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2022-10-31T03:32:00-06:00</updated><entry><title>vi</title><link href="https://porfiriopaiz.github.io/site/posts/2022/10/31/vi.html" rel="alternate"/><published>2022-10-31T03:32:00-06:00</published><updated>2022-10-31T03:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2022-10-31:/site/posts/2022/10/31/vi.html</id><summary type="html">&lt;p class="first last"&gt;The Vi text editor&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="understanding-vi-and-vim-on-debian"&gt;
 &lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
 &lt;p&gt;Since 2011, I have steadfastly embraced &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; as my primary text editor. My
@@ -91,4 +91,4 @@ should be manually incorporated into &lt;tt class="docutils literal"&gt;&lt;span
 Debian repository and the rationale behind my selection.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="floss"></category><category term="deb11"></category><category term="debian"></category><category term="vi"></category></entry></feed>
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="vi"/></entry></feed>

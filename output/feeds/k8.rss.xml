@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>porfirio's blog - k8</title><link>https://porfiriopaiz.github.io/site/</link><description></description><lastBuildDate>Wed, 14 Jul 2021 17:37:00 -0600</lastBuildDate><item><title>K8</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html</link><description>&lt;p&gt;Back in February, Guido van Rossum posted on Twitter a picture of his desk with
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - k8</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/k8.rss.xml" rel="self"/><lastBuildDate>Wed, 14 Jul 2021 17:37:00 -0600</lastBuildDate><item><title>K8</title><link>https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html</link><description>&lt;p&gt;Back in February, Guido van Rossum posted on Twitter a picture of his desk with
 a large mouse pad.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897"&gt;Guido van Rossum's tweet&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What got my attention from this picture was the keyboard. Down in the comment
@@ -53,4 +53,4 @@ and unmute the audio, you must press the Fn key plus the function key (Fn +
 F1 or Fn + F2). This will allow you to continue using your K8 on Linux
 with the switches in Windows/Android mode, in wired or Bluetooth mode, with the
 function keys as the primary option instead of the multimedia keys.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 17:37:00 -0600</pubDate><guid isPermaLink="false">tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>keychron</category><category>k8</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 14 Jul 2021 17:37:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>keychron</category><category>k8</category></item></channel></rss>
