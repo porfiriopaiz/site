@@ -1,0 +1,11 @@
+pelican
+markdown
+typogrify
+feedgenerator
+jinja2
+pygments
+docutils
+blinker
+unidecode
+MarkupSafe
+python-dateutil
