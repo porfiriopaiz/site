@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="deb11, debian, keychron, k8">
+
+  <title>
+    porfirio's blog
+&ndash; K8  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2021/07/14/k8.html">K8</a></h1>
+  </div>
+  <div class="article_text">
+    <p>Back in February, Guido van Rossum posted on Twitter a picture of his desk with
+a large mouse pad.</p>
+<p><a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897">Guido van Rossum's tweet</a></p>
+<p>What got my attention from this picture was the keyboard. Down in the comment
+section, I found the manufacturer and model of this keyboard.</p>
+<p><a class="reference external" href="https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273">Keychron K8 Product</a></p>
+<p>I have always wanted to try mechanical keyboards but never knew
+exactly which one to get or try. Seeing that this is the preferred one from a
+respectable developer, I decided to go for this same model.</p>
+<p>The very specific configuration I wanted was not available at the time I was
+ordering it, so I subscribed to get a notification via email when the
+same configuration became available again.</p>
+<p>I ordered mine on June 3rd, the keyboard was shipped from Hong Kong to Miami
+and arrived in the next 5 days. The keyboard arrived in Nicaragua 25 days
+later.</p>
+<p>The first thing I tried to do was to set up the keyboard with my T440p running
+Debian 11 Bullseye via Bluetooth. For this, I installed Blueman, which provides
+a MATE applet:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install blueman&#39;</span>
+</pre></div>
+<p>With the switches on the keyboard set to Windows and Bluetooth, the Blueman
+applet running, and following the instructions in the booklet included in the box,
+I was able to pair my Keychron K8 via Bluetooth with my T440p running Debian.</p>
+<p>I had to manually add my keyboard as a new device with the applet and then pair
+both devices.</p>
+<p>Over Bluetooth and in Windows mode, the swap from multimedia keys to function
+keys worked, but in wired mode, this did not work.</p>
+<p>I found some hints on how to fix this in the official Facebook support group
+for Linux users of Keychron, which led me to this very specific command that must
+be run on every startup so that the primary option for the F1 to F12 keys
+becomes function keys instead of multimedia keys.</p>
+<div class="highlight"><pre><span></span><span class="go">echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode</span>
+</pre></div>
+<p>Later, I found this documentation that provides at least 3 different ways to
+ensure this command is executed on every startup:</p>
+<p><a class="reference external" href="https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior">Ubuntu Keyboard Configuration Help</a></p>
+<p>From the 3 options listed there, I decided to go for the one that makes use of
+the sysfs.conf file. So, I installed <tt class="docutils literal">sysfsutils</tt>:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install sysfsutils&#39;</span>
+</pre></div>
+<p>And added this line at the end of the file <strong>/etc/sysfs.conf</strong>:</p>
+<div class="highlight"><pre><span></span><span class="go">module/hid_apple/parameters/fnmode = 0</span>
+</pre></div>
+<p>I then restarted the computer, and while in cable and Windows mode, I pressed the
+key combination:</p>
+<div class="highlight"><pre><span></span>Fn + x + l
+</pre></div>
+<p>After doing this, the primary option for the F1 to F12 keys will be the function
+keys instead of the multimedia keys.</p>
+<p>To modify the screen brightness, turn the keyboard backlight on and off, or mute
+and unmute the audio, you must press the Fn key plus the function key (Fn +
+F1 or Fn + F2). This will allow you to continue using your K8 on Linux
+with the switches in Windows/Android mode, in wired or Bluetooth mode, with the
+function keys as the primary option instead of the multimedia keys.</p>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Wed 14 July 2021</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/deb11.html">deb11</a>,      <a href="../../../../tag/debian.html">debian</a>,      <a href="../../../../tag/keychron.html">keychron</a>,      <a href="../../../../tag/k8.html">k8</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2021/07/14/k8.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>

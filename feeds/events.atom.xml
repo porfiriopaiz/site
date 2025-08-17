@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - events</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/events.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2017-03-31T15:07:00-06:00</updated><entry><title>This was Fedora at CS50x.ni</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html" rel="alternate"/><published>2017-03-31T15:07:00-06:00</published><updated>2017-03-31T15:07:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-31:/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</id><summary type="html"/><content type="html">&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
+community and the &lt;a class="reference external" href="http://code-fu.net.ni/"&gt;CS50x.ni&lt;/a&gt; staff, with the support
+of &lt;a class="reference external" href="http://fundacionuno.org/en/"&gt;Fundación UNO&lt;/a&gt; and the Fedora Project, came
+together for a series of lectures. These sessions provided insights into using
+Free Software, emphasizing the importance and benefits of the various tools
+utilized in the CS50x.ni course. The lectures were open to current CS50x.ni
+participants, prospective students, and anyone interested in learning more
+about Free Software, particularly the Fedora Project.&lt;/p&gt;
+&lt;p&gt;The event took place in the basement of the north wing of the Rigoberto López
+Pérez building at the National University of Engineering's Simón Bolívar
+Campus, in classrooms designated for the CS50x.ni (Coding) project.&lt;/p&gt;
+&lt;p&gt;The talks started at 9:00 AM. The first presentation, &lt;a class="reference external" href="https://fedorapeople.org/~mayorga/slides/this_is_fedora.odp"&gt;&amp;quot;Fedora Project
+Overview&amp;quot;&lt;/a&gt;, was
+facilitated by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Mayorga"&gt;Eduardo Mayorga&lt;/a&gt;. Eduardo, a Fedora Project
+Ambassador, Package Maintainer, and participant in the CS50x.ni course,
+explained the Fedora Project's mission and vision as a Free Software
+initiative. He also shared his experience of being part of the Fedora community
+at both local and international levels.&lt;/p&gt;
+&lt;img alt="Eduardo Mayorga speaking." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/mayorga.jpg" /&gt;
+&lt;p&gt;The second talk was delivered by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Yn1v"&gt;Neville Cross&lt;/a&gt;, Founder and Leader of the Fedora
+Community in Nicaragua. Neville highlighted the significance of mastering
+command-line tools included in all GNU/Linux distributions. He demonstrated the
+use of &lt;a class="reference external" href="https://yn1v.fedorapeople.org/Slides/ssh_una_presentacion_corta.odp"&gt;SSH remote management tools&lt;/a&gt;,
+showcasing how to manage resources remotely via command line, and discussed
+additional tools for system monitoring.&lt;/p&gt;
+&lt;img alt="Neville, Fedora Nicaragua Leader." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/yn1v.jpg" /&gt;
+&lt;p&gt;The third talk was facilitated by &lt;a class="reference external" href="http://reactivated.net/"&gt;Daniel Drake&lt;/a&gt;, an
+operating system developer from the UK who has lived in Nicaragua for eight
+years. Daniel, known for his work on the One Laptop per Child project,
+presented &lt;a class="reference external" href="https://drive.google.com/uc?export=download&amp;amp;id=0ByFPl6lV1b_MRHROTmFQTkQ1V3c"&gt;&amp;quot;Employment Opportunities related to Linux after CS50&amp;quot;&lt;/a&gt;.
+Drawing from over 15 years of experience, Daniel shared his journey as a Free
+Software contributor and developer, offering advice on joining projects like
+&lt;a class="reference external" href="https://www.openhub.net/p/gnome/contributors/16149077045725"&gt;The GNOME Project&lt;/a&gt; and the &lt;a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&amp;amp;q=daniel+drake"&gt;Linux
+Kernel&lt;/a&gt;.&lt;/p&gt;
+&lt;img alt="Daniel sharing his experiences as a Kernel Developer." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/dsd.jpg" /&gt;
+&lt;p&gt;In the final block of talks, &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Porfiriopaiz"&gt;Porfirio Páiz&lt;/a&gt;, a Fedora Project
+contributor and CS50x.ni student, demonstrated Fedora's utility for CS50x.ni
+students. He gave three mini-presentations:&lt;/p&gt;
+&lt;p&gt;1. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/comenzando_con_git.odp"&gt;&amp;quot;Getting Started with Git&amp;quot;&lt;/a&gt;: A
+workflow demo for version control.
+2. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/breve_introduccion_a_docker.odp"&gt;&amp;quot;A Brief Introduction to Docker&amp;quot;&lt;/a&gt;:
+How Docker simplifies programming environments for CS50x.ni participants.
+3. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/estacion_de_trabajo.odp"&gt;&amp;quot;Setting Up a Development Workstation with Fedora&amp;quot;&lt;/a&gt;: Tips
+on using Fedora to create an efficient development environment.&lt;/p&gt;
+&lt;img alt="Porfirio Páiz discussing Git, Docker, and Fedora Workstation." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/porfiriopaiz.jpg" /&gt;
+&lt;p&gt;As a delightful conclusion, the Fedora Nicaragua team and CS50x.ni staff
+enjoyed a casual gathering with the audience, sharing ideas, experiences, cold
+drinks, and delicious pizza, generously sponsored by the Fedora Project.&lt;/p&gt;
+&lt;img alt="Group picture." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg" /&gt;
+&lt;p&gt;The Fedora Project community is committed to continuing these sessions,
+offering valuable knowledge and inspiration for those entering the exciting
+world of programming through CS50x.ni.&lt;/p&gt;
+&lt;p&gt;Sorry for the late post. Here's a cheerful Hot Dog to brighten your day:&lt;/p&gt;
+&lt;img alt="A happy hotdog." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/beefy_miracle.gif" /&gt;
+</content><category term="floss"/><category term="cs50x.ni"/><category term="events"/><category term="fedora"/></entry></feed>

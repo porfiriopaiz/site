@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="dnf, eol, fc22, fc23, fedora, system-upgrade">
+
+  <title>
+    porfirio's blog
+&ndash; Upgrading from Fedora 22 to Fedora 23  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html">Upgrading from Fedora 22 to Fedora 23</a></h1>
+  </div>
+  <div class="article_text">
+    <p>From May 26, 2015, to November 22, 2016, I enjoyed a smooth experience running
+Fedora 22 on my Lenovo ThinkPad T440p—a solid year and a half of tech bliss.
+However, on July 19, 2016, Fedora 22 officially entered its <a class="reference external" href="https://fedoraproject.org/wiki/End_of_life">End of Life (EOL)</a> phase. This meant no more
+security or maintenance updates, prompting the need to upgrade to a newer,
+stable version.</p>
+<p>In this post, I'll walk you through the process of upgrading to Fedora 23 using
+the reliable DNF package manager. Let’s keep your Fedora system running fresh
+and secure! 🚀</p>
+<!-- TEASER_END -->
+<p>Over the course of 18 months using Fedora 22, the package cache had accumulated
+approximately 10 GB of space on my hard drive.</p>
+<img alt="A year and a half of packages stored in the DNF cache" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" />
+<p>To instruct DNF to retain downloaded packages in the cache, add the following
+line to the DNF configuration file located at <tt class="docutils literal">/etc/dnf/dnf.conf</tt>:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &quot;echo &#39;keepcache = true&#39; &gt;&gt; /etc/dnf/dnf.conf&quot;</span>
+</pre></div>
+<div class="section" id="upgrading-to-fedora-23">
+<h2>Upgrading to Fedora 23</h2>
+<div class="section" id="prerequisites-for-upgrading">
+<h3>Prerequisites for Upgrading</h3>
+<p>1. Ensure there is sufficient space on your <tt class="docutils literal">/</tt> partition. This is necessary
+because the upgrade process involves downloading the latest version of every
+package installed on your system. To free up space, if needed, you can clear
+the stored package cache:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf clean all&#39;</span>
+</pre></div>
+<p>2. Ensure your system is up-to-date by rebuilding the metadata cache and
+applying any pending updates:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf makecache&#39;</span>
+</pre></div>
+<img alt="Rebuilding the package cache" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" />
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="install-the-dnf-system-upgrade-plugin">
+<h3>Install the DNF System Upgrade Plugin</h3>
+<p><strong>DNF System Upgrade</strong> enables the upgrade to a newer Fedora version using a
+mechanism similar to offline updates. Packages are downloaded during regular
+system operation, and a reboot triggers their installation in a dedicated
+environment.</p>
+<p>Install the required plugin with the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install dnf-plugin-system-upgrade&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="download-the-packages">
+<h3>Download the Packages</h3>
+<p>Next, download the necessary packages for the upgrade to Fedora 23. This step
+ensures that every package currently installed on your system is replaced with
+its latest version for Fedora 23:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=23&#39;</span>
+</pre></div>
+<p>The screenshot below shows the details of the packages to be downloaded and
+their total size:</p>
+<img alt="DNF downloading packages for the upgrade" class="align-center" src="../../../../images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" />
+<p>You can also upgrade to newer versions such as Fedora 24, 25, or even Rawhide.
+However, I recommend avoiding skipping more than one release (a <tt class="docutils literal">n + 2</tt>
+jump). At the time of writing, the latest stable versions are Fedora 24 and 25,
+with Fedora 26 in the <a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched">Branched</a> state and <a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide">Rawhide</a> as the rolling development
+version.</p>
+<p>To upgrade to another version, adjust the <tt class="docutils literal"><span class="pre">--releasever</span></tt> parameter:</p>
+<ul class="simple">
+<li>Upgrade to Fedora 24:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&#39;</span>
+</pre></div>
+<ul class="simple">
+<li>Upgrade to Fedora 25:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=25&#39;</span>
+</pre></div>
+<ul class="simple">
+<li>Upgrade to Rawhide:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="reboot-to-apply-the-upgrade">
+<h3>Reboot to Apply the Upgrade</h3>
+<p>After downloading the packages, reboot your system to initiate the upgrade
+process:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf system-upgrade reboot&#39;</span>
+</pre></div>
+<p>This command will restart the system. Upon reboot, the upgrade process will
+begin, using the newly downloaded packages. Once complete, your system will be
+running Fedora 23.</p>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sun 26 March 2017</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/dnf.html">dnf</a>,      <a href="../../../../tag/eol.html">eol</a>,      <a href="../../../../tag/fc22.html">fc22</a>,      <a href="../../../../tag/fc23.html">fc23</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/system-upgrade.html">system-upgrade</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>

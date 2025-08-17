@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - vim</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/vim.rss.xml" rel="self"/><lastBuildDate>Mon, 11 Sep 2023 04:39:00 -0600</lastBuildDate><item><title>vim</title><link>https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html</link><description>&lt;div class="section" id="understanding-vim-on-debian"&gt;
+&lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
+&lt;p&gt;Now that I understand how Debian manages &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and I've grasped
+the purpose of the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; package, it's time to determine the
+requirements for obtaining a more advanced &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; binary with enhanced
+features or support for additional functionalities.&lt;/p&gt;
+&lt;p&gt;A brief search for additional information on &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; suggests various
+alternatives for a more comprehensive &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; experience:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;apt-cache&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;vim-tiny
+&lt;span class="go"&gt;Package: vim-tiny&lt;/span&gt;
+&lt;span class="go"&gt;Source: vim&lt;/span&gt;
+&lt;span class="go"&gt;Version: 2:8.2.2434-3+deb11u1&lt;/span&gt;
+&lt;span class="go"&gt;Installed-Size: 1574&lt;/span&gt;
+&lt;span class="go"&gt;Maintainer: Debian Vim Maintainers &amp;lt;team+vim@tracker.debian.org&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Architecture: amd64&lt;/span&gt;
+&lt;span class="go"&gt;Provides: editor&lt;/span&gt;
+&lt;span class="go"&gt;Depends: vim-common (= 2:8.2.2434-3+deb11u1), libacl1 (&amp;gt;= 2.2.23), libc6 (&amp;gt;= 2.15), libselinux1 (&amp;gt;= 3.1~), libtinfo6 (&amp;gt;= 6)&lt;/span&gt;
+&lt;span class="go"&gt;Suggests: indent&lt;/span&gt;
+&lt;span class="go"&gt;Description-en: Vi IMproved - enhanced vi editor - compact version&lt;/span&gt;
+&lt;span class="go"&gt; Vim is an almost compatible version of the UNIX editor Vi.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; This package contains a minimal version of Vim compiled with no GUI and&lt;/span&gt;
+&lt;span class="go"&gt; a small subset of features. This package&amp;#39;s sole purpose is to provide&lt;/span&gt;
+&lt;span class="go"&gt; the vi binary for base installations.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; If a vim binary is wanted, try one of the following more featureful&lt;/span&gt;
+&lt;span class="go"&gt; packages: vim, vim-nox, vim-athena, or vim-gtk3.&lt;/span&gt;
+&lt;span class="go"&gt;Description-md5: 85f2dbef1339af3dcf83d9ee00fd5e22&lt;/span&gt;
+&lt;span class="go"&gt;Homepage: https://www.vim.org/&lt;/span&gt;
+&lt;span class="go"&gt;Tag: devel::editor, implemented-in::c, interface::text-mode, role::program,&lt;/span&gt;
+&lt;span class="go"&gt; uitoolkit::ncurses, use::editing, works-with::text, works-with::unicode&lt;/span&gt;
+&lt;span class="go"&gt;Section: editors&lt;/span&gt;
+&lt;span class="go"&gt;Priority: important&lt;/span&gt;
+&lt;span class="go"&gt;Filename: pool/main/v/vim/vim-tiny_8.2.2434-3+deb11u1_amd64.deb&lt;/span&gt;
+&lt;span class="go"&gt;Size: 744284&lt;/span&gt;
+&lt;span class="go"&gt;MD5sum: 3b101104ccb4e8367298e4ea9dc33d27&lt;/span&gt;
+&lt;span class="go"&gt;SHA256: 0cfc3ce179181f9c08f8460360a8bcba05c214d75ba51d78ecf021e42c9a4261&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Running both &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-athena&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-gtk3&lt;/span&gt;&lt;/tt&gt;
+reveals that both packages offer a graphical user interface, which I neither
+desire nor require.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show vim&lt;/tt&gt; displays information that suggests this could be the
+solution I've been searching for:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;apt-cache&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;vim
+&lt;span class="go"&gt;Package: vim&lt;/span&gt;
+&lt;span class="go"&gt;Version: 2:8.2.2434-3+deb11u1&lt;/span&gt;
+&lt;span class="go"&gt;Installed-Size: 3286&lt;/span&gt;
+&lt;span class="go"&gt;Maintainer: Debian Vim Maintainers &amp;lt;team+vim@tracker.debian.org&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Architecture: amd64&lt;/span&gt;
+&lt;span class="go"&gt;Provides: editor&lt;/span&gt;
+&lt;span class="go"&gt;Depends: vim-common (= 2:8.2.2434-3+deb11u1), vim-runtime (= 2:8.2.2434-3+deb11u1), libacl1 (&amp;gt;= 2.2.23), libc6 (&amp;gt;= 2.29), libgpm2 (&amp;gt;= 1.20.7), libselinux1 (&amp;gt;= 3.1~), libtinfo6 (&amp;gt;= 6)&lt;/span&gt;
+&lt;span class="go"&gt;Suggests: ctags, vim-doc, vim-scripts&lt;/span&gt;
+&lt;span class="go"&gt;Description-en: Vi IMproved - enhanced vi editor&lt;/span&gt;
+&lt;span class="go"&gt; Vim is an almost compatible version of the UNIX editor Vi.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; Many new features have been added: multi level undo, syntax&lt;/span&gt;
+&lt;span class="go"&gt; highlighting, command line history, on-line help, filename&lt;/span&gt;
+&lt;span class="go"&gt; completion, block operations, folding, Unicode support, etc.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; This package contains a version of vim compiled with a rather&lt;/span&gt;
+&lt;span class="go"&gt; standard set of features. This package does not provide a GUI&lt;/span&gt;
+&lt;span class="go"&gt; version of Vim. See the other vim-* packages if you need more&lt;/span&gt;
+&lt;span class="go"&gt; (or less).&lt;/span&gt;
+&lt;span class="go"&gt;Description-md5: 59e8b8f7757db8b53566d5d119872de8&lt;/span&gt;
+&lt;span class="go"&gt;Homepage: https://www.vim.org/&lt;/span&gt;
+&lt;span class="go"&gt;Tag: devel::editor, implemented-in::c, interface::commandline,&lt;/span&gt;
+&lt;span class="go"&gt; interface::text-mode, role::program, scope::application,&lt;/span&gt;
+&lt;span class="go"&gt; uitoolkit::ncurses, use::editing, works-with::text, works-with::unicode&lt;/span&gt;
+&lt;span class="go"&gt;Section: editors&lt;/span&gt;
+&lt;span class="go"&gt;Priority: optional&lt;/span&gt;
+&lt;span class="go"&gt;Filename: pool/main/v/vim/vim_8.2.2434-3+deb11u1_amd64.deb&lt;/span&gt;
+&lt;span class="go"&gt;Size: 1494176&lt;/span&gt;
+&lt;span class="go"&gt;MD5sum: f74e7886b6610f74d06c789eeb144b9c&lt;/span&gt;
+&lt;span class="go"&gt;SHA256: b06d11fdee525b919deb4778f7af352ebf3d6ce2591c8fb8e02e52f1ae90ef7d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; reveals that &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; provides support for
+scripting languages, including Python, which is absent in the minimal &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;
+package.&lt;/p&gt;
+&lt;p&gt;So, I installed it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;apt-get install vim-nox&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first thing I noticed after installing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; is that now &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;
+points to &lt;tt class="docutils literal"&gt;vim.nox&lt;/tt&gt;, meaning that when running &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; it actually runs
+&lt;tt class="docutils literal"&gt;vim.nox&lt;/tt&gt;, which was unexpected.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;whereis&lt;span class="w"&gt; &lt;/span&gt;vi
+&lt;span class="go"&gt;vi: /usr/bin/vi /usr/share/man/man1/vi.1.gz&lt;/span&gt;
+&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/usr/bin/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 20 May 28  2021 /usr/bin/vi -&amp;gt; /etc/alternatives/vi&lt;/span&gt;
+&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/etc/alternatives/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&amp;gt; /usr/bin/vim.nox&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I struggled to find a fix for this, but I eventually found the solution:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219"&gt;https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I just needed to run &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and pass some parameters to avoid loading
+additional features:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;vim -u NONE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Later, I found the same suggestion in the &lt;tt class="docutils literal"&gt;/usr/share/vim/vim82/defaults.vim&lt;/tt&gt;
+file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;&amp;quot; This is loaded if no vimrc file was found.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Except when Vim is run with &amp;quot;-u NONE&amp;quot; or &amp;quot;-C&amp;quot;.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Individual settings can be reverted with &amp;quot;:set option&amp;amp;&amp;quot;.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Other commands can be reverted as mentioned below.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This setup allows me to run &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; without loading any additional features from
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt;, which is useful for quick edits without plugins. To simplify this,
+I added the following alias to my &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Alias to run vi without additional features&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vim -u NONE&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With this configuration, I'm all set! In a future post, I’ll share my
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file and its configuration details.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Mon, 11 Sep 2023 04:39:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</guid><category>floss</category><category>deb11</category><category>debian</category><category>vim</category></item></channel></rss>

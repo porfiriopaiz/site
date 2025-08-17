@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="deb11, debian, josm">
+
+  <title>
+    porfirio's blog
+&ndash; JOSM  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2021/07/22/josm.html">JOSM</a></h1>
+  </div>
+  <div class="article_text">
+    <p>JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
+it is also the best Java software I have ever used.</p>
+<p>In this post, I will cover how to get it installed on Debian, how to properly
+configure it for mapping on OSM, and which plugins to install and use.</p>
+<div class="section" id="installing-josm-on-debian">
+<h2>Installing JOSM on Debian</h2>
+<p>JOSM is available in the Debian official repository, so to install it, you just
+need to open a terminal and run the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;apt-get install josm&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="solving-josm-outdated-version-on-debian">
+<h2>Solving JOSM Outdated Version on Debian</h2>
+<p>Installing JOSM from the official Debian repositories resolves the dependency
+issue you would encounter when using the most up-to-date version from the
+official .jar build.</p>
+<p>To run the latest stable version, you need to download it from the official
+JOSM website as a JAR file. However, before doing that, you need to run the
+version installed from the Debian repository at least once.</p>
+<div class="highlight"><pre><span></span><span class="go">josm</span>
+</pre></div>
+<p>This will create the following directory structure:</p>
+<div class="highlight"><pre><span></span><span class="go">~/.config/JOSM</span>
+<span class="go">~/.cache/JOSM</span>
+<span class="go">~/.local/share/JOSM</span>
+</pre></div>
+<p>Under <tt class="docutils literal"><span class="pre">~/.cache/JOSM/</span></tt>, a directory named <tt class="docutils literal">jar</tt> will be created:</p>
+<div class="highlight"><pre><span></span><span class="go">mkdir -p ~/.cache/JOSM/jar</span>
+</pre></div>
+<p>Now, navigate to that directory:</p>
+<div class="highlight"><pre><span></span><span class="go">cd ~/.cache/JOSM/jar</span>
+</pre></div>
+<p>Next, download the latest version of the JOSM editor using wget:</p>
+<div class="highlight"><pre><span></span><span class="go">wget -N -t 0 -c https://josm.openstreetmap.de/josm-tested.jar</span>
+</pre></div>
+<p>To run the newly downloaded version, use the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">java -jar ~/.cache/JOSM/jar/josm-tested.jar</span>
+</pre></div>
+</div>
+<div class="section" id="script-launcher">
+<h2>Script Launcher</h2>
+<p>To launch the JAR file easily, you can create a script. First, create an
+executable file:</p>
+<div class="highlight"><pre><span></span><span class="go">touch ~/.local/bin/tested-josm.sh</span>
+</pre></div>
+<p>Then, add the following content to the script:</p>
+<div class="highlight"><pre><span></span><span class="gp">#</span>!<span class="w"> </span>/bin/bash
+<span class="go">java -jar ~/.cache/JOSM/jar/josm-tested.jar</span>
+</pre></div>
+</div>
+<div class="section" id="adding-a-launcher">
+<h2>Adding a Launcher</h2>
+<p>To make this process even easier, let's create a launcher for the manually
+downloaded JOSM JAR file and the previously created script.</p>
+<p>Create a new desktop entry file:</p>
+<div class="highlight"><pre><span></span><span class="go">touch ~/.local/share/applications/org.openstreetmap.josm.desktop</span>
+</pre></div>
+<p>Then, add the following content to the file:</p>
+<div class="highlight"><pre><span></span><span class="go">[Desktop Entry]</span>
+<span class="go">Type=Application</span>
+<span class="go">Version=1.0</span>
+<span class="go">Name=JOSM Tested</span>
+<span class="go">GenericName=Java OpenStreetMap Editor</span>
+<span class="go">Comment=Extensible off-line editor for OpenStreetMap (OSM)</span>
+<span class="go">Icon=org.openstreetmap.josm</span>
+<span class="go">Exec=/home/pionen/.local/bin/tested-josm.sh</span>
+<span class="go">Terminal=false</span>
+<span class="go">MimeType=application/x-osm+xml;application/x-gpx+xml;application/geo+json;application/x-josm-session+xml;application/x-josm-session+zip;x-scheme-handler/geo;</span>
+<span class="go">StartupNotify=true</span>
+<span class="go">Categories=Education;Geoscience;Maps;</span>
+<span class="go">StartupWMClass=org-openstreetmap-josm-MainApplication</span>
+<span class="go">Keywords=OpenStreetMap;OSM;</span>
+</pre></div>
+<p>The next time you restart your computer, you will find the new launcher. By
+clicking on it, you will launch the most up-to-date version of JOSM on Debian.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 22 July 2021</p>
+    <p>Category: <a href="../../../../category/gis.html">gis</a>
+ &ndash; Tags:
+      <a href="../../../../tag/deb11.html">deb11</a>,      <a href="../../../../tag/debian.html">debian</a>,      <a href="../../../../tag/josm.html">josm</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2021/07/22/josm.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>

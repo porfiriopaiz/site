@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="deb11, debian, mate-desktop">
+
+  <title>
+    porfirio's blog
+&ndash; Mate Desktop on Debian  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2021/07/22/mate-desktop-on-debian.html">Mate Desktop on Debian</a></h1>
+  </div>
+  <div class="article_text">
+    <div class="section" id="mate-desktop-tips-and-tricks">
+<h2>Mate Desktop Tips and Tricks</h2>
+<div class="section" id="notify-battery-discharging">
+<h3>Notify Battery Discharging</h3>
+<p>Enable notification when the battery is discharging:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.power-manager notify-discharging true</span>
+</pre></div>
+</div>
+<div class="section" id="enable-window-compositing">
+<h3>Enable Window Compositing</h3>
+<p>Turn on window compositing for better visual effects:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general compositing-manager true</span>
+</pre></div>
+</div>
+<div class="section" id="center-new-windows">
+<h3>Center New Windows</h3>
+<p>Automatically center new windows on the screen:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general center-new-windows true</span>
+</pre></div>
+</div>
+<div class="section" id="enable-window-snapping">
+<h3>Enable Window Snapping</h3>
+<p>Allow window snapping for better workspace management:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general allow-tiling true</span>
+</pre></div>
+</div>
+<div class="section" id="hide-all-desktop-icons">
+<h3>Hide All Desktop Icons</h3>
+<p>Remove all desktop icons for a cleaner look:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.background show-desktop-icons false</span>
+</pre></div>
+</div>
+<div class="section" id="customize-window-button-layout">
+<h3>Customize Window Button Layout</h3>
+<p>Modify the order of window decoration buttons:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general button-layout &#39;close,maximize,minimize:menu&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="disable-auto-mount-open">
+<h3>Disable Auto-Mount Open</h3>
+<p>Prevent the file manager from opening automatically on mounting:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount-open false</span>
+</pre></div>
+</div>
+<div class="section" id="disable-auto-mounting">
+<h3>Disable Auto-Mounting</h3>
+<p>Turn off automatic mounting of devices:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount false</span>
+</pre></div>
+</div>
+<div class="section" id="caja-file-manager-preferences">
+<h3>Caja File Manager Preferences</h3>
+<div class="section" id="set-default-sorting-order">
+<h4>Set Default Sorting Order</h4>
+<p>Change the default sorting order to &quot;type&quot;:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.caja.preferences default-sort-order &#39;type&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="sort-directories-first">
+<h4>Sort Directories First</h4>
+<p>Ensure directories are always sorted first:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.caja.preferences sort-directories-first true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customize-appearance">
+<h3>Customize Appearance</h3>
+<div class="section" id="set-icon-theme">
+<h4>Set Icon Theme</h4>
+<p>Choose an icon theme, e.g., &quot;gnome&quot;:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.interface icon-theme &#39;gnome&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="set-gtk-theme">
+<h4>Set GTK Theme</h4>
+<p>Select a GTK theme, e.g., &quot;Arc-Dark&quot;:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.interface gtk-theme &#39;Arc-Dark&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="set-window-border-theme">
+<h4>Set Window Border Theme</h4>
+<p>Define the theme for window borders:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general theme &#39;Arc-Dark&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 22 July 2021</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/deb11.html">deb11</a>,      <a href="../../../../tag/debian.html">debian</a>,      <a href="../../../../tag/mate-desktop.html">mate-desktop</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2021/07/22/mate-desktop-on-debian.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - fc29</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/fc29.rss.xml" rel="self"/><lastBuildDate>Sun, 09 Dec 2018 21:26:00 -0600</lastBuildDate><item><title>i3 Post-Install</title><link>https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html</link><description>&lt;p&gt;After installing Fedora 29 with the i3 Window Manager, additional programs are
+necessary to enhance the user experience.&lt;/p&gt;
+&lt;p&gt;The first issue to address is how to connect to the Internet. You may have
+noticed that there is no program or applet to activate the Wi-Fi card or manage
+the NetworkManager service for a wired network card or available networks.&lt;/p&gt;
+&lt;p&gt;Assuming you are logged in and your hardware is supported by Fedora, the
+wireless network card should already be activated. But how do you connect to
+the networks within range?&lt;/p&gt;
+&lt;div class="section" id="nmcli"&gt;
+&lt;h2&gt;nmcli&lt;/h2&gt;
+&lt;p&gt;In a previous post, we installed a set of packages from the &amp;quot;Hardware Support&amp;quot;
+group. This group provides support for various networking hardware. We also
+installed the package group for NetworkManager.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; is a command-line utility that allows us to activate network
+hardware, scan for available networks, and connect to them.&lt;/p&gt;
+&lt;p&gt;To get started, open a terminal by pressing &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;.&lt;/p&gt;
+&lt;p&gt;Ensure your device’s physical network card switch (if present) is enabled.
+Then, in the terminal, verify that networking is activated via software with
+the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli networking on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will activate the wired network connection if available and ready for use.&lt;/p&gt;
+&lt;p&gt;To activate the wireless network hardware, execute:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli radio wifi on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This activates the wireless card. Next, scan for available networks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Example output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;IN-USE  SSID           MODE   CHAN  RATE        SIGNAL  BARS  SECURITY&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_1     Infra  5     130 Mbit/s  100     ▂▄▆█  WPA2&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_2     Infra  1     130 Mbit/s  29      ▂___  WPA2&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_3     Infra  1     54 Mbit/s   17      ▂___  WPA1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To refresh the network list, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi rescan&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the network &lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; does not require a password, connect using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For networks requiring a password, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1 password &amp;quot;1234567890&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Explanation of parameters:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;connect&lt;/tt&gt; specifies the task to perform.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; identifies the target network.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;password&lt;/tt&gt; indicates that a password will be provided.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;1234567890&lt;/tt&gt; is the password (replace with your network’s password).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should now be connected to the network. Next, install programs to improve
+your experience with i3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="networks"&gt;
+&lt;h2&gt;Networks&lt;/h2&gt;
+&lt;div class="section" id="nm-applet"&gt;
+&lt;h3&gt;nm-applet&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is a simple graphical applet for NetworkManager. It provides an
+intuitive interface for managing network connections.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-applet&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To launch &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt;, press &amp;lt;Start&amp;gt; + &amp;lt;d&amp;gt;, type &lt;cite&gt;nm-applet&lt;/cite&gt;, and press
+&amp;lt;Enter&amp;gt;. An icon should appear in the lower-right corner of your screen for
+managing network connections.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="networkmanager-tui"&gt;
+&lt;h3&gt;NetworkManager-tui&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;NetworkManager-tui&lt;/span&gt;&lt;/tt&gt; is an alternative to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; that uses &lt;tt class="docutils literal"&gt;ncurses&lt;/tt&gt;
+to create a user-friendly Text User Interface.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install NetworkManager-tui&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nm-connection-editor"&gt;
+&lt;h3&gt;nm-connection-editor&lt;/h3&gt;
+&lt;p&gt;The &lt;cite&gt;NetworkManager Connection Editor&lt;/cite&gt; provides an intuitive interface for
+editing saved networks or creating hotspots (if supported by your network
+card).&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-connection-editor&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-emulator"&gt;
+&lt;h2&gt;Terminal Emulator&lt;/h2&gt;
+&lt;p&gt;The default terminal emulator installed with i3 is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt;
+(&lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;). While powerful, it can be unintuitive and has a steep learning
+curve.&lt;/p&gt;
+&lt;p&gt;If you prefer a more user-friendly terminal emulator, such as GNOME Terminal,
+you can install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To set GNOME Terminal as the default terminal for &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;, edit the
+i3 configuration file (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/i3/config&lt;/span&gt;&lt;/tt&gt;). Look for the line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Replace it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec gnome-terminal&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the next post, I will share other programs I use in my Fedora 29 i3wm setup.
+For now, you should have the tools necessary to install additional programs,
+such as a web browser.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 09 Dec 2018 21:26:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item><item><title>i3</title><link>https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html</link><description>&lt;p&gt;In this post, I will explain how to perform a Fedora 29 installation with the
+i3 window manager. It is common to find installation guides for i3, but they
+often assume you already have another desktop environment installed.&lt;/p&gt;
+&lt;p&gt;Here, we will see how to build a fully functional environment starting from a
+minimal installation, as I have explained in previous posts.&lt;/p&gt;
+&lt;div class="section" id="creating-an-installation-medium"&gt;
+&lt;h2&gt;Creating an Installation Medium&lt;/h2&gt;
+&lt;div class="section" id="downloading-the-fedora-everything-netinstall-iso"&gt;
+&lt;h3&gt;Downloading the Fedora Everything Netinstall ISO&lt;/h3&gt;
+&lt;p&gt;From the site: &lt;a class="reference external" href="https://alt.fedoraproject.org/"&gt;https://alt.fedoraproject.org/&lt;/a&gt;, download the file in the
+&lt;em&gt;Everything&lt;/em&gt; section. This ISO allows network-based installation, downloading
+all necessary packages from the Internet. It also provides the option to choose
+which package collections to install, unlike Live media, which comes with
+predefined software selections.&lt;/p&gt;
+&lt;p&gt;Download the ISO with &lt;cite&gt;wget&lt;/cite&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Also, download the integrity check file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Verify the integrity of the file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-the-installation-medium-with-fedora-media-writer"&gt;
+&lt;h3&gt;Creating the Installation Medium with Fedora Media Writer&lt;/h3&gt;
+&lt;p&gt;Fedora Media Writer is available for various operating systems. Download the
+appropriate version from:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1"&gt;https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Using Fedora Media Writer ensures the installation medium will support booting
+on both UEFI and BIOS systems. The boot mode depends on which has higher
+priority during startup. I always use UEFI exclusively, so all my systems are
+installed in UEFI mode.&lt;/p&gt;
+&lt;p&gt;Once Fedora Media Writer is installed, connect your USB drive, run the
+application, and use the &lt;em&gt;Custom Image&lt;/em&gt; option to navigate to the downloaded
+ISO. Select the USB drive carefully and write the image to the drive.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Follow the installation steps described in this previous post, ensuring access
+to a wireless or wired network:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html"&gt;https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;During installation, I used my mobile phone to create a wired network via USB.
+While I had wireless access during the base system installation (Fedora Custom
+Install), the selected package collection lacked the necessary drivers for
+wireless connectivity.&lt;/p&gt;
+&lt;p&gt;To use a USB tethered network, follow these steps after the first boot:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Log in to the system.&lt;/li&gt;
+&lt;li&gt;Connect the USB cable to your computer and mobile phone.&lt;/li&gt;
+&lt;li&gt;Ensure the phone is connected to Wi-Fi or has an active data plan. You will need at least 800 MB of data for downloading the required RPM packages.&lt;/li&gt;
+&lt;li&gt;Put the phone in USB or MTP data transfer mode.&lt;/li&gt;
+&lt;li&gt;Enable a wired network (USB tethering) on your mobile phone.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Verify the connection by pinging Google:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;ping 8.8.8.8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-configurations"&gt;
+&lt;h2&gt;Basic Configurations&lt;/h2&gt;
+&lt;div class="section" id="configuring-dnf"&gt;
+&lt;h3&gt;Configuring &lt;cite&gt;dnf&lt;/cite&gt;&lt;/h3&gt;
+&lt;p&gt;As root, I configure &lt;cite&gt;dnf&lt;/cite&gt; for optimal performance. This step is optional:&lt;/p&gt;
+&lt;p&gt;Enable the fastest mirrors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable delta RPMs for faster downloads (optional):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Keep the package cache for the lifetime of the Fedora release (optional):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable unnecessary &lt;cite&gt;dnf&lt;/cite&gt; services and timers to save bandwidth and avoid
+locks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.timer&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot to apply the changes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="updating-the-system"&gt;
+&lt;h3&gt;Updating the System&lt;/h3&gt;
+&lt;p&gt;After installation, your system may not include the latest updates. Refresh the
+metadata cache and install updates:&lt;/p&gt;
+&lt;p&gt;As a normal user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As root:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check for updates:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If updates are available, install them:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot if updates include critical components like the kernel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-i3"&gt;
+&lt;h2&gt;Installing i3&lt;/h2&gt;
+&lt;p&gt;Install the i3 window manager and necessary components. All commands must be
+executed as root.&lt;/p&gt;
+&lt;p&gt;Install required groups and packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install core&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install networkmanager-submodules&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install fonts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install multimedia&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install base-x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install standard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install input-methods&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install i3 lightdm-gtk xdg-user-dirs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable the graphical boot mode and LightDM:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl set-default graphical.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl enable lightdm.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot the system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="first-graphical-session"&gt;
+&lt;h2&gt;First Graphical Session&lt;/h2&gt;
+&lt;p&gt;Upon first login, i3 will prompt you to generate a configuration file. Press
+Enter to confirm. Choose your preferred modifier key (e.g., the Windows or Meta
+key).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-additional-software"&gt;
+&lt;h2&gt;Installing Additional Software&lt;/h2&gt;
+&lt;p&gt;This setup does not include preinstalled tools like a web browser or file
+manager. You can install them as needed. For example, to install GNOME
+Terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;cite&gt;dmenu&lt;/cite&gt; to launch applications:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Win&amp;gt; + d&lt;/cite&gt; and type &lt;cite&gt;gnome-terminal&lt;/cite&gt; to open the terminal.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="logging-out-and-powering-off"&gt;
+&lt;h2&gt;Logging Out and Powering Off&lt;/h2&gt;
+&lt;p&gt;To log out from i3:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Win&amp;gt; + &amp;lt;Shift&amp;gt; + e&lt;/cite&gt; and confirm.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To power off from LightDM:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Alt&amp;gt; + &amp;lt;F4&amp;gt;&lt;/cite&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This guide provides a streamlined way to set up i3 on Fedora 29, ideal for
+lightweight virtual machines or older hardware with limited resources.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Thu, 29 Nov 2018 02:53:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</guid><category>floss</category><category>dnf</category><category>fc29</category><category>fedora</category><category>postinstall</category></item></channel></rss>

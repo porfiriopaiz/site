@@ -1,0 +1,1920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-17T09:05:00-06:00</updated><entry><title>Checking for updates</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/17/checking-for-updates.html" rel="alternate"/><published>2025-08-17T09:05:00-06:00</published><updated>2025-08-17T09:05:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-17:/site/posts/2025/08/17/checking-for-updates.html</id><summary type="html">&lt;p class="first last"&gt;On macOS via command-line&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;In this post, we will explore the process of updating via the command-
+line.&lt;/p&gt;
+&lt;p&gt;First thing to explore would be disabling the automatic updates process
+on System Settings &amp;gt; General &amp;gt; Software Update &amp;gt; Automatic Updates &amp;gt; ⓘ.&lt;/p&gt;
+&lt;div class="section" id="updates-via-command-line"&gt;
+&lt;h2&gt;Updates via command-line&lt;/h2&gt;
+&lt;p&gt;You can install macOS updates from the built-in command line using the
+&lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; utility in Terminal. This is often preferred by power
+users and system administrators for its flexibility and ability to
+automate tasks.&lt;/p&gt;
+&lt;p&gt;Here's a breakdown of how to do it:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Open Terminal:&lt;/strong&gt;
+You can find Terminal in &lt;tt class="docutils literal"&gt;Applications/Utilities&lt;/tt&gt; or by searching for
+it using Spotlight (Cmd + Space, then type &amp;quot;Terminal&amp;quot;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Check for Available Updates:&lt;/strong&gt;
+Before installing, it's good practice to see what updates are available
+for your system. Use one of these commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;softwareupdate -l&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;softwareupdate --list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will list any pending updates, including macOS updates, Safari
+updates, security updates, and other Apple software. You'll see
+information like the update's name, version, and size. Look for items
+marked &lt;tt class="docutils literal"&gt;[Recommended]&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;[restart]&lt;/tt&gt; (indicating a restart is
+needed).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Install All Available Updates:&lt;/strong&gt;
+To download and install all available updates, use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -ia&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate --install --all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;``sudo``&lt;/strong&gt;: This grants administrative privileges, which are
+necessary for installing updates. You'll be prompted to enter your
+administrator password.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;``-i`` or ``--install``&lt;/strong&gt;: This flag tells &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; to
+install the updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;``-a`` or ``--all``&lt;/strong&gt;: This flag tells &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; to
+install all available updates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;4. Install Specific Updates:&lt;/strong&gt;
+If you only want to install a particular update from the list you saw
+in step 2, you can specify its identifier:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -i &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate --install &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Important Notes:&lt;/strong&gt;
+- The &amp;quot;Update Name-Version&amp;quot; is the exact identifier from the output of &lt;tt class="docutils literal"&gt;softwareupdate &lt;span class="pre"&gt;-l&lt;/span&gt;&lt;/tt&gt;.
+- If the update name contains spaces, you &lt;strong&gt;must&lt;/strong&gt; enclose it in single quotes (e.g., &lt;tt class="docutils literal"&gt;'macOS Ventura 13.5 &lt;span class="pre"&gt;Update-'&lt;/span&gt;&lt;/tt&gt;). Be precise with the name, including any trailing spaces if present in the output of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-l&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Download Updates Without Installing:&lt;/strong&gt;
+You can download updates to your system without immediately installing
+them. This can be useful if you want to prepare updates for later
+installation or for multiple machines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -d -a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -d &amp;quot;Update Name-Version&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Downloaded updates are usually stored in &lt;tt class="docutils literal"&gt;/Library/Updates&lt;/tt&gt;. You can
+then install them later using the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--install&lt;/span&gt;&lt;/tt&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Restart After Installation:&lt;/strong&gt;
+Many macOS updates require a restart to complete the installation. The
+&lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command will usually prompt you to restart or handle
+it automatically if you use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-R&lt;/span&gt;&lt;/tt&gt; flag.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo softwareupdate -iaR&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It's generally a good idea to perform the restart when prompted or
+manually after the installation is complete.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="important-considerations"&gt;
+&lt;h2&gt;Important Considerations&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Backup Your Mac:&lt;/strong&gt; Before performing any major system update, it's
+always highly recommended to back up your Mac using Time Machine or
+another backup solution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Administrator Password:&lt;/strong&gt; You will need your administrator
+password to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; and install updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Internet Connection:&lt;/strong&gt; A stable internet connection is essential
+for downloading updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disk Space:&lt;/strong&gt; Ensure you have enough free disk space for the
+updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Third-Party Apps:&lt;/strong&gt; The &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command handles Apple
+system updates and built-in Apple apps. It does not update
+third-party apps from the Mac App Store or other sources.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Command Line Tools for Xcode:&lt;/strong&gt; If you develop or use certain
+development tools, you might also need to update the Xcode Command
+Line Tools. You can usually do this with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xcode-select&lt;/span&gt; &lt;span class="pre"&gt;--install&lt;/span&gt;&lt;/tt&gt;
+or through &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By using the &lt;tt class="docutils literal"&gt;softwareupdate&lt;/tt&gt; command, you gain more control over when
+and how your macOS updates are applied, which can be particularly
+useful in automated environments or for troubleshooting.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="misc"/><category term="apple"/><category term="cli"/><category term="macOS"/></entry><entry><title>vim</title><link href="https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html" rel="alternate"/><published>2023-09-11T04:39:00-06:00</published><updated>2023-09-11T04:39:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</id><summary type="html">&lt;p class="first last"&gt;The Vim text editor&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="understanding-vim-on-debian"&gt;
+&lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
+&lt;p&gt;Now that I understand how Debian manages &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and I've grasped
+the purpose of the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; package, it's time to determine the
+requirements for obtaining a more advanced &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; binary with enhanced
+features or support for additional functionalities.&lt;/p&gt;
+&lt;p&gt;A brief search for additional information on &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; suggests various
+alternatives for a more comprehensive &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; experience:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;apt-cache&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;vim-tiny
+&lt;span class="go"&gt;Package: vim-tiny&lt;/span&gt;
+&lt;span class="go"&gt;Source: vim&lt;/span&gt;
+&lt;span class="go"&gt;Version: 2:8.2.2434-3+deb11u1&lt;/span&gt;
+&lt;span class="go"&gt;Installed-Size: 1574&lt;/span&gt;
+&lt;span class="go"&gt;Maintainer: Debian Vim Maintainers &amp;lt;team+vim@tracker.debian.org&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Architecture: amd64&lt;/span&gt;
+&lt;span class="go"&gt;Provides: editor&lt;/span&gt;
+&lt;span class="go"&gt;Depends: vim-common (= 2:8.2.2434-3+deb11u1), libacl1 (&amp;gt;= 2.2.23), libc6 (&amp;gt;= 2.15), libselinux1 (&amp;gt;= 3.1~), libtinfo6 (&amp;gt;= 6)&lt;/span&gt;
+&lt;span class="go"&gt;Suggests: indent&lt;/span&gt;
+&lt;span class="go"&gt;Description-en: Vi IMproved - enhanced vi editor - compact version&lt;/span&gt;
+&lt;span class="go"&gt; Vim is an almost compatible version of the UNIX editor Vi.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; This package contains a minimal version of Vim compiled with no GUI and&lt;/span&gt;
+&lt;span class="go"&gt; a small subset of features. This package&amp;#39;s sole purpose is to provide&lt;/span&gt;
+&lt;span class="go"&gt; the vi binary for base installations.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; If a vim binary is wanted, try one of the following more featureful&lt;/span&gt;
+&lt;span class="go"&gt; packages: vim, vim-nox, vim-athena, or vim-gtk3.&lt;/span&gt;
+&lt;span class="go"&gt;Description-md5: 85f2dbef1339af3dcf83d9ee00fd5e22&lt;/span&gt;
+&lt;span class="go"&gt;Homepage: https://www.vim.org/&lt;/span&gt;
+&lt;span class="go"&gt;Tag: devel::editor, implemented-in::c, interface::text-mode, role::program,&lt;/span&gt;
+&lt;span class="go"&gt; uitoolkit::ncurses, use::editing, works-with::text, works-with::unicode&lt;/span&gt;
+&lt;span class="go"&gt;Section: editors&lt;/span&gt;
+&lt;span class="go"&gt;Priority: important&lt;/span&gt;
+&lt;span class="go"&gt;Filename: pool/main/v/vim/vim-tiny_8.2.2434-3+deb11u1_amd64.deb&lt;/span&gt;
+&lt;span class="go"&gt;Size: 744284&lt;/span&gt;
+&lt;span class="go"&gt;MD5sum: 3b101104ccb4e8367298e4ea9dc33d27&lt;/span&gt;
+&lt;span class="go"&gt;SHA256: 0cfc3ce179181f9c08f8460360a8bcba05c214d75ba51d78ecf021e42c9a4261&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Running both &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-athena&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-gtk3&lt;/span&gt;&lt;/tt&gt;
+reveals that both packages offer a graphical user interface, which I neither
+desire nor require.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show vim&lt;/tt&gt; displays information that suggests this could be the
+solution I've been searching for:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;apt-cache&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;vim
+&lt;span class="go"&gt;Package: vim&lt;/span&gt;
+&lt;span class="go"&gt;Version: 2:8.2.2434-3+deb11u1&lt;/span&gt;
+&lt;span class="go"&gt;Installed-Size: 3286&lt;/span&gt;
+&lt;span class="go"&gt;Maintainer: Debian Vim Maintainers &amp;lt;team+vim@tracker.debian.org&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Architecture: amd64&lt;/span&gt;
+&lt;span class="go"&gt;Provides: editor&lt;/span&gt;
+&lt;span class="go"&gt;Depends: vim-common (= 2:8.2.2434-3+deb11u1), vim-runtime (= 2:8.2.2434-3+deb11u1), libacl1 (&amp;gt;= 2.2.23), libc6 (&amp;gt;= 2.29), libgpm2 (&amp;gt;= 1.20.7), libselinux1 (&amp;gt;= 3.1~), libtinfo6 (&amp;gt;= 6)&lt;/span&gt;
+&lt;span class="go"&gt;Suggests: ctags, vim-doc, vim-scripts&lt;/span&gt;
+&lt;span class="go"&gt;Description-en: Vi IMproved - enhanced vi editor&lt;/span&gt;
+&lt;span class="go"&gt; Vim is an almost compatible version of the UNIX editor Vi.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; Many new features have been added: multi level undo, syntax&lt;/span&gt;
+&lt;span class="go"&gt; highlighting, command line history, on-line help, filename&lt;/span&gt;
+&lt;span class="go"&gt; completion, block operations, folding, Unicode support, etc.&lt;/span&gt;
+&lt;span class="go"&gt; .&lt;/span&gt;
+&lt;span class="go"&gt; This package contains a version of vim compiled with a rather&lt;/span&gt;
+&lt;span class="go"&gt; standard set of features. This package does not provide a GUI&lt;/span&gt;
+&lt;span class="go"&gt; version of Vim. See the other vim-* packages if you need more&lt;/span&gt;
+&lt;span class="go"&gt; (or less).&lt;/span&gt;
+&lt;span class="go"&gt;Description-md5: 59e8b8f7757db8b53566d5d119872de8&lt;/span&gt;
+&lt;span class="go"&gt;Homepage: https://www.vim.org/&lt;/span&gt;
+&lt;span class="go"&gt;Tag: devel::editor, implemented-in::c, interface::commandline,&lt;/span&gt;
+&lt;span class="go"&gt; interface::text-mode, role::program, scope::application,&lt;/span&gt;
+&lt;span class="go"&gt; uitoolkit::ncurses, use::editing, works-with::text, works-with::unicode&lt;/span&gt;
+&lt;span class="go"&gt;Section: editors&lt;/span&gt;
+&lt;span class="go"&gt;Priority: optional&lt;/span&gt;
+&lt;span class="go"&gt;Filename: pool/main/v/vim/vim_8.2.2434-3+deb11u1_amd64.deb&lt;/span&gt;
+&lt;span class="go"&gt;Size: 1494176&lt;/span&gt;
+&lt;span class="go"&gt;MD5sum: f74e7886b6610f74d06c789eeb144b9c&lt;/span&gt;
+&lt;span class="go"&gt;SHA256: b06d11fdee525b919deb4778f7af352ebf3d6ce2591c8fb8e02e52f1ae90ef7d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-cache&lt;/span&gt; show &lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; reveals that &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; provides support for
+scripting languages, including Python, which is absent in the minimal &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;
+package.&lt;/p&gt;
+&lt;p&gt;So, I installed it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;apt-get install vim-nox&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first thing I noticed after installing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; is that now &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;
+points to &lt;tt class="docutils literal"&gt;vim.nox&lt;/tt&gt;, meaning that when running &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; it actually runs
+&lt;tt class="docutils literal"&gt;vim.nox&lt;/tt&gt;, which was unexpected.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;whereis&lt;span class="w"&gt; &lt;/span&gt;vi
+&lt;span class="go"&gt;vi: /usr/bin/vi /usr/share/man/man1/vi.1.gz&lt;/span&gt;
+&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/usr/bin/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 20 May 28  2021 /usr/bin/vi -&amp;gt; /etc/alternatives/vi&lt;/span&gt;
+&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/etc/alternatives/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&amp;gt; /usr/bin/vim.nox&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I struggled to find a fix for this, but I eventually found the solution:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219"&gt;https://superuser.com/questions/852177/why-does-the-vi-command-open-vim-editor/852219#852219&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I just needed to run &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and pass some parameters to avoid loading
+additional features:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;vim -u NONE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Later, I found the same suggestion in the &lt;tt class="docutils literal"&gt;/usr/share/vim/vim82/defaults.vim&lt;/tt&gt;
+file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;&amp;quot; This is loaded if no vimrc file was found.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Except when Vim is run with &amp;quot;-u NONE&amp;quot; or &amp;quot;-C&amp;quot;.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Individual settings can be reverted with &amp;quot;:set option&amp;amp;&amp;quot;.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Other commands can be reverted as mentioned below.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This setup allows me to run &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; without loading any additional features from
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt;, which is useful for quick edits without plugins. To simplify this,
+I added the following alias to my &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Alias to run vi without additional features&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vim -u NONE&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With this configuration, I'm all set! In a future post, I’ll share my
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file and its configuration details.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="vim"/></entry><entry><title>vi</title><link href="https://porfiriopaiz.github.io/site/posts/2022/10/31/vi.html" rel="alternate"/><published>2022-10-31T03:32:00-06:00</published><updated>2022-10-31T03:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2022-10-31:/site/posts/2022/10/31/vi.html</id><summary type="html">&lt;p class="first last"&gt;The Vi text editor&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="understanding-vi-and-vim-on-debian"&gt;
+&lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
+&lt;p&gt;Since 2011, I have steadfastly embraced &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; as my primary text editor. My
+journey into mastering the command-line interface and transitioning away from
+the comfort of the graphical user interface began early. Among the foundational
+skills I sought to acquire, efficient text file editing was one of the first.&lt;/p&gt;
+&lt;p&gt;Surprisingly, the exact catalyst that led me to embrace &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; has faded into
+the distant recesses of my memory. Nevertheless, over eleven years later, my
+loyalty to &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; remains unwavering. It has been a constant companion
+throughout my journey, and I have never strayed into the world of alternative
+text editors. I have even used &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; for basic Python programming tasks,
+underscoring its versatility and enduring utility in my daily computing
+endeavors.&lt;/p&gt;
+&lt;p&gt;In this post, I will delve into the intricacies of how Debian manages the
+functionality of &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; in a basic, uncustomized Debian
+installation.&lt;/p&gt;
+&lt;p&gt;My objective is to gain a profound understanding of the default behavior of
+&lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; in their most minimalist configurations, as presented
+immediately after a fresh Debian installation.&lt;/p&gt;
+&lt;p&gt;It's worth noting that Debian does not include &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; by default in this
+setup. I opted for a network installation using the minimal tasksel profile,
+selecting only the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;mate-desktop-environment&lt;/span&gt;&lt;/tt&gt; package. This highlights one of
+the aspects I greatly appreciate about Debian—its commitment to providing
+essential software components while allowing users to shape and personalize
+their tools and environments without presumption.&lt;/p&gt;
+&lt;div class="section" id="vi-1"&gt;
+&lt;h3&gt;&lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;&lt;/h3&gt;
+&lt;p&gt;A pristine Debian installation includes only the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; package. Within
+this package, two critical configuration files are stored in &lt;tt class="docutils literal"&gt;/etc/vim/&lt;/tt&gt;:
+&lt;tt class="docutils literal"&gt;vimrc&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vimrc.tiny&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;This setup is intentionally minimalist, devoid of any symbolic links, aliases,
+or binary files associated with &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;. The only alias present is &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;,
+which is linked to &lt;tt class="docutils literal"&gt;vim.tiny&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;When &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; is invoked, it calls &lt;tt class="docutils literal"&gt;vim.tiny&lt;/tt&gt;, which, by default, sources the
+file located at &lt;tt class="docutils literal"&gt;/etc/vim/vimrc.tiny&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Now, let's explore the contents of the &lt;tt class="docutils literal"&gt;/etc/vim/vimrc.tiny&lt;/tt&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;&amp;quot; Vim configuration file in effect when invoked as &amp;#39;vi&amp;#39;. This configuration&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; aims to provide a Vim environment as compatible with the original &amp;#39;vi&amp;#39; as possible.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Note that ~/.vimrc and other runtimepath configuration files are still sourced.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; When Vim is invoked as &amp;#39;vim&amp;#39;, &amp;#39;view&amp;#39;, &amp;#39;evim&amp;#39;, etc., this file is _not_ sourced.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; In such cases, /etc/vim/vimrc and/or /etc/vim/gvimrc are used.&lt;/span&gt;
+
+&lt;span class="go"&gt;set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim82,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after&lt;/span&gt;
+&lt;span class="go"&gt;set compatible&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; vim: set ft=vim:&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This configuration ensures that &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; (invoking &lt;tt class="docutils literal"&gt;vim.tiny&lt;/tt&gt;) mimics the
+original &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;. It also loads configuration files from the &lt;tt class="docutils literal"&gt;$VIMRUNTIME&lt;/tt&gt;
+directory, including &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; and other runtimepath files. Specifically, it
+prioritizes:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;/usr/share/vim/vim82/debian.vim&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;/usr/share/vim/vim82/defaults.vim&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Finally, the &lt;tt class="docutils literal"&gt;set compatible&lt;/tt&gt; directive ensures compatibility with the
+original &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt;, even if other configurations attempt to disable it.&lt;/p&gt;
+&lt;p&gt;By default, &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; links to &lt;tt class="docutils literal"&gt;vim.tiny&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;/etc/alternatives/vi
+&lt;span class="go"&gt;lrwxrwxrwx 1 root root 16 Oct 12  2022 /etc/alternatives/vi -&amp;gt; /usr/bin/vim.tiny&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; is explicitly installed, additional aliases (e.g., &lt;tt class="docutils literal"&gt;view&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;evim&lt;/tt&gt;) and configuration files, such as &lt;tt class="docutils literal"&gt;/etc/vim/vimrc&lt;/tt&gt; and
+&lt;tt class="docutils literal"&gt;/etc/gvimrc&lt;/tt&gt;, become active. These configurations enable enhanced features:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;runtime! debian.vim&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Uncomment below to make Vim more Vi-compatible.&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; set compatible&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; Syntax highlighting example:&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; syntax on&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Enable additional plugins or rules:&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; filetype plugin indent on&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;quot; Uncomment to remember the last position in a file:&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot; au BufReadPost * if line(&amp;quot;&amp;#39;\&amp;quot;&amp;quot;) &amp;gt; 1 &amp;amp;&amp;amp; line(&amp;quot;&amp;#39;\&amp;quot;&amp;quot;) &amp;lt;= line(&amp;quot;$&amp;quot;) | exe &amp;quot;normal! g&amp;#39;\&amp;quot;&amp;quot; | endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When using &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;, you can check the runtime path and sourced scripts:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;:echo $VIMRUNTIME&lt;/span&gt;
+&lt;span class="go"&gt;/usr/share/vim/vim82&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;:scriptnames&lt;/span&gt;
+&lt;span class="go"&gt;1: /usr/share/vim/vimrc&lt;/span&gt;
+&lt;span class="go"&gt;2: /usr/share/vim/vim82/debian.vim&lt;/span&gt;
+&lt;span class="go"&gt;3: ~/.vimrc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This confirms that user-defined configurations in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; override
+defaults. Any required settings from &lt;tt class="docutils literal"&gt;/usr/share/vim/vim82/defaults.vim&lt;/tt&gt;
+should be manually incorporated into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; if needed.&lt;/p&gt;
+&lt;p&gt;In the next post, I will explain my choice of &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; versions available in the
+Debian repository and the rationale behind my selection.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="vi"/></entry><entry><title>JOSM</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/josm.html" rel="alternate"/><published>2021-07-22T20:46:00-06:00</published><updated>2021-07-22T20:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/josm.html</id><summary type="html">&lt;p class="first last"&gt;The Java OpenStreetMap editor&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;JOSM is, in my opinion, the best editor for OpenStreetMap I have ever used, and
+it is also the best Java software I have ever used.&lt;/p&gt;
+&lt;p&gt;In this post, I will cover how to get it installed on Debian, how to properly
+configure it for mapping on OSM, and which plugins to install and use.&lt;/p&gt;
+&lt;div class="section" id="installing-josm-on-debian"&gt;
+&lt;h2&gt;Installing JOSM on Debian&lt;/h2&gt;
+&lt;p&gt;JOSM is available in the Debian official repository, so to install it, you just
+need to open a terminal and run the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install josm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solving-josm-outdated-version-on-debian"&gt;
+&lt;h2&gt;Solving JOSM Outdated Version on Debian&lt;/h2&gt;
+&lt;p&gt;Installing JOSM from the official Debian repositories resolves the dependency
+issue you would encounter when using the most up-to-date version from the
+official .jar build.&lt;/p&gt;
+&lt;p&gt;To run the latest stable version, you need to download it from the official
+JOSM website as a JAR file. However, before doing that, you need to run the
+version installed from the Debian repository at least once.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;josm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will create the following directory structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;~/.config/JOSM&lt;/span&gt;
+&lt;span class="go"&gt;~/.cache/JOSM&lt;/span&gt;
+&lt;span class="go"&gt;~/.local/share/JOSM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.cache/JOSM/&lt;/span&gt;&lt;/tt&gt;, a directory named &lt;tt class="docutils literal"&gt;jar&lt;/tt&gt; will be created:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;mkdir -p ~/.cache/JOSM/jar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, navigate to that directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cd ~/.cache/JOSM/jar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, download the latest version of the JOSM editor using wget:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://josm.openstreetmap.de/josm-tested.jar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To run the newly downloaded version, use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;java -jar ~/.cache/JOSM/jar/josm-tested.jar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="script-launcher"&gt;
+&lt;h2&gt;Script Launcher&lt;/h2&gt;
+&lt;p&gt;To launch the JAR file easily, you can create a script. First, create an
+executable file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;touch ~/.local/bin/tested-josm.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, add the following content to the script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;#&lt;/span&gt;!&lt;span class="w"&gt; &lt;/span&gt;/bin/bash
+&lt;span class="go"&gt;java -jar ~/.cache/JOSM/jar/josm-tested.jar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="adding-a-launcher"&gt;
+&lt;h2&gt;Adding a Launcher&lt;/h2&gt;
+&lt;p&gt;To make this process even easier, let's create a launcher for the manually
+downloaded JOSM JAR file and the previously created script.&lt;/p&gt;
+&lt;p&gt;Create a new desktop entry file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;touch ~/.local/share/applications/org.openstreetmap.josm.desktop&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, add the following content to the file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;span class="go"&gt;Type=Application&lt;/span&gt;
+&lt;span class="go"&gt;Version=1.0&lt;/span&gt;
+&lt;span class="go"&gt;Name=JOSM Tested&lt;/span&gt;
+&lt;span class="go"&gt;GenericName=Java OpenStreetMap Editor&lt;/span&gt;
+&lt;span class="go"&gt;Comment=Extensible off-line editor for OpenStreetMap (OSM)&lt;/span&gt;
+&lt;span class="go"&gt;Icon=org.openstreetmap.josm&lt;/span&gt;
+&lt;span class="go"&gt;Exec=/home/pionen/.local/bin/tested-josm.sh&lt;/span&gt;
+&lt;span class="go"&gt;Terminal=false&lt;/span&gt;
+&lt;span class="go"&gt;MimeType=application/x-osm+xml;application/x-gpx+xml;application/geo+json;application/x-josm-session+xml;application/x-josm-session+zip;x-scheme-handler/geo;&lt;/span&gt;
+&lt;span class="go"&gt;StartupNotify=true&lt;/span&gt;
+&lt;span class="go"&gt;Categories=Education;Geoscience;Maps;&lt;/span&gt;
+&lt;span class="go"&gt;StartupWMClass=org-openstreetmap-josm-MainApplication&lt;/span&gt;
+&lt;span class="go"&gt;Keywords=OpenStreetMap;OSM;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The next time you restart your computer, you will find the new launcher. By
+clicking on it, you will launch the most up-to-date version of JOSM on Debian.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="gis"/><category term="deb11"/><category term="debian"/><category term="josm"/></entry><entry><title>Mate Desktop on Debian</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/22/mate-desktop-on-debian.html" rel="alternate"/><published>2021-07-22T19:11:00-06:00</published><updated>2021-07-22T19:11:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-22:/site/posts/2021/07/22/mate-desktop-on-debian.html</id><summary type="html">&lt;p class="first last"&gt;Configuration tips and tricks for Mate Desktop on my Debian setup.&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
+&lt;h2&gt;Mate Desktop Tips and Tricks&lt;/h2&gt;
+&lt;div class="section" id="notify-battery-discharging"&gt;
+&lt;h3&gt;Notify Battery Discharging&lt;/h3&gt;
+&lt;p&gt;Enable notification when the battery is discharging:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.power-manager notify-discharging true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enable-window-compositing"&gt;
+&lt;h3&gt;Enable Window Compositing&lt;/h3&gt;
+&lt;p&gt;Turn on window compositing for better visual effects:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general compositing-manager true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="center-new-windows"&gt;
+&lt;h3&gt;Center New Windows&lt;/h3&gt;
+&lt;p&gt;Automatically center new windows on the screen:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general center-new-windows true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enable-window-snapping"&gt;
+&lt;h3&gt;Enable Window Snapping&lt;/h3&gt;
+&lt;p&gt;Allow window snapping for better workspace management:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general allow-tiling true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hide-all-desktop-icons"&gt;
+&lt;h3&gt;Hide All Desktop Icons&lt;/h3&gt;
+&lt;p&gt;Remove all desktop icons for a cleaner look:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.background show-desktop-icons false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-window-button-layout"&gt;
+&lt;h3&gt;Customize Window Button Layout&lt;/h3&gt;
+&lt;p&gt;Modify the order of window decoration buttons:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general button-layout &amp;#39;close,maximize,minimize:menu&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disable-auto-mount-open"&gt;
+&lt;h3&gt;Disable Auto-Mount Open&lt;/h3&gt;
+&lt;p&gt;Prevent the file manager from opening automatically on mounting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.media-handling automount-open false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disable-auto-mounting"&gt;
+&lt;h3&gt;Disable Auto-Mounting&lt;/h3&gt;
+&lt;p&gt;Turn off automatic mounting of devices:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.media-handling automount false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="caja-file-manager-preferences"&gt;
+&lt;h3&gt;Caja File Manager Preferences&lt;/h3&gt;
+&lt;div class="section" id="set-default-sorting-order"&gt;
+&lt;h4&gt;Set Default Sorting Order&lt;/h4&gt;
+&lt;p&gt;Change the default sorting order to &amp;quot;type&amp;quot;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.caja.preferences default-sort-order &amp;#39;type&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sort-directories-first"&gt;
+&lt;h4&gt;Sort Directories First&lt;/h4&gt;
+&lt;p&gt;Ensure directories are always sorted first:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.caja.preferences sort-directories-first true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-appearance"&gt;
+&lt;h3&gt;Customize Appearance&lt;/h3&gt;
+&lt;div class="section" id="set-icon-theme"&gt;
+&lt;h4&gt;Set Icon Theme&lt;/h4&gt;
+&lt;p&gt;Choose an icon theme, e.g., &amp;quot;gnome&amp;quot;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.interface icon-theme &amp;#39;gnome&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="set-gtk-theme"&gt;
+&lt;h4&gt;Set GTK Theme&lt;/h4&gt;
+&lt;p&gt;Select a GTK theme, e.g., &amp;quot;Arc-Dark&amp;quot;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.interface gtk-theme &amp;#39;Arc-Dark&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="set-window-border-theme"&gt;
+&lt;h4&gt;Set Window Border Theme&lt;/h4&gt;
+&lt;p&gt;Define the theme for window borders:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general theme &amp;#39;Arc-Dark&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="mate-desktop"/></entry><entry><title>UTC</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/15/utc.html" rel="alternate"/><published>2021-07-15T20:53:00-06:00</published><updated>2021-07-15T20:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-15:/site/posts/2021/07/15/utc.html</id><summary type="html">&lt;p class="first last"&gt;Set Local time, RTC time, and Time zone to UTC&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;When I was installing Debian on my Lenovo ThinkPad T440p, I could not find the
+option to set up the local time, RTC time, and time zone to UTC as the
+default configuration.&lt;/p&gt;
+&lt;p&gt;To fix this, I need to run the following commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This lists the current configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 14:45:28 CST&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 20:45:28 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 20:44:47&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: America/Managua (CST, -0600)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: yes&lt;/span&gt;
+
+&lt;span class="go"&gt;Warning: The system is configured to read the RTC time in the local time zone.&lt;/span&gt;
+&lt;span class="go"&gt;         This mode cannot be fully supported. It will create various problems&lt;/span&gt;
+&lt;span class="go"&gt;         with time zone changes and daylight saving time adjustments. The RTC&lt;/span&gt;
+&lt;span class="go"&gt;         time is never updated; it relies on external facilities to maintain it.&lt;/span&gt;
+&lt;span class="go"&gt;         If at all possible, use RTC in UTC by calling&lt;/span&gt;
+&lt;span class="go"&gt;         &amp;#39;timedatectl set-local-rtc 0&amp;#39;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, let's update the RTC to use UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-local-rtc 0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, let's set the time zone and the local time zone to UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;timedatectl set-timezone UTC&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, our system will be fully synchronized with UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;timedatectl
+&lt;span class="go"&gt;               Local time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;           Universal time: Thu 2021-07-15 21:31:52 UTC&lt;/span&gt;
+&lt;span class="go"&gt;                 RTC time: Thu 2021-07-15 21:31:52&lt;/span&gt;
+&lt;span class="go"&gt;                Time zone: UTC (UTC, +0000)&lt;/span&gt;
+&lt;span class="go"&gt;System clock synchronized: yes&lt;/span&gt;
+&lt;span class="go"&gt;              NTP service: active&lt;/span&gt;
+&lt;span class="go"&gt;          RTC in local TZ: no&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="timedatectl"/><category term="utc"/></entry><entry><title>K8</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/k8.html" rel="alternate"/><published>2021-07-14T17:37:00-06:00</published><updated>2021-07-14T17:37:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/k8.html</id><summary type="html">&lt;p class="first last"&gt;Swap from multimedia keys to function keys as the primary option&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Back in February, Guido van Rossum posted on Twitter a picture of his desk with
+a large mouse pad.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://twitter.com/gvanrossum/status/1365796969617104897"&gt;Guido van Rossum's tweet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What got my attention from this picture was the keyboard. Down in the comment
+section, I found the manufacturer and model of this keyboard.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.keychron.com/products/keychron-k8-tenkeyless-wireless-mechanical-keyboard?variant=32018253021273"&gt;Keychron K8 Product&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have always wanted to try mechanical keyboards but never knew
+exactly which one to get or try. Seeing that this is the preferred one from a
+respectable developer, I decided to go for this same model.&lt;/p&gt;
+&lt;p&gt;The very specific configuration I wanted was not available at the time I was
+ordering it, so I subscribed to get a notification via email when the
+same configuration became available again.&lt;/p&gt;
+&lt;p&gt;I ordered mine on June 3rd, the keyboard was shipped from Hong Kong to Miami
+and arrived in the next 5 days. The keyboard arrived in Nicaragua 25 days
+later.&lt;/p&gt;
+&lt;p&gt;The first thing I tried to do was to set up the keyboard with my T440p running
+Debian 11 Bullseye via Bluetooth. For this, I installed Blueman, which provides
+a MATE applet:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install blueman&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the switches on the keyboard set to Windows and Bluetooth, the Blueman
+applet running, and following the instructions in the booklet included in the box,
+I was able to pair my Keychron K8 via Bluetooth with my T440p running Debian.&lt;/p&gt;
+&lt;p&gt;I had to manually add my keyboard as a new device with the applet and then pair
+both devices.&lt;/p&gt;
+&lt;p&gt;Over Bluetooth and in Windows mode, the swap from multimedia keys to function
+keys worked, but in wired mode, this did not work.&lt;/p&gt;
+&lt;p&gt;I found some hints on how to fix this in the official Facebook support group
+for Linux users of Keychron, which led me to this very specific command that must
+be run on every startup so that the primary option for the F1 to F12 keys
+becomes function keys instead of multimedia keys.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Later, I found this documentation that provides at least 3 different ways to
+ensure this command is executed on every startup:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://help.ubuntu.com/community/AppleKeyboard#Change_Function_Key_behavior"&gt;Ubuntu Keyboard Configuration Help&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;From the 3 options listed there, I decided to go for the one that makes use of
+the sysfs.conf file. So, I installed &lt;tt class="docutils literal"&gt;sysfsutils&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install sysfsutils&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And added this line at the end of the file &lt;strong&gt;/etc/sysfs.conf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;module/hid_apple/parameters/fnmode = 0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I then restarted the computer, and while in cable and Windows mode, I pressed the
+key combination:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Fn + x + l
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After doing this, the primary option for the F1 to F12 keys will be the function
+keys instead of the multimedia keys.&lt;/p&gt;
+&lt;p&gt;To modify the screen brightness, turn the keyboard backlight on and off, or mute
+and unmute the audio, you must press the Fn key plus the function key (Fn +
+F1 or Fn + F2). This will allow you to continue using your K8 on Linux
+with the switches in Windows/Android mode, in wired or Bluetooth mode, with the
+function keys as the primary option instead of the multimedia keys.&lt;/p&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="keychron"/><category term="k8"/></entry><entry><title>Setup Debian Keyboard Layout and Distribution</title><link href="https://porfiriopaiz.github.io/site/posts/2021/07/14/kb-layout-and-distribution.html" rel="alternate"/><published>2021-07-14T16:38:00-06:00</published><updated>2021-07-14T16:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2021-07-14:/site/posts/2021/07/14/kb-layout-and-distribution.html</id><summary type="html">&lt;p class="first last"&gt;How to set up English International with AltGr dead keys&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;During the Debian installation process, we are prompted to set up our keyboard
+layout and distribution. Unfortunately, my preferred layout is not listed as
+one of the available options.&lt;/p&gt;
+&lt;p&gt;I would like to set it up as English International with AltGr dead keys.&lt;/p&gt;
+&lt;p&gt;This is something I need to configure as a post-installation setting by running
+the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;localectl set-x11-keymap us thinkpad altgr-intl&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This sets the layout to English (US), the model to one compatible with my
+Lenovo ThinkPad T440p, and the variant to Dead keys via AltGr. This allows me
+to input characters such as á or ñ by simply pressing: AltGr + a or AltGr + n,
+respectively.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;pionen@lilit:~$ &lt;/span&gt;localectl
+&lt;span class="go"&gt;System Locale: LANG=en_US.UTF-8&lt;/span&gt;
+&lt;span class="go"&gt;               LANGUAGE=en_US:en&lt;/span&gt;
+&lt;span class="go"&gt;    VC Keymap: n/a&lt;/span&gt;
+&lt;span class="go"&gt;   X11 Layout: us&lt;/span&gt;
+&lt;span class="go"&gt;    X11 Model: thinkpad&lt;/span&gt;
+&lt;span class="go"&gt;  X11 Variant: altgr-intl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This way, I can continue using the English (US) keyboard layout when typing in
+either English or Spanish without needing to change the variant or physical
+layout.&lt;/p&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="distribution"/><category term="keyboard"/><category term="layout"/></entry><entry><title>Flatpak</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html" rel="alternate"/><published>2019-12-25T18:03:00-06:00</published><updated>2019-12-25T18:03:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-25:/site/posts/2019/12/25/flatpak.html</id><summary type="html">&lt;p class="first last"&gt;Flatpak and the Flathub repository&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
+significant amount of RAM. However, when it comes to installing proprietary
+software that is not available in the official Fedora repositories, Flatpaks
+can be a good option since they provide a certain level of isolation.&lt;/p&gt;
+&lt;div class="section" id="flatpak-installation"&gt;
+&lt;h2&gt;Flatpak Installation&lt;/h2&gt;
+&lt;p&gt;To install Flatpak, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install flatpak&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enable-flathub-repository"&gt;
+&lt;h2&gt;Enable Flathub Repository&lt;/h2&gt;
+&lt;p&gt;To enable the Flathub repository, use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some popular examples of software available via Flathub include:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/im.riot.Riot"&gt;Riot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.skype.Client"&gt;Skype&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/org.signal.Signal"&gt;Signal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.slack.Slack"&gt;Slack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.spotify.Client"&gt;Spotify&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://flathub.org/apps/details/com.wire.WireDesktop"&gt;Wire&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I prefer not to install Flatpaks in the root directory. Instead, I always use
+the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--user&lt;/span&gt;&lt;/tt&gt; flag to ensure Flatpaks are installed under my &lt;tt class="docutils literal"&gt;~/&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;p&gt;Example command to install a Flatpak:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;flatpak --user install flathub im.riot.Riot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="flathub"/><category term="flatpak"/></entry><entry><title>Fedora 30 Mate Desktop Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2019/12/24/mate-desktop.html" rel="alternate"/><published>2019-12-24T12:28:00-06:00</published><updated>2019-12-24T12:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-12-24:/site/posts/2019/12/24/mate-desktop.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 30 Mate Desktop Post-Install&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="dnf-configuration"&gt;
+&lt;h2&gt;DNF Configuration&lt;/h2&gt;
+&lt;div class="section" id="dnf-conf"&gt;
+&lt;h3&gt;dnf.conf&lt;/h3&gt;
+&lt;p&gt;Enable Fastest Mirrors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable DeltaRPMs for Future Updates:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable DNF Package Caching:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disable-dnf-makecache-systemd-service-and-timer"&gt;
+&lt;h3&gt;Disable DNF Makecache Systemd Service and Timer&lt;/h3&gt;
+&lt;p&gt;To disable the service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To disable the timer:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.timer&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="regenerate-the-cache-and-install-available-updates"&gt;
+&lt;h3&gt;Regenerate the Cache and Install Available Updates&lt;/h3&gt;
+&lt;p&gt;As a normal, non-root user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For root:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="check-for-available-upgrades"&gt;
+&lt;h2&gt;Check for Available Upgrades&lt;/h2&gt;
+&lt;p&gt;Enter your root password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If upgrades are available, apply them:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mate-desktop-tips-and-tricks"&gt;
+&lt;h2&gt;Mate Desktop Tips and Tricks&lt;/h2&gt;
+&lt;p&gt;Enable Window Compositing:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general compositing-manager true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable New Window Centering:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general center-new-windows true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable Window Snapping:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general allow-tiling true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Hide All Desktop Icons:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.background show-desktop-icons false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Change Window Decoration Button Order:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.Marco.general button-layout &amp;#39;close,maximize,minimize:menu&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable Automount-Open:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.media-handling automount-open false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable Automounting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.media-handling automount false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Set Default Caja Preferences for Sorting Order:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.mate.caja.preferences default-sort-order type&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="create-working-directories"&gt;
+&lt;h2&gt;Create Working Directories&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;mkdir ~/git_repos&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;mkdir ~/projects&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="remove-unneeded-software"&gt;
+&lt;h2&gt;Remove Unneeded Software&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove xfburn&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove exaile&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove parole&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove hexchat&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove dnfdragora&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y remove filezilla&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="software-repositories"&gt;
+&lt;h2&gt;Software Repositories&lt;/h2&gt;
+&lt;p&gt;Enable software repositories.&lt;/p&gt;
+&lt;div class="section" id="rpmfusion"&gt;
+&lt;h3&gt;RPMFusion&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fedora-workstation-repositories"&gt;
+&lt;h3&gt;Fedora Workstation Repositories&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-workstation-repositories&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fedora-rawhide-s-repositories"&gt;
+&lt;h3&gt;Fedora Rawhide's Repositories&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-repos-rawhide&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copr"&gt;
+&lt;h3&gt;COPR&lt;/h3&gt;
+&lt;p&gt;Copr is an easy-to-use automatic build system providing a package repository as
+its output.&lt;/p&gt;
+&lt;div class="section" id="neteler-remarkable"&gt;
+&lt;h4&gt;&lt;cite&gt;neteler/remarkable&lt;/cite&gt;&lt;/h4&gt;
+&lt;p&gt;Remarkable is a free, fully-featured Markdown editor.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable neteler/remarkable&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="philfry-gajim"&gt;
+&lt;h4&gt;&lt;cite&gt;philfry/gajim&lt;/cite&gt;&lt;/h4&gt;
+&lt;p&gt;Gajim is a Jabber client written in PyGTK. It provides support for the OMEMO
+encryption method. This repo includes tools and dependencies not available in
+the official Fedora repo.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable philfry/gajim&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dani-qgis"&gt;
+&lt;h4&gt;&lt;cite&gt;dani/qgis&lt;/cite&gt;&lt;/h4&gt;
+&lt;p&gt;QGIS is a user-friendly, open-source Geographic Information System.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable dani/qgis&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dotnet-sig-dotnet"&gt;
+&lt;h4&gt;&lt;cite&gt;&amp;#64;dotnet-sig/dotnet&lt;/cite&gt;&lt;/h4&gt;
+&lt;p&gt;This provides the .NET CLI tools and runtime for Fedora.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf copr enable @dotnet-sig/dotnet&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vscodium"&gt;
+&lt;h3&gt;VSCodium&lt;/h3&gt;
+&lt;p&gt;Import the GPG key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now create the &lt;cite&gt;vscodium.repo&lt;/cite&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;tee -a /etc/yum.repos.d/vscodium.repo &amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="go"&gt;[gitlab.com_paulcarroty_vscodium_repo]&lt;/span&gt;
+&lt;span class="go"&gt;name=gitlab.com_paulcarroty_vscodium_repo&lt;/span&gt;
+&lt;span class="go"&gt;baseurl=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/rpms/&lt;/span&gt;
+&lt;span class="go"&gt;enabled=1&lt;/span&gt;
+&lt;span class="go"&gt;gpgcheck=1&lt;/span&gt;
+&lt;span class="go"&gt;repo_gpgcheck=1&lt;/span&gt;
+&lt;span class="go"&gt;gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&lt;/span&gt;
+&lt;span class="go"&gt;EOF&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="mate"/><category term="postinstall"/></entry><entry><title>repos</title><link href="https://porfiriopaiz.github.io/site/posts/2019/07/11/repos.html" rel="alternate"/><published>2019-07-11T23:32:00-06:00</published><updated>2019-07-11T23:32:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2019-07-11:/site/posts/2019/07/11/repos.html</id><summary type="html">&lt;p class="first last"&gt;A list of the software repositories I use on Fedora&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="software-repositories"&gt;
+&lt;h2&gt;Software Repositories&lt;/h2&gt;
+&lt;p&gt;Once you have resolved the problem of connecting to the Internet and launching
+a terminal, you might want to install all the software you need.&lt;/p&gt;
+&lt;p&gt;Software in Fedora comes from repositories, referred to as &lt;em&gt;Software
+Repositories&lt;/em&gt;. Below, I detail the repositories I enable on all my Fedora
+installations, apart from the official ones that come preinstalled and enabled
+by default.&lt;/p&gt;
+&lt;p&gt;Open a terminal and enable some of these repositories.&lt;/p&gt;
+&lt;div class="section" id="rpm-fusion"&gt;
+&lt;h3&gt;RPM Fusion&lt;/h3&gt;
+&lt;p&gt;RPM Fusion is a repository of add-on packages for Fedora and EL+EPEL,
+maintained by a group of volunteers. It is not a standalone repository but an
+extension of Fedora. RPM Fusion distributes packages that are not acceptable
+for inclusion in Fedora.&lt;/p&gt;
+&lt;p&gt;Learn more about RPM Fusion on its official website: &lt;a class="reference external" href="https://rpmfusion.org/FAQ"&gt;https://rpmfusion.org/FAQ&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fedora-workstation-repositories"&gt;
+&lt;h3&gt;Fedora Workstation Repositories&lt;/h3&gt;
+&lt;p&gt;From the Fedora Wiki page for Fedora Workstation Repositories:&lt;/p&gt;
+&lt;p&gt;The Fedora community strongly promotes free and open source resources.
+Therefore, the Fedora Workstation, in its default configuration, only includes
+free and open source software. To make Fedora Workstation more usable, we’ve
+made it easy to install a curated set of third-party (external) sources that
+supply software not included in Fedora through an additional package.&lt;/p&gt;
+&lt;p&gt;Read more at:
+&lt;a class="reference external" href="https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories"&gt;https://fedoraproject.org/wiki/Workstation/Third_Party_Software_Repositories&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note: This will only install the &lt;cite&gt;.repo&lt;/cite&gt; files; it will not enable the provided
+repositories:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-workstation-repositories&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fedora-rawhide-s-repositories"&gt;
+&lt;h3&gt;Fedora Rawhide's Repositories&lt;/h3&gt;
+&lt;p&gt;Rawhide is the name of the current development version of Fedora. It consists
+of a package repository called &amp;quot;rawhide,&amp;quot; containing the latest builds of all
+Fedora packages, updated daily. Each day, an attempt is made to create a full
+set of &amp;quot;deliverables&amp;quot; (installation images and so on), and all successfully
+composed packages are included in the Rawhide tree for that day.&lt;/p&gt;
+&lt;p&gt;You can install its repository files and temporarily enable it for a single
+transaction—for example, to install or upgrade a single package and its
+dependencies. This is particularly useful when a bug fix exists in Rawhide but
+has not yet reached the stable branches of Fedora.&lt;/p&gt;
+&lt;p&gt;Note: This will only install the &lt;cite&gt;.repo&lt;/cite&gt; file under &lt;tt class="docutils literal"&gt;/etc/yum.repos.d/&lt;/tt&gt;; it
+will not enable the repository. Later, we will see how to handle enabling and
+disabling repositories for single transactions.&lt;/p&gt;
+&lt;p&gt;Learn more about Rawhide on its Wiki page:
+&lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;https://fedoraproject.org/wiki/Releases/Rawhide&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install fedora-repos-rawhide&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copr"&gt;
+&lt;h3&gt;COPR&lt;/h3&gt;
+&lt;p&gt;COPR is an easy-to-use automatic build system that provides a package
+repository as its output.&lt;/p&gt;
+&lt;p&gt;Here are some of the repositories I rely on:&lt;/p&gt;
+&lt;div class="section" id="neteler-remarkable"&gt;
+&lt;h4&gt;neteler/remarkable&lt;/h4&gt;
+&lt;p&gt;Remarkable is a free, fully featured markdown editor.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable neteler/remarkable&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="philfry-gajim"&gt;
+&lt;h4&gt;philfry/gajim&lt;/h4&gt;
+&lt;p&gt;Gajim is a Jabber client written in PyGTK. It currently provides support for
+the OMEMO encryption method, which I use. This repository provides tools and
+dependencies not available in the official Fedora repository.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable philfry/gajim&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dani-qgis"&gt;
+&lt;h4&gt;dani/qgis&lt;/h4&gt;
+&lt;p&gt;QGIS is a user-friendly open source Geographic Information System.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y copr enable dani/qgis&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="donet-sig-dotnet"&gt;
+&lt;h4&gt;donet-sig/dotnet&lt;/h4&gt;
+&lt;p&gt;This repository provides the .NET CLI tools and runtime for Fedora.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf copr enable @dotnet-sig/dotnet&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vscodium"&gt;
+&lt;h3&gt;VSCodium&lt;/h3&gt;
+&lt;p&gt;A few weeks ago, I decided to try VSCodium, a fork of VSCode. Here is how to
+enable its repository for Fedora.&lt;/p&gt;
+&lt;p&gt;First, import its GPG key so you can verify the packages retrieved from the
+repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now create the &lt;cite&gt;vscodium.repo&lt;/cite&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;tee -a /etc/yum.repos.d/vscodium.repo &amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="go"&gt;[gitlab.com_paulcarroty_vscodium_repo]&lt;/span&gt;
+&lt;span class="go"&gt;name=gitlab.com_paulcarroty_vscodium_repo&lt;/span&gt;
+&lt;span class="go"&gt;baseurl=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/rpms/&lt;/span&gt;
+&lt;span class="go"&gt;enabled=1&lt;/span&gt;
+&lt;span class="go"&gt;gpgcheck=1&lt;/span&gt;
+&lt;span class="go"&gt;repo_gpgcheck=1&lt;/span&gt;
+&lt;span class="go"&gt;gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&lt;/span&gt;
+&lt;span class="go"&gt;EOF&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="verification"&gt;
+&lt;h2&gt;Verification&lt;/h2&gt;
+&lt;p&gt;Now check that all the repositories have been successfully installed and some
+of them enabled by refreshing the &lt;cite&gt;dnf&lt;/cite&gt; metadata:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-update&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s all. In the next post, we will see how to enable some of these
+repositories, temporarily disable and enable others for single transactions,
+install or upgrade specific packages from a particular repository, and perform
+many repository administration tasks.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="fc30"/><category term="fedora"/><category term="postinstall"/><category term="repositories"/></entry><entry><title>i3 Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2018/12/09/i3-post-install.html" rel="alternate"/><published>2018-12-09T21:26:00-06:00</published><updated>2018-12-09T21:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-12-09:/site/posts/2018/12/09/i3-post-install.html</id><summary type="html">&lt;p class="first last"&gt;Fedora 29 i3 Window Manager Post-Install&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;After installing Fedora 29 with the i3 Window Manager, additional programs are
+necessary to enhance the user experience.&lt;/p&gt;
+&lt;p&gt;The first issue to address is how to connect to the Internet. You may have
+noticed that there is no program or applet to activate the Wi-Fi card or manage
+the NetworkManager service for a wired network card or available networks.&lt;/p&gt;
+&lt;p&gt;Assuming you are logged in and your hardware is supported by Fedora, the
+wireless network card should already be activated. But how do you connect to
+the networks within range?&lt;/p&gt;
+&lt;div class="section" id="nmcli"&gt;
+&lt;h2&gt;nmcli&lt;/h2&gt;
+&lt;p&gt;In a previous post, we installed a set of packages from the &amp;quot;Hardware Support&amp;quot;
+group. This group provides support for various networking hardware. We also
+installed the package group for NetworkManager.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; is a command-line utility that allows us to activate network
+hardware, scan for available networks, and connect to them.&lt;/p&gt;
+&lt;p&gt;To get started, open a terminal by pressing &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;.&lt;/p&gt;
+&lt;p&gt;Ensure your device’s physical network card switch (if present) is enabled.
+Then, in the terminal, verify that networking is activated via software with
+the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli networking on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will activate the wired network connection if available and ready for use.&lt;/p&gt;
+&lt;p&gt;To activate the wireless network hardware, execute:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli radio wifi on&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This activates the wireless card. Next, scan for available networks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Example output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;IN-USE  SSID           MODE   CHAN  RATE        SIGNAL  BARS  SECURITY&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_1     Infra  5     130 Mbit/s  100     ▂▄▆█  WPA2&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_2     Infra  1     130 Mbit/s  29      ▂___  WPA2&lt;/span&gt;
+&lt;span class="go"&gt;        RED_WIFI_3     Infra  1     54 Mbit/s   17      ▂___  WPA1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To refresh the network list, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi rescan&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the network &lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; does not require a password, connect using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For networks requiring a password, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;nmcli device wifi connect RED_WIFI_1 password &amp;quot;1234567890&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Explanation of parameters:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;connect&lt;/tt&gt; specifies the task to perform.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;RED_WIFI_1&lt;/tt&gt; identifies the target network.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;password&lt;/tt&gt; indicates that a password will be provided.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;1234567890&lt;/tt&gt; is the password (replace with your network’s password).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should now be connected to the network. Next, install programs to improve
+your experience with i3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="networks"&gt;
+&lt;h2&gt;Networks&lt;/h2&gt;
+&lt;div class="section" id="nm-applet"&gt;
+&lt;h3&gt;nm-applet&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is a simple graphical applet for NetworkManager. It provides an
+intuitive interface for managing network connections.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-applet&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To launch &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt;, press &amp;lt;Start&amp;gt; + &amp;lt;d&amp;gt;, type &lt;cite&gt;nm-applet&lt;/cite&gt;, and press
+&amp;lt;Enter&amp;gt;. An icon should appear in the lower-right corner of your screen for
+managing network connections.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="networkmanager-tui"&gt;
+&lt;h3&gt;NetworkManager-tui&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;NetworkManager-tui&lt;/span&gt;&lt;/tt&gt; is an alternative to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; that uses &lt;tt class="docutils literal"&gt;ncurses&lt;/tt&gt;
+to create a user-friendly Text User Interface.&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install NetworkManager-tui&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nm-connection-editor"&gt;
+&lt;h3&gt;nm-connection-editor&lt;/h3&gt;
+&lt;p&gt;The &lt;cite&gt;NetworkManager Connection Editor&lt;/cite&gt; provides an intuitive interface for
+editing saved networks or creating hotspots (if supported by your network
+card).&lt;/p&gt;
+&lt;p&gt;Install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install nm-connection-editor&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-emulator"&gt;
+&lt;h2&gt;Terminal Emulator&lt;/h2&gt;
+&lt;p&gt;The default terminal emulator installed with i3 is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt;
+(&lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;). While powerful, it can be unintuitive and has a steep learning
+curve.&lt;/p&gt;
+&lt;p&gt;If you prefer a more user-friendly terminal emulator, such as GNOME Terminal,
+you can install it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To set GNOME Terminal as the default terminal for &amp;lt;Start&amp;gt; + &amp;lt;Enter&amp;gt;, edit the
+i3 configuration file (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/i3/config&lt;/span&gt;&lt;/tt&gt;). Look for the line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Replace it with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;bindsym $mod+Return exec gnome-terminal&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the next post, I will share other programs I use in my Fedora 29 i3wm setup.
+For now, you should have the tools necessary to install additional programs,
+such as a web browser.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="dnf"/><category term="fc29"/><category term="fedora"/><category term="postinstall"/></entry><entry><title>i3</title><link href="https://porfiriopaiz.github.io/site/posts/2018/11/29/i3.html" rel="alternate"/><published>2018-11-29T02:53:00-06:00</published><updated>2018-11-29T02:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2018-11-29:/site/posts/2018/11/29/i3.html</id><summary type="html">&lt;p class="first last"&gt;Improved tiling WM&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;In this post, I will explain how to perform a Fedora 29 installation with the
+i3 window manager. It is common to find installation guides for i3, but they
+often assume you already have another desktop environment installed.&lt;/p&gt;
+&lt;p&gt;Here, we will see how to build a fully functional environment starting from a
+minimal installation, as I have explained in previous posts.&lt;/p&gt;
+&lt;div class="section" id="creating-an-installation-medium"&gt;
+&lt;h2&gt;Creating an Installation Medium&lt;/h2&gt;
+&lt;div class="section" id="downloading-the-fedora-everything-netinstall-iso"&gt;
+&lt;h3&gt;Downloading the Fedora Everything Netinstall ISO&lt;/h3&gt;
+&lt;p&gt;From the site: &lt;a class="reference external" href="https://alt.fedoraproject.org/"&gt;https://alt.fedoraproject.org/&lt;/a&gt;, download the file in the
+&lt;em&gt;Everything&lt;/em&gt; section. This ISO allows network-based installation, downloading
+all necessary packages from the Internet. It also provides the option to choose
+which package collections to install, unlike Live media, which comes with
+predefined software selections.&lt;/p&gt;
+&lt;p&gt;Download the ISO with &lt;cite&gt;wget&lt;/cite&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-29-1.2.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Also, download the integrity check file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/29/Everything/x86_64/iso/Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Verify the integrity of the file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-29-1.2-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-the-installation-medium-with-fedora-media-writer"&gt;
+&lt;h3&gt;Creating the Installation Medium with Fedora Media Writer&lt;/h3&gt;
+&lt;p&gt;Fedora Media Writer is available for various operating systems. Download the
+appropriate version from:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1"&gt;https://github.com/FedoraQt/MediaWriter/releases/tag/4.1.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Using Fedora Media Writer ensures the installation medium will support booting
+on both UEFI and BIOS systems. The boot mode depends on which has higher
+priority during startup. I always use UEFI exclusively, so all my systems are
+installed in UEFI mode.&lt;/p&gt;
+&lt;p&gt;Once Fedora Media Writer is installed, connect your USB drive, run the
+application, and use the &lt;em&gt;Custom Image&lt;/em&gt; option to navigate to the downloaded
+ISO. Select the USB drive carefully and write the image to the drive.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Follow the installation steps described in this previous post, ensuring access
+to a wireless or wired network:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html"&gt;https://porfiriopaiz.github.io/blog/posts/anaconda-y-lvm-sobre-luks.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;During installation, I used my mobile phone to create a wired network via USB.
+While I had wireless access during the base system installation (Fedora Custom
+Install), the selected package collection lacked the necessary drivers for
+wireless connectivity.&lt;/p&gt;
+&lt;p&gt;To use a USB tethered network, follow these steps after the first boot:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Log in to the system.&lt;/li&gt;
+&lt;li&gt;Connect the USB cable to your computer and mobile phone.&lt;/li&gt;
+&lt;li&gt;Ensure the phone is connected to Wi-Fi or has an active data plan. You will need at least 800 MB of data for downloading the required RPM packages.&lt;/li&gt;
+&lt;li&gt;Put the phone in USB or MTP data transfer mode.&lt;/li&gt;
+&lt;li&gt;Enable a wired network (USB tethering) on your mobile phone.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Verify the connection by pinging Google:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;ping 8.8.8.8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-configurations"&gt;
+&lt;h2&gt;Basic Configurations&lt;/h2&gt;
+&lt;div class="section" id="configuring-dnf"&gt;
+&lt;h3&gt;Configuring &lt;cite&gt;dnf&lt;/cite&gt;&lt;/h3&gt;
+&lt;p&gt;As root, I configure &lt;cite&gt;dnf&lt;/cite&gt; for optimal performance. This step is optional:&lt;/p&gt;
+&lt;p&gt;Enable the fastest mirrors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable delta RPMs for faster downloads (optional):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Keep the package cache for the lifetime of the Fedora release (optional):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable unnecessary &lt;cite&gt;dnf&lt;/cite&gt; services and timers to save bandwidth and avoid
+locks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl disable dnf-makecache.timer&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot to apply the changes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="updating-the-system"&gt;
+&lt;h3&gt;Updating the System&lt;/h3&gt;
+&lt;p&gt;After installation, your system may not include the latest updates. Refresh the
+metadata cache and install updates:&lt;/p&gt;
+&lt;p&gt;As a normal user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As root:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check for updates:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If updates are available, install them:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot if updates include critical components like the kernel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-i3"&gt;
+&lt;h2&gt;Installing i3&lt;/h2&gt;
+&lt;p&gt;Install the i3 window manager and necessary components. All commands must be
+executed as root.&lt;/p&gt;
+&lt;p&gt;Install required groups and packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install core&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install networkmanager-submodules&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install fonts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install multimedia&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install base-x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install standard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y group install input-methods&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf -y install i3 lightdm-gtk xdg-user-dirs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable the graphical boot mode and LightDM:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl set-default graphical.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;systemctl enable lightdm.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot the system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="first-graphical-session"&gt;
+&lt;h2&gt;First Graphical Session&lt;/h2&gt;
+&lt;p&gt;Upon first login, i3 will prompt you to generate a configuration file. Press
+Enter to confirm. Choose your preferred modifier key (e.g., the Windows or Meta
+key).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-additional-software"&gt;
+&lt;h2&gt;Installing Additional Software&lt;/h2&gt;
+&lt;p&gt;This setup does not include preinstalled tools like a web browser or file
+manager. You can install them as needed. For example, to install GNOME
+Terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install gnome-terminal&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;cite&gt;dmenu&lt;/cite&gt; to launch applications:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Win&amp;gt; + d&lt;/cite&gt; and type &lt;cite&gt;gnome-terminal&lt;/cite&gt; to open the terminal.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="logging-out-and-powering-off"&gt;
+&lt;h2&gt;Logging Out and Powering Off&lt;/h2&gt;
+&lt;p&gt;To log out from i3:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Win&amp;gt; + &amp;lt;Shift&amp;gt; + e&lt;/cite&gt; and confirm.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To power off from LightDM:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Press &lt;cite&gt;&amp;lt;Alt&amp;gt; + &amp;lt;F4&amp;gt;&lt;/cite&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This guide provides a streamlined way to set up i3 on Fedora 29, ideal for
+lightweight virtual machines or older hardware with limited resources.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="dnf"/><category term="fc29"/><category term="fedora"/><category term="postinstall"/></entry><entry><title>KeePassXC: The Password Manager</title><link href="https://porfiriopaiz.github.io/site/posts/2017/11/17/keepassxc-password-manager.html" rel="alternate"/><published>2017-11-17T19:10:00-06:00</published><updated>2017-11-17T19:10:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-11-17:/site/posts/2017/11/17/keepassxc-password-manager.html</id><summary type="html">&lt;p class="first last"&gt;A free and secure password manager.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;KeePassXC is one of the first programs I install after booting a fresh system.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll show you how to install KeePassXC on Fedora and Debian, how
+to use it, how it simplifies managing hundreds of accounts and associated
+passwords, and how to generate secure passwords with high entropy.&lt;/p&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;div class="section" id="fedora"&gt;
+&lt;h3&gt;Fedora&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install keepassxc&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="debian"&gt;
+&lt;h3&gt;Debian&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install keepassx&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creating-a-password-database"&gt;
+&lt;h2&gt;Creating a Password Database&lt;/h2&gt;
+&lt;p&gt;The first step is to create your first database, where all generated passwords
+for your accounts will be stored.&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Launch KeePassXC:&lt;/p&gt;
+&lt;img alt="Screenshot showing GNOME Shell overview mode and KeePassXC launcher" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-38-49.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Create a new database:&lt;/p&gt;
+&lt;img alt="KeePassXC interface with the option to create a new database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_21-31-18.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Assign a name to the &lt;cite&gt;*.kdbx&lt;/cite&gt; file (the database):&lt;/p&gt;
+&lt;img alt="Nautilus file explorer showing the new database file being saved" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-02-29.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Set a master password to encrypt the database (&lt;cite&gt;Passwords.kdbx&lt;/cite&gt;) and click &lt;cite&gt;OK&lt;/cite&gt;:&lt;/p&gt;
+&lt;img alt="KeePassXC while assigning the master password for the database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-18_22-09-07.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Add a new account and password by clicking the &lt;cite&gt;Key&lt;/cite&gt; icon with a green arrow:&lt;/p&gt;
+&lt;img alt="Button to add a new account to the database" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-20_16-37-51.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Fill in the details:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Add a title to identify the account.&lt;/li&gt;
+&lt;li&gt;Specify the username for the account.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Adding a title, username, and password for a new account entry" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-15-14.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Generate a secure password:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Click the black dice icon to open the password generator.&lt;/li&gt;
+&lt;li&gt;Adjust the character length for stronger passwords.&lt;/li&gt;
+&lt;li&gt;Select the character groups to include:&lt;ul&gt;
+&lt;li&gt;Uppercase letters: &lt;cite&gt;A-Z&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Lowercase letters: &lt;cite&gt;a-z&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Numbers: &lt;cite&gt;0-9&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Special characters: &lt;cite&gt;/*_ ...&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;Extended ASCII characters (optional).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Enable:&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exclude look-alike characters&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pick characters from every group&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Click &lt;cite&gt;Generate&lt;/cite&gt; to create the password, then click &lt;cite&gt;Copy&lt;/cite&gt; to copy it to the clipboard.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Random password generated based on selected criteria" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-17-30.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Paste the generated password into the &lt;strong&gt;Password&lt;/strong&gt; and &lt;strong&gt;Repeat&lt;/strong&gt; fields using &lt;cite&gt;Ctrl-v&lt;/cite&gt;:&lt;/p&gt;
+&lt;img alt="Pasting the password into the required fields" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-18.png" /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Verify the password by clicking the &lt;cite&gt;Eye&lt;/cite&gt; icon, then click &lt;cite&gt;Apply&lt;/cite&gt; and &lt;cite&gt;OK&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Verifying passwords match in both fields" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-18-31.png" /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;10. Save your changes by clicking the blue save icon. Confirm that the asterisk
+(*) at the top disappears, indicating the changes have been saved.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Database changes successfully saved" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-19_22-19-03.png" /&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="useful-keyboard-shortcuts"&gt;
+&lt;h2&gt;Useful Keyboard Shortcuts&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-b&lt;/strong&gt;: Copy the username to the clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-c&lt;/strong&gt;: Copy the password to the clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-e&lt;/strong&gt;: Edit the selected account entry.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ctrl-n&lt;/strong&gt;: Add a new account to the database.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="auto-type-shortcut"&gt;
+&lt;h2&gt;Auto-Type Shortcut&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;Auto-Type&lt;/strong&gt; shortcut, &lt;cite&gt;Ctrl-v&lt;/cite&gt;, is my favorite. It allows KeePassXC to
+enter the username and password for an account directly into the login fields
+of a webpage or application.&lt;/p&gt;
+&lt;p&gt;For it to work, KeePassXC and the target field must be adjacent in the
+task-switching order (&lt;cite&gt;Alt-Tab&lt;/cite&gt;).&lt;/p&gt;
+&lt;p&gt;Example:
+1. Select an entry with a URL:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Database entry with a linked URL" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_15-56-04.png" /&gt;
+&lt;/blockquote&gt;
+&lt;ol class="arabic" start="2"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Press &lt;strong&gt;Ctrl-u&lt;/strong&gt; to open the login page in your default web browser:&lt;/p&gt;
+&lt;img alt="Opening the linked URL in a web browser" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_16-35-24.png" /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;3. Switch back to KeePassXC using &lt;cite&gt;Alt-Tab&lt;/cite&gt; and press &lt;cite&gt;Ctrl-v&lt;/cite&gt; to enter the
+username and password automatically:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Auto-Type entering the username and password" class="align-center" src="https://porfiriopaiz.github.io/site/images/keepassxc/screenshot_from_2017-11-22_17-01-06.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;KeePassXC will then complete the login process for you.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="debian"/><category term="fc27"/><category term="fedora"/><category term="keepassxc"/><category term="password"/></entry><entry><title>Fedora 26 Custom Operating System Post-Install</title><link href="https://porfiriopaiz.github.io/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html" rel="alternate"/><published>2017-08-31T16:26:00-06:00</published><updated>2017-08-31T16:26:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-08-31:/site/posts/2017/08/31/fedora-26-custom-operating-system-post-install.html</id><summary type="html"/><content type="html">&lt;p&gt;In the last post, I explained how to make a minimal installation of Fedora 25.
+Months have passed since then, and Fedora 26 has been released. Following the
+same steps, I installed it on my laptop and will now document my
+post-installation process.&lt;/p&gt;
+&lt;p&gt;Since this is a minimal installation, the set of installed packages does not
+provide support for wireless network cards. Although Anaconda provides such
+support during the installation process, the minimal package set lacks the
+required drivers. To address this, I connected my laptop to a wired network.&lt;/p&gt;
+&lt;div class="section" id="dnf-configuration"&gt;
+&lt;h2&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; Configuration&lt;/h2&gt;
+&lt;p&gt;After connecting to a wired network, the first thing I did was edit &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt;'s
+configuration file and add the following lines:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;fastestmirror=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;deltarpm=false&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;keepcache=true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This ensures that &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; always uses the fastest mirror, avoids using &lt;cite&gt;*.drpm&lt;/cite&gt;
+files for upgrades (downloading &lt;cite&gt;*.rpm&lt;/cite&gt; files instead), and retains any
+downloaded packages in its cache.&lt;/p&gt;
+&lt;p&gt;Now, let's reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disable-dnf-makecache-service-and-dnf-makecache-timer"&gt;
+&lt;h2&gt;Disable &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-makecache.service&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dnf-makecache.timer&lt;/span&gt;&lt;/tt&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; has a service and timer that keep the package metadata cache updated
+periodically. This behavior annoys me, as I prefer to update the cache when I
+want and need to. To disable these, I ran the following commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl disable dnf-makecache.service&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl disable dnf-makecache.timer&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's reboot again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rebuilding-package-metadata-cache"&gt;
+&lt;h2&gt;Rebuilding Package Metadata Cache&lt;/h2&gt;
+&lt;p&gt;After customizing the &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt; configuration file and disabling the service and
+timer, I cleaned the old cache and rebuilt it. Fedora maintains two separate
+caches: one for the normal user and another for the root user.&lt;/p&gt;
+&lt;p&gt;To rebuild the cache for my normal user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf clean all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;dnf makecache&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To rebuild the cache for the root user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="available-upgrades"&gt;
+&lt;h2&gt;Available Upgrades&lt;/h2&gt;
+&lt;p&gt;During installation, there is an option to download and install the latest
+versions of packages. To check for any available upgrades:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf --refresh check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To download and apply the upgrades, if available:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After upgrading, reboot to utilize the latest versions of any upgraded
+packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="workstation-product-environment-installation"&gt;
+&lt;h2&gt;Workstation Product Environment Installation&lt;/h2&gt;
+&lt;p&gt;On my laptop, I use GNOME Shell as my desktop environment. To install it, I
+used a package group that provides all the necessary packages to transform this
+minimal installation into a Fedora Workstation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf group install workstation-product-environment&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="graphical-boot-mode"&gt;
+&lt;h2&gt;Graphical Boot Mode&lt;/h2&gt;
+&lt;p&gt;After installing the required packages, we must change the default &lt;cite&gt;init&lt;/cite&gt; mode
+from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;multi-user.target&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;graphical.target&lt;/tt&gt;. Otherwise, the system will
+not boot into graphical mode. Additionally, we need to enable the graphical
+login manager service. Without this, the login will remain a text-based prompt:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl set-default graphical.target&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl enable gdm.service&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If everything works correctly, Fedora 26 Workstation with GNOME Shell should
+now be running.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fixing-nautilus-behavior"&gt;
+&lt;h2&gt;Fixing Nautilus Behavior&lt;/h2&gt;
+&lt;p&gt;Before opening any other application, I like to adjust how Nautilus sorts
+files. I prefer sorting by type or file extension:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.gnome.nautilus.preferences default-sort-order type&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This ensures files are displayed sorted by extension when opening Nautilus.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="repositories"&gt;
+&lt;h2&gt;Repositories&lt;/h2&gt;
+&lt;div class="section" id="enabling-rpmfusion"&gt;
+&lt;h3&gt;Enabling RPMFusion:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Refresh the cache to download the RPMFusion package metadata:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enabling-google-chrome-s-repository"&gt;
+&lt;h3&gt;Enabling Google Chrome's Repository:&lt;/h3&gt;
+&lt;p&gt;I used to enable the Google Chrome repository as explained in this post:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/"&gt;https://www.if-not-true-then-false.com/2010/install-google-chrome-with-yum-on-fedora-red-hat-rhel/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;However, a simpler method was introduced to me by Mayorga. Simply download the
+Google Chrome &lt;tt class="docutils literal"&gt;rpm&lt;/tt&gt; package, install it via the command line, and it will
+automatically add the &lt;cite&gt;*.repo&lt;/cite&gt; file to &lt;cite&gt;/etc/yum.repos.d/&lt;/cite&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cd ~/Downloads&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install google-chrome-stable_current_x86_64.rpm&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf check-update&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disabling-tracker"&gt;
+&lt;h2&gt;Disabling Tracker&lt;/h2&gt;
+&lt;p&gt;Before copying files from my backups, I disable the annoying &lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt;
+service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install tracker-preferences&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;mkdir ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cp /etc/xdg/autostart/tracker* ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;cd ~/.config/autostart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sed -i &amp;#39;s/X-GNOME-Autostart-enabled=true/X-GNOME-Autostart-enabled=false/&amp;#39; tracker*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To check &lt;tt class="docutils literal"&gt;tracker&lt;/tt&gt; status:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;tracker status&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To perform a &lt;tt class="docutils literal"&gt;hard reset&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;tracker reset --hard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disabling-gnome-software-and-packagekit-auto-updates"&gt;
+&lt;h2&gt;Disabling GNOME Software and PackageKit Auto-Updates&lt;/h2&gt;
+&lt;p&gt;GNOME Software downloads metadata and updates in the background. To disable
+this behavior:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;gsettings set org.gnome.software download-updates false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;systemctl mask packagekit.service&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="libraries-and-development-tools"&gt;
+&lt;h2&gt;Libraries and Development Tools&lt;/h2&gt;
+&lt;p&gt;Finally, I installed package groups and tools for development:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf -y group install c-development development-libs development-tools fedora-packager rpm-development-tools&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install automake gcc gcc-c++ kernel-devel cmake python-devel python3-devel monodevelop golang nodejs rust cargo python3-virtualenv python3-pip&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To install spell checkers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install hunspell hunspell-en hunspell-es aspell aspell-es aspell-en autocorr-es autocorr-en&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the next post, I will review additional tools I use on Fedora.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="dnf"/><category term="fc26"/><category term="fedora"/><category term="postinstall"/></entry><entry><title>This was Fedora at CS50x.ni</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html" rel="alternate"/><published>2017-03-31T15:07:00-06:00</published><updated>2017-03-31T15:07:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-31:/site/posts/2017/03/31/this-was-fedora-at-cs50x.ni.html</id><summary type="html"/><content type="html">&lt;p&gt;On Tuesday, March 14th, the &lt;a class="reference external" href="http://fedora.org.ni/"&gt;Fedora Nicaragua&lt;/a&gt;
+community and the &lt;a class="reference external" href="http://code-fu.net.ni/"&gt;CS50x.ni&lt;/a&gt; staff, with the support
+of &lt;a class="reference external" href="http://fundacionuno.org/en/"&gt;Fundación UNO&lt;/a&gt; and the Fedora Project, came
+together for a series of lectures. These sessions provided insights into using
+Free Software, emphasizing the importance and benefits of the various tools
+utilized in the CS50x.ni course. The lectures were open to current CS50x.ni
+participants, prospective students, and anyone interested in learning more
+about Free Software, particularly the Fedora Project.&lt;/p&gt;
+&lt;p&gt;The event took place in the basement of the north wing of the Rigoberto López
+Pérez building at the National University of Engineering's Simón Bolívar
+Campus, in classrooms designated for the CS50x.ni (Coding) project.&lt;/p&gt;
+&lt;p&gt;The talks started at 9:00 AM. The first presentation, &lt;a class="reference external" href="https://fedorapeople.org/~mayorga/slides/this_is_fedora.odp"&gt;&amp;quot;Fedora Project
+Overview&amp;quot;&lt;/a&gt;, was
+facilitated by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Mayorga"&gt;Eduardo Mayorga&lt;/a&gt;. Eduardo, a Fedora Project
+Ambassador, Package Maintainer, and participant in the CS50x.ni course,
+explained the Fedora Project's mission and vision as a Free Software
+initiative. He also shared his experience of being part of the Fedora community
+at both local and international levels.&lt;/p&gt;
+&lt;img alt="Eduardo Mayorga speaking." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/mayorga.jpg" /&gt;
+&lt;p&gt;The second talk was delivered by &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Yn1v"&gt;Neville Cross&lt;/a&gt;, Founder and Leader of the Fedora
+Community in Nicaragua. Neville highlighted the significance of mastering
+command-line tools included in all GNU/Linux distributions. He demonstrated the
+use of &lt;a class="reference external" href="https://yn1v.fedorapeople.org/Slides/ssh_una_presentacion_corta.odp"&gt;SSH remote management tools&lt;/a&gt;,
+showcasing how to manage resources remotely via command line, and discussed
+additional tools for system monitoring.&lt;/p&gt;
+&lt;img alt="Neville, Fedora Nicaragua Leader." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/yn1v.jpg" /&gt;
+&lt;p&gt;The third talk was facilitated by &lt;a class="reference external" href="http://reactivated.net/"&gt;Daniel Drake&lt;/a&gt;, an
+operating system developer from the UK who has lived in Nicaragua for eight
+years. Daniel, known for his work on the One Laptop per Child project,
+presented &lt;a class="reference external" href="https://drive.google.com/uc?export=download&amp;amp;id=0ByFPl6lV1b_MRHROTmFQTkQ1V3c"&gt;&amp;quot;Employment Opportunities related to Linux after CS50&amp;quot;&lt;/a&gt;.
+Drawing from over 15 years of experience, Daniel shared his journey as a Free
+Software contributor and developer, offering advice on joining projects like
+&lt;a class="reference external" href="https://www.openhub.net/p/gnome/contributors/16149077045725"&gt;The GNOME Project&lt;/a&gt; and the &lt;a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&amp;amp;q=daniel+drake"&gt;Linux
+Kernel&lt;/a&gt;.&lt;/p&gt;
+&lt;img alt="Daniel sharing his experiences as a Kernel Developer." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/dsd.jpg" /&gt;
+&lt;p&gt;In the final block of talks, &lt;a class="reference external" href="https://fedoraproject.org/wiki/User:Porfiriopaiz"&gt;Porfirio Páiz&lt;/a&gt;, a Fedora Project
+contributor and CS50x.ni student, demonstrated Fedora's utility for CS50x.ni
+students. He gave three mini-presentations:&lt;/p&gt;
+&lt;p&gt;1. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/comenzando_con_git.odp"&gt;&amp;quot;Getting Started with Git&amp;quot;&lt;/a&gt;: A
+workflow demo for version control.
+2. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/breve_introduccion_a_docker.odp"&gt;&amp;quot;A Brief Introduction to Docker&amp;quot;&lt;/a&gt;:
+How Docker simplifies programming environments for CS50x.ni participants.
+3. &lt;a class="reference external" href="https://porfiriopaiz.fedorapeople.org/Slides/estacion_de_trabajo.odp"&gt;&amp;quot;Setting Up a Development Workstation with Fedora&amp;quot;&lt;/a&gt;: Tips
+on using Fedora to create an efficient development environment.&lt;/p&gt;
+&lt;img alt="Porfirio Páiz discussing Git, Docker, and Fedora Workstation." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/porfiriopaiz.jpg" /&gt;
+&lt;p&gt;As a delightful conclusion, the Fedora Nicaragua team and CS50x.ni staff
+enjoyed a casual gathering with the audience, sharing ideas, experiences, cold
+drinks, and delicious pizza, generously sponsored by the Fedora Project.&lt;/p&gt;
+&lt;img alt="Group picture." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/fedora_at_cs50xni.jpg" /&gt;
+&lt;p&gt;The Fedora Project community is committed to continuing these sessions,
+offering valuable knowledge and inspiration for those entering the exciting
+world of programming through CS50x.ni.&lt;/p&gt;
+&lt;p&gt;Sorry for the late post. Here's a cheerful Hot Dog to brighten your day:&lt;/p&gt;
+&lt;img alt="A happy hotdog." class="align-center" src="https://porfiriopaiz.github.io/site/images/fedora_at_cs50xni/beefy_miracle.gif" /&gt;
+</content><category term="floss"/><category term="cs50x.ni"/><category term="events"/><category term="fedora"/></entry><entry><title>Anaconda and LVM on LUKS</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html" rel="alternate"/><published>2017-03-30T21:00:00-06:00</published><updated>2017-03-30T21:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-30:/site/posts/2017/03/30/anaconda-and-lvm-on-luks.html</id><summary type="html"/><content type="html">&lt;p&gt;I previously upgraded my laptop from Fedora 22 to Fedora 23 after F22 had been
+in its End of Life state for over six months. Notably, you can efficiently
+reuse partitions originally configured for F22, ensuring they seamlessly
+accommodate the installation of the new Fedora release while preserving all
+files within the Logical Volume designated as &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In this post, I'll guide you through achieving this without compromising the
+integrity of our data or other operating systems installed on your
+Desktop/Laptop.&lt;/p&gt;
+&lt;p&gt;As discussed in the earlier post, while upgrades are an option, I'm personally
+inclined towards fresh installs. Resetting everything to its prior state brings
+a sense of satisfaction. Moreover, it places less strain on the computer,
+downloading only the essential packages for a functional system. Additional
+software can be installed on demand later.&lt;/p&gt;
+&lt;p&gt;Once a proper backup of all our system files is secured, we can embark on the
+installation process without the nagging fear of the unknown. After all, you
+never truly know what could go wrong until it does – that's the beauty of it!
+XD&lt;/p&gt;
+&lt;div class="section" id="creating-an-installation-media"&gt;
+&lt;h2&gt;Creating an Installation Media&lt;/h2&gt;
+&lt;p&gt;Our initial step involves crafting an installation medium, and to kickstart
+this process, we need to download the Fedora 25 ISO file. For consistency, I've
+been relying on the netinstall image since Fedora 21, as highlighted in Chapter
+2 of the &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/Fedora/25/html/Installation_Guide/chap-downloading-fedora.html"&gt;Fedora Installation Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The netinstall image boots directly into the installation environment, and
+uses the online Fedora package repositories as the installation source.
+With a netinstall image, you can select a wide variety of packages to
+create a customized installation of Fedora.&lt;/p&gt;
+&lt;p&gt;The Fedora Server netinstall image is a universal one, and can be used to
+install any Fedora flavor or your own set of favorite packages.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="section" id="downloading-the-image-everything-netinstall"&gt;
+&lt;h3&gt;Downloading the image Everything netinstall&lt;/h3&gt;
+&lt;p&gt;I prefer utilizing the netinstall ISO image of &lt;a class="reference external" href="https://alt.fedoraproject.org/en/"&gt;Fedora Everything&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Unfortunately, it seems that the Everything netinstall image lacks a torrent
+seeder for download, as indicated by the absence on the &lt;a class="reference external" href="https://torrent.fedoraproject.org/"&gt;Fedora torrent page&lt;/a&gt;. As a result, we'll have to resort to
+the conventional method of direct download, and for this, we'll leverage the
+command line.&lt;/p&gt;
+&lt;p&gt;For 32-bit systems, employ the following command to download the image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/i386/iso/Fedora-Everything-netinst-i386-25-1.3.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For 64-bit systems, employ the following command to initiate the image
+download:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-25-1.3.iso&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here's a breakdown of the command options:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;cite&gt;-N&lt;/cite&gt; ensures the downloaded file retains the original time and date stamp
+from its initial upload to the servers.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-t 0&lt;/cite&gt; serves as a safety net; if the download encounters connectivity
+issues, it will automatically attempt to reconnect. Leaving the time at &lt;cite&gt;0&lt;/cite&gt;
+ensures an immediate reconnection.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;-c&lt;/cite&gt; signals that the download should resume from the byte where it was
+left pending in case of interruptions. This precaution is particularly useful
+for scenarios with less stable network connections.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This provides a small contingency measure in the event of an unstable network.&lt;/p&gt;
+&lt;p&gt;Additionally, we can verify the integrity of the downloaded image using the
+checksum file. Simply download the checksum file and save it in the same
+directory as the ISO image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;wget -N -t 0 -c https://alt.fedoraproject.org/es/static/checksums/Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, execute the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sha256sum -c Fedora-Everything-25-1.3-x86_64-CHECKSUM&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="writing-the-iso-image-on-a-usb"&gt;
+&lt;h3&gt;Writing the ISO image on a USB&lt;/h3&gt;
+&lt;p&gt;To write the ISO image onto a USB drive, we'll employ the &lt;strong&gt;Fedora Media
+Writer&lt;/strong&gt; tool. If you're on Windows, you can install Fedora Media Writer using
+the following link:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe"&gt;https://getfedora.org/fmw/FedoraMediaWriter-win32-4.0.7.exe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For MacOS users, the link is:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg"&gt;https://getfedora.org/fmw/FedoraMediaWriter-osx-4.0.7.dmg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you're using Fedora 23 or a later version, you can install Fedora Media
+Writer with the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install mediawriter&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Before launching Fedora Media Writer, it's recommended to disconnect any
+removable storage devices currently plugged into your system. This precaution
+helps avoid potential confusion. Once that's done, connect the USB memory you
+intend to use and proceed to run Fedora Media Writer.&lt;/p&gt;
+&lt;p&gt;The steps are straightforward:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Choose &amp;quot;Custom image.&amp;quot;&lt;/li&gt;
+&lt;li&gt;Navigate to the directory where the ISO image was downloaded.&lt;/li&gt;
+&lt;li&gt;Select the USB drive.&lt;/li&gt;
+&lt;li&gt;Click on &lt;cite&gt;Write to disk&lt;/cite&gt;.&lt;/li&gt;
+&lt;li&gt;Enter your user password if you belong to the &lt;cite&gt;wheel&lt;/cite&gt; group, or provide the
+&lt;cite&gt;root&lt;/cite&gt; password if you are not in the admins group.&lt;/li&gt;
+&lt;li&gt;That's it!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="booting-from-usb"&gt;
+&lt;h3&gt;Booting from USB&lt;/h3&gt;
+&lt;p&gt;In configuring my laptop, I've set it to start up in &lt;cite&gt;UEFI mode&lt;/cite&gt; while keeping
+the trusty &lt;cite&gt;Secure Boot&lt;/cite&gt; feature engaged.&lt;/p&gt;
+&lt;p&gt;When crafting the installation media using Fedora Media Writer, it serves as a
+reliable assurance that it'll seamlessly adapt to various scenarios.&lt;/p&gt;
+&lt;p&gt;To access the Boot Manager on my laptop, a simple press of the &lt;strong&gt;Enter&lt;/strong&gt; key
+during the appearance of the &lt;strong&gt;Lenovo&lt;/strong&gt; logo is indicative of the system's
+initiation in UEFI mode.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="starting-the-fedora-25-installation-process"&gt;
+&lt;h2&gt;Starting the Fedora 25 Installation Process&lt;/h2&gt;
+&lt;p&gt;In this section of the post, I'll provide screenshots along with brief
+descriptions.&lt;/p&gt;
+&lt;p&gt;Let's start with the Internet connection.&lt;/p&gt;
+&lt;p&gt;The installation media created from netinstall images relies solely on an
+Internet connection, which can be established either through a wired connection
+via the RJ45 port (Ethernet) or wirelessly using our WiFi card. In my case, the
+netinstall setup effortlessly detects both network cards. Fedora netinstall
+includes a range of drivers that enable the utilization of certain network
+cards. If your network card isn't detected, it may be due to the device not
+being supported by Fedora, typically for legal reasons. Fedora strictly
+incorporates FLOSS (Free/Libre and Open Source Software) drivers or drivers
+whose manufacturers explicitly outline their terms of use and distribution
+policy.&lt;/p&gt;
+&lt;p&gt;My T440p is equipped with an &lt;a class="reference external" href="https://ark.intel.com/products/60019/Intel-Ethernet-Connection-I217-LM"&gt;Intel® Ethernet Wired Network Card Connection
+I217-LM&lt;/a&gt; and
+an &lt;a class="reference external" href="http://ark.intel.com/products/75174/Intel-Wireless-N-7260"&gt;Intel® Wireless-N 7260 Wireless Network Card&lt;/a&gt;. During
+installation, both cards were promptly detected. As I have access only to WiFi
+networks in the office, I opted to use the Wireless card.&lt;/p&gt;
+&lt;img alt="Configuring Network and Host Name" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0000.png" /&gt;
+&lt;p&gt;In this initial image of the installation summary, our first step is to
+establish a connection to any of the available networks, be it through a wired
+or WiFi network. To achieve this, click on &lt;cite&gt;NETWORK &amp;amp; HOST NAME&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Next, choose Wireless and enable the corresponding network card. From the list
+of available networks, select one, alter the name of your Desktop/Laptop as
+desired, and then click &lt;cite&gt;Apply&lt;/cite&gt;...&lt;/p&gt;
+&lt;img alt="Turned on the Wireless Network Card and set the Host Name" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0002.png" /&gt;
+&lt;p&gt;Click &lt;cite&gt;Done&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;LOCALIZATION&lt;/cite&gt; section, I included the option for &lt;tt class="docutils literal"&gt;French
+(International, AltGr dead keys)&lt;/tt&gt; while removing &lt;tt class="docutils literal"&gt;English (US)&lt;/tt&gt;.&lt;/p&gt;
+&lt;img alt="Setting the keyboard layout as English International with Alt-Gr dead keys" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0005.png" /&gt;
+&lt;p&gt;You can perform a quick test by pressing the &lt;cite&gt;AltGr + a&lt;/cite&gt; key and other vowels
+to observe the accentuated vowels.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;TIME &amp;amp; DATE&lt;/cite&gt; section, I consistently enable &lt;cite&gt;Network Time&lt;/cite&gt;...&lt;/p&gt;
+&lt;img alt="Set the time zone to my region and the source for it as Network Time on" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0007.png" /&gt;
+&lt;p&gt;Additionally, we choose our &lt;cite&gt;Region&lt;/cite&gt; and &lt;cite&gt;City&lt;/cite&gt;, and based on this selection,
+the time and date are automatically set.&lt;/p&gt;
+&lt;p&gt;So far, we've configured the following sections:&lt;/p&gt;
+&lt;img alt="Keyboard, Language Support, Time and Date, Network and Host Name are set" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0008.png" /&gt;
+&lt;p&gt;Now, let's proceed to configure the &lt;cite&gt;SOFTWARE&lt;/cite&gt; section, focusing on the
+&lt;cite&gt;INSTALLATION SOURCE&lt;/cite&gt;...&lt;/p&gt;
+&lt;p&gt;In this section, we check &lt;cite&gt;On the Network:&lt;/cite&gt; and choose &lt;cite&gt;Closest mirror&lt;/cite&gt;.
+Additionally, ensure to uncheck the &lt;cite&gt;Updates&lt;/cite&gt; option...&lt;/p&gt;
+&lt;img alt="Setting the installation source" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0009.png" /&gt;
+&lt;p&gt;This setup ensures that the installer utilizes online repositories to download
+the necessary packages for installation. It dynamically selects the nearest
+server, which may not necessarily be the closest geographically but is
+typically the most efficient with optimal data transfer times.&lt;/p&gt;
+&lt;p&gt;By leaving &lt;cite&gt;Updates&lt;/cite&gt; unchecked, we instruct the installer to deploy the latest
+available packages from the repository.&lt;/p&gt;
+&lt;p&gt;We patiently wait for the download of package group metadata as the &lt;cite&gt;SOFTWARE
+SELECTION&lt;/cite&gt; section depends on this step.&lt;/p&gt;
+&lt;img alt="Pending Software Selection and Installation Destination" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0011.png" /&gt;
+&lt;p&gt;In the &lt;cite&gt;SOFTWARE SELECTION&lt;/cite&gt; section, I opted for &lt;cite&gt;Fedora Custom Operating
+System&lt;/cite&gt;, representing a minimal package selection. This choice excludes a
+graphical environment, including only a few essential package groups, such as:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;Environment Group: Fedora Custom Operating System&lt;/span&gt;
+&lt;span class="go"&gt; Environment-Id: custom-environment&lt;/span&gt;
+&lt;span class="go"&gt; Description: Basic building block for a custom Fedora system.&lt;/span&gt;
+&lt;span class="go"&gt; Mandatory Groups:&lt;/span&gt;
+&lt;span class="go"&gt;   Core&lt;/span&gt;
+&lt;span class="go"&gt; Optional Groups:&lt;/span&gt;
+&lt;span class="go"&gt;   Guest Agents&lt;/span&gt;
+&lt;span class="go"&gt;   Standard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we've arrived at the &lt;cite&gt;SYSTEM&lt;/cite&gt; section. Choose &lt;cite&gt;INSTALLATION
+DESTINATION&lt;/cite&gt;. Under &lt;cite&gt;Device Selection&lt;/cite&gt;, in &lt;cite&gt;Local Standard Disk&lt;/cite&gt;, select the
+hard disk containing the existing Fedora installation with the partitions you
+wish to reuse.&lt;/p&gt;
+&lt;p&gt;In the &lt;cite&gt;Other Storage Options&lt;/cite&gt; section, within the &lt;cite&gt;Partitioning&lt;/cite&gt; category,
+select &lt;cite&gt;I will Configure partitioning&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;The subsequent menu is displayed below, where we'll click on &lt;cite&gt;Unknown&lt;/cite&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Reusing the old partition table" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0013.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once we click &lt;cite&gt;Unknown&lt;/cite&gt; the other existing partitions will be displayed. we
+will focus on the partitions &lt;strong&gt;sda2&lt;/strong&gt;, &lt;strong&gt;sda9&lt;/strong&gt; and &lt;strong&gt;sda10&lt;/strong&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;img alt="Partitions to be reused and unlocking the encrypted one" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0014.png" /&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here's a detailed breakdown:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;sda2&lt;/strong&gt;: This is the ESP (EFI System Partition), housing other *.efi files.
+Each OS installed in UEFI mode has an *.efi file linked to our GRUB. It
+enables us to choose the OS during the initial seconds after turning on our
+computer. &lt;strong&gt;Never mark&lt;/strong&gt; this partition for formatting. &lt;strong&gt;sda2&lt;/strong&gt; will be
+mounted on &lt;cite&gt;/boot/efi&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda9&lt;/strong&gt;: This partition will be mounted in &lt;cite&gt;/boot&lt;/cite&gt; and should not be
+encrypted. It contains crucial files needed for the OS to load, such as the
+kernel. Encrypting this partition would prevent the loading of kernels during
+boot.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sda10&lt;/strong&gt;: This partition is encrypted using LUKS and houses the &lt;cite&gt;Volume
+Group&lt;/cite&gt;, which, in turn, contains other logical volumes serving as &lt;cite&gt;/&lt;/cite&gt;, &lt;cite&gt;/home&lt;/cite&gt;,
+and &lt;cite&gt;swap&lt;/cite&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once &lt;strong&gt;sda10&lt;/strong&gt; is selected, you'll be prompted for the encryption password
+granting access to the &lt;cite&gt;Volume Group&lt;/cite&gt;, which includes the mentioned partitions.
+This section reflects the existing Fedora 23 installation, originally the F22
+that we updated in the previous post.&lt;/p&gt;
+&lt;img alt="Now we can see the volume group and the logical volumes from the encrypted partition" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0015.png" /&gt;
+&lt;p&gt;Click on &lt;cite&gt;Fedora Linux 23 for x86_64&lt;/cite&gt;, and you'll be able to view the logical
+volumes slated for reuse.&lt;/p&gt;
+&lt;p&gt;When selecting &lt;cite&gt;/home&lt;/cite&gt;, ensure to allocate a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical
+Volume. Make certain that the &lt;cite&gt;Reformat&lt;/cite&gt; checkbox is &lt;strong&gt;not&lt;/strong&gt; selected, then
+click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Reusing the old home volume group" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0017.png" /&gt;
+&lt;p&gt;In the subsequent image, you'll observe that the logical volume
+&lt;cite&gt;fedora_lilit-home&lt;/cite&gt; has been reallocated to the &lt;cite&gt;New Fedora 25 Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Old /home volume group has been reallocated to the new Fedora 25 clean install" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0018.png" /&gt;
+&lt;p&gt;Choose &lt;cite&gt;/boot/efi&lt;/cite&gt;, equivalent to the ESP partition located in &lt;strong&gt;sda2&lt;/strong&gt;. Ensure
+to assign a &lt;cite&gt;Mount Point&lt;/cite&gt; for this Logical Volume, which, in this case, would
+be &lt;cite&gt;/boot/efi&lt;/cite&gt;. Confirm that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; is &lt;strong&gt;not&lt;/strong&gt; selected, then
+click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Reusing the one and the only /boot/efi partition shared by different system" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0019.png" /&gt;
+&lt;p&gt;Choose &lt;cite&gt;/&lt;/cite&gt;. This logical volume previously served as the &lt;cite&gt;/&lt;/cite&gt; for F23, so for
+reuse, we need to mark it for formatting. Assign &lt;cite&gt;/&lt;/cite&gt; as the mount point, select
+the file system as ext4, ensure that the checkbox &lt;cite&gt;Reformat&lt;/cite&gt; &lt;strong&gt;is&lt;/strong&gt; marked, and
+then click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Setting the old / partition, this is going to be reformated for the new install" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0023.png" /&gt;
+&lt;p&gt;Select &lt;cite&gt;swap&lt;/cite&gt;, mark the checkbox and click &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Reformation the Swap volume" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0025.png" /&gt;
+&lt;p&gt;Opt for &lt;cite&gt;/boot&lt;/cite&gt;. This is where the F23 kernels were stored, so to repurpose
+this partition, formatting is necessary. Allocate the &lt;cite&gt;Mount Point&lt;/cite&gt; as &lt;cite&gt;/boot&lt;/cite&gt;,
+check the &lt;cite&gt;Reformat&lt;/cite&gt; option, specify the file system as ext4 (in my case), and
+click on &lt;cite&gt;Update Settings&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Reformatting the old /boot partition to remove the old kernels" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0030.png" /&gt;
+&lt;p&gt;Click on &lt;cite&gt;Done&lt;/cite&gt; and confirm the impending changes.&lt;/p&gt;
+&lt;p&gt;To conclude, simply click on &lt;cite&gt;Begin Installation&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="All is set and we are ready to begin the clean installation" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0032.png" /&gt;
+&lt;p&gt;Assign both a user password and a ROOT password. Now, patiently wait for the
+download and installation of the packages to complete.&lt;/p&gt;
+&lt;img alt="Set a user and a root password" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0037.png" /&gt;
+&lt;p&gt;Once everything is set, click on &lt;cite&gt;Reboot&lt;/cite&gt;.&lt;/p&gt;
+&lt;img alt="Once it is complete it is ready to reboot" class="align-center" src="https://porfiriopaiz.github.io/site/images/anaconda-screenshots/0053.png" /&gt;
+&lt;p&gt;In my case, I had to perform a series of post-installation steps, which I'll
+elaborate on in the next post.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="anaconda"/><category term="fc25"/><category term="fedora"/><category term="luks"/><category term="lvm"/></entry><entry><title>Upgrading from Fedora 22 to Fedora 23</title><link href="https://porfiriopaiz.github.io/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html" rel="alternate"/><published>2017-03-26T16:46:00-06:00</published><updated>2017-03-26T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2017-03-26:/site/posts/2017/03/26/upgrading-from-fedora-22-to-fedora-23.html</id><summary type="html">&lt;p class="first last"&gt;A guide to upgrading from Fedora 22 to Fedora 23 using the DNF package manager.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;From May 26, 2015, to November 22, 2016, I enjoyed a smooth experience running
+Fedora 22 on my Lenovo ThinkPad T440p—a solid year and a half of tech bliss.
+However, on July 19, 2016, Fedora 22 officially entered its &lt;a class="reference external" href="https://fedoraproject.org/wiki/End_of_life"&gt;End of Life (EOL)&lt;/a&gt; phase. This meant no more
+security or maintenance updates, prompting the need to upgrade to a newer,
+stable version.&lt;/p&gt;
+&lt;p&gt;In this post, I'll walk you through the process of upgrading to Fedora 23 using
+the reliable DNF package manager. Let’s keep your Fedora system running fresh
+and secure! 🚀&lt;/p&gt;
+&lt;!-- TEASER_END --&gt;
+&lt;p&gt;Over the course of 18 months using Fedora 22, the package cache had accumulated
+approximately 10 GB of space on my hard drive.&lt;/p&gt;
+&lt;img alt="A year and a half of packages stored in the DNF cache" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_16-05-06.png" /&gt;
+&lt;p&gt;To instruct DNF to retain downloaded packages in the cache, add the following
+line to the DNF configuration file located at &lt;tt class="docutils literal"&gt;/etc/dnf/dnf.conf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;quot;echo &amp;#39;keepcache = true&amp;#39; &amp;gt;&amp;gt; /etc/dnf/dnf.conf&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="upgrading-to-fedora-23"&gt;
+&lt;h2&gt;Upgrading to Fedora 23&lt;/h2&gt;
+&lt;div class="section" id="prerequisites-for-upgrading"&gt;
+&lt;h3&gt;Prerequisites for Upgrading&lt;/h3&gt;
+&lt;p&gt;1. Ensure there is sufficient space on your &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; partition. This is necessary
+because the upgrade process involves downloading the latest version of every
+package installed on your system. To free up space, if needed, you can clear
+the stored package cache:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf clean all&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2. Ensure your system is up-to-date by rebuilding the metadata cache and
+applying any pending updates:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf makecache&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;img alt="Rebuilding the package cache" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-23-27.png" /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-the-dnf-system-upgrade-plugin"&gt;
+&lt;h3&gt;Install the DNF System Upgrade Plugin&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;DNF System Upgrade&lt;/strong&gt; enables the upgrade to a newer Fedora version using a
+mechanism similar to offline updates. Packages are downloaded during regular
+system operation, and a reboot triggers their installation in a dedicated
+environment.&lt;/p&gt;
+&lt;p&gt;Install the required plugin with the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install dnf-plugin-system-upgrade&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="download-the-packages"&gt;
+&lt;h3&gt;Download the Packages&lt;/h3&gt;
+&lt;p&gt;Next, download the necessary packages for the upgrade to Fedora 23. This step
+ensures that every package currently installed on your system is replaced with
+its latest version for Fedora 23:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=23&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The screenshot below shows the details of the packages to be downloaded and
+their total size:&lt;/p&gt;
+&lt;img alt="DNF downloading packages for the upgrade" class="align-center" src="https://porfiriopaiz.github.io/site/images/fc22_to_fc23/screenshot_from_2016-11-22_17-34-42.png" /&gt;
+&lt;p&gt;You can also upgrade to newer versions such as Fedora 24, 25, or even Rawhide.
+However, I recommend avoiding skipping more than one release (a &lt;tt class="docutils literal"&gt;n + 2&lt;/tt&gt;
+jump). At the time of writing, the latest stable versions are Fedora 24 and 25,
+with Fedora 26 in the &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Branched"&gt;Branched&lt;/a&gt; state and &lt;a class="reference external" href="https://fedoraproject.org/wiki/Releases/Rawhide"&gt;Rawhide&lt;/a&gt; as the rolling development
+version.&lt;/p&gt;
+&lt;p&gt;To upgrade to another version, adjust the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--releasever&lt;/span&gt;&lt;/tt&gt; parameter:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Fedora 24:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=24&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Fedora 25:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=25&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Upgrade to Rawhide:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade download --refresh --best --allowerasing --releasever=rawhide&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot-to-apply-the-upgrade"&gt;
+&lt;h3&gt;Reboot to Apply the Upgrade&lt;/h3&gt;
+&lt;p&gt;After downloading the packages, reboot your system to initiate the upgrade
+process:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf system-upgrade reboot&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will restart the system. Upon reboot, the upgrade process will
+begin, using the newly downloaded packages. Once complete, your system will be
+running Fedora 23.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="dnf"/><category term="eol"/><category term="fc22"/><category term="fc23"/><category term="fedora"/><category term="system-upgrade"/></entry><entry><title>IRC with irssi</title><link href="https://porfiriopaiz.github.io/site/posts/2016/11/03/irc-with-irssi.html" rel="alternate"/><published>2016-11-03T21:20:00-06:00</published><updated>2016-11-03T21:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-11-03:/site/posts/2016/11/03/irc-with-irssi.html</id><summary type="html"/><content type="html">&lt;p&gt;Since my introduction to the realm of Free Software and GNU/Linux, one aspect
+that has consistently captivated me is the formidable prowess of the command
+line within this operating system. Whether it involves seamlessly navigating
+through diverse directories or orchestrating the installation of an entire
+operating system from the ground up, the terminal empowers users to
+effortlessly accomplish a myriad of routine tasks.&lt;/p&gt;
+&lt;!-- TEASER_END --&gt;
+&lt;p&gt;This post will guide you through configuring irssi to automate several
+essential steps required to access a chat room. This includes connecting to the
+server, authenticating, and seamlessly joining various channels of interest.&lt;/p&gt;
+&lt;div class="section" id="installing-irssi"&gt;
+&lt;h2&gt;Installing irssi&lt;/h2&gt;
+&lt;p&gt;To install irssi in fedora, just open a terminal and type the following
+command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;dnf install irssi&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And to install irssi in debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install irssi&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="running-irssi"&gt;
+&lt;h3&gt;Running irssi&lt;/h3&gt;
+&lt;p&gt;Initiate irssi by opening a terminal and entering the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configurations"&gt;
+&lt;h2&gt;Configurations&lt;/h2&gt;
+&lt;div class="section" id="server-configurations"&gt;
+&lt;h3&gt;Server Configurations&lt;/h3&gt;
+&lt;p&gt;All these commands must be executed within an irssi session.&lt;/p&gt;
+&lt;p&gt;To begin, let's remove the current server configuration we aim to automate.
+Utilize the command &lt;tt class="docutils literal"&gt;/server list&lt;/tt&gt; list to display the list of existing servers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/server list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In our case, we will eliminate the current configuration for Freenode.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/server remove chat.freenode.net&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Subsequently, incorporate the new configuration using the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this context, the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-auto&lt;/span&gt;&lt;/tt&gt; flag designates the connection to the
+&lt;tt class="docutils literal"&gt;Freenode&lt;/tt&gt; server as automatic, while &lt;tt class="docutils literal"&gt;your_nick_password&lt;/tt&gt; corresponds to
+your user password.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="adding-channels"&gt;
+&lt;h3&gt;Adding Channels&lt;/h3&gt;
+&lt;p&gt;Likewise, you can append channels to this server to facilitate automatic
+connection upon each login. To achieve this, execute the following command
+within our irssi session:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/channel add -auto #fedora Freenode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Where &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-auto&lt;/span&gt;&lt;/tt&gt; enables automatic joining to the &lt;tt class="docutils literal"&gt;#fedora&lt;/tt&gt; channel at the
+&lt;tt class="docutils literal"&gt;Freenode&lt;/tt&gt; server upon every login.&lt;/p&gt;
+&lt;p&gt;Concluding, after making any configuration adjustments, it is imperative to
+save the changes using the command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;/save&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Irssi automatically takes the username of your current system session as the
+IRC user. To avoid discrepancies when your system username differs from your
+Freenode user, run irssi with the following parameter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;irssi -n nick&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Replace &lt;tt class="docutils literal"&gt;nick&lt;/tt&gt; with your Freenode IRC username.&lt;/p&gt;
+&lt;p&gt;After successfully adding all your preferred channels from the Freenode server
+and saving the modifications, simply execute the &lt;tt class="docutils literal"&gt;irssi&lt;/tt&gt; command in a
+terminal. You will be seamlessly connected to the server, and all the
+designated channels will be accessible without the need for manual
+authentication. This not only eliminates the risk of exposing your password
+while typing but also streamlines the entire process—all from the convenience
+of a terminal.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="cli"/><category term="irc"/></entry><entry><title>Hello World!</title><link href="https://porfiriopaiz.github.io/site/posts/2016/10/09/hello-world.html" rel="alternate"/><published>2016-10-09T20:49:00-06:00</published><updated>2016-10-09T20:49:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2016-10-09:/site/posts/2016/10/09/hello-world.html</id><summary type="html"/><content type="html">&lt;p&gt;Hello World from Pelican!&lt;/p&gt;
+</content><category term="misc"/></entry></feed>

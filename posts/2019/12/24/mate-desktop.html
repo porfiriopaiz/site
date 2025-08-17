@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="fc30, fedora, mate, postinstall">
+
+  <title>
+    porfirio's blog
+&ndash; Fedora 30 Mate Desktop Post-Install  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2019/12/24/mate-desktop.html">Fedora 30 Mate Desktop Post-Install</a></h1>
+  </div>
+  <div class="article_text">
+    <div class="section" id="dnf-configuration">
+<h2>DNF Configuration</h2>
+<div class="section" id="dnf-conf">
+<h3>dnf.conf</h3>
+<p>Enable Fastest Mirrors:</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;fastestmirror=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+</pre></div>
+<p>Disable DeltaRPMs for Future Updates:</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;deltarpm=false&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+</pre></div>
+<p>Enable DNF Package Caching:</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;keepcache=true&#39; &gt;&gt; /etc/dnf/dnf.conf</span>
+</pre></div>
+</div>
+<div class="section" id="disable-dnf-makecache-systemd-service-and-timer">
+<h3>Disable DNF Makecache Systemd Service and Timer</h3>
+<p>To disable the service:</p>
+<div class="highlight"><pre><span></span><span class="go">systemctl disable dnf-makecache.service</span>
+</pre></div>
+<p>To disable the timer:</p>
+<div class="highlight"><pre><span></span><span class="go">systemctl disable dnf-makecache.timer</span>
+</pre></div>
+</div>
+<div class="section" id="regenerate-the-cache-and-install-available-updates">
+<h3>Regenerate the Cache and Install Available Updates</h3>
+<p>As a normal, non-root user:</p>
+<div class="highlight"><pre><span></span><span class="go">dnf clean all</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">dnf makecache</span>
+</pre></div>
+<p>For root:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf clean all&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf makecache&#39;</span>
+</pre></div>
+<p>Reboot:</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-for-available-upgrades">
+<h2>Check for Available Upgrades</h2>
+<p>Enter your root password:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf --refresh check-upgrade&#39;</span>
+</pre></div>
+<p>If upgrades are available, apply them:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf upgrade&#39;</span>
+</pre></div>
+<p>Reboot:</p>
+<div class="highlight"><pre><span></span><span class="go">reboot</span>
+</pre></div>
+</div>
+<div class="section" id="mate-desktop-tips-and-tricks">
+<h2>Mate Desktop Tips and Tricks</h2>
+<p>Enable Window Compositing:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general compositing-manager true</span>
+</pre></div>
+<p>Enable New Window Centering:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general center-new-windows true</span>
+</pre></div>
+<p>Enable Window Snapping:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general allow-tiling true</span>
+</pre></div>
+<p>Hide All Desktop Icons:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.background show-desktop-icons false</span>
+</pre></div>
+<p>Change Window Decoration Button Order:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.Marco.general button-layout &#39;close,maximize,minimize:menu&#39;</span>
+</pre></div>
+<p>Disable Automount-Open:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount-open false</span>
+</pre></div>
+<p>Disable Automounting:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.media-handling automount false</span>
+</pre></div>
+<p>Set Default Caja Preferences for Sorting Order:</p>
+<div class="highlight"><pre><span></span><span class="go">gsettings set org.mate.caja.preferences default-sort-order type</span>
+</pre></div>
+</div>
+<div class="section" id="create-working-directories">
+<h2>Create Working Directories</h2>
+<div class="highlight"><pre><span></span><span class="go">mkdir ~/git_repos</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">mkdir ~/projects</span>
+</pre></div>
+</div>
+<div class="section" id="remove-unneeded-software">
+<h2>Remove Unneeded Software</h2>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove xfburn&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove exaile&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove parole&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove hexchat&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove dnfdragora&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y remove filezilla&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="software-repositories">
+<h2>Software Repositories</h2>
+<p>Enable software repositories.</p>
+<div class="section" id="rpmfusion">
+<h3>RPMFusion</h3>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="fedora-workstation-repositories">
+<h3>Fedora Workstation Repositories</h3>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install fedora-workstation-repositories&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="fedora-rawhide-s-repositories">
+<h3>Fedora Rawhide's Repositories</h3>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install fedora-repos-rawhide&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="copr">
+<h3>COPR</h3>
+<p>Copr is an easy-to-use automatic build system providing a package repository as
+its output.</p>
+<div class="section" id="neteler-remarkable">
+<h4><cite>neteler/remarkable</cite></h4>
+<p>Remarkable is a free, fully-featured Markdown editor.</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable neteler/remarkable&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="philfry-gajim">
+<h4><cite>philfry/gajim</cite></h4>
+<p>Gajim is a Jabber client written in PyGTK. It provides support for the OMEMO
+encryption method. This repo includes tools and dependencies not available in
+the official Fedora repo.</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable philfry/gajim&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="dani-qgis">
+<h4><cite>dani/qgis</cite></h4>
+<p>QGIS is a user-friendly, open-source Geographic Information System.</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf -y copr enable dani/qgis&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="dotnet-sig-dotnet">
+<h4><cite>&#64;dotnet-sig/dotnet</cite></h4>
+<p>This provides the .NET CLI tools and runtime for Fedora.</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf copr enable @dotnet-sig/dotnet&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vscodium">
+<h3>VSCodium</h3>
+<p>Import the GPG key:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg&#39;</span>
+</pre></div>
+<p>Now create the <cite>vscodium.repo</cite> file:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &quot;tee -a /etc/yum.repos.d/vscodium.repo &lt;&lt; &#39;EOF&#39;</span>
+<span class="go">[gitlab.com_paulcarroty_vscodium_repo]</span>
+<span class="go">name=gitlab.com_paulcarroty_vscodium_repo</span>
+<span class="go">baseurl=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/rpms/</span>
+<span class="go">enabled=1</span>
+<span class="go">gpgcheck=1</span>
+<span class="go">repo_gpgcheck=1</span>
+<span class="go">gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg</span>
+<span class="go">EOF</span>
+<span class="go">&quot;</span>
+</pre></div>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Tue 24 December 2019</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/fc30.html">fc30</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/mate.html">mate</a>,      <a href="../../../../tag/postinstall.html">postinstall</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2019/12/24/mate-desktop.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
