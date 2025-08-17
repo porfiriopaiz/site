@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-17T09:05:00-06:00</updated><entry><title>Checking for updates</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/17/checking-for-updates.html" rel="alternate"/><published>2025-08-17T09:05:00-06:00</published><updated>2025-08-17T09:05:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-17:/site/posts/2025/08/17/checking-for-updates.html</id><summary type="html">&lt;p class="first last"&gt;On macOS via command-line&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-17T19:47:00-06:00</updated><entry><title>Lock the screen when closing the lid</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/17/lock-the-screen-when-closing-the-lid.html" rel="alternate"/><published>2025-08-17T19:47:00-06:00</published><updated>2025-08-17T19:47:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-17:/site/posts/2025/08/17/lock-the-screen-when-closing-the-lid.html</id><summary type="html">&lt;p class="first last"&gt;Lock screen upon closing the lid&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;By default, your MacBook is designed to go to sleep when you close the
+lid. When it wakes up, it requires your password (or Touch ID/Apple
+Watch) if you have the &amp;quot;Require password&amp;quot; setting enabled for your lock
+screen.&lt;/p&gt;
+&lt;p&gt;Here's how to ensure your MacBook locks when the lid is closed, and some
+related settings you might want to consider:&lt;/p&gt;
+&lt;div class="section" id="ensure-require-password-is-set-to-immediately"&gt;
+&lt;h2&gt;1. Ensure &amp;quot;Require password&amp;quot; is set to &amp;quot;Immediately&amp;quot;&lt;/h2&gt;
+&lt;p&gt;This is the most crucial setting for locking your Mac.&lt;/p&gt;
+&lt;div class="section" id="for-macos-ventura-and-later"&gt;
+&lt;h3&gt;For macOS Ventura and later:&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Click the &lt;strong&gt;Apple menu&lt;/strong&gt; in the top-left corner of your screen.&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;System Settings&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Click on &lt;strong&gt;Lock Screen&lt;/strong&gt; in the sidebar.&lt;/li&gt;
+&lt;li&gt;Next to &amp;quot;Require password after screen saver begins or display is
+turned off,&amp;quot; choose &lt;strong&gt;&amp;quot;Immediately&amp;quot;&lt;/strong&gt; from the dropdown menu.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="for-macos-monterey-and-earlier"&gt;
+&lt;h3&gt;For macOS Monterey and earlier:&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Click the &lt;strong&gt;Apple menu&lt;/strong&gt; in the top-left corner of your screen.&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;System Preferences&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Click on &lt;strong&gt;Security &amp;amp; Privacy&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Go to the &lt;strong&gt;General&lt;/strong&gt; tab.&lt;/li&gt;
+&lt;li&gt;Check the box next to &amp;quot;Require password [time] after sleep or screen
+saver begins.&amp;quot;&lt;/li&gt;
+&lt;li&gt;From the dropdown menu, select &lt;strong&gt;&amp;quot;immediately.&amp;quot;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="understanding-clamshell-mode-and-why-it-might-prevent-locking"&gt;
+&lt;h2&gt;2. Understanding &amp;quot;Clamshell Mode&amp;quot; (and why it might prevent locking)&lt;/h2&gt;
+&lt;p&gt;If you're using an external monitor, keyboard, and mouse, macOS has a
+feature called &lt;strong&gt;&amp;quot;clamshell mode.&amp;quot;&lt;/strong&gt; In this mode, your MacBook can
+remain awake and drive the external display even with the lid closed,
+provided it's plugged into power.&lt;/p&gt;
+&lt;p&gt;If your Mac isn't locking when you close the lid and you're using an
+external display, it's likely in clamshell mode. To ensure it locks when
+the lid is closed in this scenario, you'd typically either:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Manually lock it before closing the lid:&lt;/strong&gt; Press &lt;strong&gt;Control +
+Command + Q&lt;/strong&gt; to lock the screen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Put it to sleep before closing the lid:&lt;/strong&gt; Go to the &lt;strong&gt;Apple menu&lt;/strong&gt;
+and select &lt;strong&gt;&amp;quot;Sleep.&amp;quot;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="adjusting-display-sleep-settings-less-about-locking-more-about-power"&gt;
+&lt;h2&gt;3. Adjusting Display Sleep Settings (less about locking, more about power)&lt;/h2&gt;
+&lt;p&gt;While not directly about locking, you can configure how quickly your
+display turns off (which can then trigger the password requirement if
+set to &amp;quot;immediately&amp;quot;).&lt;/p&gt;
+&lt;div class="section" id="for-macos-ventura-and-later-1"&gt;
+&lt;h3&gt;For macOS Ventura and later:&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Go to &lt;strong&gt;System Settings &amp;gt; Lock Screen.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Adjust &amp;quot;Turn display off on battery when inactive&amp;quot; and &amp;quot;Turn display
+off on power adapter when inactive&amp;quot; to your preferred times. Setting
+them to a shorter time will make your display turn off sooner, and if
+&amp;quot;Require password immediately&amp;quot; is set, it will lock faster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="for-macos-monterey-and-earlier-1"&gt;
+&lt;h3&gt;For macOS Monterey and earlier:&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Go to &lt;strong&gt;System Preferences &amp;gt; Battery&lt;/strong&gt; (or Energy Saver for desktops).&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;&amp;quot;Battery&amp;quot;&lt;/strong&gt; and &lt;strong&gt;&amp;quot;Power Adapter&amp;quot;&lt;/strong&gt; tabs, adjust the &amp;quot;Turn
+display off after&amp;quot; slider.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr class="docutils" /&gt;
+&lt;p&gt;In summary: The key to having your MacBook lock when the lid is closed
+is to ensure your &amp;quot;Require password after screen saver begins or display
+is turned off&amp;quot; setting is set to &lt;strong&gt;&amp;quot;Immediately.&amp;quot;&lt;/strong&gt; If you're using an
+external monitor in clamshell mode, your Mac might not go to sleep (and
+thus lock) automatically, so manual locking or sleeping might be
+necessary.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="misc"/><category term="macOS"/></entry><entry><title>Checking for updates</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/17/checking-for-updates.html" rel="alternate"/><published>2025-08-17T09:05:00-06:00</published><updated>2025-08-17T09:05:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-17:/site/posts/2025/08/17/checking-for-updates.html</id><summary type="html">&lt;p class="first last"&gt;On macOS via command-line&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In this post, we will explore the process of updating via the command-
 line.&lt;/p&gt;
 &lt;p&gt;First thing to explore would be disabling the automatic updates process
