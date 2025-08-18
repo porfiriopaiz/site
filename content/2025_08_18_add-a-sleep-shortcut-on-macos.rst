@@ -38,8 +38,8 @@ mode without closing the lid by following these steps:
      and convenient one is **Control + Shift + Eject** (if your
      MacBook has an Eject key) or **Control + Shift + Power button**
      (on newer MacBooks without an Eject key). You can also choose
-     something like **Command + Option + S** if you prefer. Just make
-     sure it's a combination you won't accidentally press often.
+     something like **Control + Command + S** if you prefer (which I did). Just 
+     make sure it's a combination you won't accidentally press often.
 7. **Click Done** (or Add): Once you've entered the menu title and
    your desired shortcut, click "**Done**" (or "Add" on older macOS
    versions).
