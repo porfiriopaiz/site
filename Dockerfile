@@ -1,5 +1,5 @@
 # Use a minimal Python base image
-FROM python:3.13.7-slim-trixie
+FROM python:slim
 
 # Set the working directory in the container
 WORKDIR /app
