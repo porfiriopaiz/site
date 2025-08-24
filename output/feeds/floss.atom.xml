@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - floss</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/floss.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2023-09-11T04:39:00-06:00</updated><entry><title>vim</title><link href="https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html" rel="alternate"/><published>2023-09-11T04:39:00-06:00</published><updated>2023-09-11T04:39:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</id><summary type="html">&lt;p class="first last"&gt;The Vim text editor&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - floss</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/floss.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-24T01:17:00-06:00</updated><entry><title>Debian Age</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html" rel="alternate"/><published>2025-08-24T01:17:00-06:00</published><updated>2025-08-24T01:17:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-24:/site/posts/2025/08/24/debian-age.html</id><summary type="html">&lt;p class="first last"&gt;A quick guide to checking when Debian was installed on your device&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="how-to-find-the-installation-date-of-debian"&gt;
+&lt;h2&gt;How to Find the Installation Date of Debian&lt;/h2&gt;
+&lt;p&gt;Have you ever needed to know the exact date a Debian-based system was installed?
+Whether for troubleshooting, system auditing, or just out of curiosity, this
+information can be useful. While there isn't a single file named
+&amp;quot;installation-date,&amp;quot; you can reliably find this information by consulting the
+installer's logs or by checking the creation date of the root filesystem.&lt;/p&gt;
+&lt;p&gt;Here's how to do it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Using the Installer Syslog:&lt;/p&gt;
+&lt;p&gt;Debian-based systems typically log installation details in
+&lt;tt class="docutils literal"&gt;/var/log/installer/syslog&lt;/tt&gt;. The very first entry in this file corresponds
+to the start of the installation process, giving you a precise date.&lt;/p&gt;
+&lt;p&gt;To view the first line, use the &lt;tt class="docutils literal"&gt;head&lt;/tt&gt; command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;head -n 1 /var/log/installer/syslog&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Checking Filesystem Creation Date:&lt;/p&gt;
+&lt;p&gt;The creation date of the root filesystem is another excellent indicator of the
+installation date. This method is particularly useful if the installer logs
+are unavailable or incomplete.&lt;/p&gt;
+&lt;p&gt;First, identify your root partition (e.g., &lt;tt class="docutils literal"&gt;/dev/sda1&lt;/tt&gt;). Then, use
+&lt;tt class="docutils literal"&gt;tune2fs&lt;/tt&gt; to display filesystem information:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;sudo tune2fs -l /dev/sda1 | grep &amp;#39;Filesystem created:&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Remember to replace &lt;tt class="docutils literal"&gt;/dev/sda1&lt;/tt&gt; with your actual root partition.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Note: While &lt;tt class="docutils literal"&gt;stat &lt;span class="pre"&gt;-c&lt;/span&gt; %w /&lt;/tt&gt; can show the &amp;quot;birth time&amp;quot; of the root directory,
+this may not always align precisely with the OS installation date, especially
+if the root directory's creation time was modified after installation. For the
+most reliable information, the installer syslog or filesystem creation date
+provides a more dependable indication.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By using these two straightforward methods, you can quickly and accurately
+determine the installation date of any Debian-based system.&lt;/p&gt;
+&lt;p&gt;And here is mine, my current Debian 11.11 has been installed on &lt;tt class="docutils literal"&gt;May 27
+17:59:58 syslogd started: BusyBox v1.30.1&lt;/tt&gt;, notice this is in local time zone
+during the installation, probably when it started.&lt;/p&gt;
+&lt;p&gt;And &lt;tt class="docutils literal"&gt;Filesystem created:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Fri May 28 00:56:56 2021&lt;/tt&gt; is when the
+installation was already completed, the time stamps are in UTC time zone.&lt;/p&gt;
+&lt;img alt="Debian Age screenshot" class="align-center" src="https://porfiriopaiz.github.io/site/images/debian_age/screenshot_at_2025-08-24_01-40-08.png" /&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="cli"/><category term="deb11"/><category term="debian"/></entry><entry><title>vim</title><link href="https://porfiriopaiz.github.io/site/posts/2023/09/11/vim.html" rel="alternate"/><published>2023-09-11T04:39:00-06:00</published><updated>2023-09-11T04:39:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2023-09-11:/site/posts/2023/09/11/vim.html</id><summary type="html">&lt;p class="first last"&gt;The Vim text editor&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="understanding-vim-on-debian"&gt;
 &lt;h2&gt;Understanding &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; on Debian&lt;/h2&gt;
 &lt;p&gt;Now that I understand how Debian manages &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; and I've grasped
