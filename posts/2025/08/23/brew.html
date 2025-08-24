@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="brew, macOS">
+
+  <title>
+    porfirio's blog
+&ndash; Homebrew: Your macOS Package Manager 🍺  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2025/08/23/brew.html">Homebrew: Your macOS Package Manager 🍺</a></h1>
+  </div>
+  <div class="article_text">
+    <p>Welcome to the world of macOS! If you're coming from another operating
+system or are new to the command line, you might be wondering how to
+easily install and manage software. That's where Homebrew comes in!</p>
+<div class="section" id="what-is-homebrew">
+<h2>What is Homebrew? 🤔</h2>
+<p>Think of Homebrew as an app store for developers on macOS (and Linux).
+It's a free and open-source package manager that simplifies the process
+of installing, updating, and uninstalling software from the command
+line. Instead of downloading .dmg files and dragging applications to
+your &quot;Applications&quot; folder, Homebrew lets you do it with simple
+commands.</p>
+<p>Homebrew has two main parts:</p>
+<ul class="simple">
+<li><strong>Homebrew (Core):</strong> For installing command-line tools and libraries
+(like python, git, or node).</li>
+<li><strong>Homebrew Cask:</strong> An extension for installing graphical macOS
+applications (like Firefox, VLC, or Spotify).</li>
+</ul>
+</div>
+<div class="section" id="the-problem-homebrew-solves">
+<h2>The Problem Homebrew Solves ⚙️</h2>
+<p>macOS comes with a lot of built-in tools, but it doesn't include
+everything a developer or power user might need. Traditionally,
+installing additional software on macOS could involve:</p>
+<ul class="simple">
+<li>Searching for the correct download link.</li>
+<li>Navigating complex installation wizards.</li>
+<li>Manually managing dependencies (other software the application needs
+to run).</li>
+<li>Dealing with potential conflicts between different installations.</li>
+</ul>
+<p>Homebrew streamlines this entire process, handling dependencies,
+configurations, and installations in a consistent and efficient manner.
+It saves you from the tedious &quot;download a .dmg, open it, and drag the
+app to the Applications folder&quot; process.</p>
+</div>
+<div class="section" id="getting-homebrew-installed">
+<h2>Getting Homebrew Installed 🛠️</h2>
+<p>Ready to get started? Here's how to install Homebrew:</p>
+<ul>
+<li><p class="first"><strong>Open Terminal:</strong> You can find Terminal in <tt class="docutils literal">/Applications/Utilities</tt>
+or by searching for it using Spotlight (<tt class="docutils literal">Command + Space</tt>).</p>
+</li>
+<li><p class="first"><strong>Install Command Line Tools for Xcode</strong> (if you haven't already):
+Sometimes, Homebrew requires these tools. Run the following command:</p>
+<div class="highlight"><pre><span></span>xcode-select<span class="w"> </span>--install
+</pre></div>
+<p>If they are already installed, you'll get a message saying so.
+Otherwise, follow the prompts to install them.</p>
+</li>
+<li><p class="first"><strong>Run the Homebrew Installation Script:</strong> Copy and paste the following
+command into your Terminal and press Enter:</p>
+<div class="highlight"><pre><span></span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+<p>This command downloads and runs the official Homebrew installation
+script.</p>
+</li>
+<li><p class="first"><strong>Follow the Prompts:</strong> The script will explain what it will do and
+ask for your password (this is normal for installing software).
+Carefully read the prompts and press Enter to proceed.</p>
+</li>
+<li><p class="first"><strong>Add Homebrew to Your PATH</strong> (if the installer doesn't do it): After
+installation, the script might give you instructions to add Homebrew
+to your system's PATH. This allows you to run <tt class="docutils literal">brew</tt> commands from any
+directory in Terminal. Typically, this involves running a command like:</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;&#39; &gt;&gt; ~/.zshrc</span>
+</pre></div>
+<p>(for Zsh, the default shell on newer macOS versions)</p>
+<p>or</p>
+<div class="highlight"><pre><span></span><span class="go">echo &#39;eval &quot;$(/usr/local/bin/brew shellenv)&quot;&#39; &gt;&gt; ~/.bash_profile</span>
+</pre></div>
+<p>(for Bash)</p>
+<p>Then, run <tt class="docutils literal">source <span class="pre">~/.zshrc</span></tt> or <tt class="docutils literal">source <span class="pre">~/.bash_profile</span></tt> to apply the changes.</p>
+</li>
+<li><p class="first"><strong>Verify the Installation:</strong> To make sure Homebrew is installed
+correctly, run:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>doctor
+</pre></div>
+<p>This command checks for common problems and will give you advice on how
+to fix them if any are found. You should see a message saying &quot;Your
+system is ready to brew.&quot;</p>
+</li>
+</ul>
+</div>
+<div class="section" id="using-homebrew-essential-commands">
+<h2>Using Homebrew: Essential Commands ⚙️</h2>
+<p>Now that you have Homebrew installed, let's look at some essential
+commands. We'll use Firefox as our example, which is a &quot;Cask&quot; in
+Homebrew's terminology.</p>
+<div class="section" id="searching-for-software">
+<h3>Searching for Software 🔍</h3>
+<p>To find a specific piece of software, use the <tt class="docutils literal">search</tt> command followed by
+the name (or keywords):</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>search<span class="w"> </span>&lt;software_name&gt;
+</pre></div>
+<p>For example, to search for the Firefox browser, you would run:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>search<span class="w"> </span>firefox
+</pre></div>
+<p>Homebrew will display any formulas or casks that match your search terms.
+You'll notice <tt class="docutils literal">firefox</tt> has a <tt class="docutils literal"><span class="pre">--cask</span></tt> flag next to it, indicating it's a
+graphical application.</p>
+</div>
+<div class="section" id="getting-information-about-software-i">
+<h3>Getting Information About Software ℹ️</h3>
+<p>Once you've found the software you're interested in, you can get more
+information about it using the <tt class="docutils literal">info</tt> command. For Casks, you'll need to
+specify <tt class="docutils literal"><span class="pre">--cask</span></tt>:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>info<span class="w"> </span>--cask<span class="w"> </span>&lt;cask_name&gt;
+</pre></div>
+<p>For example:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>info<span class="w"> </span>--cask<span class="w"> </span>firefox
+</pre></div>
+<p>This will show you details like the software's website, description, and
+installation instructions.</p>
+</div>
+<div class="section" id="installing-software">
+<h3>Installing Software ⬇️</h3>
+<p>To install a graphical application, use the <tt class="docutils literal">install</tt> command followed by
+the <tt class="docutils literal"><span class="pre">--cask</span></tt> flag and the software name:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>&lt;cask_name&gt;
+</pre></div>
+<p>For example, to install Firefox:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>firefox
+</pre></div>
+<p>Homebrew will download the necessary files, install the application to
+your <tt class="docutils literal">/Applications</tt> folder, and even manage the dependencies.</p>
+</div>
+<div class="section" id="updating-homebrew-itself">
+<h3>Updating Homebrew Itself 🔄</h3>
+<p>To get the latest version of Homebrew and its formula and cask
+definitions, run:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>update
+</pre></div>
+<p>This command downloads the newest information from the Homebrew
+repository.</p>
+</div>
+<div class="section" id="upgrading-your-software">
+<h3>Upgrading Your Software ⬆️</h3>
+<p>Homebrew provides powerful commands to manage updates for your installed
+software.</p>
+<div class="section" id="checking-for-outdated-software-with-and-without-greedy">
+<h4>Checking for Outdated Software (With and Without --greedy) 👀</h4>
+<p>To see which of your installed Homebrew packages have newer versions
+available, run:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>outdated
+</pre></div>
+<p>By default, this command will not show you updates for apps that have
+their own built-in update mechanism (known as <tt class="docutils literal">auto_updates</tt>). This is
+because Homebrew defers to the app's own updater to avoid conflicts. For
+example, apps like Firefox and Google Chrome often handle their own
+updates.</p>
+<p>However, if you want Homebrew to list all available updates, including
+those with <tt class="docutils literal">auto_updates</tt>, you can use the <tt class="docutils literal"><span class="pre">--greedy</span></tt> flag:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>outdated<span class="w"> </span>--greedy
+</pre></div>
+<p>This is useful if you prefer to manage all your updates through Homebrew
+rather than through each app's individual updater.</p>
+</div>
+<div class="section" id="upgrading-all-outdated-software-with-and-without-greedy">
+<h4>Upgrading All Outdated Software (With and Without --greedy) ✅</h4>
+<p>To upgrade all the software installed via Homebrew to their latest
+versions, use:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>upgrade
+</pre></div>
+<p>Just like with <tt class="docutils literal">brew outdated</tt>, this command will ignore any apps that have
+their own <tt class="docutils literal">auto_updates</tt> enabled.</p>
+<p>To force Homebrew to upgrade all outdated software, including those with
+<tt class="docutils literal">auto_updates</tt> enabled, use the <tt class="docutils literal"><span class="pre">--greedy</span></tt> flag:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>upgrade<span class="w"> </span>--greedy
+</pre></div>
+<p>You can also upgrade a specific piece of software, for example:</p>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>upgrade<span class="w"> </span>--cask<span class="w"> </span>firefox
+</pre></div>
+<p>This command will override the <tt class="docutils literal">auto_updates</tt> setting for that specific app
+and perform the upgrade via Homebrew.</p>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion 🎉</h2>
+<p>Homebrew is a powerful tool that will significantly simplify how you
+manage software on your macOS system. By mastering these basic commands,
+including the flexible <tt class="docutils literal"><span class="pre">--greedy</span></tt> flag for Casks, you'll be well on
+your way to a more efficient and enjoyable development or user
+experience. Happy brewing! 🍺</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sat 23 August 2025</p>
+    <p>Category: <a href="../../../../category/misc.html">misc</a>
+ &ndash; Tags:
+      <a href="../../../../tag/brew.html">brew</a>,      <a href="../../../../tag/macos.html">macOS</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2025/08/23/brew.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-18T16:46:00-06:00</updated><entry><title>Add a Sleep shortcut on macOS</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/18/add-a-sleep-shortcut-on-macos.html" rel="alternate"/><published>2025-08-18T16:46:00-06:00</published><updated>2025-08-18T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-18:/site/posts/2025/08/18/add-a-sleep-shortcut-on-macos.html</id><summary type="html">&lt;p class="first last"&gt;how to add a keyboard shortcut to put your MacBook into Sleep mode
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-23T23:53:00-06:00</updated><entry><title>Homebrew: Your macOS Package Manager 🍺</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/23/brew.html" rel="alternate"/><published>2025-08-23T23:53:00-06:00</published><updated>2025-08-23T23:53:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-23:/site/posts/2025/08/23/brew.html</id><summary type="html">&lt;p class="first last"&gt;A primer on the unnofficial macOS package manager&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Welcome to the world of macOS! If you're coming from another operating
+system or are new to the command line, you might be wondering how to
+easily install and manage software. That's where Homebrew comes in!&lt;/p&gt;
+&lt;div class="section" id="what-is-homebrew"&gt;
+&lt;h2&gt;What is Homebrew? 🤔&lt;/h2&gt;
+&lt;p&gt;Think of Homebrew as an app store for developers on macOS (and Linux).
+It's a free and open-source package manager that simplifies the process
+of installing, updating, and uninstalling software from the command
+line. Instead of downloading .dmg files and dragging applications to
+your &amp;quot;Applications&amp;quot; folder, Homebrew lets you do it with simple
+commands.&lt;/p&gt;
+&lt;p&gt;Homebrew has two main parts:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Homebrew (Core):&lt;/strong&gt; For installing command-line tools and libraries
+(like python, git, or node).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Homebrew Cask:&lt;/strong&gt; An extension for installing graphical macOS
+applications (like Firefox, VLC, or Spotify).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-problem-homebrew-solves"&gt;
+&lt;h2&gt;The Problem Homebrew Solves ⚙️&lt;/h2&gt;
+&lt;p&gt;macOS comes with a lot of built-in tools, but it doesn't include
+everything a developer or power user might need. Traditionally,
+installing additional software on macOS could involve:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Searching for the correct download link.&lt;/li&gt;
+&lt;li&gt;Navigating complex installation wizards.&lt;/li&gt;
+&lt;li&gt;Manually managing dependencies (other software the application needs
+to run).&lt;/li&gt;
+&lt;li&gt;Dealing with potential conflicts between different installations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Homebrew streamlines this entire process, handling dependencies,
+configurations, and installations in a consistent and efficient manner.
+It saves you from the tedious &amp;quot;download a .dmg, open it, and drag the
+app to the Applications folder&amp;quot; process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="getting-homebrew-installed"&gt;
+&lt;h2&gt;Getting Homebrew Installed 🛠️&lt;/h2&gt;
+&lt;p&gt;Ready to get started? Here's how to install Homebrew:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Open Terminal:&lt;/strong&gt; You can find Terminal in &lt;tt class="docutils literal"&gt;/Applications/Utilities&lt;/tt&gt;
+or by searching for it using Spotlight (&lt;tt class="docutils literal"&gt;Command + Space&lt;/tt&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Install Command Line Tools for Xcode&lt;/strong&gt; (if you haven't already):
+Sometimes, Homebrew requires these tools. Run the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xcode-select&lt;span class="w"&gt; &lt;/span&gt;--install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If they are already installed, you'll get a message saying so.
+Otherwise, follow the prompts to install them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Run the Homebrew Installation Script:&lt;/strong&gt; Copy and paste the following
+command into your Terminal and press Enter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/bin/bash&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-fsSL&lt;span class="w"&gt; &lt;/span&gt;https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command downloads and runs the official Homebrew installation
+script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Follow the Prompts:&lt;/strong&gt; The script will explain what it will do and
+ask for your password (this is normal for installing software).
+Carefully read the prompts and press Enter to proceed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Add Homebrew to Your PATH&lt;/strong&gt; (if the installer doesn't do it): After
+installation, the script might give you instructions to add Homebrew
+to your system's PATH. This allows you to run &lt;tt class="docutils literal"&gt;brew&lt;/tt&gt; commands from any
+directory in Terminal. Typically, this involves running a command like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;eval &amp;quot;$(/opt/homebrew/bin/brew shellenv)&amp;quot;&amp;#39; &amp;gt;&amp;gt; ~/.zshrc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(for Zsh, the default shell on newer macOS versions)&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;echo &amp;#39;eval &amp;quot;$(/usr/local/bin/brew shellenv)&amp;quot;&amp;#39; &amp;gt;&amp;gt; ~/.bash_profile&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(for Bash)&lt;/p&gt;
+&lt;p&gt;Then, run &lt;tt class="docutils literal"&gt;source &lt;span class="pre"&gt;~/.zshrc&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;source &lt;span class="pre"&gt;~/.bash_profile&lt;/span&gt;&lt;/tt&gt; to apply the changes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Verify the Installation:&lt;/strong&gt; To make sure Homebrew is installed
+correctly, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;doctor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command checks for common problems and will give you advice on how
+to fix them if any are found. You should see a message saying &amp;quot;Your
+system is ready to brew.&amp;quot;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="using-homebrew-essential-commands"&gt;
+&lt;h2&gt;Using Homebrew: Essential Commands ⚙️&lt;/h2&gt;
+&lt;p&gt;Now that you have Homebrew installed, let's look at some essential
+commands. We'll use Firefox as our example, which is a &amp;quot;Cask&amp;quot; in
+Homebrew's terminology.&lt;/p&gt;
+&lt;div class="section" id="searching-for-software"&gt;
+&lt;h3&gt;Searching for Software 🔍&lt;/h3&gt;
+&lt;p&gt;To find a specific piece of software, use the &lt;tt class="docutils literal"&gt;search&lt;/tt&gt; command followed by
+the name (or keywords):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;search&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;software_name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example, to search for the Firefox browser, you would run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;search&lt;span class="w"&gt; &lt;/span&gt;firefox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Homebrew will display any formulas or casks that match your search terms.
+You'll notice &lt;tt class="docutils literal"&gt;firefox&lt;/tt&gt; has a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--cask&lt;/span&gt;&lt;/tt&gt; flag next to it, indicating it's a
+graphical application.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="getting-information-about-software-i"&gt;
+&lt;h3&gt;Getting Information About Software ℹ️&lt;/h3&gt;
+&lt;p&gt;Once you've found the software you're interested in, you can get more
+information about it using the &lt;tt class="docutils literal"&gt;info&lt;/tt&gt; command. For Casks, you'll need to
+specify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--cask&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;info&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;cask_name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;info&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;firefox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will show you details like the software's website, description, and
+installation instructions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installing-software"&gt;
+&lt;h3&gt;Installing Software ⬇️&lt;/h3&gt;
+&lt;p&gt;To install a graphical application, use the &lt;tt class="docutils literal"&gt;install&lt;/tt&gt; command followed by
+the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--cask&lt;/span&gt;&lt;/tt&gt; flag and the software name:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;cask_name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example, to install Firefox:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;firefox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Homebrew will download the necessary files, install the application to
+your &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; folder, and even manage the dependencies.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="updating-homebrew-itself"&gt;
+&lt;h3&gt;Updating Homebrew Itself 🔄&lt;/h3&gt;
+&lt;p&gt;To get the latest version of Homebrew and its formula and cask
+definitions, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;update
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command downloads the newest information from the Homebrew
+repository.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrading-your-software"&gt;
+&lt;h3&gt;Upgrading Your Software ⬆️&lt;/h3&gt;
+&lt;p&gt;Homebrew provides powerful commands to manage updates for your installed
+software.&lt;/p&gt;
+&lt;div class="section" id="checking-for-outdated-software-with-and-without-greedy"&gt;
+&lt;h4&gt;Checking for Outdated Software (With and Without --greedy) 👀&lt;/h4&gt;
+&lt;p&gt;To see which of your installed Homebrew packages have newer versions
+available, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;outdated
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By default, this command will not show you updates for apps that have
+their own built-in update mechanism (known as &lt;tt class="docutils literal"&gt;auto_updates&lt;/tt&gt;). This is
+because Homebrew defers to the app's own updater to avoid conflicts. For
+example, apps like Firefox and Google Chrome often handle their own
+updates.&lt;/p&gt;
+&lt;p&gt;However, if you want Homebrew to list all available updates, including
+those with &lt;tt class="docutils literal"&gt;auto_updates&lt;/tt&gt;, you can use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--greedy&lt;/span&gt;&lt;/tt&gt; flag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;outdated&lt;span class="w"&gt; &lt;/span&gt;--greedy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is useful if you prefer to manage all your updates through Homebrew
+rather than through each app's individual updater.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrading-all-outdated-software-with-and-without-greedy"&gt;
+&lt;h4&gt;Upgrading All Outdated Software (With and Without --greedy) ✅&lt;/h4&gt;
+&lt;p&gt;To upgrade all the software installed via Homebrew to their latest
+versions, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Just like with &lt;tt class="docutils literal"&gt;brew outdated&lt;/tt&gt;, this command will ignore any apps that have
+their own &lt;tt class="docutils literal"&gt;auto_updates&lt;/tt&gt; enabled.&lt;/p&gt;
+&lt;p&gt;To force Homebrew to upgrade all outdated software, including those with
+&lt;tt class="docutils literal"&gt;auto_updates&lt;/tt&gt; enabled, use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--greedy&lt;/span&gt;&lt;/tt&gt; flag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;upgrade&lt;span class="w"&gt; &lt;/span&gt;--greedy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also upgrade a specific piece of software, for example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew&lt;span class="w"&gt; &lt;/span&gt;upgrade&lt;span class="w"&gt; &lt;/span&gt;--cask&lt;span class="w"&gt; &lt;/span&gt;firefox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command will override the &lt;tt class="docutils literal"&gt;auto_updates&lt;/tt&gt; setting for that specific app
+and perform the upgrade via Homebrew.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion 🎉&lt;/h2&gt;
+&lt;p&gt;Homebrew is a powerful tool that will significantly simplify how you
+manage software on your macOS system. By mastering these basic commands,
+including the flexible &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--greedy&lt;/span&gt;&lt;/tt&gt; flag for Casks, you'll be well on
+your way to a more efficient and enjoyable development or user
+experience. Happy brewing! 🍺&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="misc"/><category term="brew"/><category term="macOS"/></entry><entry><title>Add a Sleep shortcut on macOS</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/18/add-a-sleep-shortcut-on-macos.html" rel="alternate"/><published>2025-08-18T16:46:00-06:00</published><updated>2025-08-18T16:46:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-18:/site/posts/2025/08/18/add-a-sleep-shortcut-on-macos.html</id><summary type="html">&lt;p class="first last"&gt;how to add a keyboard shortcut to put your MacBook into Sleep mode
 without closing the lid&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;You can create a custom keyboard shortcut to put your MacBook into Sleep
 mode without closing the lid by following these steps:&lt;/p&gt;
