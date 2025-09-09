@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all-en.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-08-24T01:17:00-06:00</updated><entry><title>Debian Age</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html" rel="alternate"/><published>2025-08-24T01:17:00-06:00</published><updated>2025-08-24T01:17:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-24:/site/posts/2025/08/24/debian-age.html</id><summary type="html">&lt;p class="first last"&gt;A quick guide to checking when Debian was installed on your device&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all-en.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-09-09T05:38:00-06:00</updated><entry><title>podman</title><link href="https://porfiriopaiz.github.io/site/posts/2025/09/09/podman.html" rel="alternate"/><published>2025-09-09T05:38:00-06:00</published><updated>2025-09-09T05:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-09-09:/site/posts/2025/09/09/podman.html</id><summary type="html">&lt;p class="first last"&gt;How to install and configure &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I have never used &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian before, and I will be adopting it for
+handling my blog's Python environment necessary for the Pelican site generator
+that it uses.&lt;/p&gt;
+&lt;div class="section" id="install-podman"&gt;
+&lt;h2&gt;Install &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt;&lt;/h2&gt;
+&lt;p&gt;For the installation process, I referred to the Debian Wiki:
+&lt;a class="reference external" href="https://wiki.debian.org/Podman"&gt;https://wiki.debian.org/Podman&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This command will install &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; and its dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install podman crun&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuration"&gt;
+&lt;h2&gt;Configuration&lt;/h2&gt;
+&lt;div class="section" id="specify-registries-for-unqualified-searches"&gt;
+&lt;h3&gt;Specify registries for unqualified searches&lt;/h3&gt;
+&lt;p&gt;From the Debian Wiki: A &lt;em&gt;registry&lt;/em&gt; is a site you download &lt;em&gt;container images&lt;/em&gt;
+from, similar to how a &lt;em&gt;Debian repository&lt;/em&gt; is a site you download &lt;em&gt;.deb
+packages&lt;/em&gt; from. However, whereas &lt;tt class="docutils literal"&gt;apt&lt;/tt&gt; searches all Debian repositories,
+&lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; expects you to &lt;em&gt;qualify&lt;/em&gt; which registry you want to search.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;# &lt;/span&gt;No&lt;span class="w"&gt; &lt;/span&gt;qualifier&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;returns&lt;span class="w"&gt; &lt;/span&gt;nothing:
+&lt;span class="go"&gt;podman search podman&lt;/span&gt;
+
+&lt;span class="gp"&gt;# &lt;/span&gt;Registry&lt;span class="w"&gt; &lt;/span&gt;qualifier&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;returns&lt;span class="w"&gt; &lt;/span&gt;several&lt;span class="w"&gt; &lt;/span&gt;matches:
+&lt;span class="go"&gt;podman search quay.io/podman&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To make unqualified searches useful, you need to set a list of
+&lt;em&gt;unqualified-search registries&lt;/em&gt;. To set your unqualified-search registries, add
+a line like &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;unqualified-search-registries=[&amp;quot;docker.io&amp;quot;,&lt;/span&gt; &amp;quot;quay.io&amp;quot;]&lt;/tt&gt; in either
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/containers/registries.conf&lt;/span&gt;&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;/etc/containers/registries.conf&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;With these simple changes, I'm now able to build Podman images from
+&lt;em&gt;Containerfiles&lt;/em&gt; (or &lt;em&gt;Dockerfiles&lt;/em&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="podman"/></entry><entry><title>Debian Age</title><link href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html" rel="alternate"/><published>2025-08-24T01:17:00-06:00</published><updated>2025-08-24T01:17:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-08-24:/site/posts/2025/08/24/debian-age.html</id><summary type="html">&lt;p class="first last"&gt;A quick guide to checking when Debian was installed on your device&lt;/p&gt;
 </summary><content type="html">&lt;div class="section" id="how-to-find-the-installation-date-of-debian"&gt;
 &lt;h2&gt;How to Find the Installation Date of Debian&lt;/h2&gt;
 &lt;p&gt;Have you ever needed to know the exact date a Debian-based system was installed?
