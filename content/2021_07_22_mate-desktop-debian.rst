@@ -133,4 +133,3 @@ Define the theme for window borders:
 .. code-block:: console
 
    gsettings set org.mate.Marco.general theme 'Arc-Dark'
-

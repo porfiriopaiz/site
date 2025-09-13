@@ -29,13 +29,13 @@ command:
 
 .. code-block:: console
 
-    su -c 'dnf install irssi'
+   su -c 'dnf install irssi'
 
 And to install irssi in debian:
 
 .. code-block:: console
 
-    su -c 'apt-get install irssi'
+   su -c 'apt-get install irssi'
 
 Running irssi
 -------------
@@ -44,7 +44,7 @@ Initiate irssi by opening a terminal and entering the following command:
 
 .. code-block:: console
 
-    irssi
+   irssi
 
 Configurations
 ==============
@@ -59,19 +59,19 @@ Utilize the command ``/server list`` list to display the list of existing server
 
 .. code-block:: console
 
-    /server list
+   /server list
 
 In our case, we will eliminate the current configuration for Freenode.
 
 .. code-block:: console
 
-    /server remove chat.freenode.net
+   /server remove chat.freenode.net
 
 Subsequently, incorporate the new configuration using the following command:
 
 .. code-block:: console
 
-    /SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password
+   /SERVER ADD -auto -network Freenode chat.freenode.net 6667 your_nick_password
 
 In this context, the ``-auto`` flag designates the connection to the
 ``Freenode`` server as automatic, while ``your_nick_password`` corresponds to
@@ -86,7 +86,7 @@ within our irssi session:
 
 .. code-block:: console
 
-    /channel add -auto #fedora Freenode
+   /channel add -auto #fedora Freenode
 
 Where ``-auto`` enables automatic joining to the ``#fedora`` channel at the
 ``Freenode`` server upon every login.
@@ -96,7 +96,7 @@ save the changes using the command:
 
 .. code-block:: console
 
-    /save
+   /save
 
 Irssi automatically takes the username of your current system session as the
 IRC user. To avoid discrepancies when your system username differs from your
@@ -104,7 +104,7 @@ Freenode user, run irssi with the following parameter:
 
 .. code-block:: console
 
-    irssi -n nick
+   irssi -n nick
 
 Replace ``nick`` with your Freenode IRC username.
 

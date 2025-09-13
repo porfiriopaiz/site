@@ -34,11 +34,11 @@ for your system. Use one of these commands:
 
 .. code-block:: console
 
-    softwareupdate -l
+   softwareupdate -l
 
 .. code-block:: console
 
-    softwareupdate --list
+   softwareupdate --list
 
 This will list any pending updates, including macOS updates, Safari
 updates, security updates, and other Apple software. You'll see
@@ -51,11 +51,11 @@ To download and install all available updates, use the following command:
 
 .. code-block:: console
 
-    sudo softwareupdate -ia
+   sudo softwareupdate -ia
 
 .. code-block:: console
 
-    sudo softwareupdate --install --all
+   sudo softwareupdate --install --all
 
 - **``sudo``**: This grants administrative privileges, which are
   necessary for installing updates. You'll be prompted to enter your
@@ -71,11 +71,11 @@ in step 2, you can specify its identifier:
 
 .. code-block:: console
 
-    sudo softwareupdate -i "Update Name-Version"
+   sudo softwareupdate -i "Update Name-Version"
 
 .. code-block:: console
 
-    sudo softwareupdate --install "Update Name-Version"
+   sudo softwareupdate --install "Update Name-Version"
 
 **Important Notes:**
 - The "Update Name-Version" is the exact identifier from the output of ``softwareupdate -l``.
@@ -88,11 +88,11 @@ installation or for multiple machines.
 
 .. code-block:: console
 
-    sudo softwareupdate -d -a
+   sudo softwareupdate -d -a
 
 .. code-block:: console
 
-    sudo softwareupdate -d "Update Name-Version"
+   sudo softwareupdate -d "Update Name-Version"
 
 Downloaded updates are usually stored in ``/Library/Updates``. You can
 then install them later using the ``-i`` or ``--install`` command.
@@ -104,7 +104,7 @@ it automatically if you use the ``-R`` flag.
 
 .. code-block:: console
 
-    sudo softwareupdate -iaR
+   sudo softwareupdate -iaR
 
 It's generally a good idea to perform the restart when prompted or
 manually after the installation is complete.

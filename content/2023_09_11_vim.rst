@@ -148,4 +148,3 @@ I added the following alias to my ``~/.bash_aliases`` file:
 
 With this configuration, I'm all set! In a future post, I’ll share my
 ``~/.vimrc`` file and its configuration details.
-

@@ -33,7 +33,7 @@ line to the DNF configuration file located at ``/etc/dnf/dnf.conf``:
 
 .. code-block:: console
 
-    su -c "echo 'keepcache = true' >> /etc/dnf/dnf.conf"
+   su -c "echo 'keepcache = true' >> /etc/dnf/dnf.conf"
 
 Upgrading to Fedora 23
 ======================

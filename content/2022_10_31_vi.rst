@@ -124,4 +124,3 @@ should be manually incorporated into ``~/.vimrc`` if needed.
 
 In the next post, I will explain my choice of ``vim`` versions available in the
 Debian repository and the rationale behind my selection.
-
