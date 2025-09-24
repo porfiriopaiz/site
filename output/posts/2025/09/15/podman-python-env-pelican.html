@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="pelican, podman, python">
+
+  <title>
+    porfirio's blog
+&ndash; Podman, a Python Environment, and Pelican  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2025/09/15/podman-python-env-pelican.html">Podman, a Python Environment, and Pelican</a></h1>
+  </div>
+  <div class="article_text">
+    <p>Ever wanted to manage your static blog without cluttering your local
+machine with Python environments? <strong>Podman</strong> offers a clean, isolated
+way to do just that! This post will guide you through setting up a
+minimal Podman image to provide the requirements for an existing
+static site generator using <strong>Pelican</strong>.</p>
+<hr class="docutils" />
+<div class="section" id="prepare-your-project-directory">
+<h2>Prepare Your Project Directory</h2>
+<p>I have been using Pelican to generate the contents of this blog,
+starting from .rst files. From the very beginning, I have been using
+the Python Virtual Environment module, along with <tt class="docutils literal">git</tt> and the
+pre-included bash shell scripts that Pelican provides when static
+content is first generated. I have always been curious about using
+Docker to make this portable and easy to reproduce regardless of the
+platform I'm using at the moment, whether it's GNU/Linux (Fedora,
+Debian, Arch...) or macOS, which I've been using recently.</p>
+<p>Having something that would ease this process is beneficial. In this
+case, I will not be starting from the stage where you configure the
+metadata for the static site generator that will be used for your
+project, but rather from cloning the existing Git repository that
+contains the previous entries and outputs of this blog.</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/git_repos/github.com/porfiriopaiz/
+</pre></div>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:porfiriopaiz/site.git
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>site/
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="define-python-dependencies-requirements-txt">
+<h2>Define Python Dependencies (<tt class="docutils literal">requirements.txt</tt>)</h2>
+<p>Inside my <tt class="docutils literal">site</tt> directory, I created a file named
+<tt class="docutils literal">requirements.txt</tt>. This file lists all the Python packages your
+static site generator (Pelican, in this case) needs.</p>
+<div class="highlight"><pre><span></span># site/requirements.txt
+pelican
+markdown
+typogrify
+feedgenerator
+jinja2
+pygments
+docutils
+blinker
+unidecode
+MarkupSafe
+python-dateutil
+</pre></div>
+<ul class="simple">
+<li><tt class="docutils literal">pelican</tt>: The core static site generator.</li>
+<li><tt class="docutils literal">markdown</tt>: Essential if you plan to write your content in Markdown
+format.</li>
+<li><tt class="docutils literal">typogrify</tt>: For optional typographical enhancements.</li>
+<li>The rest are automatically installed dependencies for Pelican.</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="create-your-dockerfile">
+<h2>Create Your Dockerfile</h2>
+<p>Next, I created a file named <tt class="docutils literal">Dockerfile</tt> (no extension) in the root
+of the <tt class="docutils literal"><span class="pre">my-pelican-blog</span></tt> directory. This file instructs Podman on
+how to build the image that is going to be used by <tt class="docutils literal">podman</tt> to
+create the <em>site</em> container.</p>
+<div class="highlight"><pre><span></span><span class="c"># Use a minimal Python base image</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:slim</span>
+
+<span class="c"># Set the working directory in the container</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Install system dependencies</span>
+<span class="c"># git is needed to clone your repository</span>
+<span class="c"># build-essential might be needed if your Python packages have C</span>
+<span class="c"># extensions (remove if not needed)</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Copy your requirements.txt file into the container</span>
+<span class="c"># This is done early to leverage Docker&#39;s layer caching</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+
+<span class="c"># Install Python dependencies</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Copy your blog source code into the container</span>
+<span class="c"># This should be the last step so that changes to your code don&#39;t</span>
+<span class="c"># invalidate previous layers</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="c"># (Optional) Define a default command to run when the container starts</span>
+<span class="c"># Replace &#39;python your_generator.py&#39; with the actual command to run</span>
+<span class="c"># your generator</span>
+<span class="c">#CMD [&quot;python&quot;, &quot;your_generator.py&quot;, &quot;build&quot;]</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="build-your-podman-image">
+<h2>Build Your Podman Image</h2>
+<p>With the <tt class="docutils literal">Dockerfile</tt> and <tt class="docutils literal">requirements.txt</tt> in place, navigate
+your terminal to the <tt class="docutils literal">site</tt> directory and build your Podman image.
+We'll tag it <tt class="docutils literal">site</tt>.</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>site<span class="w"> </span>.
+</pre></div>
+<ul class="simple">
+<li><tt class="docutils literal">podman build</tt>: The command to build an image.</li>
+<li><tt class="docutils literal"><span class="pre">-t</span> site</tt>: Tags the resulting image with the name <tt class="docutils literal">site</tt>.</li>
+<li><tt class="docutils literal">.</tt>: Specifies that the build context (where Podman looks for
+<tt class="docutils literal">Dockerfile</tt> and other files) is the current directory.</li>
+</ul>
+<p>You can verify your image exists by running <tt class="docutils literal">podman images</tt>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="run-your-podman-container-with-port-forwarding">
+<h2>Run Your Podman Container (with Port Forwarding)</h2>
+<p>Now, let's run the container. To make your Pelican development server
+accessible from your host machine (e.g., in your browser at
+<cite>http://localhost:8000/</cite>), you <strong>must forward the port</strong>.</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/app<span class="w"> </span>--name<span class="w"> </span>site<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>site<span class="w"> </span>sleep<span class="w"> </span>infinity
+</pre></div>
+<p>Let's break down this command:</p>
+<ul class="simple">
+<li><tt class="docutils literal">podman run</tt>: Starts a new container.</li>
+<li><tt class="docutils literal"><span class="pre">-d</span></tt>: Runs the container in <strong>detached mode</strong> (in the background),
+so your terminal prompt returns immediately.</li>
+<li><tt class="docutils literal"><span class="pre">-v</span> <span class="pre">$(pwd):/app</span></tt>: This is a <strong>volume mount</strong>. It mounts your
+current host directory (<tt class="docutils literal">$(pwd)</tt>) to the <tt class="docutils literal">/app</tt> directory inside
+the container. This means any changes you make to your blog files on
+your host are immediately reflected inside the container.</li>
+<li><tt class="docutils literal"><span class="pre">--name</span> site</tt>: Assigns the name <tt class="docutils literal">site</tt> to your running
+container, making it easy to reference later.</li>
+<li><tt class="docutils literal"><span class="pre">-p</span> 8000:8000</tt>: This is crucial for <strong>port forwarding</strong>. It maps
+port <tt class="docutils literal">8000</tt> on your <strong>host machine</strong> to port <tt class="docutils literal">8000</tt> inside the
+<strong>container</strong>. Your Pelican server will run on 8000 inside the
+container, and this mapping makes it accessible on your host's 8000.</li>
+<li><tt class="docutils literal">site</tt>: Specifies that you're creating the container from the
+<tt class="docutils literal">site</tt> image you just built.</li>
+<li><tt class="docutils literal">sleep infinity</tt>: This command runs indefinitely inside the
+container, keeping it alive so you can interact with it later.</li>
+</ul>
+<p>You can check if the container is running with <tt class="docutils literal">podman ps</tt>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="generate-your-site-and-serve-it">
+<h2>Generate Your Site and Serve It</h2>
+<p>With the container running and the port mapped, you can now execute
+commands inside it.</p>
+<div class="section" id="initialize-your-pelican-project-first-time-only">
+<h3>Initialize Your Pelican Project (First Time Only)</h3>
+<p>If this is your first time, you'll want to use <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt>
+to set up the basic project structure:</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>site<span class="w"> </span>bash
+</pre></div>
+<p>Once inside the container shell:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/app
+</pre></div>
+<div class="highlight"><pre><span></span>pelican-quickstart
+</pre></div>
+<p>Follow the prompts. When it asks for the project path, the default
+(current working directory) is usually fine, as <tt class="docutils literal">/app</tt> is your
+mounted host directory. Your project will consist of a hierarchy
+including <tt class="docutils literal">content</tt>, <tt class="docutils literal">output</tt>, <tt class="docutils literal">pelicanconf.py</tt>, and
+<tt class="docutils literal">publishconf.py</tt>.</p>
+<p>After <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt> finishes, type <tt class="docutils literal">exit</tt> or <tt class="docutils literal">Ctrl+D</tt> to
+leave the container's shell.</p>
+</div>
+<div class="section" id="start-the-pelican-development-server">
+<h3>Start the Pelican Development Server</h3>
+<p>After adding some lines with reStructuredText markup within a .rst
+file, you can use it as the source to build a blog post that will be
+exported under the <tt class="docutils literal">content</tt> directory as an .html file.</p>
+<p>To build this .html file from the source .rst file, you will use the
+following command to build your site and then serve it:</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>site<span class="w"> </span>make<span class="w"> </span>html
+</pre></div>
+<p>Then:</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>site<span class="w"> </span>make<span class="w"> </span>serve
+</pre></div>
+<p>This command runs <tt class="docutils literal">make serve</tt> inside your <tt class="docutils literal">site</tt> container. This
+process will typically occupy your terminal, displaying logs from the
+server.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="view-your-blog">
+<h2>View Your Blog! 🌐</h2>
+<p>Open your web browser and navigate to:</p>
+<p><cite>http://localhost:8000/</cite></p>
+<p>You should now see your Pelican blog! Any changes you make to your
+content files on your host machine will be automatically picked up by
+Pelican's development server (if configured to reload) and reflected in
+your browser.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="stopping-and-restarting-your-container">
+<h2>Stopping and Restarting Your Container</h2>
+<p>When you're done developing:</p>
+<div class="section" id="stop-the-server">
+<h3>Stop the Server</h3>
+<p>Go back to the terminal running <tt class="docutils literal">make serve</tt> (where your prompt is
+not visible) and press <tt class="docutils literal">Ctrl+C</tt>. This will stop the <tt class="docutils literal">make serve</tt>
+process. Your prompt will return.</p>
+</div>
+<div class="section" id="stop-the-container">
+<h3>Stop the Container</h3>
+<p>To stop the Podman container itself:</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>stop<span class="w"> </span>site
+</pre></div>
+</div>
+<div class="section" id="restart-the-container">
+<h3>Restart the Container</h3>
+<p>To run it again later without recreating it:</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>start<span class="w"> </span>site
+</pre></div>
+<p>Then, re-execute <tt class="docutils literal">podman exec <span class="pre">-it</span> site make serve</tt> to restart your
+development server.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="cleaning-up-optional">
+<h2>Cleaning Up (Optional)</h2>
+<p>If you're completely done and want to remove the container and image:</p>
+<div class="section" id="remove-the-container">
+<h3>Remove the Container</h3>
+<p>(Ensure it's stopped first)</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>rm<span class="w"> </span>site
+</pre></div>
+</div>
+<div class="section" id="remove-the-image">
+<h3>Remove the Image</h3>
+<p>(Ensure no containers are using it)</p>
+<div class="highlight"><pre><span></span>podman<span class="w"> </span>rmi<span class="w"> </span>site
+</pre></div>
+<p>By following these steps, you've built a portable, isolated
+environment for your static site generator, keeping your local machine
+clean and tidy!</p>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Mon 15 September 2025</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/pelican.html">pelican</a>,      <a href="../../../../tag/podman.html">podman</a>,      <a href="../../../../tag/python.html">python</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2025/09/15/podman-python-env-pelican.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
