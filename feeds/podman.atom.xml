@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - podman</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/podman.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-09-15T02:15:00-06:00</updated><entry><title>Podman, a Python Environment, and Pelican</title><link href="https://porfiriopaiz.github.io/site/posts/2025/09/15/podman-python-env-pelican.html" rel="alternate"/><published>2025-09-15T02:15:00-06:00</published><updated>2025-09-15T02:15:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-09-15:/site/posts/2025/09/15/podman-python-env-pelican.html</id><summary type="html">&lt;p class="first last"&gt;How to set up a Python environment for Pelican within a
+Podman container&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Ever wanted to manage your static blog without cluttering your local
+machine with Python environments? &lt;strong&gt;Podman&lt;/strong&gt; offers a clean, isolated
+way to do just that! This post will guide you through setting up a
+minimal Podman image to provide the requirements for an existing
+static site generator using &lt;strong&gt;Pelican&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="prepare-your-project-directory"&gt;
+&lt;h2&gt;Prepare Your Project Directory&lt;/h2&gt;
+&lt;p&gt;I have been using Pelican to generate the contents of this blog,
+starting from .rst files. From the very beginning, I have been using
+the Python Virtual Environment module, along with &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; and the
+pre-included bash shell scripts that Pelican provides when static
+content is first generated. I have always been curious about using
+Docker to make this portable and easy to reproduce regardless of the
+platform I'm using at the moment, whether it's GNU/Linux (Fedora,
+Debian, Arch...) or macOS, which I've been using recently.&lt;/p&gt;
+&lt;p&gt;Having something that would ease this process is beneficial. In this
+case, I will not be starting from the stage where you configure the
+metadata for the static site generator that will be used for your
+project, but rather from cloning the existing Git repository that
+contains the previous entries and outputs of this blog.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/git_repos/github.com/porfiriopaiz/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;git@github.com:porfiriopaiz/site.git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;site/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="define-python-dependencies-requirements-txt"&gt;
+&lt;h2&gt;Define Python Dependencies (&lt;tt class="docutils literal"&gt;requirements.txt&lt;/tt&gt;)&lt;/h2&gt;
+&lt;p&gt;Inside my &lt;tt class="docutils literal"&gt;site&lt;/tt&gt; directory, I created a file named
+&lt;tt class="docutils literal"&gt;requirements.txt&lt;/tt&gt;. This file lists all the Python packages your
+static site generator (Pelican, in this case) needs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# site/requirements.txt
+pelican
+markdown
+typogrify
+feedgenerator
+jinja2
+pygments
+docutils
+blinker
+unidecode
+MarkupSafe
+python-dateutil
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;pelican&lt;/tt&gt;: The core static site generator.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;markdown&lt;/tt&gt;: Essential if you plan to write your content in Markdown
+format.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;typogrify&lt;/tt&gt;: For optional typographical enhancements.&lt;/li&gt;
+&lt;li&gt;The rest are automatically installed dependencies for Pelican.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="create-your-dockerfile"&gt;
+&lt;h2&gt;Create Your Dockerfile&lt;/h2&gt;
+&lt;p&gt;Next, I created a file named &lt;tt class="docutils literal"&gt;Dockerfile&lt;/tt&gt; (no extension) in the root
+of the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;my-pelican-blog&lt;/span&gt;&lt;/tt&gt; directory. This file instructs Podman on
+how to build the image that is going to be used by &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; to
+create the &lt;em&gt;site&lt;/em&gt; container.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;# Use a minimal Python base image&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;python:slim&lt;/span&gt;
+
+&lt;span class="c"&gt;# Set the working directory in the container&lt;/span&gt;
+&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;/app&lt;/span&gt;
+
+&lt;span class="c"&gt;# Install system dependencies&lt;/span&gt;
+&lt;span class="c"&gt;# git is needed to clone your repository&lt;/span&gt;
+&lt;span class="c"&gt;# build-essential might be needed if your Python packages have C&lt;/span&gt;
+&lt;span class="c"&gt;# extensions (remove if not needed)&lt;/span&gt;
+&lt;span class="k"&gt;RUN&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;update&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-y&lt;span class="w"&gt; &lt;/span&gt;--no-install-recommends&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;build-essential&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;-rf&lt;span class="w"&gt; &lt;/span&gt;/var/lib/apt/lists/*
+
+&lt;span class="c"&gt;# Copy your requirements.txt file into the container&lt;/span&gt;
+&lt;span class="c"&gt;# This is done early to leverage Docker&amp;#39;s layer caching&lt;/span&gt;
+&lt;span class="k"&gt;COPY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;requirements.txt&lt;span class="w"&gt; &lt;/span&gt;.
+
+&lt;span class="c"&gt;# Install Python dependencies&lt;/span&gt;
+&lt;span class="k"&gt;RUN&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;--no-cache-dir&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+
+&lt;span class="c"&gt;# Copy your blog source code into the container&lt;/span&gt;
+&lt;span class="c"&gt;# This should be the last step so that changes to your code don&amp;#39;t&lt;/span&gt;
+&lt;span class="c"&gt;# invalidate previous layers&lt;/span&gt;
+&lt;span class="k"&gt;COPY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;.
+
+&lt;span class="c"&gt;# (Optional) Define a default command to run when the container starts&lt;/span&gt;
+&lt;span class="c"&gt;# Replace &amp;#39;python your_generator.py&amp;#39; with the actual command to run&lt;/span&gt;
+&lt;span class="c"&gt;# your generator&lt;/span&gt;
+&lt;span class="c"&gt;#CMD [&amp;quot;python&amp;quot;, &amp;quot;your_generator.py&amp;quot;, &amp;quot;build&amp;quot;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="build-your-podman-image"&gt;
+&lt;h2&gt;Build Your Podman Image&lt;/h2&gt;
+&lt;p&gt;With the &lt;tt class="docutils literal"&gt;Dockerfile&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;requirements.txt&lt;/tt&gt; in place, navigate
+your terminal to the &lt;tt class="docutils literal"&gt;site&lt;/tt&gt; directory and build your Podman image.
+We'll tag it &lt;tt class="docutils literal"&gt;site&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;build&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;pelican&lt;span class="w"&gt; &lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;podman build&lt;/tt&gt;: The command to build an image.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-t&lt;/span&gt; pelican&lt;/tt&gt;: Tags the resulting image with the name &lt;tt class="docutils literal"&gt;pelican&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;.&lt;/tt&gt;: Specifies that the build context (where Podman looks for
+&lt;tt class="docutils literal"&gt;Dockerfile&lt;/tt&gt; and other files) is the current directory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can verify your image exists by running &lt;tt class="docutils literal"&gt;podman images&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="run-your-podman-container-with-port-forwarding"&gt;
+&lt;h2&gt;Run Your Podman Container (with Port Forwarding)&lt;/h2&gt;
+&lt;p&gt;Now, let's run the container. To make your Pelican development server
+accessible from your host machine (e.g., in your browser at
+&lt;cite&gt;http://localhost:8000/&lt;/cite&gt;), you &lt;strong&gt;must forward the port&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/app&lt;span class="w"&gt; &lt;/span&gt;--name&lt;span class="w"&gt; &lt;/span&gt;site&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8000&lt;/span&gt;:8000&lt;span class="w"&gt; &lt;/span&gt;pelican:latest&lt;span class="w"&gt; &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;infinity
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let's break down this command:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;podman run&lt;/tt&gt;: Starts a new container.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-d&lt;/span&gt;&lt;/tt&gt;: Runs the container in &lt;strong&gt;detached mode&lt;/strong&gt; (in the background),
+so your terminal prompt returns immediately.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-v&lt;/span&gt; &lt;span class="pre"&gt;$(pwd):/app&lt;/span&gt;&lt;/tt&gt;: This is a &lt;strong&gt;volume mount&lt;/strong&gt;. It mounts your
+current host directory (&lt;tt class="docutils literal"&gt;$(pwd)&lt;/tt&gt;) to the &lt;tt class="docutils literal"&gt;/app&lt;/tt&gt; directory inside
+the container. This means any changes you make to your blog files on
+your host are immediately reflected inside the container.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--name&lt;/span&gt; site&lt;/tt&gt;: Assigns the name &lt;tt class="docutils literal"&gt;site&lt;/tt&gt; to your running
+container, making it easy to reference later.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-p&lt;/span&gt; 8000:8000&lt;/tt&gt;: This is crucial for &lt;strong&gt;port forwarding&lt;/strong&gt;. It maps
+port &lt;tt class="docutils literal"&gt;8000&lt;/tt&gt; on your &lt;strong&gt;host machine&lt;/strong&gt; to port &lt;tt class="docutils literal"&gt;8000&lt;/tt&gt; inside the
+&lt;strong&gt;container&lt;/strong&gt;. Your Pelican server will run on 8000 inside the
+container, and this mapping makes it accessible on your host's 8000.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;pelican:latest&lt;/tt&gt;: Specifies that you're creating the container from the
+&lt;tt class="docutils literal"&gt;pelican:latest&lt;/tt&gt; image you just built.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sleep infinity&lt;/tt&gt;: This command runs indefinitely inside the
+container, keeping it alive so you can interact with it later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can check if the container is running with &lt;tt class="docutils literal"&gt;podman ps&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="generate-your-site-and-serve-it"&gt;
+&lt;h2&gt;Generate Your Site and Serve It&lt;/h2&gt;
+&lt;p&gt;With the container running and the port mapped, you can now execute
+commands inside it.&lt;/p&gt;
+&lt;div class="section" id="initialize-your-pelican-project-first-time-only"&gt;
+&lt;h3&gt;Initialize Your Pelican Project (First Time Only)&lt;/h3&gt;
+&lt;p&gt;If this is your first time, you'll want to use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt;
+to set up the basic project structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exec&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-it&lt;span class="w"&gt; &lt;/span&gt;site&lt;span class="w"&gt; &lt;/span&gt;bash
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once inside the container shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/app
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pelican-quickstart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Follow the prompts. When it asks for the project path, the default
+(current working directory) is usually fine, as &lt;tt class="docutils literal"&gt;/app&lt;/tt&gt; is your
+mounted host directory. Your project will consist of a hierarchy
+including &lt;tt class="docutils literal"&gt;content&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;output&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt;, and
+&lt;tt class="docutils literal"&gt;publishconf.py&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;After &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; finishes, type &lt;tt class="docutils literal"&gt;exit&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt; to
+leave the container's shell.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="start-the-pelican-development-server"&gt;
+&lt;h3&gt;Start the Pelican Development Server&lt;/h3&gt;
+&lt;p&gt;After adding some lines with reStructuredText markup within a .rst
+file, you can use it as the source to build a blog post that will be
+exported under the &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; directory as an .html file.&lt;/p&gt;
+&lt;p&gt;To build this .html file from the source .rst file, you will use the
+following command to build your site and then serve it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exec&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-it&lt;span class="w"&gt; &lt;/span&gt;site&lt;span class="w"&gt; &lt;/span&gt;make&lt;span class="w"&gt; &lt;/span&gt;html
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exec&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-it&lt;span class="w"&gt; &lt;/span&gt;site&lt;span class="w"&gt; &lt;/span&gt;make&lt;span class="w"&gt; &lt;/span&gt;serve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command runs &lt;tt class="docutils literal"&gt;make serve&lt;/tt&gt; inside your &lt;tt class="docutils literal"&gt;site&lt;/tt&gt; container. This
+process will typically occupy your terminal, displaying logs from the
+server.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="view-your-blog"&gt;
+&lt;h2&gt;View Your Blog! 🌐&lt;/h2&gt;
+&lt;p&gt;Open your web browser and navigate to:&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;http://localhost:8000/&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;You should now see your Pelican blog! Any changes you make to your
+content files on your host machine will be automatically picked up by
+Pelican's development server (if configured to reload) and reflected in
+your browser.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="stopping-and-restarting-your-container"&gt;
+&lt;h2&gt;Stopping and Restarting Your Container&lt;/h2&gt;
+&lt;p&gt;When you're done developing:&lt;/p&gt;
+&lt;div class="section" id="stop-the-server"&gt;
+&lt;h3&gt;Stop the Server&lt;/h3&gt;
+&lt;p&gt;Go back to the terminal running &lt;tt class="docutils literal"&gt;make serve&lt;/tt&gt; (where your prompt is
+not visible) and press &lt;tt class="docutils literal"&gt;Ctrl+C&lt;/tt&gt;. This will stop the &lt;tt class="docutils literal"&gt;make serve&lt;/tt&gt;
+process. Your prompt will return.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="stop-the-container"&gt;
+&lt;h3&gt;Stop the Container&lt;/h3&gt;
+&lt;p&gt;To stop the Podman container itself:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;stop&lt;span class="w"&gt; &lt;/span&gt;site
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="restart-the-container"&gt;
+&lt;h3&gt;Restart the Container&lt;/h3&gt;
+&lt;p&gt;To run it again later without recreating it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;start&lt;span class="w"&gt; &lt;/span&gt;site
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, re-execute &lt;tt class="docutils literal"&gt;podman exec &lt;span class="pre"&gt;-it&lt;/span&gt; site make serve&lt;/tt&gt; to restart your
+development server.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="cleaning-up-optional"&gt;
+&lt;h2&gt;Cleaning Up (Optional)&lt;/h2&gt;
+&lt;p&gt;If you're completely done and want to remove the container and image:&lt;/p&gt;
+&lt;div class="section" id="remove-the-container"&gt;
+&lt;h3&gt;Remove the Container&lt;/h3&gt;
+&lt;p&gt;(Ensure it's stopped first)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;site
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="remove-the-image"&gt;
+&lt;h3&gt;Remove the Image&lt;/h3&gt;
+&lt;p&gt;(Ensure no containers are using it)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;rmi&lt;span class="w"&gt; &lt;/span&gt;pelican
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By following these steps, you've built a portable, isolated
+environment for your static site generator, keeping your local machine
+clean and tidy!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="pelican"/><category term="podman"/><category term="python"/></entry><entry><title>podman</title><link href="https://porfiriopaiz.github.io/site/posts/2025/09/09/podman.html" rel="alternate"/><published>2025-09-09T05:38:00-06:00</published><updated>2025-09-09T05:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-09-09:/site/posts/2025/09/09/podman.html</id><summary type="html">&lt;p class="first last"&gt;How to install and configure &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I have never used &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian before, and I will be adopting it for
+handling my blog's Python environment necessary for the Pelican site generator
+that it uses.&lt;/p&gt;
+&lt;div class="section" id="install-podman"&gt;
+&lt;h2&gt;Install &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt;&lt;/h2&gt;
+&lt;p&gt;For the installation process, I referred to the Debian Wiki:
+&lt;a class="reference external" href="https://wiki.debian.org/Podman"&gt;https://wiki.debian.org/Podman&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This command will install &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; and its dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;su -c &amp;#39;apt-get install podman crun&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuration"&gt;
+&lt;h2&gt;Configuration&lt;/h2&gt;
+&lt;div class="section" id="specify-registries-for-unqualified-searches"&gt;
+&lt;h3&gt;Specify registries for unqualified searches&lt;/h3&gt;
+&lt;p&gt;From the Debian Wiki: A &lt;em&gt;registry&lt;/em&gt; is a site you download &lt;em&gt;container images&lt;/em&gt;
+from, similar to how a &lt;em&gt;Debian repository&lt;/em&gt; is a site you download &lt;em&gt;.deb
+packages&lt;/em&gt; from. However, whereas &lt;tt class="docutils literal"&gt;apt&lt;/tt&gt; searches all Debian repositories,
+&lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; expects you to &lt;em&gt;qualify&lt;/em&gt; which registry you want to search.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;# &lt;/span&gt;No&lt;span class="w"&gt; &lt;/span&gt;qualifier&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;returns&lt;span class="w"&gt; &lt;/span&gt;nothing:
+&lt;span class="go"&gt;podman search podman&lt;/span&gt;
+
+&lt;span class="gp"&gt;# &lt;/span&gt;Registry&lt;span class="w"&gt; &lt;/span&gt;qualifier&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;returns&lt;span class="w"&gt; &lt;/span&gt;several&lt;span class="w"&gt; &lt;/span&gt;matches:
+&lt;span class="go"&gt;podman search quay.io/podman&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To make unqualified searches useful, you need to set a list of
+&lt;em&gt;unqualified-search registries&lt;/em&gt;. To set your unqualified-search registries, add
+a line like &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;unqualified-search-registries=[&amp;quot;docker.io&amp;quot;,&lt;/span&gt; &amp;quot;quay.io&amp;quot;]&lt;/tt&gt; in either
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/containers/registries.conf&lt;/span&gt;&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;/etc/containers/registries.conf&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;With these simple changes, I'm now able to build Podman images from
+&lt;em&gt;Containerfiles&lt;/em&gt; (or &lt;em&gt;Dockerfiles&lt;/em&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="deb11"/><category term="debian"/><category term="podman"/></entry></feed>

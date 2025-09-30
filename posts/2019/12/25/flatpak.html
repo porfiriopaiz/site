@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="fc30, fedora, flathub, flatpak">
+
+  <title>
+    porfirio's blog
+&ndash; Flatpak  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2019/12/25/flatpak.html">Flatpak</a></h1>
+  </div>
+  <div class="article_text">
+    <p>I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
+significant amount of RAM. However, when it comes to installing proprietary
+software that is not available in the official Fedora repositories, Flatpaks
+can be a good option since they provide a certain level of isolation.</p>
+<div class="section" id="flatpak-installation">
+<h2>Flatpak Installation</h2>
+<p>To install Flatpak, run:</p>
+<div class="highlight"><pre><span></span><span class="go">su -c &#39;dnf install flatpak&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="enable-flathub-repository">
+<h2>Enable Flathub Repository</h2>
+<p>To enable the Flathub repository, use the following command:</p>
+<div class="highlight"><pre><span></span><span class="go">flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</span>
+</pre></div>
+<p>Some popular examples of software available via Flathub include:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://flathub.org/apps/details/im.riot.Riot">Riot</a></li>
+<li><a class="reference external" href="https://flathub.org/apps/details/com.skype.Client">Skype</a></li>
+<li><a class="reference external" href="https://flathub.org/apps/details/org.signal.Signal">Signal</a></li>
+<li><a class="reference external" href="https://flathub.org/apps/details/com.slack.Slack">Slack</a></li>
+<li><a class="reference external" href="https://flathub.org/apps/details/com.spotify.Client">Spotify</a></li>
+<li><a class="reference external" href="https://flathub.org/apps/details/com.wire.WireDesktop">Wire</a></li>
+</ul>
+<p>I prefer not to install Flatpaks in the root directory. Instead, I always use
+the <tt class="docutils literal"><span class="pre">--user</span></tt> flag to ensure Flatpaks are installed under my <tt class="docutils literal">~/</tt> directory.</p>
+<p>Example command to install a Flatpak:</p>
+<div class="highlight"><pre><span></span><span class="go">flatpak --user install flathub im.riot.Riot</span>
+</pre></div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Wed 25 December 2019</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/fc30.html">fc30</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/flathub.html">flathub</a>,      <a href="../../../../tag/flatpak.html">flatpak</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2019/12/25/flatpak.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
