@@ -133,10 +133,10 @@ We'll tag it ``site``.
 
 .. code-block:: bash
 
-   podman build -t site .
+   podman build -t pelican .
 
 - ``podman build``: The command to build an image.
-- ``-t site``: Tags the resulting image with the name ``site``.
+- ``-t pelican``: Tags the resulting image with the name ``pelican``.
 - ``.``: Specifies that the build context (where Podman looks for
   ``Dockerfile`` and other files) is the current directory.
 
@@ -153,7 +153,7 @@ accessible from your host machine (e.g., in your browser at
 
 .. code-block:: bash
 
-   podman run -d -v $(pwd):/app --name site -p 8000:8000 site sleep infinity
+   podman run -d -v $(pwd):/app --name site -p 8000:8000 pelican:latest sleep infinity
 
 Let's break down this command:
 
@@ -170,8 +170,8 @@ Let's break down this command:
   port ``8000`` on your **host machine** to port ``8000`` inside the
   **container**. Your Pelican server will run on 8000 inside the
   container, and this mapping makes it accessible on your host's 8000.
-- ``site``: Specifies that you're creating the container from the
-  ``site`` image you just built.
+- ``pelican:latest``: Specifies that you're creating the container from the
+  ``pelican:latest`` image you just built.
 - ``sleep infinity``: This command runs indefinitely inside the
   container, keeping it alive so you can interact with it later.
 
@@ -310,7 +310,7 @@ Remove the Image
 
 .. code-block:: bash
 
-   podman rmi site
+   podman rmi pelican
 
 By following these steps, you've built a portable, isolated
 environment for your static site generator, keeping your local machine

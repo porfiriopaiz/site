@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="cli, deb11, debian">
+
+  <title>
+    porfirio's blog
+&ndash; Debian Age  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2025/08/24/debian-age.html">Debian Age</a></h1>
+  </div>
+  <div class="article_text">
+    <div class="section" id="how-to-find-the-installation-date-of-debian">
+<h2>How to Find the Installation Date of Debian</h2>
+<p>Have you ever needed to know the exact date a Debian-based system was installed?
+Whether for troubleshooting, system auditing, or just out of curiosity, this
+information can be useful. While there isn't a single file named
+&quot;installation-date,&quot; you can reliably find this information by consulting the
+installer's logs or by checking the creation date of the root filesystem.</p>
+<p>Here's how to do it:</p>
+<ul>
+<li><p class="first">Using the Installer Syslog:</p>
+<p>Debian-based systems typically log installation details in
+<tt class="docutils literal">/var/log/installer/syslog</tt>. The very first entry in this file corresponds
+to the start of the installation process, giving you a precise date.</p>
+<p>To view the first line, use the <tt class="docutils literal">head</tt> command:</p>
+<div class="highlight"><pre><span></span><span class="go">head -n 1 /var/log/installer/syslog</span>
+</pre></div>
+</li>
+<li><p class="first">Checking Filesystem Creation Date:</p>
+<p>The creation date of the root filesystem is another excellent indicator of the
+installation date. This method is particularly useful if the installer logs
+are unavailable or incomplete.</p>
+<p>First, identify your root partition (e.g., <tt class="docutils literal">/dev/sda1</tt>). Then, use
+<tt class="docutils literal">tune2fs</tt> to display filesystem information:</p>
+<div class="highlight"><pre><span></span><span class="go">sudo tune2fs -l /dev/sda1 | grep &#39;Filesystem created:&#39;</span>
+</pre></div>
+<p>Remember to replace <tt class="docutils literal">/dev/sda1</tt> with your actual root partition.</p>
+</li>
+<li><p class="first">Note: While <tt class="docutils literal">stat <span class="pre">-c</span> %w /</tt> can show the &quot;birth time&quot; of the root directory,
+this may not always align precisely with the OS installation date, especially
+if the root directory's creation time was modified after installation. For the
+most reliable information, the installer syslog or filesystem creation date
+provides a more dependable indication.</p>
+</li>
+</ul>
+<p>By using these two straightforward methods, you can quickly and accurately
+determine the installation date of any Debian-based system.</p>
+<p>And here is mine, my current Debian 11.11 has been installed on <tt class="docutils literal">May 27
+17:59:58 syslogd started: BusyBox v1.30.1</tt>, notice this is in local time zone
+during the installation, probably when it started.</p>
+<p>And <tt class="docutils literal">Filesystem created:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fri May 28 00:56:56 2021</tt> is when the
+installation was already completed, the time stamps are in UTC time zone.</p>
+<img alt="Debian Age screenshot" class="align-center" src="../../../../images/debian_age/screenshot_at_2025-08-24_01-40-08.png" />
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sun 24 August 2025</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/cli.html">cli</a>,      <a href="../../../../tag/deb11.html">deb11</a>,      <a href="../../../../tag/debian.html">debian</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2025/08/24/debian-age.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
