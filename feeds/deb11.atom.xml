@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - deb11</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/deb11.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2025-09-24T20:20:00-06:00</updated><entry><title>Debian 12.12 Bookworm</title><link href="https://porfiriopaiz.github.io/site/posts/2025/09/24/bookworm.html" rel="alternate"/><published>2025-09-24T20:20:00-06:00</published><updated>2025-09-24T20:20:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-09-24:/site/posts/2025/09/24/bookworm.html</id><summary type="html">&lt;p class="first last"&gt;Upgrading from Debian 11.11 to Debian 12.12&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Placeholder&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;So previously I have posted about to confirm what was the age of my currently
+installed Debian 11.11, the one I have been runing since 2021, as I could not
+remember the exact date and time it was installed on my laptop.&lt;/p&gt;
+&lt;p&gt;I was able to find a couple of possible options, which I shared on this post:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html"&gt;https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now, after more that 4 years of using Debian 11.11, I have finally decided to
+upgrade to Debian 12.12 Bookworm. I will cover the steps I took to perform the
+upgrade, and some of the issues I faced during the process.&lt;/p&gt;
+&lt;p&gt;Also, I will share with you some of the things I wanted to preserve from the
+current installation before the upgrade process.&lt;/p&gt;
 </content><category term="floss"/><category term="debian"/><category term="bullseye"/><category term="deb11"/><category term="bookworm"/><category term="deb12"/></entry><entry><title>podman</title><link href="https://porfiriopaiz.github.io/site/posts/2025/09/09/podman.html" rel="alternate"/><published>2025-09-09T05:38:00-06:00</published><updated>2025-09-09T05:38:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2025-09-09:/site/posts/2025/09/09/podman.html</id><summary type="html">&lt;p class="first last"&gt;How to install and configure &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I have never used &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian before, and I will be adopting it for
 handling my blog's Python environment necessary for the Pelican site generator

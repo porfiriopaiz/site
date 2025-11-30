@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - deb11</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/deb11.rss.xml" rel="self"/><lastBuildDate>Wed, 24 Sep 2025 20:20:00 -0600</lastBuildDate><item><title>Debian 12.12 Bookworm</title><link>https://porfiriopaiz.github.io/site/posts/2025/09/24/bookworm.html</link><description>&lt;p&gt;Placeholder&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - deb11</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/deb11.rss.xml" rel="self"/><lastBuildDate>Wed, 24 Sep 2025 20:20:00 -0600</lastBuildDate><item><title>Debian 12.12 Bookworm</title><link>https://porfiriopaiz.github.io/site/posts/2025/09/24/bookworm.html</link><description>&lt;p&gt;So previously I have posted about to confirm what was the age of my currently
+installed Debian 11.11, the one I have been runing since 2021, as I could not
+remember the exact date and time it was installed on my laptop.&lt;/p&gt;
+&lt;p&gt;I was able to find a couple of possible options, which I shared on this post:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html"&gt;https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now, after more that 4 years of using Debian 11.11, I have finally decided to
+upgrade to Debian 12.12 Bookworm. I will cover the steps I took to perform the
+upgrade, and some of the issues I faced during the process.&lt;/p&gt;
+&lt;p&gt;Also, I will share with you some of the things I wanted to preserve from the
+current installation before the upgrade process.&lt;/p&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 24 Sep 2025 20:20:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2025-09-24:/site/posts/2025/09/24/bookworm.html</guid><category>floss</category><category>debian</category><category>bullseye</category><category>deb11</category><category>bookworm</category><category>deb12</category></item><item><title>podman</title><link>https://porfiriopaiz.github.io/site/posts/2025/09/09/podman.html</link><description>&lt;p&gt;I have never used &lt;tt class="docutils literal"&gt;podman&lt;/tt&gt; on Debian before, and I will be adopting it for
 handling my blog's Python environment necessary for the Pelican site generator
 that it uses.&lt;/p&gt;

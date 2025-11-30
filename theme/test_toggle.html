@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Toggle Test</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+
+<body>
+    <aside>
+        <div id="user_meta">
+            <h2><a href="#">Test Site</a></h2>
+            <p>Tagline</p>
+            <button id="theme-toggle"
+                style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+                <span id="theme-icon">🌓</span>
+            </button>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <p>Header</p>
+        </header>
+
+        <article>
+            <div class="article_text">
+                <h1>Hello World</h1>
+                <p>This is a test paragraph to check colors.</p>
+                <a href="#">Link</a>
+                <code>Code block</code>
+                <blockquote>Blockquote</blockquote>
+            </div>
+        </article>
+
+        <footer>
+            <a href="#" class="button_accent">Button</a>
+        </footer>
+    </main>
+
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function updateIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        }
+
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateIcon(currentTheme);
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    </script>
+</body>
+
+</html>
