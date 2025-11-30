@@ -8,9 +8,6 @@ Debian 12.12 Bookworm
 :summary: Upgrading from Debian 11.11 to Debian 12.12
 :lang: en
 
-<<<<<<< HEAD
-Placeholder
-=======
 So previously I have posted about to confirm what was the age of my currently
 installed Debian 11.11, the one I have been runing since 2021, as I could not
 remember the exact date and time it was installed on my laptop.
@@ -27,4 +24,3 @@ Also, I will share with you some of the things I wanted to preserve from the
 current installation before the upgrade process.
 
 
->>>>>>> 1dddc61 (Add initial work in progress for next blog post)
