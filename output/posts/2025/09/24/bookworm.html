@@ -189,8 +189,8 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>dist-upgrade
 <p>Then, update the file to include the new <tt class="docutils literal"><span class="pre">non-free-firmware</span></tt> component and
 switch the codename to <strong>Bookworm</strong>:</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/apt/
-sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/non-free/ s/$/ non-free-firmware/&#39;</span><span class="w"> </span>sources.list
-sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/bullseye/bookworm/g&#39;</span><span class="w"> </span>sources.list
+sudo<span class="w"> </span>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">&#39;/^deb-src\|^deb/ { /non-free/ s/$/ non-free-firmware/ }&#39;</span><span class="w"> </span>/etc/apt/sources.list
+sudo<span class="w"> </span>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">&#39;/^deb-src\|^deb/ s/bullseye/bookworm/g&#39;</span><span class="w"> </span>/etc/apt/sources.list
 </pre></div>
 </div>
 <div class="section" id="perform-the-full-upgrade">

@@ -117,8 +117,8 @@ sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&
 &lt;p&gt;Then, update the file to include the new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;non-free-firmware&lt;/span&gt;&lt;/tt&gt; component and
 switch the codename to &lt;strong&gt;Bookworm&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/
-sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/non-free/ s/$/ non-free-firmware/&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sources.list
-sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s/bullseye/bookworm/g&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sources.list
+sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i.bak&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/^deb-src\|^deb/ { /non-free/ s/$/ non-free-firmware/ }&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list
+sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i.bak&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/^deb-src\|^deb/ s/bullseye/bookworm/g&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="perform-the-full-upgrade"&gt;

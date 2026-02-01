@@ -182,8 +182,8 @@ switch the codename to **Bookworm**:
 .. code-block:: bash
 
    cd /etc/apt/
-   sudo sed -i '/non-free/ s/$/ non-free-firmware/' sources.list
-   sudo sed -i 's/bullseye/bookworm/g' sources.list
+   sudo sed -i.bak '/^deb-src\|^deb/ { /non-free/ s/$/ non-free-firmware/ }' /etc/apt/sources.list
+   sudo sed -i.bak '/^deb-src\|^deb/ s/bullseye/bookworm/g' /etc/apt/sources.list
 
 Perform the Full Upgrade
 ^^^^^^^^^^^^^^^^^^^^^^^^
