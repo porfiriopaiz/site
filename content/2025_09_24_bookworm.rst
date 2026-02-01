@@ -1,26 +1,224 @@
 Debian 12.12 Bookworm
 #####################
 
-:date: 2025-9-24 20:20
+:date: 2025-09-24 20:20
 :tags: debian, bullseye, deb11, bookworm, deb12
 :category: floss
 :slug: bookworm
 :summary: Upgrading from Debian 11.11 to Debian 12.12
 :lang: en
 
-So previously I have posted about to confirm what was the age of my currently
-installed Debian 11.11, the one I have been runing since 2021, as I could not
-remember the exact date and time it was installed on my laptop.
+Previously, I posted about confirming the age of my currently installed Debian
+11.11—the version I have been running since 2021—as I could not remember the
+exact date and time it was installed on my laptop.
 
-I was able to find a couple of possible options, which I shared on this post:
+I was able to find a couple of possible options, which I shared in this post:
 
-https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html
+`https://porfiriopaiz.github.io/site/posts/2028/08/24/debian-age.html`_
 
-Now, after more that 4 years of using Debian 11.11, I have finally decided to
+Now, after more than 4 years of using Debian 11.11, I have finally decided to
 upgrade to Debian 12.12 Bookworm. I will cover the steps I took to perform the
-upgrade, and some of the issues I faced during the process.
+upgrade and some of the issues I faced during the process.
 
-Also, I will share with you some of the things I wanted to preserve from the
-current installation before the upgrade process.
+Also, I will share some of the things I wanted to preserve from the current
+installation before the upgrade process.
 
+----
 
+Pre-upgrade Process
+-------------------
+
+Confirm the installed Debian version just to make sure where we are starting
+from:
+
+.. code-block:: bash
+
+   cat /etc/debian_version
+
+Which returns:
+
+.. code-block:: bash
+
+   11.11
+
+Gather System Information
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This command gives us more information about the current version installed on our
+device:
+
+.. code-block:: bash
+
+   lsb_release -a
+
+Which returns:
+
+.. code-block:: bash
+
+   Distributor ID:   Debian
+   Description:      Debian GNU/Linux 11 (bullseye)
+   Release:          11
+   Codename:         bullseye
+
+This is another alternative to get even more information about the installed 
+system version:
+
+.. code-block:: bash
+
+   cat /etc/os-release
+
+Which returns:
+
+.. code-block:: bash
+
+   PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+   NAME="Debian GNU/Linux"
+   VERSION_ID="11"
+   VERSION="11 (bullseye)"
+   VERSION_CODENAME=bullseye
+   ID=debian
+   HOME_URL="https://www.debian.org/"
+   SUPPORT_URL="https://www.debian.org/support"
+   BUG_REPORT_URL="https://bugs.debian.org/"
+
+----
+
+Storage Analysis
+----------------
+
+Before upgrading, I wanted to know how much storage space I have used since 
+Debian 11 was installed on my T440p.
+
+Analyze APT Cache
+^^^^^^^^^^^^^^^^^
+
+First, I moved to the directory where ``apt`` stores the packages before they are
+installed on the system:
+
+.. code-block:: bash
+
+   cd /var/cache/apt
+
+Once there, I ran this command to measure the total storage space used:
+
+.. code-block:: bash
+
+   sudo du -sh .
+
+Which returned the following:
+
+.. code-block:: bash
+
+   27G   /var/cache/apt/
+
+Meaning that in 4 years, I have downloaded 27 GB either as new packages or 
+updates for existing packages.
+
+----
+
+Package Inventory
+-----------------
+
+Something important to me before upgrading is to make a list of all the 
+packages currently installed.
+
+Methods to List Packages
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+- **Selection List**: Saves a basic list to ``packagesInstalled``.
+  
+  .. code-block:: bash
+
+     dpkg --get-selections > packagesInstalled
+
+- **Detailed Query**: Includes status, version, and architecture.
+  
+  .. code-block:: bash
+
+     dpkg-query -l > dpkgQuery-l
+
+- **Binary Names Only**: Useful for clean, one-per-line lists.
+  
+  .. code-block:: bash
+
+     dpkg-query -f '${binary:Package}\n' -W > dpkgQuery-f_binPac
+
+- **Manual Selections**: Lists packages specifically requested by the user.
+  
+  .. code-block:: bash
+
+     apt-mark showmanual > manuallyInstalled
+
+----
+
+The Upgrade Process
+-------------------
+
+OK... enough nostalgia for the moment; this is where the fun begins!
+
+Update Current System
+^^^^^^^^^^^^^^^^^^^^^
+
+As it is, I need to make sure that my system is fully up to date:
+
+.. code-block:: bash
+
+   sudo apt-get update
+   sudo apt-get upgrade
+   sudo apt-get dist-upgrade
+
+Modify Package Sources
+^^^^^^^^^^^^^^^^^^^^^^
+
+First, make a backup of your current configuration:
+
+.. code-block:: bash
+
+   sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig
+
+Then, update the file to include the new ``non-free-firmware`` component and 
+switch the codename to **Bookworm**:
+
+.. code-block:: bash
+
+   cd /etc/apt/
+   sudo sed -i '/non-free/ s/$/ non-free-firmware/' sources.list
+   sudo sed -i 's/bullseye/bookworm/g' sources.list
+
+Perform the Full Upgrade
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Update the repository data:
+
+.. code-block:: bash
+
+   sudo apt update
+
+Check for upgradable packages:
+
+.. code-block:: bash
+
+   sudo apt list --upgradable
+
+We will upgrade first without installing new packages:
+
+.. code-block:: bash
+
+   sudo apt upgrade --without-new-pkgs
+
+Once this is completed, we can fully upgrade our system:
+
+.. code-block:: bash
+
+   sudo apt full-upgrade
+
+----
+
+Conclusion
+----------
+
+Once this process was completed, I was able to reboot my system and run
+Debian 12.12 on my Lenovo ThinkPad T440p without having to reinstall from 
+scratch.
+
+.. _https://porfiriopaiz.github.io/site/posts/2028/08/24/debian-age.html: https://porfiriopaiz.github.io/site/posts/2028/08/24/debian-age.html

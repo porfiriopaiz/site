@@ -1,12 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - bullseye</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/bullseye.rss.xml" rel="self"/><lastBuildDate>Wed, 24 Sep 2025 20:20:00 -0600</lastBuildDate><item><title>Debian 12.12 Bookworm</title><link>https://porfiriopaiz.github.io/site/posts/2025/09/24/bookworm.html</link><description>&lt;p&gt;So previously I have posted about to confirm what was the age of my currently
-installed Debian 11.11, the one I have been runing since 2021, as I could not
-remember the exact date and time it was installed on my laptop.&lt;/p&gt;
-&lt;p&gt;I was able to find a couple of possible options, which I shared on this post:&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html"&gt;https://porfiriopaiz.github.io/site/posts/2025/08/24/debian-age.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Now, after more that 4 years of using Debian 11.11, I have finally decided to
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - bullseye</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/bullseye.rss.xml" rel="self"/><lastBuildDate>Wed, 24 Sep 2025 20:20:00 -0600</lastBuildDate><item><title>Debian 12.12 Bookworm</title><link>https://porfiriopaiz.github.io/site/posts/2025/09/24/bookworm.html</link><description>&lt;p&gt;Previously, I posted about confirming the age of my currently installed Debian
+11.11—the version I have been running since 2021—as I could not remember the
+exact date and time it was installed on my laptop.&lt;/p&gt;
+&lt;p&gt;I was able to find a couple of possible options, which I shared in this post:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://porfiriopaiz.github.io/site/posts/2028/08/24/debian-age.html"&gt;https://porfiriopaiz.github.io/site/posts/2028/08/24/debian-age.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now, after more than 4 years of using Debian 11.11, I have finally decided to
 upgrade to Debian 12.12 Bookworm. I will cover the steps I took to perform the
-upgrade, and some of the issues I faced during the process.&lt;/p&gt;
-&lt;p&gt;Also, I will share with you some of the things I wanted to preserve from the
-current installation before the upgrade process.&lt;/p&gt;
+upgrade and some of the issues I faced during the process.&lt;/p&gt;
+&lt;p&gt;Also, I will share some of the things I wanted to preserve from the current
+installation before the upgrade process.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="pre-upgrade-process"&gt;
+&lt;h2&gt;Pre-upgrade Process&lt;/h2&gt;
+&lt;p&gt;Confirm the installed Debian version just to make sure where we are starting
+from:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/etc/debian_version
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;.11
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="gather-system-information"&gt;
+&lt;h3&gt;Gather System Information&lt;/h3&gt;
+&lt;p&gt;This command gives us more information about the current version installed on our
+device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsb_release&lt;span class="w"&gt; &lt;/span&gt;-a
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Distributor&lt;span class="w"&gt; &lt;/span&gt;ID:&lt;span class="w"&gt;   &lt;/span&gt;Debian
+Description:&lt;span class="w"&gt;      &lt;/span&gt;Debian&lt;span class="w"&gt; &lt;/span&gt;GNU/Linux&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;bullseye&lt;span class="o"&gt;)&lt;/span&gt;
+Release:&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;
+Codename:&lt;span class="w"&gt;         &lt;/span&gt;bullseye
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is another alternative to get even more information about the installed
+system version:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/etc/os-release
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;PRETTY_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debian GNU/Linux 11 (bullseye)&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debian GNU/Linux&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;11&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;11 (bullseye)&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;bullseye
+&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;debian
+&lt;span class="nv"&gt;HOME_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://www.debian.org/&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;SUPPORT_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://www.debian.org/support&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;BUG_REPORT_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://bugs.debian.org/&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="storage-analysis"&gt;
+&lt;h2&gt;Storage Analysis&lt;/h2&gt;
+&lt;p&gt;Before upgrading, I wanted to know how much storage space I have used since
+Debian 11 was installed on my T440p.&lt;/p&gt;
+&lt;div class="section" id="analyze-apt-cache"&gt;
+&lt;h3&gt;Analyze APT Cache&lt;/h3&gt;
+&lt;p&gt;First, I moved to the directory where &lt;tt class="docutils literal"&gt;apt&lt;/tt&gt; stores the packages before they are
+installed on the system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/var/cache/apt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once there, I ran this command to measure the total storage space used:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;du&lt;span class="w"&gt; &lt;/span&gt;-sh&lt;span class="w"&gt; &lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returned the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;27G&lt;span class="w"&gt;   &lt;/span&gt;/var/cache/apt/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Meaning that in 4 years, I have downloaded 27 GB either as new packages or
+updates for existing packages.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="package-inventory"&gt;
+&lt;h2&gt;Package Inventory&lt;/h2&gt;
+&lt;p&gt;Something important to me before upgrading is to make a list of all the
+packages currently installed.&lt;/p&gt;
+&lt;div class="section" id="methods-to-list-packages"&gt;
+&lt;h3&gt;Methods to List Packages&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Selection List&lt;/strong&gt;: Saves a basic list to &lt;tt class="docutils literal"&gt;packagesInstalled&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg&lt;span class="w"&gt; &lt;/span&gt;--get-selections&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;packagesInstalled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Detailed Query&lt;/strong&gt;: Includes status, version, and architecture.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-query&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;dpkgQuery-l
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Binary Names Only&lt;/strong&gt;: Useful for clean, one-per-line lists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-query&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;${binary:Package}\n&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-W&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;dpkgQuery-f_binPac
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Manual Selections&lt;/strong&gt;: Lists packages specifically requested by the user.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-mark&lt;span class="w"&gt; &lt;/span&gt;showmanual&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;manuallyInstalled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="the-upgrade-process"&gt;
+&lt;h2&gt;The Upgrade Process&lt;/h2&gt;
+&lt;p&gt;OK... enough nostalgia for the moment; this is where the fun begins!&lt;/p&gt;
+&lt;div class="section" id="update-current-system"&gt;
+&lt;h3&gt;Update Current System&lt;/h3&gt;
+&lt;p&gt;As it is, I need to make sure that my system is fully up to date:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;upgrade
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;dist-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="modify-package-sources"&gt;
+&lt;h3&gt;Modify Package Sources&lt;/h3&gt;
+&lt;p&gt;First, make a backup of your current configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;cp&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list.orig
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, update the file to include the new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;non-free-firmware&lt;/span&gt;&lt;/tt&gt; component and
+switch the codename to &lt;strong&gt;Bookworm&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/
+sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/non-free/ s/$/ non-free-firmware/&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sources.list
+sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s/bullseye/bookworm/g&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sources.list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="perform-the-full-upgrade"&gt;
+&lt;h3&gt;Perform the Full Upgrade&lt;/h3&gt;
+&lt;p&gt;Update the repository data:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check for upgradable packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;--upgradable
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We will upgrade first without installing new packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;upgrade&lt;span class="w"&gt; &lt;/span&gt;--without-new-pkgs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once this is completed, we can fully upgrade our system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;full-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Once this process was completed, I was able to reboot my system and run
+Debian 12.12 on my Lenovo ThinkPad T440p without having to reinstall from
+scratch.&lt;/p&gt;
+&lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 24 Sep 2025 20:20:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2025-09-24:/site/posts/2025/09/24/bookworm.html</guid><category>floss</category><category>debian</category><category>bullseye</category><category>deb11</category><category>bookworm</category><category>deb12</category></item></channel></rss>
