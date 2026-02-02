@@ -1,5 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-02T00:50:00-06:00</updated><entry><title>Debian 13.3 Trixie</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/02/trixie.html" rel="alternate"/><published>2026-02-02T00:50:00-06:00</published><updated>2026-02-02T00:50:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-02:/site/posts/2026/02/02/trixie.html</id><summary type="html">&lt;p class="first last"&gt;Upgrading from Debian 12.12 to Debian 13.3&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-02T02:15:00-06:00</updated><entry><title>Debian Testing Forky</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/02/debian-testing.html" rel="alternate"/><published>2026-02-02T02:15:00-06:00</published><updated>2026-02-02T02:15:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-02:/site/posts/2026/02/02/debian-testing.html</id><summary type="html"/><content type="html">&lt;p&gt;So I have another Lenovo ThinkPad, this one is a T450 and it is currently
+running Debian 13.&lt;/p&gt;
+&lt;p&gt;On this post I will be upgrading from Debian 13.3 to Debian Testing (Forky).&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="pre-upgrade-process"&gt;
+&lt;h2&gt;Pre-upgrade Process&lt;/h2&gt;
+&lt;p&gt;Confirm the installed Debian version just to make sure where we are starting
+from:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/etc/debian_version
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;.3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="gather-system-information"&gt;
+&lt;h3&gt;Gather System Information&lt;/h3&gt;
+&lt;p&gt;This command gives us more information about the current version installed on our
+device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsb_release&lt;span class="w"&gt; &lt;/span&gt;-a
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Distributor&lt;span class="w"&gt; &lt;/span&gt;ID:&lt;span class="w"&gt; &lt;/span&gt;Debian
+Description:&lt;span class="w"&gt;    &lt;/span&gt;Debian&lt;span class="w"&gt; &lt;/span&gt;GNU/Linux&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;trixie&lt;span class="o"&gt;)&lt;/span&gt;
+Release:&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;
+Codename:&lt;span class="w"&gt;       &lt;/span&gt;trixie
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is another alternative to get even more information about the installed
+system version:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/etc/os-release
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;PRETTY_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debian GNU/Linux 13 (trixie)&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debian GNU/Linux&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;13&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;13 (trixie)&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;VERSION_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;trixie
+&lt;span class="nv"&gt;DEBIAN_VERSION_FULL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;.3
+&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;debian
+&lt;span class="nv"&gt;HOME_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://www.debian.org/&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;SUPPORT_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://www.debian.org/support&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;BUG_REPORT_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://bugs.debian.org/&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="storage-analysis"&gt;
+&lt;h2&gt;Storage Analysis&lt;/h2&gt;
+&lt;p&gt;Before upgrading, I wanted to know how much storage space I have used since
+Debian 13.3 was installed on my T450.&lt;/p&gt;
+&lt;div class="section" id="analyze-apt-cache"&gt;
+&lt;h3&gt;Analyze APT Cache&lt;/h3&gt;
+&lt;p&gt;I ran this command to measure the total storage space used:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;du&lt;span class="w"&gt; &lt;/span&gt;-sh&lt;span class="w"&gt; &lt;/span&gt;/var/cache/apt/archives/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returned the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;.3G&lt;span class="w"&gt; &lt;/span&gt;/var/cache/apt/archives/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since I installed Debian 13.3 on this device, I have downloaded 8.3 GB of packages.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;head&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/var/log/installer/syslog
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Sep&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;04&lt;/span&gt;:37:28&lt;span class="w"&gt; &lt;/span&gt;syslogd&lt;span class="w"&gt; &lt;/span&gt;started:&lt;span class="w"&gt; &lt;/span&gt;BusyBox&lt;span class="w"&gt; &lt;/span&gt;v1.30.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Meaning that Debian 13.3 was installed on September 4, 2025 at 04:37:28 UTC.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;tune2fs&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;/dev/mapper/taylor--vg-root&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Filesystem created:&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Filesystem&lt;span class="w"&gt; &lt;/span&gt;created:&lt;span class="w"&gt;       &lt;/span&gt;Wed&lt;span class="w"&gt; &lt;/span&gt;Sep&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;23&lt;/span&gt;:10:05&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Meaning that the root filesystem was created on September 3, 2025 at 23:10:05 UTC.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;tune2fs&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;/dev/sda2&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Filesystem created:&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returned the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Filesystem&lt;span class="w"&gt; &lt;/span&gt;created:&lt;span class="w"&gt;       &lt;/span&gt;Wed&lt;span class="w"&gt; &lt;/span&gt;Sep&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;22&lt;/span&gt;:41:58&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Meaning that the /boot filesystem was created on September 3, 2025 at 22:41:58 UTC.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="package-inventory"&gt;
+&lt;h2&gt;Package Inventory&lt;/h2&gt;
+&lt;p&gt;Something important to me before upgrading is to make a list of all the
+packages currently installed.&lt;/p&gt;
+&lt;div class="section" id="methods-to-list-packages"&gt;
+&lt;h3&gt;Methods to List Packages&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Selection List&lt;/strong&gt;: Saves a basic list to &lt;tt class="docutils literal"&gt;packagesInstalled&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg&lt;span class="w"&gt; &lt;/span&gt;--get-selections&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;packagesInstalled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Detailed Query&lt;/strong&gt;: Includes status, version, and architecture.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-query&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;dpkgQuery-l
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Binary Names Only&lt;/strong&gt;: Useful for clean, one-per-line lists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-query&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;${binary:Package}\n&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-W&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;dpkgQuery-f_binPac
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;Manual Selections&lt;/strong&gt;: Lists packages specifically requested by the user.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-mark&lt;span class="w"&gt; &lt;/span&gt;showmanual&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;manuallyInstalled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="the-upgrade-process"&gt;
+&lt;h2&gt;The Upgrade Process&lt;/h2&gt;
+&lt;p&gt;OK... enough nostalgia for the moment; this is where the fun begins!&lt;/p&gt;
+&lt;div class="section" id="update-current-system"&gt;
+&lt;h3&gt;Update Current System&lt;/h3&gt;
+&lt;p&gt;As it is, I need to make sure that my system is fully up to date:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;upgrade
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;dist-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="modify-package-sources"&gt;
+&lt;h3&gt;Modify Package Sources&lt;/h3&gt;
+&lt;p&gt;First, make a backup of your current configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;cp&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list.orig
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, update the file to switch the codename to &lt;strong&gt;Forky&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/
+sudo&lt;span class="w"&gt; &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-i.bak&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/^deb-src\|^deb/ s/trixie/forky/g&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/apt/sources.list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="perform-the-full-upgrade"&gt;
+&lt;h3&gt;Perform the Full Upgrade&lt;/h3&gt;
+&lt;p&gt;Update the repository data:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check for upgradable packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;--upgradable
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We will upgrade first without installing new packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;upgrade&lt;span class="w"&gt; &lt;/span&gt;--without-new-pkgs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once this is completed, we can fully upgrade our system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;full-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Once this process was completed, I was able to reboot my system and run Debian
+Testing (Forky) on my Lenovo ThinkPad T450 without having to reinstall from
+scratch.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="debian"/><category term="forky"/><category term="testing"/></entry><entry><title>Debian 13.3 Trixie</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/02/trixie.html" rel="alternate"/><published>2026-02-02T00:50:00-06:00</published><updated>2026-02-02T00:50:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-02:/site/posts/2026/02/02/trixie.html</id><summary type="html">&lt;p class="first last"&gt;Upgrading from Debian 12.12 to Debian 13.3&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Previously, I have upgraded from Debian 11.11 to Debian 12.12. On this post I
 will be upgrading from Debian 12.12 to Debian 13.3.&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
