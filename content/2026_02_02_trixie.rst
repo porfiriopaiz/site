@@ -1,0 +1,207 @@
+Debian 13.3 Trixie
+##################
+
+:date: 2026-2-2 0:50
+:tags: bookworm, debian, deb12, deb13, , trixie
+:category: floss
+:slug: trixie
+:summary: Upgrading from Debian 12.12 to Debian 13.3
+:lang: en
+
+Previously, I have upgraded from Debian 11.11 to Debian 12.12. On this post I
+will be upgrading from Debian 12.12 to Debian 13.3.
+
+----
+
+Pre-upgrade Process
+-------------------
+
+Confirm the installed Debian version just to make sure where we are starting
+from:
+
+.. code-block:: bash
+
+   cat /etc/debian_version
+
+Which returns:
+
+.. code-block:: bash
+
+   12.12
+
+Gather System Information
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This command gives us more information about the current version installed on our
+device:
+
+.. code-block:: bash
+
+   lsb_release -a
+
+Which returns:
+
+.. code-block:: bash
+
+   Distributor ID:	Debian
+   Description:		Debian GNU/Linux 12 (bookworm)
+   Release:		12
+   Codename:		bookworm
+
+This is another alternative to get even more information about the installed 
+system version:
+
+.. code-block:: bash
+
+   cat /etc/os-release
+
+Which returns:
+
+.. code-block:: bash
+
+   PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+   NAME="Debian GNU/Linux"
+   VERSION_ID="12"
+   VERSION="12 (bookworm)"
+   VERSION_CODENAME=bookworm
+   ID=debian
+   HOME_URL="https://www.debian.org/"
+   SUPPORT_URL="https://www.debian.org/support"
+   BUG_REPORT_URL="https://bugs.debian.org/"
+
+----
+
+Storage Analysis
+----------------
+
+Before upgrading, I wanted to know how much storage space I have used since 
+Debian 11 was installed on my T440p.
+
+Analyze APT Cache
+^^^^^^^^^^^^^^^^^
+
+First, I moved to the directory where ``apt`` stores the packages before they are
+installed on the system:
+
+.. code-block:: bash
+
+   cd /var/cache/apt
+
+Once there, I ran this command to measure the total storage space used:
+
+.. code-block:: bash
+
+   sudo du -sh .
+
+Which returned the following:
+
+.. code-block:: bash
+
+   31G	/var/cache/apt/
+
+Meaning that in 4 years, I have downloaded 31 GB either as new packages or 
+updates for existing packages.
+
+----
+
+Package Inventory
+-----------------
+
+Something important to me before upgrading is to make a list of all the 
+packages currently installed.
+
+Methods to List Packages
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+- **Selection List**: Saves a basic list to ``packagesInstalled``.
+  
+  .. code-block:: bash
+
+     dpkg --get-selections > packagesInstalled
+
+- **Detailed Query**: Includes status, version, and architecture.
+  
+  .. code-block:: bash
+
+     dpkg-query -l > dpkgQuery-l
+
+- **Binary Names Only**: Useful for clean, one-per-line lists.
+  
+  .. code-block:: bash
+
+     dpkg-query -f '${binary:Package}\n' -W > dpkgQuery-f_binPac
+
+- **Manual Selections**: Lists packages specifically requested by the user.
+  
+  .. code-block:: bash
+
+     apt-mark showmanual > manuallyInstalled
+
+----
+
+The Upgrade Process
+-------------------
+
+OK... enough nostalgia for the moment; this is where the fun begins!
+
+Update Current System
+^^^^^^^^^^^^^^^^^^^^^
+
+As it is, I need to make sure that my system is fully up to date:
+
+.. code-block:: bash
+
+   sudo apt-get update
+   sudo apt-get upgrade
+   sudo apt-get dist-upgrade
+
+Modify Package Sources
+^^^^^^^^^^^^^^^^^^^^^^
+
+First, make a backup of your current configuration:
+
+.. code-block:: bash
+
+   sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig
+
+Then, update the file to switch the codename to **Trixie**:
+
+.. code-block:: bash
+
+   cd /etc/apt/
+   sudo sed -i.bak '/^deb-src\|^deb/ s/bookworm/trixie/g' /etc/apt/sources.list
+
+Perform the Full Upgrade
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Update the repository data:
+
+.. code-block:: bash
+
+   sudo apt update
+
+Check for upgradable packages:
+
+.. code-block:: bash
+
+   sudo apt list --upgradable
+
+We will upgrade first without installing new packages:
+
+.. code-block:: bash
+
+   sudo apt upgrade --without-new-pkgs
+
+Once this is completed, we can fully upgrade our system:
+
+.. code-block:: bash
+
+   sudo apt full-upgrade
+
+----
+
+Conclusion
+----------
+
+Once this process was completed, I was able to reboot my system and run Debian
+13.3 on my Lenovo ThinkPad T440p without having to reinstall from scratch.
