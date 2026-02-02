@@ -5,7 +5,7 @@ Debian Testing Forky
 :tags: debian, forky, testing
 :category: floss
 :slug: debian-testing
-:summary: 
+:summary: How to upgrade to Debian Testing (forky)
 :lang: en
 
 So I have another Lenovo ThinkPad, this one is a T450 and it is currently
