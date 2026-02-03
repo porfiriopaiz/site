@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="debian, powerline, tmux, vim">
+
+  <title>
+    porfirio's blog
+&ndash; Setting Up a Productive Terminal Environment: Vim, tmux, and Powerline on Debian  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/02/03/debian-powerline-tmux-vim.html">Setting Up a Productive Terminal Environment: Vim, tmux, and Powerline on Debian</a></h1>
+  </div>
+  <div class="article_text">
+    <p>Establishing a robust and personalized terminal environment is a foundational
+step for any developer or system administrator. On Debian, this process is
+particularly rewarding due to the system's commitment to providing essential
+software components while allowing users to shape and personalize their own
+tools without presumption.</p>
+<p>This post covers the installation and configuration of <strong>Vim</strong>, <strong>tmux</strong>, and
+<strong>Powerline</strong> to create a seamless, efficient workflow.</p>
+<hr class="docutils" />
+<div class="section" id="installing-the-essentials">
+<h2>1. Installing the Essentials</h2>
+<p>While a pristine Debian installation includes only the <tt class="docutils literal"><span class="pre">vim-tiny</span></tt> package,
+we require a more advanced binary to support scripting (like Python) and
+enhanced features.</p>
+<p>Open your terminal and install the feature-rich versions available in the
+official repositories:</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>vim-nox<span class="w"> </span>tmux<span class="w"> </span>btop<span class="w"> </span>powerline<span class="w"> </span>python3-powerline<span class="w"> </span>fonts-powerline<span class="w"> </span>-y
+</pre></div>
+<p>We use <tt class="docutils literal"><span class="pre">vim-nox</span></tt> specifically because it provides support for scripting
+languages like Python, which is essential for advanced plugins and
+Powerline integration.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="configuring-a-minimalist-vim">
+<h2>2. Configuring a Minimalist Vim</h2>
+<p>To maintain a clean foundation that respects Debian's defaults while allowing
+personalization, create a <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> file. This configuration ensures a
+modern, &quot;nocompatible&quot; environment.</p>
+<div class="highlight"><pre><span></span><span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; 1. DEBIAN SYSTEM INTEGRATION</span>
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; Load Debian-specific settings like filetype detection</span>
+runtime<span class="p">!</span> debian.<span class="k">vim</span>
+
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; 2. CORE BEHAVIOR</span>
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; Use Vim settings rather than Vi settings. This must be first.</span>
+<span class="c">&quot; This is often set in defaults.vim, but good to be explicit.</span>
+<span class="k">set</span> <span class="nb">nocompatible</span>
+
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; 3. UI AND VISUALS</span>
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="nb">syntax</span> <span class="k">on</span>            <span class="c">&quot; Enable syntax highlighting</span>
+<span class="k">set</span> <span class="k">number</span>           <span class="c">&quot; Show line numbers</span>
+<span class="k">set</span> <span class="nb">cursorline</span>       <span class="c">&quot; Highlight the current line</span>
+<span class="k">set</span> <span class="nb">showcmd</span>          <span class="c">&quot; Show partial commands in status line</span>
+<span class="k">set</span> <span class="nb">wildmenu</span>         <span class="c">&quot; Visual autocomplete for command menu</span>
+
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; 4. TEXT EDITING &amp; INDENTATION</span>
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="k">filetype</span> plugin indent <span class="k">on</span>    <span class="c">&quot; Load plugins/indent files for specific filetypes</span>
+<span class="k">set</span> <span class="nb">tabstop</span><span class="p">=</span><span class="m">4</span>                <span class="c">&quot; Number of visual spaces per TAB</span>
+<span class="k">set</span> <span class="nb">softtabstop</span><span class="p">=</span><span class="m">4</span>            <span class="c">&quot; Number of spaces in tab when editing</span>
+<span class="k">set</span> <span class="nb">expandtab</span>                <span class="c">&quot; Use spaces instead of tabs</span>
+<span class="k">set</span> <span class="nb">shiftwidth</span><span class="p">=</span><span class="m">4</span>             <span class="c">&quot; Size of an indent</span>
+
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="c">&quot; 5. SEARCHING</span>
+<span class="c">&quot; ---------------------------------------------------------</span>
+<span class="k">set</span> <span class="nb">hlsearch</span>         <span class="c">&quot; Highlight matches</span>
+<span class="k">set</span> <span class="nb">incsearch</span>        <span class="c">&quot; Search as you type</span>
+<span class="k">set</span> <span class="nb">ignorecase</span>       <span class="c">&quot; Ignore case when searching</span>
+<span class="k">set</span> <span class="nb">smartcase</span>        <span class="c">&quot; Override &#39;ignorecase&#39; if search contains capitals</span>
+
+<span class="c">&quot; --- POWERLINE SETUP ---</span>
+<span class="c">&quot; Always show the status line</span>
+<span class="k">set</span> <span class="nb">laststatus</span><span class="p">=</span><span class="m">2</span>
+
+<span class="c">&quot; Set 256 colors for the terminal (required for Powerline colors)</span>
+<span class="k">set</span> <span class="nb">t_Co</span><span class="p">=</span><span class="m">256</span>
+
+<span class="c">&quot; Source the Powerline Python binding</span>
+<span class="c">&quot; On Debian, the path is standard:</span>
+<span class="k">python3</span> from powerline.<span class="k">vim</span> import setup <span class="k">as</span> powerline_setup
+<span class="k">python3</span> powerline_setup<span class="p">()</span>
+<span class="k">python3</span> <span class="k">del</span> powerline_setup
+</pre></div>
+<p>For quick, no-frills edits without loading plugins, you can still access a
+pristine experience by adding an alias to your <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Run vi without any plugins or custom vimrc features</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">vi</span><span class="o">=</span><span class="s2">&quot;vim -u NONE&quot;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="the-tmux-configuration">
+<h2>3. The tmux Configuration</h2>
+<p>The behavior of tmux is controlled by <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt>. This setup balances
+session automation with professional UI enhancements via Powerline.</p>
+<div class="highlight"><pre><span></span><span class="c1"># --- GENERAL SETTINGS ---</span>
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>prefix<span class="w"> </span>C-b
+<span class="nb">bind</span><span class="w"> </span>C-b<span class="w"> </span>send-prefix
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>mouse<span class="w"> </span>on
+
+<span class="c1"># --- POWERLINE &amp; COLOR SETTINGS ---</span>
+<span class="c1"># Powerline integration for Debian</span>
+run-shell<span class="w"> </span><span class="s2">&quot;powerline-daemon -q&quot;</span>
+<span class="nb">source</span><span class="w"> </span><span class="s2">&quot;/usr/share/powerline/bindings/tmux/powerline.conf&quot;</span>
+
+<span class="c1"># Terminal Color Support</span>
+<span class="c1"># We use tmux-256color as the primary, and ensure RGB (TrueColor) support</span>
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>default-terminal<span class="w"> </span><span class="s2">&quot;tmux-256color&quot;</span>
+set-option<span class="w"> </span>-sa<span class="w"> </span>terminal-features<span class="w"> </span><span class="s2">&quot;,xterm*:RGB&quot;</span>
+
+<span class="c1"># --- UI SETTINGS ---</span>
+<span class="c1"># Note: Powerline overrides status-left/right.</span>
+<span class="c1"># If you want your custom clock, place it AFTER the source line above:</span>
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>status-right<span class="w"> </span><span class="s2">&quot;%H:%M &quot;</span>
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>window-status-current-style<span class="w"> </span><span class="s2">&quot;underscore&quot;</span>
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>remain-on-exit<span class="w"> </span>on
+<span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>default-command<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SHELL</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># --- KEY BINDINGS ---</span>
+<span class="nb">bind</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>split-window<span class="w"> </span>-h<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;#{pane_current_path}&quot;</span>
+<span class="nb">bind</span><span class="w"> </span>-<span class="w"> </span>split-window<span class="w"> </span>-v<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;#{pane_current_path}&quot;</span>
+<span class="nb">bind</span><span class="w"> </span>y<span class="w"> </span><span class="nb">set</span><span class="w"> </span>synchronize-panes<span class="se">\;</span><span class="w"> </span>display<span class="w"> </span><span class="s1">&#39;Sync: #{?synchronize-panes,on,off}&#39;</span>
+
+<span class="c1"># Kill the whole session instantly</span>
+<span class="nb">bind</span><span class="w"> </span>X<span class="w"> </span>kill-session
+
+<span class="c1"># --- SESSION AUTOMATION ---</span>
+new-session<span class="w"> </span>-d<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;monitor&#39;</span>
+send-keys<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>:0<span class="w"> </span><span class="s1">&#39;btop&#39;</span><span class="w"> </span>C-m
+
+new-window<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>:1<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;editor&#39;</span>
+send-keys<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>:1<span class="w"> </span><span class="s1">&#39;vim&#39;</span><span class="w"> </span>C-m
+
+new-window<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>:2<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;shell&#39;</span>
+
+<span class="k">select</span>-window<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>:1
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="finishing-touches">
+<h2>4. Finishing Touches</h2>
+<div class="section" id="fixing-the-vte-prompt-error">
+<h3>Fixing the VTE Prompt Error</h3>
+<p>On some Debian systems, you might see a <tt class="docutils literal">bash: __vte_prompt_command: command not found</tt>
+error. Silence it by adding this to the top of your <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Silence the VTE prompt error by defining it as an empty function</span>
+__vte_prompt_command<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>:<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</pre></div>
+<p>By following these steps, you have transformed a fresh Debian installation into
+a portable, automated, and visually cohesive terminal environment ready for
+any development task.</p>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Tue 03 February 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/debian.html">debian</a>,      <a href="../../../../tag/powerline.html">powerline</a>,      <a href="../../../../tag/tmux.html">tmux</a>,      <a href="../../../../tag/vim.html">vim</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/02/03/debian-powerline-tmux-vim.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>
