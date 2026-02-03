@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all-en.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-02T02:15:00-06:00</updated><entry><title>Debian Testing Forky</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/02/debian-testing.html" rel="alternate"/><published>2026-02-02T02:15:00-06:00</published><updated>2026-02-02T02:15:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-02:/site/posts/2026/02/02/debian-testing.html</id><summary type="html">&lt;p class="first last"&gt;How to upgrade to Debian Testing (forky)&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all-en.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-03T01:22:00-06:00</updated><entry><title>Setting Up a Productive Terminal Environment: Vim, tmux, and Powerline on Debian</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/03/debian-powerline-tmux-vim.html" rel="alternate"/><published>2026-02-03T01:22:00-06:00</published><updated>2026-02-03T01:22:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-03:/site/posts/2026/02/03/debian-powerline-tmux-vim.html</id><summary type="html">&lt;p class="first last"&gt;A comprehensive guide to installing and configuring a minimalist yet
+powerful terminal environment using Vim, tmux, and Powerline on Debian.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Establishing a robust and personalized terminal environment is a foundational
+step for any developer or system administrator. On Debian, this process is
+particularly rewarding due to the system's commitment to providing essential
+software components while allowing users to shape and personalize their own
+tools without presumption.&lt;/p&gt;
+&lt;p&gt;This post covers the installation and configuration of &lt;strong&gt;Vim&lt;/strong&gt;, &lt;strong&gt;tmux&lt;/strong&gt;, and
+&lt;strong&gt;Powerline&lt;/strong&gt; to create a seamless, efficient workflow.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="installing-the-essentials"&gt;
+&lt;h2&gt;1. Installing the Essentials&lt;/h2&gt;
+&lt;p&gt;While a pristine Debian installation includes only the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt; package,
+we require a more advanced binary to support scripting (like Python) and
+enhanced features.&lt;/p&gt;
+&lt;p&gt;Open your terminal and install the feature-rich versions available in the
+official repositories:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;vim-nox&lt;span class="w"&gt; &lt;/span&gt;tmux&lt;span class="w"&gt; &lt;/span&gt;btop&lt;span class="w"&gt; &lt;/span&gt;powerline&lt;span class="w"&gt; &lt;/span&gt;python3-powerline&lt;span class="w"&gt; &lt;/span&gt;fonts-powerline&lt;span class="w"&gt; &lt;/span&gt;-y
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; specifically because it provides support for scripting
+languages like Python, which is essential for advanced plugins and
+Powerline integration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="configuring-a-minimalist-vim"&gt;
+&lt;h2&gt;2. Configuring a Minimalist Vim&lt;/h2&gt;
+&lt;p&gt;To maintain a clean foundation that respects Debian's defaults while allowing
+personalization, create a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file. This configuration ensures a
+modern, &amp;quot;nocompatible&amp;quot; environment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; 1. DEBIAN SYSTEM INTEGRATION&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; Load Debian-specific settings like filetype detection&lt;/span&gt;
+runtime&lt;span class="p"&gt;!&lt;/span&gt; debian.&lt;span class="k"&gt;vim&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; 2. CORE BEHAVIOR&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; Use Vim settings rather than Vi settings. This must be first.&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; This is often set in defaults.vim, but good to be explicit.&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;nocompatible&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; 3. UI AND VISUALS&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="nb"&gt;syntax&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt;            &lt;span class="c"&gt;&amp;quot; Enable syntax highlighting&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="k"&gt;number&lt;/span&gt;           &lt;span class="c"&gt;&amp;quot; Show line numbers&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;cursorline&lt;/span&gt;       &lt;span class="c"&gt;&amp;quot; Highlight the current line&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;showcmd&lt;/span&gt;          &lt;span class="c"&gt;&amp;quot; Show partial commands in status line&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;wildmenu&lt;/span&gt;         &lt;span class="c"&gt;&amp;quot; Visual autocomplete for command menu&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; 4. TEXT EDITING &amp;amp; INDENTATION&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="k"&gt;filetype&lt;/span&gt; plugin indent &lt;span class="k"&gt;on&lt;/span&gt;    &lt;span class="c"&gt;&amp;quot; Load plugins/indent files for specific filetypes&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;tabstop&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;                &lt;span class="c"&gt;&amp;quot; Number of visual spaces per TAB&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;softtabstop&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;            &lt;span class="c"&gt;&amp;quot; Number of spaces in tab when editing&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;expandtab&lt;/span&gt;                &lt;span class="c"&gt;&amp;quot; Use spaces instead of tabs&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;shiftwidth&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;             &lt;span class="c"&gt;&amp;quot; Size of an indent&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; 5. SEARCHING&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; ---------------------------------------------------------&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;hlsearch&lt;/span&gt;         &lt;span class="c"&gt;&amp;quot; Highlight matches&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;incsearch&lt;/span&gt;        &lt;span class="c"&gt;&amp;quot; Search as you type&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;ignorecase&lt;/span&gt;       &lt;span class="c"&gt;&amp;quot; Ignore case when searching&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;smartcase&lt;/span&gt;        &lt;span class="c"&gt;&amp;quot; Override &amp;#39;ignorecase&amp;#39; if search contains capitals&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; --- POWERLINE SETUP ---&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; Always show the status line&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;laststatus&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; Set 256 colors for the terminal (required for Powerline colors)&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;t_Co&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; Source the Powerline Python binding&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; On Debian, the path is standard:&lt;/span&gt;
+&lt;span class="k"&gt;python3&lt;/span&gt; from powerline.&lt;span class="k"&gt;vim&lt;/span&gt; import setup &lt;span class="k"&gt;as&lt;/span&gt; powerline_setup
+&lt;span class="k"&gt;python3&lt;/span&gt; powerline_setup&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;python3&lt;/span&gt; &lt;span class="k"&gt;del&lt;/span&gt; powerline_setup
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For quick, no-frills edits without loading plugins, you can still access a
+pristine experience by adding an alias to your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Run vi without any plugins or custom vimrc features&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vim -u NONE&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="the-tmux-configuration"&gt;
+&lt;h2&gt;3. The tmux Configuration&lt;/h2&gt;
+&lt;p&gt;The behavior of tmux is controlled by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt;. This setup balances
+session automation with professional UI enhancements via Powerline.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# --- GENERAL SETTINGS ---&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;prefix&lt;span class="w"&gt; &lt;/span&gt;C-b
+&lt;span class="nb"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;C-b&lt;span class="w"&gt; &lt;/span&gt;send-prefix
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;mouse&lt;span class="w"&gt; &lt;/span&gt;on
+
+&lt;span class="c1"&gt;# --- POWERLINE &amp;amp; COLOR SETTINGS ---&lt;/span&gt;
+&lt;span class="c1"&gt;# Powerline integration for Debian&lt;/span&gt;
+run-shell&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;powerline-daemon -q&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/share/powerline/bindings/tmux/powerline.conf&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Terminal Color Support&lt;/span&gt;
+&lt;span class="c1"&gt;# We use tmux-256color as the primary, and ensure RGB (TrueColor) support&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;default-terminal&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tmux-256color&amp;quot;&lt;/span&gt;
+set-option&lt;span class="w"&gt; &lt;/span&gt;-sa&lt;span class="w"&gt; &lt;/span&gt;terminal-features&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;,xterm*:RGB&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# --- UI SETTINGS ---&lt;/span&gt;
+&lt;span class="c1"&gt;# Note: Powerline overrides status-left/right.&lt;/span&gt;
+&lt;span class="c1"&gt;# If you want your custom clock, place it AFTER the source line above:&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;status-right&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;%H:%M &amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;window-status-current-style&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;underscore&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;remain-on-exit&lt;span class="w"&gt; &lt;/span&gt;on
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;default-command&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;SHELL&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# --- KEY BINDINGS ---&lt;/span&gt;
+&lt;span class="nb"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;split-window&lt;span class="w"&gt; &lt;/span&gt;-h&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#{pane_current_path}&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;split-window&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;#{pane_current_path}&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;y&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;synchronize-panes&lt;span class="se"&gt;\;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;display&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Sync: #{?synchronize-panes,on,off}&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Kill the whole session instantly&lt;/span&gt;
+&lt;span class="nb"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;X&lt;span class="w"&gt; &lt;/span&gt;kill-session
+
+&lt;span class="c1"&gt;# --- SESSION AUTOMATION ---&lt;/span&gt;
+new-session&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;monitor&amp;#39;&lt;/span&gt;
+send-keys&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;btop&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;C-m
+
+new-window&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:1&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;editor&amp;#39;&lt;/span&gt;
+send-keys&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;vim&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;C-m
+
+new-window&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:2&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;shell&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;select&lt;/span&gt;-window&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;4. Finishing Touches&lt;/h2&gt;
+&lt;div class="section" id="fixing-the-vte-prompt-error"&gt;
+&lt;h3&gt;Fixing the VTE Prompt Error&lt;/h3&gt;
+&lt;p&gt;On some Debian systems, you might see a &lt;tt class="docutils literal"&gt;bash: __vte_prompt_command: command not found&lt;/tt&gt;
+error. Silence it by adding this to the top of your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Silence the VTE prompt error by defining it as an empty function&lt;/span&gt;
+__vte_prompt_command&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;:&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By following these steps, you have transformed a fresh Debian installation into
+a portable, automated, and visually cohesive terminal environment ready for
+any development task.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="debian"/><category term="powerline"/><category term="tmux"/><category term="vim"/></entry><entry><title>Debian Testing Forky</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/02/debian-testing.html" rel="alternate"/><published>2026-02-02T02:15:00-06:00</published><updated>2026-02-02T02:15:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-02:/site/posts/2026/02/02/debian-testing.html</id><summary type="html">&lt;p class="first last"&gt;How to upgrade to Debian Testing (forky)&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;So I have another Lenovo ThinkPad, this one is a T450 and it is currently
 running Debian 13.&lt;/p&gt;
 &lt;p&gt;On this post I will be upgrading from Debian 13.3 to Debian Testing (Forky).&lt;/p&gt;
