@@ -177,6 +177,19 @@ error. Silence it by adding this to the top of your ``~/.bashrc``:
    # Silence the VTE prompt error by defining it as an empty function
    __vte_prompt_command() { :; }
 
+Optional: Bash Prompt Integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you want the Powerline look in your terminal prompt as well, add this to your ``~/.bashrc``:
+
+.. code-block:: bash
+
+   # --- POWERLINE PROMPT INTEGRATION ---
+   # This enables the Powerline look in the bash terminal prompt
+   if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+       powerline-daemon -q
+       source /usr/share/powerline/bindings/bash/powerline.sh
+   fi
+
 By following these steps, you have transformed a fresh Debian installation into 
 a portable, automated, and visually cohesive terminal environment ready for 
 any development task.
