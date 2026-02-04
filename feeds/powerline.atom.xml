@@ -145,6 +145,17 @@ error. Silence it by adding this to the top of your &lt;tt class="docutils liter
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Silence the VTE prompt error by defining it as an empty function&lt;/span&gt;
 __vte_prompt_command&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;:&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="optional-bash-prompt-integration"&gt;
+&lt;h3&gt;Optional: Bash Prompt Integration&lt;/h3&gt;
+&lt;p&gt;If you want the Powerline look in your terminal prompt as well, add this to your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# --- POWERLINE PROMPT INTEGRATION ---&lt;/span&gt;
+&lt;span class="c1"&gt;# This enables the Powerline look in the bash terminal prompt&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;/usr/share/powerline/bindings/bash/powerline.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;powerline-daemon&lt;span class="w"&gt; &lt;/span&gt;-q
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/usr/share/powerline/bindings/bash/powerline.sh
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;By following these steps, you have transformed a fresh Debian installation into
 a portable, automated, and visually cohesive terminal environment ready for
 any development task.&lt;/p&gt;
