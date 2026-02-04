@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="debian, vim, vim-plug, nerdtree">
+
+  <title>
+    porfirio's blog
+&ndash; Advanced Vim Management on Debian: Transitioning to vim-plug and NERDTree  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/02/04/vim-plug-nerdtree-debian.html">Advanced Vim Management on Debian: Transitioning to vim-plug and NERDTree</a></h1>
+  </div>
+  <div class="article_text">
+    <p>In our previous explorations of the Debian environment, we examined how the system
+manages the relationship between <tt class="docutils literal">vi</tt> and <tt class="docutils literal">vim.tiny</tt>. While the default
+minimalist setup is excellent for system recovery, a modern development workflow
+requires more power. This post guides you through upgrading to <tt class="docutils literal"><span class="pre">vim-nox</span></tt> and
+implementing <strong>vim-plug</strong>, the industry standard for high-performance
+plugin management, alongside the <strong>NERDTree</strong> file explorer.</p>
+<hr class="docutils" />
+<div class="section" id="the-importance-of-vim-nox">
+<h2>The Importance of vim-nox</h2>
+<p>Before installing a manager, it is essential to ensure you are using the
+correct Vim binary. Debian's base installations often rely on <tt class="docutils literal"><span class="pre">vim-tiny</span></tt>,
+which lacks the scripting support required for many modern enhancements.</p>
+<p>We recommend installing <tt class="docutils literal"><span class="pre">vim-nox</span></tt>, which is compiled with support for
+scripting languages like Python 3. This is particularly effective when
+paired with a plugin manager, as it enables parallel installations and
+asynchronous updates.</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>vim-nox<span class="w"> </span>-y
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="implementing-vim-plug">
+<h2>Implementing vim-plug</h2>
+<p><strong>vim-plug</strong> is a beautiful, minimalist manager consisting of a single
+<tt class="docutils literal">.vim</tt> file. It provides a clean syntax for managing plugins directly
+within your configuration and offers significant speed advantages through
+parallel power.</p>
+<div class="section" id="installation">
+<h3>Installation</h3>
+<p>To set up the manager, download the <tt class="docutils literal">plug.vim</tt> file into your local
+autoload directory (<tt class="docutils literal"><span class="pre">~/.vim/autoload/</span></tt>) using <tt class="docutils literal">curl</tt>:</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-fLo<span class="w"> </span>~/.vim/autoload/plug.vim<span class="w"> </span>--create-dirs<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+</pre></div>
+</div>
+<div class="section" id="configuring-vimrc">
+<h3>Configuring ~/.vimrc</h3>
+<p>With the manager installed, you can now define your plugins. Open your
+personal <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> file and wrap your plugin declarations between
+the <tt class="docutils literal">plug#begin()</tt> and <tt class="docutils literal">plug#end()</tt> calls:</p>
+<div class="highlight"><pre><span></span><span class="c">&quot; --- VIM-PLUG SECTION ---</span>
+<span class="c">&quot; Specify a directory for plugins</span>
+<span class="k">call</span> plug#begin<span class="p">(</span><span class="s1">&#39;~/.vim/plugged&#39;</span><span class="p">)</span>
+
+<span class="c">&quot; List your plugins here</span>
+Plug <span class="s1">&#39;preservim/nerdtree&#39;</span>         <span class="c">&quot; File system explorer</span>
+
+<span class="c">&quot; Initialize the plugin system</span>
+<span class="k">call</span> plug#<span class="k">end</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="finalizing-the-setup">
+<h3>Finalizing the Setup</h3>
+<p>After saving your <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt>, restart Vim or source the file, then
+execute the installation command:</p>
+<div class="highlight"><pre><span></span><span class="p">:</span>PlugInstall
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="automating-nerdtree">
+<h2>Automating NERDTree</h2>
+<p>Once NERDTree is installed, you can configure it to launch automatically
+whenever Vim is started. This creates a more &quot;IDE-like&quot; experience while
+retaining the speed of a terminal editor.</p>
+<div class="section" id="auto-launch-logic">
+<h3>Auto-Launch Logic</h3>
+<p>Add the following block to your <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt> to automate the explorer startup
+and ensure the cursor moves to the editing window rather than staying in
+the sidebar:</p>
+<div class="highlight"><pre><span></span><span class="c">&quot; Start NERDTree when Vim is started</span>
+autocmd <span class="nb">VimEnter</span> * NERDTree
+
+<span class="c">&quot; Move the cursor to the editing window automatically</span>
+autocmd <span class="nb">VimEnter</span> * <span class="k">wincmd</span> <span class="k">p</span>
+
+<span class="c">&quot; Close Vim if NERDTree is the only window left open</span>
+autocmd <span class="nb">BufEnter</span> * <span class="k">if</span> tabpagenr<span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">)</span> <span class="p">==</span> <span class="m">1</span> &amp;&amp; winnr<span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">)</span> <span class="p">==</span> <span class="m">1</span> &amp;&amp; exists<span class="p">(</span><span class="s1">&#39;b:NERDTree&#39;</span><span class="p">)</span> &amp;&amp; <span class="k">b</span>:NERDTree.isTabTree<span class="p">()</span> <span class="p">|</span> quit <span class="p">|</span> <span class="k">endif</span>
+
+<span class="c">&quot; Optional: Map Ctrl+n to toggle NERDTree manually</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">n</span><span class="p">&gt;</span> :NERDTreeToggle<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="a-note-on-the-native-alternative">
+<h2>A Note on the Native Alternative</h2>
+<p>Modern versions of Vim (Debian 8 and newer) include a <strong>native package system</strong>.
+This allows users to manually manage plugins by cloning them into the
+<tt class="docutils literal"><span class="pre">~/.vim/pack/vendor/start/</span></tt> directory.</p>
+<p>While this approach avoids third-party managers, it lacks automated
+functionality for updates, cleaning unused directories, or parallel
+installation. For a personalized setup that you plan to grow over time,
+<strong>vim-plug</strong> remains the superior choice because it automates the
+&quot;management&quot; aspect of your environment while adhering to a minimalist
+philosophy.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="finishing-touches">
+<h2>Finishing Touches</h2>
+<p>To maintain the 'pure' experience we've previously discussed, ensure
+your <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt> still includes a shortcut for quick edits
+without the overhead of your new plugins or the automatic NERDTree sidebar:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Run vi without loading plugins or user configurations</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">vi</span><span class="o">=</span><span class="s2">&quot;vim -u NONE&quot;</span>
+</pre></div>
+<p>This ensures that while your environment grows in power, you never
+lose the ability to return to the minimalist roots of the editor
+when the situation demands it.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Wed 04 February 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/debian.html">debian</a>,      <a href="../../../../tag/vim.html">vim</a>,      <a href="../../../../tag/vim-plug.html">vim-plug</a>,      <a href="../../../../tag/nerdtree.html">nerdtree</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/02/04/vim-plug-nerdtree-debian.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>

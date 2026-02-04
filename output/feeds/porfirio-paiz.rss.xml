@@ -1,5 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - Porfirio Páiz</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.rss.xml" rel="self"/><lastBuildDate>Tue, 03 Feb 2026 01:22:00 -0600</lastBuildDate><item><title>Setting Up a Productive Terminal Environment: Vim, tmux, and Powerline on Debian</title><link>https://porfiriopaiz.github.io/site/posts/2026/02/03/debian-powerline-tmux-vim.html</link><description>&lt;p&gt;Establishing a robust and personalized terminal environment is a foundational
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - Porfirio Páiz</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.rss.xml" rel="self"/><lastBuildDate>Wed, 04 Feb 2026 04:15:00 -0600</lastBuildDate><item><title>Advanced Vim Management on Debian: Transitioning to vim-plug and NERDTree</title><link>https://porfiriopaiz.github.io/site/posts/2026/02/04/vim-plug-nerdtree.html</link><description>&lt;p&gt;In our previous explorations of the Debian environment, we examined how the system
+manages the relationship between &lt;tt class="docutils literal"&gt;vi&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vim.tiny&lt;/tt&gt;. While the default
+minimalist setup is excellent for system recovery, a modern development workflow
+requires more power. This post guides you through upgrading to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt; and
+implementing &lt;strong&gt;vim-plug&lt;/strong&gt;, the industry standard for high-performance
+plugin management, alongside the &lt;strong&gt;NERDTree&lt;/strong&gt; file explorer.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="the-importance-of-vim-nox"&gt;
+&lt;h2&gt;The Importance of vim-nox&lt;/h2&gt;
+&lt;p&gt;Before installing a manager, it is essential to ensure you are using the
+correct Vim binary. Debian's base installations often rely on &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-tiny&lt;/span&gt;&lt;/tt&gt;,
+which lacks the scripting support required for many modern enhancements.&lt;/p&gt;
+&lt;p&gt;We recommend installing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vim-nox&lt;/span&gt;&lt;/tt&gt;, which is compiled with support for
+scripting languages like Python 3. This is particularly effective when
+paired with a plugin manager, as it enables parallel installations and
+asynchronous updates.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;vim-nox&lt;span class="w"&gt; &lt;/span&gt;-y
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="implementing-vim-plug"&gt;
+&lt;h2&gt;Implementing vim-plug&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;vim-plug&lt;/strong&gt; is a beautiful, minimalist manager consisting of a single
+&lt;tt class="docutils literal"&gt;.vim&lt;/tt&gt; file. It provides a clean syntax for managing plugins directly
+within your configuration and offers significant speed advantages through
+parallel power.&lt;/p&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;To set up the manager, download the &lt;tt class="docutils literal"&gt;plug.vim&lt;/tt&gt; file into your local
+autoload directory (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vim/autoload/&lt;/span&gt;&lt;/tt&gt;) using &lt;tt class="docutils literal"&gt;curl&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-fLo&lt;span class="w"&gt; &lt;/span&gt;~/.vim/autoload/plug.vim&lt;span class="w"&gt; &lt;/span&gt;--create-dirs&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuring-vimrc"&gt;
+&lt;h3&gt;Configuring ~/.vimrc&lt;/h3&gt;
+&lt;p&gt;With the manager installed, you can now define your plugins. Open your
+personal &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; file and wrap your plugin declarations between
+the &lt;tt class="docutils literal"&gt;plug#begin()&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;plug#end()&lt;/tt&gt; calls:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;&amp;quot; --- VIM-PLUG SECTION ---&lt;/span&gt;
+&lt;span class="c"&gt;&amp;quot; Specify a directory for plugins&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; plug#begin&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;~/.vim/plugged&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; List your plugins here&lt;/span&gt;
+Plug &lt;span class="s1"&gt;&amp;#39;preservim/nerdtree&amp;#39;&lt;/span&gt;         &lt;span class="c"&gt;&amp;quot; File system explorer&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; Initialize the plugin system&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; plug#&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="finalizing-the-setup"&gt;
+&lt;h3&gt;Finalizing the Setup&lt;/h3&gt;
+&lt;p&gt;After saving your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt;, restart Vim or source the file, then
+execute the installation command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;PlugInstall
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="automating-nerdtree"&gt;
+&lt;h2&gt;Automating NERDTree&lt;/h2&gt;
+&lt;p&gt;Once NERDTree is installed, you can configure it to launch automatically
+whenever Vim is started. This creates a more &amp;quot;IDE-like&amp;quot; experience while
+retaining the speed of a terminal editor.&lt;/p&gt;
+&lt;div class="section" id="auto-launch-logic"&gt;
+&lt;h3&gt;Auto-Launch Logic&lt;/h3&gt;
+&lt;p&gt;Add the following block to your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt; to automate the explorer startup
+and ensure the cursor moves to the editing window rather than staying in
+the sidebar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;&amp;quot; Start NERDTree when Vim is started&lt;/span&gt;
+autocmd &lt;span class="nb"&gt;VimEnter&lt;/span&gt; * NERDTree
+
+&lt;span class="c"&gt;&amp;quot; Move the cursor to the editing window automatically&lt;/span&gt;
+autocmd &lt;span class="nb"&gt;VimEnter&lt;/span&gt; * &lt;span class="k"&gt;wincmd&lt;/span&gt; &lt;span class="k"&gt;p&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; Close Vim if NERDTree is the only window left open&lt;/span&gt;
+autocmd &lt;span class="nb"&gt;BufEnter&lt;/span&gt; * &lt;span class="k"&gt;if&lt;/span&gt; tabpagenr&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &amp;amp;&amp;amp; winnr&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &amp;amp;&amp;amp; exists&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b:NERDTree&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class="k"&gt;b&lt;/span&gt;:NERDTree.isTabTree&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; quit &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt;
+
+&lt;span class="c"&gt;&amp;quot; Optional: Map Ctrl+n to toggle NERDTree manually&lt;/span&gt;
+map &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;n&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :NERDTreeToggle&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="a-note-on-the-native-alternative"&gt;
+&lt;h2&gt;A Note on the Native Alternative&lt;/h2&gt;
+&lt;p&gt;Modern versions of Vim (Debian 8 and newer) include a &lt;strong&gt;native package system&lt;/strong&gt;.
+This allows users to manually manage plugins by cloning them into the
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vim/pack/vendor/start/&lt;/span&gt;&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;p&gt;While this approach avoids third-party managers, it lacks automated
+functionality for updates, cleaning unused directories, or parallel
+installation. For a personalized setup that you plan to grow over time,
+&lt;strong&gt;vim-plug&lt;/strong&gt; remains the superior choice because it automates the
+&amp;quot;management&amp;quot; aspect of your environment while adhering to a minimalist
+philosophy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;Finishing Touches&lt;/h2&gt;
+&lt;p&gt;To maintain the 'pure' experience we've previously discussed, ensure
+your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; still includes a shortcut for quick edits
+without the overhead of your new plugins or the automatic NERDTree sidebar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Run vi without loading plugins or user configurations&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vim -u NONE&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This ensures that while your environment grows in power, you never
+lose the ability to return to the minimalist roots of the editor
+when the situation demands it.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Wed, 04 Feb 2026 04:15:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2026-02-04:/site/posts/2026/02/04/vim-plug-nerdtree.html</guid><category>floss</category><category>debian</category><category>vim</category><category>vim-plug</category><category>nerdtree</category></item><item><title>Setting Up a Productive Terminal Environment: Vim, tmux, and Powerline on Debian</title><link>https://porfiriopaiz.github.io/site/posts/2026/02/03/debian-powerline-tmux-vim.html</link><description>&lt;p&gt;Establishing a robust and personalized terminal environment is a foundational
 step for any developer or system administrator. On Debian, this process is
 particularly rewarding due to the system's commitment to providing essential
 software components while allowing users to shape and personalize their own
