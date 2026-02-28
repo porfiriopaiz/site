@@ -1,5 +1,3 @@
-You're absolutely right; I missed some of the critical "start from scratch" and directory navigation steps we covered earlier. I've integrated the full sequence—from cloning the repo to the final "nuclear" cleanup—into this updated version.
-
 # Pelican Static Site Generator (Podman Edition)
 
 These are my notes for setting up a containerized environment for Pelican. By using Podman, the entire Python stack is isolated from the host OS, avoiding version conflicts and ensuring a reproducible build environment.
