@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="fedora, latex, linux, texlive">
+
+  <title>
+    porfirio's blog
+&ndash; Installing TeX Live 2025 on Fedora: A Minimalist User-Space Guide  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/02/28/texlive-2025-fedora-user-space.html">Installing TeX Live 2025 on Fedora: A Minimalist User-Space Guide</a></h1>
+  </div>
+  <div class="article_text">
+    <p>This guide consolidates the steps required to establish a professional-grade
+LaTeX environment into a single, clean workflow. Following this chronological
+order ensures that directories exist, dependencies are met, and the
+environment is correctly configured before the software attempts to utilize them.</p>
+<p>By installing TeX Live in user-space (within <tt class="docutils literal"><span class="pre">~/.local/opt</span></tt>), we adhere to a
+minimalist philosophy. This approach avoids cluttering the system root,
+removes the need for <tt class="docutils literal">sudo</tt> during package management via <tt class="docutils literal">tlmgr</tt>, and
+ensures you are using the most recent upstream binaries rather than
+potentially outdated distribution packages.</p>
+<hr class="docutils" />
+<div class="section" id="pre-installation-system-dependencies">
+<h2>Pre-Installation: System Dependencies</h2>
+<p>Fedora's &quot;minimal&quot; Perl and X11 profiles often lack specific libraries
+required by the TeX Live installer and its graphical management tools.
+While we aim for a lean system, these Perl modules are essential for the
+installer's checksum verification and the <tt class="docutils literal">tlmgr</tt> interface.</p>
+<p>Install these requirements using <tt class="docutils literal">dnf</tt>:</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>perl-File-Find<span class="w"> </span>perl-File-Copy<span class="w"> </span>perl-Digest-MD5<span class="w"> </span>perl-Tk<span class="w"> </span>perl-Term-ANSIColor<span class="w"> </span>xdotool
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="create-the-directory-structure">
+<h2>Create the Directory Structure</h2>
+<p>We will create a &quot;user-space system&quot; directory. Utilizing <tt class="docutils literal"><span class="pre">~/.local/opt</span></tt>
+keeps your home directory organized while mimicking the Linux Filesystem
+Hierarchy Standard (FHS).</p>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
+</pre></div>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/opt/texlive
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="download-and-launch-the-installer">
+<h2>Download and Launch the Installer</h2>
+<p>To avoid &quot;checksum mismatch&quot; errors common with unstable local mirrors, we
+will point the installer directly to the Comprehensive TeX Archive Network
+(CTAN) global repository.</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+</pre></div>
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+</pre></div>
+<div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzf<span class="w"> </span>install-tl-unx.tar.gz
+</pre></div>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>install-tl-*
+</pre></div>
+<p>Launch the installer using a reliable global mirror:</p>
+<div class="highlight"><pre><span></span>./install-tl<span class="w"> </span>-repository<span class="w"> </span>http://mirror.ctan.org/systems/texlive/tlnet/
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="installer-configuration-text-menu">
+<h2>Installer Configuration (Text Menu)</h2>
+<p>Once the command-line interface menu appears, you must modify specific
+installation paths to point to your local directories:</p>
+<ol class="arabic simple">
+<li><strong>Directories (D)</strong>: Change <tt class="docutils literal">TEXDIR</tt> to:
+<tt class="docutils literal"><span class="pre">/home/porfirio/.local/opt/texlive/2025</span></tt></li>
+<li><strong>Options (O)</strong>:
+* Toggle <strong>Paper Size</strong> to <tt class="docutils literal">letter</tt>.
+* Toggle <strong>Create symlinks</strong> (<tt class="docutils literal">L</tt>) to <tt class="docutils literal">[X]</tt>.
+* <strong>Binaries</strong>: <tt class="docutils literal"><span class="pre">/home/porfirio/.local/bin</span></tt>
+* <strong>Manpages</strong>: <tt class="docutils literal"><span class="pre">/home/porfirio/.local/share/man</span></tt>
+* <strong>Info</strong>: <tt class="docutils literal"><span class="pre">/home/porfirio/.local/share/info</span></tt></li>
+<li><strong>Install (I)</strong>: Start the process.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The full installation can take approximately 3 hours depending on your
+connection. It is highly recommended to run this inside a <tt class="docutils literal">tmux</tt>
+session to prevent the installation from terminating if your terminal
+session disconnects.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="post-installation-environment-setup">
+<h2>Post-Installation: Environment Setup</h2>
+<p>Fedora needs to be instructed where to find these new binaries. We will
+create a modular profile script in <tt class="docutils literal"><span class="pre">~/.bashrc.d/</span></tt> to keep our
+<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> clean.</p>
+<p>Create the configuration file:</p>
+<div class="highlight"><pre><span></span>vi<span class="w"> </span>~/.bashrc.d/texlive.sh
+</pre></div>
+<p><strong>Paste the following content into the file:</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># TeX Live 2025 Path Configuration</span>
+<span class="nv">TEX_BIN_PATH</span><span class="o">=</span><span class="s2">&quot;/home/porfirio/.local/opt/texlive/2025/bin/x86_64-linux&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TEX_BIN_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># Prioritize TeX binaries and your local bin folder</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$TEX_BIN_PATH</span><span class="s2">:/home/porfirio/.local/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">INFOPATH</span><span class="o">=</span><span class="s2">&quot;/home/porfirio/.local/opt/texlive/2025/texmf-dist/doc/info:</span><span class="nv">$INFOPATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">MANPATH</span><span class="o">=</span><span class="s2">&quot;/home/porfirio/.local/opt/texlive/2025/texmf-dist/doc/man:</span><span class="nv">$MANPATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+<p><strong>Apply the changes to your current session:</strong></p>
+<div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="finalizing-the-formats">
+<h2>Finalizing the Formats</h2>
+<p>With the paths set and Perl dependencies satisfied, manually execute the
+tasks that occasionally fail during the installer's finalization stage
+due to environment restrictions:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Set default paper size</span>
+tlmgr<span class="w"> </span>paper<span class="w"> </span>letter
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Build the format files (Engines)</span>
+fmtutil-sys<span class="w"> </span>--all
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="verification-and-troubleshooting">
+<h2>Verification and Troubleshooting</h2>
+<p>To ensure your system is ready for document production, perform a &quot;smoke test&quot;
+by checking the binary location and compiling a dummy document.</p>
+<div class="section" id="check-the-binary-path">
+<h3>Check the Binary Path</h3>
+<div class="highlight"><pre><span></span>which<span class="w"> </span>pdflatex
+</pre></div>
+<p>This should return a path pointing to your <tt class="docutils literal"><span class="pre">~/.local/bin/</span></tt> or
+<tt class="docutils literal"><span class="pre">~/.local/opt/</span></tt> folder rather than <tt class="docutils literal">/usr/bin/</tt>.</p>
+</div>
+<div class="section" id="compile-a-test-document">
+<h3>Compile a Test Document</h3>
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\documentclass{article}\begin{document}LaTeX 2025 is Live on Fedora!\end{document}&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>test.tex
+</pre></div>
+<div class="highlight"><pre><span></span>pdflatex<span class="w"> </span>test.tex
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="summary-of-locations">
+<h2>Summary of Locations</h2>
+<p>For future maintenance on your system, keep these paths in mind:</p>
+<ul class="simple">
+<li><strong>The System Root</strong>: <tt class="docutils literal"><span class="pre">~/.local/opt/texlive/2025/</span></tt></li>
+<li><strong>The Binaries/Symlinks</strong>: <tt class="docutils literal"><span class="pre">~/.local/bin/</span></tt></li>
+<li><strong>The Configuration</strong>: <tt class="docutils literal"><span class="pre">~/.bashrc.d/texlive.sh</span></tt></li>
+<li><strong>The Logs</strong>: <tt class="docutils literal"><span class="pre">~/.local/opt/texlive/2025/texmf-var/web2c/fmtutil.log</span></tt></li>
+</ul>
+<p>You now have a professional-grade, upstream LaTeX installation that is
+completely independent of Fedora's system packages, making it easy to
+back up or migrate to a new machine in the future.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sat 28 February 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/latex.html">latex</a>,      <a href="../../../../tag/linux.html">linux</a>,      <a href="../../../../tag/texlive.html">texlive</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/02/28/texlive-2025-fedora-user-space.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>
