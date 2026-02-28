@@ -1,102 +1,137 @@
-# Pelican Static Site Generator
+You're absolutely right; I missed some of the critical "start from scratch" and directory navigation steps we covered earlier. I've integrated the full sequence—from cloning the repo to the final "nuclear" cleanup—into this updated version.
 
-These are my notes for setting up a virtual environment for Pelican, the static
-site generator that I use to build my blog.
+# Pelican Static Site Generator (Podman Edition)
 
-## Reasons for using this guide
+These are my notes for setting up a containerized environment for Pelican. By using Podman, the entire Python stack is isolated from the host OS, avoiding version conflicts and ensuring a reproducible build environment.
 
-This document guides you through the processes of setting up a virtual
-environment, this way you can use the lastest version of Pelican, pulling it
-fron pypi without worrying about breaking or poluting your system.
+## Why use this Containerized Guide?
 
-- This ensure true portability and reproducible environments.
+Instead of managing local `virtualenvs` or system-level Python packages, this guide uses a **minimal Podman image**.
 
-## Installing `virtualenv` and `pip`
+* **True Portability**: The same environment works on any machine with Podman installed.
+* **Isolation**: No risk of polluting or breaking the system Python.
+* **Cleanliness**: All dependencies (Git, Pelican, Markdown) live inside the image.
 
-> Fedora
+---
 
-```sh
-su -c 'dnf install python2-virtualenv.noarch python3-virtualenv.noarch'
-```
+## 1. Initial Setup
 
-```sh
-su -c 'dnf install python2-pip.noarch python3-pip.noarch'
-```
+### Clone the Repository
 
-## Create a directory for virtualenvs
+Navigate to your git directory and clone your site sources:
 
 ```sh
-cd ~/Documents
-mkdir virtualenvs
-cd virtualenvs
-```
-
-## Create a virtualenv for Pelican
-
-Use the `virtualenv-3` or the `virtualenv-3.6` command.
-
-```sh
-virtualenv-3 --no-site-packages pelican
-```
-
-```sh
-cd pelican
-```
-
-## Activate the virtualenv
-
-```sh
-source bin/activate
-```
-
-## Install upgrade the `setuptools` and `pip`
-
-```sh
-pip install --upgrade setuptools pip
-```
-## Install Optional Packages
-
-```sh
-pip install Markdown typogrify
-```
-
-## Install Pelican
-
-```sh
-pip install pelican
-```
-
-## Upgrading Everything
-
-```sh
-pip install --upgrade pelican Markdown typogrify setuptools pip
-```
-
-## Clone the github repo
-
-```sh
+cd ~/git_repos/github.com/porfiriopaiz/
 git clone git@github.com:porfiriopaiz/site.git
+cd site/
+
 ```
 
-## Pelican commands
+### Configuration Files
 
-### Build a site after edit or new post
+Ensure your `requirements.txt` and `Dockerfile`  are in the root of the `site/` directory.
+
+**Dockerfile:** 
+
+```dockerfile
+FROM python:slim
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git make && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+# No COPY . . is used because we mount the local directory as a volume
+CMD ["sleep", "infinity"]
+
+```
+
+---
+
+## 2. Build and Launch
+
+### Build the Image
+
+Tag the image as `pelican`:
 
 ```sh
-make html
+podman build -t pelican .
+
 ```
 
-### Serve site locally at `http://localhost:8000/:`
+### Run the Container
+
+Launch the container with port forwarding and volume mounting. Note the `:Z` suffix to handle SELinux permissions:
 
 ```sh
-make serve
+podman run -d \
+  -v $(pwd):/app:Z \
+  --name site \
+  -p 8000:8000 \
+  pelican
+
 ```
 
-## Github serving
+---
+
+## 3. Pelican Workflow
+
+### Generate the Site
+
+If your image includes `make`, use the standard command:
+
+```sh
+podman exec -it site make html
+
+```
+
+Alternatively, use the direct Pelican command:
+
+```sh
+podman exec -it site pelican content -s pelicanconf.py
+
+```
+
+### Serve Locally
+
+To preview your site at `http://localhost:8000`, bind to `0.0.0.0`:
+
+```sh
+podman exec -it site pelican -l -p 8000 -b 0.0.0.0
+
+```
+
+---
+
+## 4. Maintenance & Reset
+
+### Cleaning the Workspace
+
+If you need to start from a "Clean Slate," run this sequence to remove the container, the image, and local build artifacts:
+
+```sh
+# Stop and remove container
+podman stop site && podman rm site
+
+# Remove image
+podman rmi pelican
+
+# Deep clean system and local artifacts
+podman system prune -f
+rm -rf output/ cache/ __pycache__/
+
+```
+
+### Deployment (GitHub Pages)
 
 ```sh
 git checkout master
 git subtree split --prefix output -b gh-pages
 git push -f origin gh-pages:gh-pages
 git branch -D gh-pages
+
 ```
+
+---
