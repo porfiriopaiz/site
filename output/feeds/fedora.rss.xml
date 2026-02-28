@@ -1,5 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - fedora</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/fedora.rss.xml" rel="self"/><lastBuildDate>Wed, 25 Dec 2019 18:03:00 -0600</lastBuildDate><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - fedora</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/fedora.rss.xml" rel="self"/><lastBuildDate>Sat, 28 Feb 2026 04:40:00 -0600</lastBuildDate><item><title>Installing TeX Live 2025 on Fedora: A Minimalist User-Space Guide</title><link>https://porfiriopaiz.github.io/site/posts/2026/02/28/texlive-2025-fedora-user-space.html</link><description>&lt;p&gt;This guide consolidates the steps required to establish a professional-grade
+LaTeX environment into a single, clean workflow. Following this chronological
+order ensures that directories exist, dependencies are met, and the
+environment is correctly configured before the software attempts to utilize them.&lt;/p&gt;
+&lt;p&gt;By installing TeX Live in user-space (within &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/opt&lt;/span&gt;&lt;/tt&gt;), we adhere to a
+minimalist philosophy. This approach avoids cluttering the system root,
+removes the need for &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; during package management via &lt;tt class="docutils literal"&gt;tlmgr&lt;/tt&gt;, and
+ensures you are using the most recent upstream binaries rather than
+potentially outdated distribution packages.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="pre-installation-system-dependencies"&gt;
+&lt;h2&gt;Pre-Installation: System Dependencies&lt;/h2&gt;
+&lt;p&gt;Fedora's &amp;quot;minimal&amp;quot; Perl and X11 profiles often lack specific libraries
+required by the TeX Live installer and its graphical management tools.
+While we aim for a lean system, these Perl modules are essential for the
+installer's checksum verification and the &lt;tt class="docutils literal"&gt;tlmgr&lt;/tt&gt; interface.&lt;/p&gt;
+&lt;p&gt;Install these requirements using &lt;tt class="docutils literal"&gt;dnf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;perl-File-Find&lt;span class="w"&gt; &lt;/span&gt;perl-File-Copy&lt;span class="w"&gt; &lt;/span&gt;perl-Digest-MD5&lt;span class="w"&gt; &lt;/span&gt;perl-Tk&lt;span class="w"&gt; &lt;/span&gt;perl-Term-ANSIColor&lt;span class="w"&gt; &lt;/span&gt;xdotool
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="create-the-directory-structure"&gt;
+&lt;h2&gt;Create the Directory Structure&lt;/h2&gt;
+&lt;p&gt;We will create a &amp;quot;user-space system&amp;quot; directory. Utilizing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/opt&lt;/span&gt;&lt;/tt&gt;
+keeps your home directory organized while mimicking the Linux Filesystem
+Hierarchy Standard (FHS).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;~/.local/bin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;~/.local/opt/texlive
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="download-and-launch-the-installer"&gt;
+&lt;h2&gt;Download and Launch the Installer&lt;/h2&gt;
+&lt;p&gt;To avoid &amp;quot;checksum mismatch&amp;quot; errors common with unstable local mirrors, we
+will point the installer directly to the Comprehensive TeX Archive Network
+(CTAN) global repository.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/Downloads
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget&lt;span class="w"&gt; &lt;/span&gt;http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar&lt;span class="w"&gt; &lt;/span&gt;-xzf&lt;span class="w"&gt; &lt;/span&gt;install-tl-unx.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;install-tl-*
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Launch the installer using a reliable global mirror:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./install-tl&lt;span class="w"&gt; &lt;/span&gt;-repository&lt;span class="w"&gt; &lt;/span&gt;http://mirror.ctan.org/systems/texlive/tlnet/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="installer-configuration-text-menu"&gt;
+&lt;h2&gt;Installer Configuration (Text Menu)&lt;/h2&gt;
+&lt;p&gt;Once the command-line interface menu appears, you must modify specific
+installation paths to point to your local directories:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;&lt;strong&gt;Directories (D)&lt;/strong&gt;: Change &lt;tt class="docutils literal"&gt;TEXDIR&lt;/tt&gt; to:
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/porfirio/.local/opt/texlive/2025&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Options (O)&lt;/strong&gt;:
+* Toggle &lt;strong&gt;Paper Size&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;letter&lt;/tt&gt;.
+* Toggle &lt;strong&gt;Create symlinks&lt;/strong&gt; (&lt;tt class="docutils literal"&gt;L&lt;/tt&gt;) to &lt;tt class="docutils literal"&gt;[X]&lt;/tt&gt;.
+* &lt;strong&gt;Binaries&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/porfirio/.local/bin&lt;/span&gt;&lt;/tt&gt;
+* &lt;strong&gt;Manpages&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/porfirio/.local/share/man&lt;/span&gt;&lt;/tt&gt;
+* &lt;strong&gt;Info&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/porfirio/.local/share/info&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Install (I)&lt;/strong&gt;: Start the process.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;The full installation can take approximately 3 hours depending on your
+connection. It is highly recommended to run this inside a &lt;tt class="docutils literal"&gt;tmux&lt;/tt&gt;
+session to prevent the installation from terminating if your terminal
+session disconnects.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="post-installation-environment-setup"&gt;
+&lt;h2&gt;Post-Installation: Environment Setup&lt;/h2&gt;
+&lt;p&gt;Fedora needs to be instructed where to find these new binaries. We will
+create a modular profile script in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc.d/&lt;/span&gt;&lt;/tt&gt; to keep our
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; clean.&lt;/p&gt;
+&lt;p&gt;Create the configuration file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vi&lt;span class="w"&gt; &lt;/span&gt;~/.bashrc.d/texlive.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Paste the following content into the file:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# TeX Live 2025 Path Configuration&lt;/span&gt;
+&lt;span class="nv"&gt;TEX_BIN_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/home/porfirio/.local/opt/texlive/2025/bin/x86_64-linux&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$TEX_BIN_PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# Prioritize TeX binaries and your local bin folder&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$TEX_BIN_PATH&lt;/span&gt;&lt;span class="s2"&gt;:/home/porfirio/.local/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;INFOPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/home/porfirio/.local/opt/texlive/2025/texmf-dist/doc/info:&lt;/span&gt;&lt;span class="nv"&gt;$INFOPATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;MANPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/home/porfirio/.local/opt/texlive/2025/texmf-dist/doc/man:&lt;/span&gt;&lt;span class="nv"&gt;$MANPATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Apply the changes to your current session:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.bashrc
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finalizing-the-formats"&gt;
+&lt;h2&gt;Finalizing the Formats&lt;/h2&gt;
+&lt;p&gt;With the paths set and Perl dependencies satisfied, manually execute the
+tasks that occasionally fail during the installer's finalization stage
+due to environment restrictions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Set default paper size&lt;/span&gt;
+tlmgr&lt;span class="w"&gt; &lt;/span&gt;paper&lt;span class="w"&gt; &lt;/span&gt;letter
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Build the format files (Engines)&lt;/span&gt;
+fmtutil-sys&lt;span class="w"&gt; &lt;/span&gt;--all
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="verification-and-troubleshooting"&gt;
+&lt;h2&gt;Verification and Troubleshooting&lt;/h2&gt;
+&lt;p&gt;To ensure your system is ready for document production, perform a &amp;quot;smoke test&amp;quot;
+by checking the binary location and compiling a dummy document.&lt;/p&gt;
+&lt;div class="section" id="check-the-binary-path"&gt;
+&lt;h3&gt;Check the Binary Path&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;which&lt;span class="w"&gt; &lt;/span&gt;pdflatex
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This should return a path pointing to your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin/&lt;/span&gt;&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/opt/&lt;/span&gt;&lt;/tt&gt; folder rather than &lt;tt class="docutils literal"&gt;/usr/bin/&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="compile-a-test-document"&gt;
+&lt;h3&gt;Compile a Test Document&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;\documentclass{article}\begin{document}LaTeX 2025 is Live on Fedora!\end{document}&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;test.tex
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pdflatex&lt;span class="w"&gt; &lt;/span&gt;test.tex
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="summary-of-locations"&gt;
+&lt;h2&gt;Summary of Locations&lt;/h2&gt;
+&lt;p&gt;For future maintenance on your system, keep these paths in mind:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;The System Root&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/opt/texlive/2025/&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Binaries/Symlinks&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin/&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Configuration&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc.d/texlive.sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Logs&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/opt/texlive/2025/texmf-var/web2c/fmtutil.log&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You now have a professional-grade, upstream LaTeX installation that is
+completely independent of Fedora's system packages, making it easy to
+back up or migrate to a new machine in the future.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sat, 28 Feb 2026 04:40:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2026-02-28:/site/posts/2026/02/28/texlive-2025-fedora-user-space.html</guid><category>floss</category><category>fedora</category><category>latex</category><category>linux</category><category>texlive</category></item><item><title>Flatpak</title><link>https://porfiriopaiz.github.io/site/posts/2019/12/25/flatpak.html</link><description>&lt;p&gt;I don't like Flatpaks. They are heavy, take up a lot of space, and consume a
 significant amount of RAM. However, when it comes to installing proprietary
 software that is not available in the official Fedora repositories, Flatpaks
 can be a good option since they provide a certain level of isolation.&lt;/p&gt;
