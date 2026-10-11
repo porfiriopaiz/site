@@ -1,5 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fedora</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/fedora.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-28T04:40:00-06:00</updated><entry><title>Installing TeX Live 2025 on Fedora: A Minimalist User-Space Guide</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/28/texlive-2025-fedora-user-space.html" rel="alternate"/><published>2026-02-28T04:40:00-06:00</published><updated>2026-02-28T04:40:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-28:/site/posts/2026/02/28/texlive-2025-fedora-user-space.html</id><summary type="html">&lt;p class="first last"&gt;A comprehensive guide to installing a full, upstream TeX Live
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - fedora</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/fedora.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-09-30T02:28:00-06:00</updated><entry><title>Fedora Everything 44 Minimal Workstation</title><link href="https://porfiriopaiz.github.io/site/posts/2026/09/30/fedora-everything-44.html" rel="alternate"/><published>2026-09-30T02:28:00-06:00</published><updated>2026-09-30T02:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-09-30:/site/posts/2026/09/30/fedora-everything-44.html</id><summary type="html">&lt;p class="first last"&gt;Rescuing a Lenovo ThinkPad T450 with a new SSD and setting up a
+minimal Fedora 44 Workstation using the Everything Netinstall ISO.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;A while ago at work, I was assigned a Lenovo ThinkPad T450. A few months ago,
+its 128GB SSD running Debian Testing suffered a hardware failure.&lt;/p&gt;
+&lt;p&gt;Last week, I ordered a 240GB Crucial BX500 SSD. To my surprise, I received a
+480GB SanDisk SSD Plus instead—the same drive tier, but offering double the
+storage capacity.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="SanDisk SSD Plus 480GB package" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_231024820.jpg" /&gt;
+&lt;p class="caption"&gt;Received a 480GB SanDisk SSD Plus instead of the ordered 240GB drive.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="hardware-failure-and-data-recovery-strategy"&gt;
+&lt;h2&gt;Hardware Failure and Data Recovery Strategy&lt;/h2&gt;
+&lt;p&gt;A few months ago, the SSD on my assigned laptop began showing signs of wear and
+impending failure. One day, while running Android Studio during an active
+collaborative project, the system froze and crashed. Subsequent attempts to
+boot or access the operating system failed completely.&lt;/p&gt;
+&lt;p&gt;Attempts to reinstall an operating system onto the original drive were
+unsuccessful. The SSD had locked itself into a permanent read-only state,
+preventing any new writes or reformatting.&lt;/p&gt;
+&lt;p&gt;Fortunately, all development projects were properly mirrored in remote Git
+repositories, and critical local documents were preserved on secondary machines
+via incremental backups managed with &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; (a tool I will cover in a future
+publication).&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="storage-upgrade-and-hardware-maintenance"&gt;
+&lt;h2&gt;Storage Upgrade and Hardware Maintenance&lt;/h2&gt;
+&lt;p&gt;After several months, I decided to restore the Lenovo ThinkPad T450. I
+originally planned to acquire a 256GB Samsung 850 Pro. However, due to recent
+AI industry demand driving up component prices, I opted for a more
+budget-friendly alternative: a 240GB Crucial BX500. Additionally, I ordered a
+uni-ball Jetstream Prime Twist pen and a Kuru Toga Metal mechanical pencil (my
+first mechanical pencil in 17 years).&lt;/p&gt;
+&lt;p&gt;Upon unboxing, I discovered the vendor had shipped a 480GB SanDisk SSD Plus
+instead of the 240GB drive.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="The SanDisk SSD Plus with 480GB of storage capacity" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233933775.jpg" /&gt;
+&lt;p class="caption"&gt;Unboxed it and got it ready for the replacement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;I removed the bottom chassis cover of the T450, extracted the defective SSD,
+and mounted the new 480GB drive.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="taylor internals" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233319522.jpg" /&gt;
+&lt;p class="caption"&gt;Taylor internals after removing a few screws and snapping off the bottom.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Removed the old SSD with its enclosure from the laptop" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233543918.jpg" /&gt;
+&lt;p class="caption"&gt;Then removed the old SSD from the enclosure.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Back of the new SSD" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233729227.jpg" /&gt;
+&lt;p class="caption"&gt;Unboxed the new SSD.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Front of the new SSD" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233933775.jpg" /&gt;
+&lt;p class="caption"&gt;My new SSD.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Put the new SSD on its enclosure" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233937651.jpg" /&gt;
+&lt;p class="caption"&gt;The new SSD is ready to be installed on Taylor.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;After reassembling the chassis, I booted into the system BIOS to confirm that
+the new disk was properly recognized.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Taylor turning on and getting to the boot menu" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_234905628.jpg" /&gt;
+&lt;p class="caption"&gt;The new SSD is successfully recognized and listed on the boot menu.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="installation-via-fedora-everything-netinstall"&gt;
+&lt;h2&gt;Installation via Fedora Everything Netinstall&lt;/h2&gt;
+&lt;p&gt;To maintain a lean, bloat-free system, I created installation media using the
+&lt;strong&gt;Fedora Everything Netinstall ISO (Release 44, x86_64)&lt;/strong&gt; available from the
+official Fedora repository:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;URL: &lt;a class="reference external" href="https://fedoraproject.org/en/misc/#everything"&gt;https://fedoraproject.org/en/misc/#everything&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Unlike the standard Live Workstation media, the Netinstall image allows
+explicit selection of individual package groups and components. Once options
+are finalized in the Anaconda installer, all necessary packages are fetched
+directly from the upstream Fedora mirrors. This ensures that every installed
+binary is completely up to date from minute one.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Taylor turning on and getting to the boot menu" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260927_000449067.jpg" /&gt;
+&lt;p class="caption"&gt;Taylor booting up from the installation media that contains the Fedora
+Everything Netinstall ISO for release 44, for x86_64 devices.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;During the installation I made use of my Motorola ThinkPhone to share its Wi-Fi
+connection to Taylor via a Wired USB Tethering network:&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Antares providing wired Internet connection to Taylor" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/photo_5068942423496527421_y.jpg" /&gt;
+&lt;p class="caption"&gt;This is a good example of how useful a USB Wired Network can be in some
+scenarios.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Once download and deployment completed, Anaconda performed a clean reboot into
+the fresh installation.&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Anaconda completed the installation" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/photo_5068942423496527416_y.jpg" /&gt;
+&lt;p class="caption"&gt;Installation completed and Taylor is ready to reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This is Taylor's GRUB2 menu with the latest Linux kernel available for Fedora
+Linux 44 already installed:&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Fedora Linux 44 GRUB2" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/photo_5068942423496527418_y.jpg" /&gt;
+&lt;p class="caption"&gt;Taylor booting up to Linux 7.2.7-200.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Upon selecting the kernel, I was prompted by the cryptsetup password manager to
+decrypt the disk:&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Waiting for the password to decrypt the disk" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/photo_5068942423496527414_y.jpg" /&gt;
+&lt;p class="caption"&gt;Time to insert the passphrase.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Taylor's about information" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/screenshot_from_2026-09-27_07-43-25.png" /&gt;
+&lt;p class="caption"&gt;This is Taylor's System Information under Fedora Linux 44 (Workstation
+Edition) with GNOME Shell as Desktop Environment.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="minimal-system-metrics-and-metrics-overview"&gt;
+&lt;h2&gt;Minimal System Metrics and Metrics Overview&lt;/h2&gt;
+&lt;p&gt;Below is a breakdown of metrics, repository lists, and package selections for
+this minimal Fedora 44 GNOME Shell Workstation setup:&lt;/p&gt;
+&lt;div class="section" id="installation-date-and-time"&gt;
+&lt;h3&gt;Installation Date and Time&lt;/h3&gt;
+&lt;p&gt;There are many ways to confirm when the Fedora installation started, when some
+filesystems or partitions were created, and when the installation process was
+completed with success.&lt;/p&gt;
+&lt;p&gt;One possible way is by inspecting the Anaconda Installer Logs. Fedora's
+installer, Anaconda, copies its logs over to the target system upon a
+successful installation. You can check the creation (birth) time of the primary
+installation log or kickstart configuration file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;/var/log/anaconda/anaconda.log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;/var/log/anaconda/anaconda.log
+&lt;span class="w"&gt;  &lt;/span&gt;File:&lt;span class="w"&gt; &lt;/span&gt;/var/log/anaconda/anaconda.log
+&lt;span class="w"&gt;  &lt;/span&gt;Size:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;120716&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;Blocks:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;240&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;IO&lt;span class="w"&gt; &lt;/span&gt;Block:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4096&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;regular&lt;span class="w"&gt; &lt;/span&gt;file
+Device:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;252&lt;/span&gt;,1&lt;span class="w"&gt;        &lt;/span&gt;Inode:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;262214&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;Links:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+Access:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0600&lt;/span&gt;/-rw-------&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;Uid:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;/&lt;span class="w"&gt;    &lt;/span&gt;root&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;Gid:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;/&lt;span class="w"&gt;    &lt;/span&gt;root&lt;span class="o"&gt;)&lt;/span&gt;
+Context:&lt;span class="w"&gt; &lt;/span&gt;system_u:object_r:var_log_t:s0
+Access:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-10-11&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;03&lt;/span&gt;:57:53.378396125&lt;span class="w"&gt; &lt;/span&gt;+0000
+Modify:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-09-27&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;07&lt;/span&gt;:01:52.682345253&lt;span class="w"&gt; &lt;/span&gt;+0000
+Change:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-09-27&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;07&lt;/span&gt;:01:52.682345253&lt;span class="w"&gt; &lt;/span&gt;+0000
+&lt;span class="w"&gt; &lt;/span&gt;Birth:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-09-27&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;07&lt;/span&gt;:01:52.681300526&lt;span class="w"&gt; &lt;/span&gt;+0000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;/root/anaconda-ks.cfg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;/root/anaconda-ks.cfg
+&lt;span class="o"&gt;[&lt;/span&gt;sudo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;password&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;porfirio:
+-rw-------.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;root&lt;span class="w"&gt; &lt;/span&gt;root&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1207&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Sep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;27&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;07&lt;/span&gt;:01&lt;span class="w"&gt; &lt;/span&gt;/root/anaconda-ks.cfg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Another way is by checking the Root Filesystem Creation Date. Just like on
+Debian, the underlying filesystem's birth time can tell you when it was
+initialized:&lt;/p&gt;
+&lt;p&gt;Using stat on the root directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;%w&lt;span class="w"&gt; &lt;/span&gt;/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;stat&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;%w&lt;span class="w"&gt; &lt;/span&gt;/
+&lt;span class="m"&gt;2026&lt;/span&gt;-09-27&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;06&lt;/span&gt;:47:23.000000000&lt;span class="w"&gt; &lt;/span&gt;+0000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is also possible to use &lt;tt class="docutils literal"&gt;tune2fs&lt;/tt&gt; (for ext4 filesystems):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;tune2fs&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;df&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tail&lt;span class="w"&gt; &lt;/span&gt;-1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;awk&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Filesystem created:&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which returned:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~&lt;span class="nv"&gt;$sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tune2fs&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="k"&gt;$(&lt;/span&gt;df&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tail&lt;span class="w"&gt; &lt;/span&gt;-1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;awk&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Filesystem created:&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;sudo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;password&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;porfirio:
+Filesystem&lt;span class="w"&gt; &lt;/span&gt;created:&lt;span class="w"&gt;       &lt;/span&gt;Sun&lt;span class="w"&gt; &lt;/span&gt;Sep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;27&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;06&lt;/span&gt;:47:23&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="number-of-packages-and-amount-of-data-downloaded"&gt;
+&lt;h3&gt;Number of packages and amount of data downloaded&lt;/h3&gt;
+&lt;p&gt;During the installation Anaconda downloaded 1905 packages, for a total of 2.02
+GiB:&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="Anaconda getting 1905 rpms, 2.02 GiB total" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/photo_5068942423496527415_y.jpg" /&gt;
+&lt;p class="caption"&gt;Anaconda getting the 1905 packages that would serve for a Fedora Linux 44
+(Workstation Edition).&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;After the installation got completed this was the total used space for the 1905
+packages once installed:&lt;/p&gt;
+&lt;div class="figure align-center"&gt;
+&lt;img alt="GNOME Disk Usage Analyzer" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/screenshot_from_2026-09-27_07-51-24.png" /&gt;
+&lt;p class="caption"&gt;Just 7.7 GB are required to have a fully functional Fedora Linux 44
+(Workstation Edition).&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This is another way to see how the space is used on the disk by using the
+command line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;df&lt;span class="w"&gt; &lt;/span&gt;-h
+Filesystem&lt;span class="w"&gt;                      &lt;/span&gt;Size&lt;span class="w"&gt;  &lt;/span&gt;Used&lt;span class="w"&gt; &lt;/span&gt;Avail&lt;span class="w"&gt; &lt;/span&gt;Use%&lt;span class="w"&gt; &lt;/span&gt;Mounted&lt;span class="w"&gt; &lt;/span&gt;on
+/dev/mapper/fedora_taylor-root&lt;span class="w"&gt;  &lt;/span&gt;428G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;.1G&lt;span class="w"&gt;  &lt;/span&gt;399G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/
+devtmpfs&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/dev
+tmpfs&lt;span class="w"&gt;                           &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;   &lt;/span&gt;92K&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/dev/shm
+efivarfs&lt;span class="w"&gt;                         &lt;/span&gt;64K&lt;span class="w"&gt;   &lt;/span&gt;20K&lt;span class="w"&gt;   &lt;/span&gt;40K&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;34&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/sys/firmware/efi/efivars
+tmpfs&lt;span class="w"&gt;                           &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.4G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.9M&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.4G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/run
+none&lt;span class="w"&gt;                            &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/run/credentials/systemd-cryptsetup@luks&lt;span class="se"&gt;\x&lt;/span&gt;2d4ceba41c&lt;span class="se"&gt;\x&lt;/span&gt;2d2349&lt;span class="se"&gt;\x&lt;/span&gt;2d42e2&lt;span class="se"&gt;\x&lt;/span&gt;2daaa7&lt;span class="se"&gt;\x&lt;/span&gt;2dc40d16426647.service
+none&lt;span class="w"&gt;                            &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/run/credentials/systemd-journald.service
+none&lt;span class="w"&gt;                            &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0M&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/run/credentials/systemd-resolved.service
+tmpfs&lt;span class="w"&gt;                           &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;   &lt;/span&gt;12M&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.8G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/tmp
+/dev/sda2&lt;span class="w"&gt;                       &lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;.8G&lt;span class="w"&gt;  &lt;/span&gt;326M&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;.0G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/boot
+/dev/sda1&lt;span class="w"&gt;                       &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.0G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;.9M&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.0G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/boot/efi
+tmpfs&lt;span class="w"&gt;                           &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.2G&lt;span class="w"&gt;  &lt;/span&gt;188K&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.2G&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;/run/user/1000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And this is how the disk's space got distributed with the different partitions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;lsblk
+NAME&lt;span class="w"&gt;                                          &lt;/span&gt;MAJ:MIN&lt;span class="w"&gt; &lt;/span&gt;RM&lt;span class="w"&gt;   &lt;/span&gt;SIZE&lt;span class="w"&gt; &lt;/span&gt;RO&lt;span class="w"&gt; &lt;/span&gt;TYPE&lt;span class="w"&gt;  &lt;/span&gt;MOUNTPOINTS
+sda&lt;span class="w"&gt;                                             &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;:0&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;447&lt;/span&gt;.1G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;disk
+├─sda1&lt;span class="w"&gt;                                          &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;:1&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;2G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;part&lt;span class="w"&gt;  &lt;/span&gt;/boot/efi
+├─sda2&lt;span class="w"&gt;                                          &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;:2&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;10G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;part&lt;span class="w"&gt;  &lt;/span&gt;/boot
+└─sda3&lt;span class="w"&gt;                                          &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;:3&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;435&lt;/span&gt;.1G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;part
+&lt;span class="w"&gt;  &lt;/span&gt;└─luks-4ceba41c-2349-42e2-aaa7-c40d16426647&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;252&lt;/span&gt;:0&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;435&lt;/span&gt;.1G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;crypt
+&lt;span class="w"&gt;    &lt;/span&gt;└─fedora_taylor-root&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;252&lt;/span&gt;:1&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;435&lt;/span&gt;.1G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;lvm&lt;span class="w"&gt;   &lt;/span&gt;/
+zram0&lt;span class="w"&gt;                                         &lt;/span&gt;&lt;span class="m"&gt;251&lt;/span&gt;:0&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;8G&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;disk&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;SWAP&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="enabled-repositories"&gt;
+&lt;h3&gt;Enabled Repositories&lt;/h3&gt;
+&lt;p&gt;During the installation I selected the Fedora Workstation Product, which is a
+set of different Fedora packages groups that guarantee that by the end of the
+installation process you will have the minimal selection of packages that will
+provide the Workstation experience intended by the Fedora development team.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;group&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;--installed&lt;span class="w"&gt; &lt;/span&gt;--hidden
+&lt;span class="o"&gt;[&lt;/span&gt;sudo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;password&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;porfirio:
+Updating&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;loading&lt;span class="w"&gt; &lt;/span&gt;repositories:
+Repositories&lt;span class="w"&gt; &lt;/span&gt;loaded.
+ID&lt;span class="w"&gt;                        &lt;/span&gt;Name&lt;span class="w"&gt;                             &lt;/span&gt;Installed
+base-graphical&lt;span class="w"&gt;            &lt;/span&gt;base-graphical&lt;span class="w"&gt;                         &lt;/span&gt;yes
+container-management&lt;span class="w"&gt;      &lt;/span&gt;Container&lt;span class="w"&gt; &lt;/span&gt;Management&lt;span class="w"&gt;                   &lt;/span&gt;yes
+core&lt;span class="w"&gt;                      &lt;/span&gt;Core&lt;span class="w"&gt;                                   &lt;/span&gt;yes
+desktop-accessibility&lt;span class="w"&gt;     &lt;/span&gt;Desktop&lt;span class="w"&gt; &lt;/span&gt;accessibility&lt;span class="w"&gt;                  &lt;/span&gt;yes
+firefox&lt;span class="w"&gt;                   &lt;/span&gt;Firefox&lt;span class="w"&gt; &lt;/span&gt;Web&lt;span class="w"&gt; &lt;/span&gt;Browser&lt;span class="w"&gt;                    &lt;/span&gt;yes
+fonts&lt;span class="w"&gt;                     &lt;/span&gt;Fonts&lt;span class="w"&gt;                                  &lt;/span&gt;yes
+gnome-desktop&lt;span class="w"&gt;             &lt;/span&gt;GNOME&lt;span class="w"&gt;                                  &lt;/span&gt;yes
+guest-desktop-agents&lt;span class="w"&gt;      &lt;/span&gt;Guest&lt;span class="w"&gt; &lt;/span&gt;Desktop&lt;span class="w"&gt; &lt;/span&gt;Agents&lt;span class="w"&gt;                   &lt;/span&gt;yes
+hardware-support&lt;span class="w"&gt;          &lt;/span&gt;Hardware&lt;span class="w"&gt; &lt;/span&gt;Support&lt;span class="w"&gt;                       &lt;/span&gt;yes
+libreoffice&lt;span class="w"&gt;               &lt;/span&gt;LibreOffice&lt;span class="w"&gt;                            &lt;/span&gt;yes
+multimedia&lt;span class="w"&gt;                &lt;/span&gt;Multimedia&lt;span class="w"&gt;                             &lt;/span&gt;yes
+networkmanager-submodules&lt;span class="w"&gt; &lt;/span&gt;Common&lt;span class="w"&gt; &lt;/span&gt;NetworkManager&lt;span class="w"&gt; &lt;/span&gt;Submodules&lt;span class="w"&gt;       &lt;/span&gt;yes
+printing&lt;span class="w"&gt;                  &lt;/span&gt;Printing&lt;span class="w"&gt; &lt;/span&gt;Support&lt;span class="w"&gt;                       &lt;/span&gt;yes
+workstation-product&lt;span class="w"&gt;       &lt;/span&gt;Fedora&lt;span class="w"&gt; &lt;/span&gt;Workstation&lt;span class="w"&gt; &lt;/span&gt;product&lt;span class="w"&gt; &lt;/span&gt;core&lt;span class="w"&gt;        &lt;/span&gt;yes
+Groups:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;installed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;available&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can use the command below to get to know more about what packages a
+package group provides:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;group&lt;span class="w"&gt; &lt;/span&gt;info&lt;span class="w"&gt; &lt;/span&gt;core
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I wanted to make sure which software repositories came enabled by default:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;repolist&lt;span class="w"&gt; &lt;/span&gt;--enabled
+repo&lt;span class="w"&gt; &lt;/span&gt;id&lt;span class="w"&gt;                        &lt;/span&gt;repo&lt;span class="w"&gt; &lt;/span&gt;name
+fedora&lt;span class="w"&gt;                         &lt;/span&gt;Fedora&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;44&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;x86_64
+fedora-cisco-openh264&lt;span class="w"&gt;          &lt;/span&gt;Fedora&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;44&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;openh264&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;From&lt;span class="w"&gt; &lt;/span&gt;Cisco&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;x86_64
+updates&lt;span class="w"&gt;                        &lt;/span&gt;Fedora&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;44&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;x86_64&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;Updates
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command lists all the repositories configured but disabled on the system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;repolist&lt;span class="w"&gt; &lt;/span&gt;--disabled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This command lists all the repositories configured on the system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;repolist&lt;span class="w"&gt; &lt;/span&gt;--all
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list-of-the-installed-packages"&gt;
+&lt;h3&gt;List of the installed packages&lt;/h3&gt;
+&lt;p&gt;I wanted to get a copy of all the installed packages just for reference. To get
+the list of the packages installed and the order in which these packages were
+installed, I used the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;history&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;info&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;dnfHistoryInfo1_cleanInstall.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can find this file on the link below:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://raw.githubusercontent.com/porfiriopaiz/site/refs/heads/master/content/extra/dnfHistoryInfo1_cleanInstall"&gt;https://raw.githubusercontent.com/porfiriopaiz/site/refs/heads/master/content/extra/dnfHistoryInfo1_cleanInstall&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;Finishing Touches&lt;/h2&gt;
+&lt;p&gt;With the base installation complete, the ThinkPad T450 is fully operational
+with an up-to-date, non-bloated Linux workstation environment built on top of a
+reliable upstream system architecture.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="fc44"/><category term="fedora"/><category term="gnome-shell"/><category term="post-install"/></entry><entry><title>Installing TeX Live 2025 on Fedora: A Minimalist User-Space Guide</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/28/texlive-2025-fedora-user-space.html" rel="alternate"/><published>2026-02-28T04:40:00-06:00</published><updated>2026-02-28T04:40:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-28:/site/posts/2026/02/28/texlive-2025-fedora-user-space.html</id><summary type="html">&lt;p class="first last"&gt;A comprehensive guide to installing a full, upstream TeX Live
 distribution within a user's home directory on Fedora Linux.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;This guide consolidates the steps required to establish a professional-grade
 LaTeX environment into a single, clean workflow. Following this chronological
