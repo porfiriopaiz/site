@@ -9,32 +9,19 @@ Fedora Everything 44 Minimal Workstation
           minimal Fedora 44 Workstation using the Everything Netinstall ISO.
 :lang: en
 
-A while ago at work, I was assigned a Lenovo ThinkPad T450. A few months ago,
-its 128GB SSD running Debian Testing suffered a hardware failure.
-
-Last week, I ordered a 240GB Crucial BX500 SSD. To my surprise, I received a
-480GB SanDisk SSD Plus instead—the same drive tier, but offering double the
-storage capacity.
-
-.. figure:: {static}/images/fedora-everything-44/img_20260926_231024820.jpg
-   :align: center
-   :alt: SanDisk SSD Plus 480GB package
-
-   Received a 480GB SanDisk SSD Plus instead of the ordered 240GB drive.
+A while ago at work, I was assigned a Lenovo ThinkPad T450. Recently, its
+original 128GB SSD running Debian Testing suffered a permanent hardware
+failure.
 
 ----
 
 Hardware Failure and Data Recovery Strategy
 ===========================================
 
-A few months ago, the SSD on my assigned laptop began showing signs of wear and
-impending failure. One day, while running Android Studio during an active
-collaborative project, the system froze and crashed. Subsequent attempts to
-boot or access the operating system failed completely.
-
-Attempts to reinstall an operating system onto the original drive were
-unsuccessful. The SSD had locked itself into a permanent read-only state,
-preventing any new writes or reformatting. 
+The laptop's SSD began showing signs of wear before finally freezing mid-task
+while I was running Android Studio and an active collaborative project.
+Subsequent attempts to boot or reinstall an operating system failed
+completely, as the drive had locked itself into a permanent read-only state.
 
 Fortunately, all development projects were properly mirrored in remote Git
 repositories, and critical local documents were preserved on secondary machines
@@ -46,21 +33,21 @@ publication).
 Storage Upgrade and Hardware Maintenance
 ========================================
 
-After several months, I decided to restore the Lenovo ThinkPad T450. I
-originally planned to acquire a 256GB Samsung 850 Pro. However, due to recent
-AI industry demand driving up component prices, I opted for a more
-budget-friendly alternative: a 240GB Crucial BX500. Additionally, I ordered a
-uni-ball Jetstream Prime Twist pen and a Kuru Toga Metal mechanical pencil (my
-first mechanical pencil in 17 years).
+To restore the ThinkPad T450, I originally planned to acquire a 256GB Samsung
+850 Pro. However, due to component price spikes driven by AI industry demand, I
+opted for a budget-friendly 240GB Crucial BX500 instead. On that same order, I
+also picked up a uni-ball Jetstream Prime Twist pen and a Kuru Toga Metal
+mechanical pencil (my first mechanical pencil in 17 years).
 
-Upon unboxing, I discovered the vendor had shipped a 480GB SanDisk SSD Plus
-instead of the 240GB drive.
+To my surprise, when the package arrived, the vendor had shipped a 480GB
+SanDisk SSD Plus instead of the 240GB drive—double the storage capacity for the
+same tier.
 
-.. figure:: {static}/images/fedora-everything-44/img_20260926_233933775.jpg
+.. figure:: {static}/images/fedora-everything-44/img_20260926_231024820.jpg
    :align: center
-   :alt: The SanDisk SSD Plus with 480GB of storage capacity
+   :alt: SanDisk SSD Plus 480GB package
 
-   Unboxed it and got it ready for the replacement.
+   Received a 480GB SanDisk SSD Plus instead of the ordered 240GB drive.
 
 I removed the bottom chassis cover of the T450, extracted the defective SSD,
 and mounted the new 480GB drive.
@@ -317,7 +304,7 @@ Enabled Repositories
 --------------------
 
 During the installation I selected the Fedora Workstation Product, which is a
-set of different Fedora packages groups that guarantee that by the end of the
+set of different Fedora package groups that guarantee that by the end of the
 installation process you will have the minimal selection of packages that will
 provide the Workstation experience intended by the Fedora development team.
 

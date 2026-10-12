@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-09-30T02:28:00-06:00</updated><entry><title>Fedora Everything 44 Minimal Workstation</title><link href="https://porfiriopaiz.github.io/site/posts/2026/09/30/fedora-everything-44.html" rel="alternate"/><published>2026-09-30T02:28:00-06:00</published><updated>2026-09-30T02:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-09-30:/site/posts/2026/09/30/fedora-everything-44.html</id><summary type="html">&lt;p class="first last"&gt;Rescuing a Lenovo ThinkPad T450 with a new SSD and setting up a
 minimal Fedora 44 Workstation using the Everything Netinstall ISO.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;A while ago at work, I was assigned a Lenovo ThinkPad T450. A few months ago,
-its 128GB SSD running Debian Testing suffered a hardware failure.&lt;/p&gt;
-&lt;p&gt;Last week, I ordered a 240GB Crucial BX500 SSD. To my surprise, I received a
-480GB SanDisk SSD Plus instead—the same drive tier, but offering double the
-storage capacity.&lt;/p&gt;
-&lt;div class="figure align-center"&gt;
-&lt;img alt="SanDisk SSD Plus 480GB package" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_231024820.jpg" /&gt;
-&lt;p class="caption"&gt;Received a 480GB SanDisk SSD Plus instead of the ordered 240GB drive.&lt;/p&gt;
-&lt;/div&gt;
+</summary><content type="html">&lt;p&gt;A while ago at work, I was assigned a Lenovo ThinkPad T450. Recently, its
+original 128GB SSD running Debian Testing suffered a permanent hardware
+failure.&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="hardware-failure-and-data-recovery-strategy"&gt;
 &lt;h2&gt;Hardware Failure and Data Recovery Strategy&lt;/h2&gt;
-&lt;p&gt;A few months ago, the SSD on my assigned laptop began showing signs of wear and
-impending failure. One day, while running Android Studio during an active
-collaborative project, the system froze and crashed. Subsequent attempts to
-boot or access the operating system failed completely.&lt;/p&gt;
-&lt;p&gt;Attempts to reinstall an operating system onto the original drive were
-unsuccessful. The SSD had locked itself into a permanent read-only state,
-preventing any new writes or reformatting.&lt;/p&gt;
+&lt;p&gt;The laptop's SSD began showing signs of wear before finally freezing mid-task
+while I was running Android Studio and an active collaborative project.
+Subsequent attempts to boot or reinstall an operating system failed
+completely, as the drive had locked itself into a permanent read-only state.&lt;/p&gt;
 &lt;p&gt;Fortunately, all development projects were properly mirrored in remote Git
 repositories, and critical local documents were preserved on secondary machines
 via incremental backups managed with &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; (a tool I will cover in a future
@@ -28,17 +19,17 @@ publication).&lt;/p&gt;
 &lt;hr class="docutils" /&gt;
 &lt;div class="section" id="storage-upgrade-and-hardware-maintenance"&gt;
 &lt;h2&gt;Storage Upgrade and Hardware Maintenance&lt;/h2&gt;
-&lt;p&gt;After several months, I decided to restore the Lenovo ThinkPad T450. I
-originally planned to acquire a 256GB Samsung 850 Pro. However, due to recent
-AI industry demand driving up component prices, I opted for a more
-budget-friendly alternative: a 240GB Crucial BX500. Additionally, I ordered a
-uni-ball Jetstream Prime Twist pen and a Kuru Toga Metal mechanical pencil (my
-first mechanical pencil in 17 years).&lt;/p&gt;
-&lt;p&gt;Upon unboxing, I discovered the vendor had shipped a 480GB SanDisk SSD Plus
-instead of the 240GB drive.&lt;/p&gt;
+&lt;p&gt;To restore the ThinkPad T450, I originally planned to acquire a 256GB Samsung
+850 Pro. However, due to component price spikes driven by AI industry demand, I
+opted for a budget-friendly 240GB Crucial BX500 instead. On that same order, I
+also picked up a uni-ball Jetstream Prime Twist pen and a Kuru Toga Metal
+mechanical pencil (my first mechanical pencil in 17 years).&lt;/p&gt;
+&lt;p&gt;To my surprise, when the package arrived, the vendor had shipped a 480GB
+SanDisk SSD Plus instead of the 240GB drive—double the storage capacity for the
+same tier.&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
-&lt;img alt="The SanDisk SSD Plus with 480GB of storage capacity" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_233933775.jpg" /&gt;
-&lt;p class="caption"&gt;Unboxed it and got it ready for the replacement.&lt;/p&gt;
+&lt;img alt="SanDisk SSD Plus 480GB package" src="https://porfiriopaiz.github.io/site/images/fedora-everything-44/img_20260926_231024820.jpg" /&gt;
+&lt;p class="caption"&gt;Received a 480GB SanDisk SSD Plus instead of the ordered 240GB drive.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;I removed the bottom chassis cover of the T450, extracted the defective SSD,
 and mounted the new 480GB drive.&lt;/p&gt;
@@ -222,7 +213,7 @@ zram0&lt;span class="w"&gt;                                         &lt;/span&gt
 &lt;div class="section" id="enabled-repositories"&gt;
 &lt;h3&gt;Enabled Repositories&lt;/h3&gt;
 &lt;p&gt;During the installation I selected the Fedora Workstation Product, which is a
-set of different Fedora packages groups that guarantee that by the end of the
+set of different Fedora package groups that guarantee that by the end of the
 installation process you will have the minimal selection of packages that will
 provide the Workstation experience intended by the Fedora development team.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;porfirio@taylor:~$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;group&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;--installed&lt;span class="w"&gt; &lt;/span&gt;--hidden
