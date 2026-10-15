@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="fc44, fedora, ssh, security, backup, post-install">
+
+  <title>
+    porfirio's blog
+&ndash; Backing Up and Restoring SSH Keys  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/10/15/ssh-backup-and-restore.html">Backing Up and Restoring SSH Keys</a></h1>
+  </div>
+  <div class="article_text">
+    <p>When setting up a fresh system like my Lenovo ThinkPad T450 (named
+<tt class="docutils literal">taylor</tt>) running Fedora Linux 44 (Workstation Edition), transferring
+cryptographic identities safely is a top priority. When hardening SSH, the
+strictness of file permissions is enforced directly by OpenSSH's
+<tt class="docutils literal">StrictModes</tt> check. If permissions are too open, SSH will
+reject key usage with errors like permissions being too open.</p>
+<hr class="docutils" />
+<div class="section" id="openssh-permission-requirements">
+<h2>OpenSSH Permission Requirements</h2>
+<p>Here are the minimal and recommended permissions required for secure SSH
+key directory and file operations on your system.</p>
+<div class="section" id="the-ssh-directory-ssh">
+<h3>The SSH Directory (<cite>~/.ssh</cite>)</h3>
+<ul class="simple">
+<li><strong>Minimal/Recommended Permission:</strong> <tt class="docutils literal">700</tt> (<cite>drwx------</cite>).</li>
+<li><strong>Access Level:</strong> Only the file owner can read, write, and execute the
+directory, leaving group and others with zero access.</li>
+<li><strong>Ownership:</strong> Must be owned by the active user account utilizing the
+keys.</li>
+</ul>
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>~/.ssh
+</pre></div>
+</div>
+<div class="section" id="files-within-the-ssh-directory">
+<h3>Files Within the SSH Directory</h3>
+<p>Permissions vary depending on whether the file contains private data,
+public data, or configuration settings:</p>
+<ul class="simple">
+<li><strong>Private Keys</strong> (<cite>id_ed25519</cite>, <cite>id_rsa</cite>): Mode <tt class="docutils literal">600</tt> (or <tt class="docutils literal">400</tt>) for
+owner read/write or read-only access, barring all others.</li>
+<li><strong>Public Keys</strong> (<cite>id_ed25519.pub</cite>, <cite>id_rsa.pub</cite>): Mode <tt class="docutils literal">644</tt> allowing
+owner read/write and group/others read-only access.</li>
+<li><strong>Authorized Keys</strong> (<cite>authorized_keys</cite>): Mode <tt class="docutils literal">600</tt> for owner
+read/write only.</li>
+<li><strong>Config / Known Hosts</strong> (<cite>config</cite>, <cite>known_hosts</cite>): Mode <tt class="docutils literal">600</tt>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For private key files, the absolute minimum required permission for
+standard SSH operations is <tt class="docutils literal">400</tt> (<cite>-r--------</cite>). However,
+<tt class="docutils literal">600</tt> is standard because it allows updating configurations without
+modifying permission bits first.</p>
+</div>
+</div>
+<div class="section" id="parent-directory-constraints">
+<h3>Parent Directory Constraints</h3>
+<p>OpenSSH also validates the permissions of parent directories in the path
+leading up to <tt class="docutils literal"><span class="pre">~/.ssh</span></tt>. Your home directory must not be
+writable by group or world, with a maximum allowable mode of <tt class="docutils literal">755</tt> or
+<tt class="docutils literal">750</tt>. If the home directory has overly open permissions, SSH
+will refuse key authentication even if <tt class="docutils literal"><span class="pre">~/.ssh</span></tt> is set to <tt class="docutils literal">700</tt>.</p>
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/home/<span class="nv">$USER</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="backing-up-and-restoring-via-external-usb">
+<h2>Backing Up and Restoring via External USB</h2>
+<p>To transfer your <tt class="docutils literal">.ssh</tt> directory to an external USB drive from Fedora
+44 and later restore it to <tt class="docutils literal">taylor</tt>, standard copying tools can cause
+ownership mismatches or strip permission bits. Using <tt class="docutils literal">rsync</tt>
+with the <tt class="docutils literal"><span class="pre">-p</span></tt> (<cite>--perms</cite>) flag ensures permission bits transfer
+intact while writing files directly under your current logged-in user.</p>
+<div class="section" id="using-rsync-for-backup-and-restoration">
+<h3>Using <cite>rsync</cite> for Backup and Restoration</h3>
+<p>Assuming your USB directory mount path points to your target location, run
+the copy operation while preserving permissions:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-rp<span class="w"> </span>/path/to/source/.ssh/<span class="w"> </span>/path/to/destination/.ssh/
+</pre></div>
+<p>The flag breakdown includes:</p>
+<ul class="simple">
+<li><strong>`-r` (`--recursive`):</strong> Recurses into subdirectories and copies all
+files.</li>
+<li><strong>`-p` (`--perms`):</strong> Preserves explicit file permission modes.</li>
+<li><strong>No `-o`/`-g`:</strong> Running as a normal user without <tt class="docutils literal">sudo</tt> automatically
+assigns your current <tt class="docutils literal">$USER</tt> and primary group as the owner.</li>
+</ul>
+</div>
+<div class="section" id="alternative-using-cp">
+<h3>Alternative Using <cite>cp</cite></h3>
+<p>If <tt class="docutils literal">rsync</tt> is not available, you can perform the copy with <tt class="docutils literal">cp</tt>:</p>
+<div class="highlight"><pre><span></span>cp<span class="w"> </span>-r<span class="w"> </span>--preserve<span class="o">=</span>mode<span class="w"> </span>/path/to/source/.ssh<span class="w"> </span>/path/to/destination/.ssh
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="post-restore-verification-and-hardening">
+<h2>Post-Restore Verification and Hardening</h2>
+<p>After restoring your keys to <tt class="docutils literal">taylor</tt> from the USB drive, perform a
+post-copy safety check and apply mass hardening commands to satisfy OpenSSH
+strict mode checks.</p>
+<div class="section" id="inspection-and-hardening-commands">
+<h3>Inspection and Hardening Commands</h3>
+<p>Verify file permissions and apply the mass hardening script:</p>
+<div class="highlight"><pre><span></span><span class="c1"># 1. Inspect restored files</span>
+ls<span class="w"> </span>-la<span class="w"> </span>~/.ssh
+
+<span class="c1"># 2. Set directory to 700 and private keys to 600</span>
+chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/id_*<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>~/.ssh/*.pub<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+
+<span class="c1"># 3. Ensure proper user ownership</span>
+chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>~/.ssh
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="establishing-remote-ssh-key-authentication">
+<h2>Establishing Remote SSH Key Authentication</h2>
+<p>To connect from another machine—such as your MacBook Pro (running macOS)—to
+your Lenovo ThinkPad <tt class="docutils literal">taylor</tt> (running Fedora 44) using SSH keys, you need
+to configure network access, verify the SSH daemon, and copy your public
+key.</p>
+<div class="section" id="step-1-find-the-ip-addresses">
+<h3>Step 1: Find the IP Addresses</h3>
+<p>First, identify the local IP addresses of both systems.</p>
+<p>On your Lenovo ThinkPad (Fedora Linux), open a terminal and run:</p>
+<div class="highlight"><pre><span></span>hostname<span class="w"> </span>-I
+</pre></div>
+<p><em>(Alternatively, use ``ip a`` and look for the ``inet`` address under your
+Wi-Fi or Ethernet interface).</em></p>
+<p>On your MacBook Pro (macOS), open Terminal and run:</p>
+<div class="highlight"><pre><span></span>ipconfig<span class="w"> </span>getifaddr<span class="w"> </span>en0
+</pre></div>
+<p><em>(If connected via Wi-Fi, ``en0`` is typically your Wi-Fi interface).</em></p>
+</div>
+<div class="section" id="step-2-ensure-ssh-server-is-running-on-fedora">
+<h3>Step 2: Ensure SSH Server is Running on Fedora</h3>
+<p>Before copying your key, ensure your ThinkPad allows incoming SSH
+connections. On your ThinkPad, run:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Check if SSH daemon is active</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>sshd
+
+<span class="c1"># If it is not active, start and enable it:</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>sshd
+
+<span class="c1"># Ensure Fedora&#39;s firewall allows SSH traffic:</span>
+sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-service<span class="o">=</span>ssh<span class="w"> </span>--permanent
+sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
+</pre></div>
+</div>
+<div class="section" id="step-3-copy-your-key-from-macbook-pro-to-thinkpad">
+<h3>Step 3: Copy Your Key from MacBook Pro to ThinkPad</h3>
+<p>Because your key file may have a custom name (such as
+<tt class="docutils literal">porfirio&#64;altair.pub</tt> instead of the default <tt class="docutils literal">id_ed25519.pub</tt>), you must
+pass the <tt class="docutils literal"><span class="pre">-i</span></tt> flag to specify it.</p>
+<p>Run this command from your MacBook Pro Terminal (replace <tt class="docutils literal">username</tt> with
+your Fedora username and <tt class="docutils literal">192.168.1.50</tt> with your ThinkPad's IP):</p>
+<div class="highlight"><pre><span></span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/porfirio@altair.pub<span class="w"> </span>username@192.168.1.50
+</pre></div>
+<ol class="arabic simple">
+<li>Confirm the connection prompt by typing <tt class="docutils literal">yes</tt> and hitting Enter.</li>
+<li>Enter your Fedora user password when prompted.</li>
+<li>The key will be installed into <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt> on your
+ThinkPad.</li>
+</ol>
+</div>
+<div class="section" id="step-4-configure-ssh-config-on-your-macbook-pro">
+<h3>Step 4: Configure <cite>~/.ssh/config</cite> on Your MacBook Pro</h3>
+<p>Since your key file has a custom name, macOS will not automatically use it
+when running a standard SSH connection. To make connecting seamless, add
+an entry to your <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> file on your MacBook Pro:</p>
+<ol class="arabic">
+<li><p class="first">Open the configuration file on your Mac:</p>
+<div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.ssh/config
+</pre></div>
+</li>
+<li><p class="first">Add the following host block:</p>
+<div class="highlight"><pre><span></span>Host taylor
+    HostName 192.168.1.50
+    User username
+    IdentityFile ~/.ssh/porfirio@altair
+</pre></div>
+<p><em>(Replace ``192.168.1.50`` with your ThinkPad's IP and ``username`` with
+your Fedora account name).</em></p>
+</li>
+<li><p class="first">Save and exit (<cite>Ctrl + O</cite>, <cite>Enter</cite>, then <cite>Ctrl + X</cite>).</p>
+</li>
+</ol>
+</div>
+<div class="section" id="step-5-test-passwordless-ssh">
+<h3>Step 5: Test Passwordless SSH</h3>
+<p>Now, from your MacBook Pro, you can connect passwordlessly by running:</p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>taylor
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="finishing-touches">
+<h2>Finishing Touches</h2>
+<p>With these steps completed on Fedora 44, your SSH keys are safely backed
+up, restored, and fully optimized for secure remote connections.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 15 October 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/fc44.html">fc44</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/ssh.html">ssh</a>,      <a href="../../../../tag/security.html">security</a>,      <a href="../../../../tag/backup.html">backup</a>,      <a href="../../../../tag/post-install.html">post-install</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/10/15/ssh-backup-and-restore.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>

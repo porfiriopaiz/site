@@ -1,5 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-09-30T02:28:00-06:00</updated><entry><title>Fedora Everything 44 Minimal Workstation</title><link href="https://porfiriopaiz.github.io/site/posts/2026/09/30/fedora-everything-44.html" rel="alternate"/><published>2026-09-30T02:28:00-06:00</published><updated>2026-09-30T02:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-09-30:/site/posts/2026/09/30/fedora-everything-44.html</id><summary type="html">&lt;p class="first last"&gt;Rescuing a Lenovo ThinkPad T450 with a new SSD and setting up a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - Porfirio Páiz</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/porfirio-paiz.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-10-15T01:04:00-06:00</updated><entry><title>Backing Up and Restoring SSH Keys</title><link href="https://porfiriopaiz.github.io/site/posts/2026/10/15/ssh-backup-and-restore.html" rel="alternate"/><published>2026-10-15T01:04:00-06:00</published><updated>2026-10-15T01:04:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-10-15:/site/posts/2026/10/15/ssh-backup-and-restore.html</id><summary type="html">&lt;p class="first last"&gt;A practical guide on securely backing up, restoring, and hardening
+OpenSSH keys from .ssh to an external USB on Fedora 44.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;When setting up a fresh system like my Lenovo ThinkPad T450 (named
+&lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;) running Fedora Linux 44 (Workstation Edition), transferring
+cryptographic identities safely is a top priority. When hardening SSH, the
+strictness of file permissions is enforced directly by OpenSSH's
+&lt;tt class="docutils literal"&gt;StrictModes&lt;/tt&gt; check. If permissions are too open, SSH will
+reject key usage with errors like permissions being too open.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="openssh-permission-requirements"&gt;
+&lt;h2&gt;OpenSSH Permission Requirements&lt;/h2&gt;
+&lt;p&gt;Here are the minimal and recommended permissions required for secure SSH
+key directory and file operations on your system.&lt;/p&gt;
+&lt;div class="section" id="the-ssh-directory-ssh"&gt;
+&lt;h3&gt;The SSH Directory (&lt;cite&gt;~/.ssh&lt;/cite&gt;)&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Minimal/Recommended Permission:&lt;/strong&gt; &lt;tt class="docutils literal"&gt;700&lt;/tt&gt; (&lt;cite&gt;drwx------&lt;/cite&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Access Level:&lt;/strong&gt; Only the file owner can read, write, and execute the
+directory, leaving group and others with zero access.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ownership:&lt;/strong&gt; Must be owned by the active user account utilizing the
+keys.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;700&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh
+chown&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;:&lt;span class="nv"&gt;$USER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="files-within-the-ssh-directory"&gt;
+&lt;h3&gt;Files Within the SSH Directory&lt;/h3&gt;
+&lt;p&gt;Permissions vary depending on whether the file contains private data,
+public data, or configuration settings:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Private Keys&lt;/strong&gt; (&lt;cite&gt;id_ed25519&lt;/cite&gt;, &lt;cite&gt;id_rsa&lt;/cite&gt;): Mode &lt;tt class="docutils literal"&gt;600&lt;/tt&gt; (or &lt;tt class="docutils literal"&gt;400&lt;/tt&gt;) for
+owner read/write or read-only access, barring all others.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Public Keys&lt;/strong&gt; (&lt;cite&gt;id_ed25519.pub&lt;/cite&gt;, &lt;cite&gt;id_rsa.pub&lt;/cite&gt;): Mode &lt;tt class="docutils literal"&gt;644&lt;/tt&gt; allowing
+owner read/write and group/others read-only access.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Authorized Keys&lt;/strong&gt; (&lt;cite&gt;authorized_keys&lt;/cite&gt;): Mode &lt;tt class="docutils literal"&gt;600&lt;/tt&gt; for owner
+read/write only.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Config / Known Hosts&lt;/strong&gt; (&lt;cite&gt;config&lt;/cite&gt;, &lt;cite&gt;known_hosts&lt;/cite&gt;): Mode &lt;tt class="docutils literal"&gt;600&lt;/tt&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;For private key files, the absolute minimum required permission for
+standard SSH operations is &lt;tt class="docutils literal"&gt;400&lt;/tt&gt; (&lt;cite&gt;-r--------&lt;/cite&gt;). However,
+&lt;tt class="docutils literal"&gt;600&lt;/tt&gt; is standard because it allows updating configurations without
+modifying permission bits first.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="parent-directory-constraints"&gt;
+&lt;h3&gt;Parent Directory Constraints&lt;/h3&gt;
+&lt;p&gt;OpenSSH also validates the permissions of parent directories in the path
+leading up to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh&lt;/span&gt;&lt;/tt&gt;. Your home directory must not be
+writable by group or world, with a maximum allowable mode of &lt;tt class="docutils literal"&gt;755&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;750&lt;/tt&gt;. If the home directory has overly open permissions, SSH
+will refuse key authentication even if &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh&lt;/span&gt;&lt;/tt&gt; is set to &lt;tt class="docutils literal"&gt;700&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;750&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/home/&lt;span class="nv"&gt;$USER&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="backing-up-and-restoring-via-external-usb"&gt;
+&lt;h2&gt;Backing Up and Restoring via External USB&lt;/h2&gt;
+&lt;p&gt;To transfer your &lt;tt class="docutils literal"&gt;.ssh&lt;/tt&gt; directory to an external USB drive from Fedora
+44 and later restore it to &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;, standard copying tools can cause
+ownership mismatches or strip permission bits. Using &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt;
+with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-p&lt;/span&gt;&lt;/tt&gt; (&lt;cite&gt;--perms&lt;/cite&gt;) flag ensures permission bits transfer
+intact while writing files directly under your current logged-in user.&lt;/p&gt;
+&lt;div class="section" id="using-rsync-for-backup-and-restoration"&gt;
+&lt;h3&gt;Using &lt;cite&gt;rsync&lt;/cite&gt; for Backup and Restoration&lt;/h3&gt;
+&lt;p&gt;Assuming your USB directory mount path points to your target location, run
+the copy operation while preserving permissions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rsync&lt;span class="w"&gt; &lt;/span&gt;-rp&lt;span class="w"&gt; &lt;/span&gt;/path/to/source/.ssh/&lt;span class="w"&gt; &lt;/span&gt;/path/to/destination/.ssh/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The flag breakdown includes:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;`-r` (`--recursive`):&lt;/strong&gt; Recurses into subdirectories and copies all
+files.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;`-p` (`--perms`):&lt;/strong&gt; Preserves explicit file permission modes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;No `-o`/`-g`:&lt;/strong&gt; Running as a normal user without &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; automatically
+assigns your current &lt;tt class="docutils literal"&gt;$USER&lt;/tt&gt; and primary group as the owner.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="alternative-using-cp"&gt;
+&lt;h3&gt;Alternative Using &lt;cite&gt;cp&lt;/cite&gt;&lt;/h3&gt;
+&lt;p&gt;If &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; is not available, you can perform the copy with &lt;tt class="docutils literal"&gt;cp&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;--preserve&lt;span class="o"&gt;=&lt;/span&gt;mode&lt;span class="w"&gt; &lt;/span&gt;/path/to/source/.ssh&lt;span class="w"&gt; &lt;/span&gt;/path/to/destination/.ssh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="post-restore-verification-and-hardening"&gt;
+&lt;h2&gt;Post-Restore Verification and Hardening&lt;/h2&gt;
+&lt;p&gt;After restoring your keys to &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt; from the USB drive, perform a
+post-copy safety check and apply mass hardening commands to satisfy OpenSSH
+strict mode checks.&lt;/p&gt;
+&lt;div class="section" id="inspection-and-hardening-commands"&gt;
+&lt;h3&gt;Inspection and Hardening Commands&lt;/h3&gt;
+&lt;p&gt;Verify file permissions and apply the mass hardening script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 1. Inspect restored files&lt;/span&gt;
+ls&lt;span class="w"&gt; &lt;/span&gt;-la&lt;span class="w"&gt; &lt;/span&gt;~/.ssh
+
+&lt;span class="c1"&gt;# 2. Set directory to 700 and private keys to 600&lt;/span&gt;
+chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;700&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh
+chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/id_*&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;644&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/*.pub&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 3. Ensure proper user ownership&lt;/span&gt;
+chown&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;:&lt;span class="nv"&gt;$USER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="establishing-remote-ssh-key-authentication"&gt;
+&lt;h2&gt;Establishing Remote SSH Key Authentication&lt;/h2&gt;
+&lt;p&gt;To connect from another machine—such as your MacBook Pro (running macOS)—to
+your Lenovo ThinkPad &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt; (running Fedora 44) using SSH keys, you need
+to configure network access, verify the SSH daemon, and copy your public
+key.&lt;/p&gt;
+&lt;div class="section" id="step-1-find-the-ip-addresses"&gt;
+&lt;h3&gt;Step 1: Find the IP Addresses&lt;/h3&gt;
+&lt;p&gt;First, identify the local IP addresses of both systems.&lt;/p&gt;
+&lt;p&gt;On your Lenovo ThinkPad (Fedora Linux), open a terminal and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;hostname&lt;span class="w"&gt; &lt;/span&gt;-I
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Alternatively, use ``ip a`` and look for the ``inet`` address under your
+Wi-Fi or Ethernet interface).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;On your MacBook Pro (macOS), open Terminal and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ipconfig&lt;span class="w"&gt; &lt;/span&gt;getifaddr&lt;span class="w"&gt; &lt;/span&gt;en0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(If connected via Wi-Fi, ``en0`` is typically your Wi-Fi interface).&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-ensure-ssh-server-is-running-on-fedora"&gt;
+&lt;h3&gt;Step 2: Ensure SSH Server is Running on Fedora&lt;/h3&gt;
+&lt;p&gt;Before copying your key, ensure your ThinkPad allows incoming SSH
+connections. On your ThinkPad, run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Check if SSH daemon is active&lt;/span&gt;
+systemctl&lt;span class="w"&gt; &lt;/span&gt;status&lt;span class="w"&gt; &lt;/span&gt;sshd
+
+&lt;span class="c1"&gt;# If it is not active, start and enable it:&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;systemctl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--now&lt;span class="w"&gt; &lt;/span&gt;sshd
+
+&lt;span class="c1"&gt;# Ensure Fedora&amp;#39;s firewall allows SSH traffic:&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;firewall-cmd&lt;span class="w"&gt; &lt;/span&gt;--add-service&lt;span class="o"&gt;=&lt;/span&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;--permanent
+sudo&lt;span class="w"&gt; &lt;/span&gt;firewall-cmd&lt;span class="w"&gt; &lt;/span&gt;--reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-copy-your-key-from-macbook-pro-to-thinkpad"&gt;
+&lt;h3&gt;Step 3: Copy Your Key from MacBook Pro to ThinkPad&lt;/h3&gt;
+&lt;p&gt;Because your key file may have a custom name (such as
+&lt;tt class="docutils literal"&gt;porfirio&amp;#64;altair.pub&lt;/tt&gt; instead of the default &lt;tt class="docutils literal"&gt;id_ed25519.pub&lt;/tt&gt;), you must
+pass the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt;&lt;/tt&gt; flag to specify it.&lt;/p&gt;
+&lt;p&gt;Run this command from your MacBook Pro Terminal (replace &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; with
+your Fedora username and &lt;tt class="docutils literal"&gt;192.168.1.50&lt;/tt&gt; with your ThinkPad's IP):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/porfirio@altair.pub&lt;span class="w"&gt; &lt;/span&gt;username@192.168.1.50
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Confirm the connection prompt by typing &lt;tt class="docutils literal"&gt;yes&lt;/tt&gt; and hitting Enter.&lt;/li&gt;
+&lt;li&gt;Enter your Fedora user password when prompted.&lt;/li&gt;
+&lt;li&gt;The key will be installed into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt; on your
+ThinkPad.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-configure-ssh-config-on-your-macbook-pro"&gt;
+&lt;h3&gt;Step 4: Configure &lt;cite&gt;~/.ssh/config&lt;/cite&gt; on Your MacBook Pro&lt;/h3&gt;
+&lt;p&gt;Since your key file has a custom name, macOS will not automatically use it
+when running a standard SSH connection. To make connecting seamless, add
+an entry to your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; file on your MacBook Pro:&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Open the configuration file on your Mac:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nano&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/config
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Add the following host block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Host taylor
+    HostName 192.168.1.50
+    User username
+    IdentityFile ~/.ssh/porfirio@altair
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Replace ``192.168.1.50`` with your ThinkPad's IP and ``username`` with
+your Fedora account name).&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Save and exit (&lt;cite&gt;Ctrl + O&lt;/cite&gt;, &lt;cite&gt;Enter&lt;/cite&gt;, then &lt;cite&gt;Ctrl + X&lt;/cite&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-5-test-passwordless-ssh"&gt;
+&lt;h3&gt;Step 5: Test Passwordless SSH&lt;/h3&gt;
+&lt;p&gt;Now, from your MacBook Pro, you can connect passwordlessly by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;taylor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;Finishing Touches&lt;/h2&gt;
+&lt;p&gt;With these steps completed on Fedora 44, your SSH keys are safely backed
+up, restored, and fully optimized for secure remote connections.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="fc44"/><category term="fedora"/><category term="ssh"/><category term="security"/><category term="backup"/><category term="post-install"/></entry><entry><title>Fedora Everything 44 Minimal Workstation</title><link href="https://porfiriopaiz.github.io/site/posts/2026/09/30/fedora-everything-44.html" rel="alternate"/><published>2026-09-30T02:28:00-06:00</published><updated>2026-09-30T02:28:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-09-30:/site/posts/2026/09/30/fedora-everything-44.html</id><summary type="html">&lt;p class="first last"&gt;Rescuing a Lenovo ThinkPad T450 with a new SSD and setting up a
 minimal Fedora 44 Workstation using the Everything Netinstall ISO.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A while ago at work, I was assigned a Lenovo ThinkPad T450. Recently, its
 original 128GB SSD running Debian Testing suffered a permanent hardware
