@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - distrobox</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/distrobox.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-11-01T19:19:00-06:00</updated><entry><title>Installing Cisco Packet Tracer on Fedora 44 Workstation Using Distrobox</title><link href="https://porfiriopaiz.github.io/site/posts/2026/11/01/cisco-packet-tracer-fedora-44.html" rel="alternate"/><published>2026-11-01T19:19:00-06:00</published><updated>2026-11-01T19:19:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-11-01:/site/posts/2026/11/01/cisco-packet-tracer-fedora-44.html</id><summary type="html">&lt;p class="first last"&gt;A complete step-by-step guide to installing Cisco Packet Tracer
+9.0.1 on Fedora 44 Workstation using an Ubuntu 24.04 Distrobox
+container, including fixing FUSE, XCB, and Qt library dependencies.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Cisco Packet Tracer is an essential tool for CCNA students and network
+engineers. However, Cisco officially distributes Packet Tracer as a .deb
+package targeting Ubuntu Linux, making native installation on RPM-based
+distributions like Fedora 44 Workstation tricky.&lt;/p&gt;
+&lt;p&gt;Rather than dirtying your host Fedora system with converted RPMs or
+extracted binaries, the cleanest solution is to isolate Cisco Packet
+Tracer inside an Ubuntu 24.04 Noble Numbat container via Distrobox.&lt;/p&gt;
+&lt;p&gt;This guide covers all prerequisite packages, container setup, dependency
+fixes, FUSE symlinks, and desktop integration for Fedora 44 Workstation
+Edition.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="host-prerequisites-fedora-44-workstation"&gt;
+&lt;h2&gt;Host Prerequisites (Fedora 44 Workstation)&lt;/h2&gt;
+&lt;p&gt;Before creating the container, ensure your host system has Distrobox,
+Podman, and the legacy FUSE kernel tools installed.&lt;/p&gt;
+&lt;p&gt;Open a terminal on your Fedora host (taylor) and install the host
+prerequisites:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;dnf&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-y&lt;span class="w"&gt; &lt;/span&gt;distrobox&lt;span class="w"&gt; &lt;/span&gt;podman&lt;span class="w"&gt; &lt;/span&gt;fuse
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;podman / distrobox&lt;/strong&gt;: Provides the container runtime and seamless host
+integration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fuse&lt;/strong&gt;: Enables host-level FUSE mounting capabilities required by
+AppImage binaries inside containers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="step-1-create-and-enter-the-ubuntu-container"&gt;
+&lt;h2&gt;Step 1: Create and Enter the Ubuntu Container&lt;/h2&gt;
+&lt;p&gt;Create an Ubuntu 24.04 container named &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ubuntu-pt&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;distrobox-create&lt;span class="w"&gt; &lt;/span&gt;--name&lt;span class="w"&gt; &lt;/span&gt;ubuntu-pt&lt;span class="w"&gt; &lt;/span&gt;--image&lt;span class="w"&gt; &lt;/span&gt;ubuntu:24.04
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once creation completes, enter the container shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;distrobox-enter&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;ubuntu-pt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="step-2-install-container-base-dependencies"&gt;
+&lt;h2&gt;Step 2: Install Container Base Dependencies&lt;/h2&gt;
+&lt;p&gt;Inside your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ubuntu-pt&lt;/span&gt;&lt;/tt&gt; container shell, update package lists and
+install the core desktop and FUSE dependencies required by Ubuntu 24.04:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-y&lt;span class="w"&gt; &lt;/span&gt;fuse3&lt;span class="w"&gt; &lt;/span&gt;libglib2.0-bin&lt;span class="w"&gt; &lt;/span&gt;desktop-file-utils&lt;span class="w"&gt; &lt;/span&gt;shared-mime-info
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="setting-up-the-fuse-symlink"&gt;
+&lt;h3&gt;Setting Up the FUSE Symlink&lt;/h3&gt;
+&lt;p&gt;Cisco Packet Tracer's internal AppImage loader specifically calls
+&lt;tt class="docutils literal"&gt;fusermount&lt;/tt&gt;, whereas Ubuntu 24.04 relies on &lt;tt class="docutils literal"&gt;fusermount3&lt;/tt&gt;. Create a
+symbolic link inside the container to prevent AppImage mounting failures:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-sf&lt;span class="w"&gt; &lt;/span&gt;/usr/bin/fusermount3&lt;span class="w"&gt; &lt;/span&gt;/usr/bin/fusermount
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="step-3-install-cisco-packet-tracer-deb-package"&gt;
+&lt;h2&gt;Step 3: Install Cisco Packet Tracer .deb Package&lt;/h2&gt;
+&lt;p&gt;Download the &lt;tt class="docutils literal"&gt;CiscoPacketTracer_901_Ubuntu_64bit.deb&lt;/tt&gt; file into your host
+&lt;tt class="docutils literal"&gt;~/Downloads&lt;/tt&gt; directory (which is automatically mounted inside Distrobox).&lt;/p&gt;
+&lt;p&gt;Inside the container, navigate to your downloads folder and install the
+package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;./Downloads/CiscoPacketTracer_901_Ubuntu_64bit.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;You may see a notice stating: &lt;tt class="docutils literal"&gt;N: Download is performed unsandboxed as &lt;span class="pre"&gt;root...&lt;/span&gt;&lt;/tt&gt;.
+This is safe to ignore; it simply indicates apt fell back to root
+privileges to read files from your home directory.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;During installation, accept the End User License Agreement (EULA). When
+prompted:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Would you like to run multi-user when application starts?
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Select &lt;strong&gt;No&lt;/strong&gt; unless you are setting up a multi-tenant shared computer lab.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="step-4-resolve-runtime-gui-and-library-dependencies"&gt;
+&lt;h2&gt;Step 4: Resolve Runtime GUI and Library Dependencies&lt;/h2&gt;
+&lt;p&gt;Cisco Packet Tracer depends on several dynamic libraries that are omitted
+from minimal container base images. Run the following command inside the
+container to install all missing audio, graphics, security, and XCB display
+dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-y&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libopengl0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libgl1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libnss3&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libnspr4&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxss1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libasound2t64&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libpulse0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-xinerama0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-cursor0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxkbcommon-x11-0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-icccm4&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-image0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-keysyms1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-randr0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-render-util0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-shape0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;libxcb-xfixes0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Summary of key dependencies:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;libopengl0 &amp;amp; libgl1&lt;/strong&gt;: Provides OpenGL rendering for the device canvas.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;libnss3 &amp;amp; libnspr4&lt;/strong&gt;: Enables internal web view components.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;libasound2t64 &amp;amp; libpulse0&lt;/strong&gt;: Handles PulseAudio client audio routing.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;libxcb-*&lt;/strong&gt;: Provides X11/XCB platform plugins for Qt application
+window rendering.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now exit the container shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="step-5-desktop-integration-on-fedora-host"&gt;
+&lt;h2&gt;Step 5: Desktop Integration on Fedora Host&lt;/h2&gt;
+&lt;p&gt;To launch Cisco Packet Tracer directly from your Fedora GNOME Application
+menu, create a custom &lt;tt class="docutils literal"&gt;.desktop&lt;/tt&gt; launcher entry on your host system.&lt;/p&gt;
+&lt;p&gt;Open your text editor on the Fedora host:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vi&lt;span class="w"&gt; &lt;/span&gt;~/.local/share/applications/packettracer.desktop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Paste the following configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Cisco Packet Tracer&lt;/span&gt;
+&lt;span class="na"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Networking Simulation Tool&lt;/span&gt;
+&lt;span class="na"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;distrobox-enter -n ubuntu-pt -- packettracer&lt;/span&gt;
+&lt;span class="na"&gt;Terminal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;false&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Application&lt;/span&gt;
+&lt;span class="na"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Education&lt;/span&gt;&lt;span class="c1"&gt;;Network;&lt;/span&gt;
+&lt;span class="na"&gt;StartupNotify&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save the file and update the desktop launcher database:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-desktop-database&lt;span class="w"&gt; &lt;/span&gt;~/.local/share/applications/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="testing-the-installation"&gt;
+&lt;h3&gt;Testing the Installation&lt;/h3&gt;
+&lt;p&gt;You can now launch Cisco Packet Tracer directly from your terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;distrobox-enter&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;ubuntu-pt&lt;span class="w"&gt; &lt;/span&gt;--&lt;span class="w"&gt; &lt;/span&gt;packettracer
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or simply search for Cisco Packet Tracer in your GNOME Super/Activities
+launcher!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="cisco"/><category term="distrobox"/><category term="fc44"/><category term="fedora"/><category term="linux"/><category term="packet-tracer"/><category term="podman"/><category term="ubuntu"/></entry></feed>
