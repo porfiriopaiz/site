@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="cli, fedora, git, linux, macos, security, ssh">
+
+  <title>
+    porfirio's blog
+&ndash; Seamless SSH Agent Forwarding and Keychain Management Between macOS and Linux  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/11/22/ssh-agent-forwarding-keychain-macos-linux.html">Seamless SSH Agent Forwarding and Keychain Management Between macOS and Linux</a></h1>
+  </div>
+  <div class="article_text">
+    <p>When connecting via SSH from a primary workstation to a remote Linux machine,
+the remote shell initializes as an isolated environment. By default, it does
+not inherit your local machine's active <tt class="docutils literal"><span class="pre">ssh-agent</span></tt> session, nor does it
+automatically spawn a new agent or load custom-named private keys unless
+explicitly configured to do so.</p>
+<p>For example, when I SSH from my MacBook Air (<tt class="docutils literal">ankaa</tt>) into my Lenovo
+ThinkPad T450 running Fedora Linux (<tt class="docutils literal">taylor</tt>) to work on my Pelican blog
+repository, running <tt class="docutils literal">git fetch</tt> or <tt class="docutils literal">git push</tt> against GitHub on
+<tt class="docutils literal">taylor</tt> will fail with <tt class="docutils literal">Permission denied (publickey)</tt> if no active
+agent socket is available. While running <tt class="docutils literal">eval <span class="pre">&quot;$(ssh-agent</span> <span class="pre">-s)&quot;</span></tt> and
+<tt class="docutils literal"><span class="pre">ssh-add</span></tt> manually on the remote host solves the issue for a single
+session, OpenSSH provides a much cleaner, permanent workflow via client
+configuration.</p>
+<p>By combining agent forwarding on the client side with native OS credential
+integration, you can authenticate Git operations and secondary SSH jumps
+from a remote Linux host without ever copying private keys onto it.</p>
+<hr class="docutils" />
+<div class="section" id="core-ssh-client-directives">
+<h2>Core SSH Client Directives</h2>
+<p>To manage SSH key lifecycles automatically on macOS and forward credentials
+securely to a Linux host, three primary directives in <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt>
+work together:</p>
+<div class="section" id="addkeystoagent-yes">
+<h3>1. <tt class="docutils literal">AddKeysToAgent yes</tt></h3>
+<ul class="simple">
+<li><strong>What it does:</strong> Automatically loads your private SSH key into the
+running <tt class="docutils literal"><span class="pre">ssh-agent</span></tt> memory the first time you use it.</li>
+<li><strong>Why it matters:</strong> Instead of manually running <tt class="docutils literal"><span class="pre">ssh-add</span></tt> after every
+system reboot or new terminal session, OpenSSH silently registers the key
+the moment you initiate a connection.</li>
+</ul>
+</div>
+<div class="section" id="usekeychain-yes">
+<h3>2. <tt class="docutils literal">UseKeychain yes</tt></h3>
+<ul class="simple">
+<li><strong>What it does:</strong> Integrates OpenSSH with native <strong>macOS Keychain
+Services</strong>.</li>
+<li><strong>Why it matters:</strong> When you unlock an encrypted SSH key with its
+passphrase on macOS, the passphrase is stored securely in your Keychain.
+On subsequent logins or reboots, <tt class="docutils literal"><span class="pre">ssh-agent</span></tt> retrieves the passphrase
+automatically so you do not have to re-enter it.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal">UseKeychain</tt> is a macOS-specific OpenSSH option. If you share your
+<tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> across Linux systems like <tt class="docutils literal">taylor</tt>, OpenSSH on Linux
+will ignore it or require <tt class="docutils literal">IgnoreUnknown UseKeychain</tt> at the top of
+the configuration file.</p>
+</div>
+</div>
+<div class="section" id="forwardagent-yes">
+<h3>3. <tt class="docutils literal">ForwardAgent yes</tt></h3>
+<ul class="simple">
+<li><strong>What it does:</strong> Passes your local machine's active <tt class="docutils literal"><span class="pre">ssh-agent</span></tt> socket
+through the encrypted SSH tunnel to the remote host.</li>
+<li><strong>Why it matters:</strong> Remote processes—such as <tt class="docutils literal">git</tt> interacting with
+GitHub—can request cryptographic signatures directly from your local
+agent. Your private key never leaves your local machine; only
+authentication challenges and signatures traverse the encrypted channel.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only enable <tt class="docutils literal">ForwardAgent yes</tt> on trusted remote hosts where you
+control root access, as a privileged user on the remote machine could
+temporarily access the forwarded socket while your session is active.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="configuring-the-client-machine-macos">
+<h2>Configuring the Client Machine (macOS)</h2>
+<p>To put this workflow into practice, configure your SSH client on the
+initiating machine. Using my setup as a working example, I configure
+<tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> on <tt class="docutils literal">ankaa</tt> (macOS) to define connection parameters for
+<tt class="docutils literal">taylor</tt> (Fedora Linux).</p>
+<div class="section" id="step-1-edit-ssh-config">
+<h3>Step 1: Edit <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt></h3>
+<p>Open your SSH client configuration file on your local machine:</p>
+<div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.ssh/config
+</pre></div>
+<p>Add a host definition block specifying the target address, user, identity
+file, and agent directives:</p>
+<div class="highlight"><pre><span></span>Host taylor
+    HostName &lt;taylor-ip-or-hostname&gt;
+    User porfirio
+    IdentityFile ~/.ssh/id_ed25519
+    AddKeysToAgent yes
+    UseKeychain yes
+    ForwardAgent yes
+</pre></div>
+<p><em>(Replace ``&lt;taylor-ip-or-hostname&gt;`` and ``porfirio`` with your target
+host's IP address or local hostname and username).</em></p>
+</div>
+<div class="section" id="step-2-enforce-strict-configuration-permissions">
+<h3>Step 2: Enforce Strict Configuration Permissions</h3>
+<p>OpenSSH enforces <tt class="docutils literal">StrictModes</tt> on configuration files as well as keys.
+Ensure your <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> file is readable and writable only by your
+user account:</p>
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/config
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="verifying-the-workflow-on-the-remote-host">
+<h2>Verifying the Workflow on the Remote Host</h2>
+<p>Once the configuration block is saved on <tt class="docutils literal">ankaa</tt>, connecting and
+authenticating remote Git operations requires zero manual agent
+management:</p>
+<ol class="arabic">
+<li><p class="first">Initiate the SSH connection from <tt class="docutils literal">ankaa</tt>:</p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>taylor
+</pre></div>
+</li>
+<li><p class="first">macOS automatically loads <tt class="docutils literal"><span class="pre">~/.ssh/id_ed25519</span></tt> into <tt class="docutils literal"><span class="pre">ssh-agent</span></tt>,
+unlocks it via Keychain, and forwards the agent socket to <tt class="docutils literal">taylor</tt>.</p>
+</li>
+<li><p class="first">On <tt class="docutils literal">taylor</tt>, verify that the forwarded identity is visible to the
+remote shell:</p>
+<div class="highlight"><pre><span></span>ssh-add<span class="w"> </span>-l
+</pre></div>
+</li>
+<li><p class="first">Navigate to a repository and run remote Git operations directly against
+GitHub without storing local keys on <tt class="docutils literal">taylor</tt>:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/gitRepos/github.com/porfiriopaiz/site
+git<span class="w"> </span>fetch<span class="w"> </span>origin
+git<span class="w"> </span>switch<span class="w"> </span>devel
+</pre></div>
+</li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="finishing-touches">
+<h2>Finishing Touches</h2>
+<p>With <tt class="docutils literal">AddKeysToAgent</tt>, <tt class="docutils literal">UseKeychain</tt>, and <tt class="docutils literal">ForwardAgent</tt> properly
+configured, your primary workstation acts as a single, secure credential
+vault. You can seamlessly administer remote Linux systems and interact with
+authenticated Git repositories while keeping your private keys isolated on
+a single physical device.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sun 22 November 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/cli.html">cli</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/git.html">git</a>,      <a href="../../../../tag/linux.html">linux</a>,      <a href="../../../../tag/macos.html">macos</a>,      <a href="../../../../tag/security.html">security</a>,      <a href="../../../../tag/ssh.html">ssh</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/11/22/ssh-agent-forwarding-keychain-macos-linux.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>

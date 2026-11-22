@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>porfirio's blog - git</title><link>https://porfiriopaiz.github.io/site/</link><description/><atom:link href="https://porfiriopaiz.github.io/site/feeds/git.rss.xml" rel="self"/><lastBuildDate>Sun, 22 Nov 2026 05:16:00 -0600</lastBuildDate><item><title>Seamless SSH Agent Forwarding and Keychain Management Between macOS and Linux</title><link>https://porfiriopaiz.github.io/site/posts/2026/11/22/ssh-agent-forwarding-keychain-macos-linux.html</link><description>&lt;p&gt;When connecting via SSH from a primary workstation to a remote Linux machine,
+the remote shell initializes as an isolated environment. By default, it does
+not inherit your local machine's active &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt; session, nor does it
+automatically spawn a new agent or load custom-named private keys unless
+explicitly configured to do so.&lt;/p&gt;
+&lt;p&gt;For example, when I SSH from my MacBook Air (&lt;tt class="docutils literal"&gt;ankaa&lt;/tt&gt;) into my Lenovo
+ThinkPad T450 running Fedora Linux (&lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;) to work on my Pelican blog
+repository, running &lt;tt class="docutils literal"&gt;git fetch&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;git push&lt;/tt&gt; against GitHub on
+&lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt; will fail with &lt;tt class="docutils literal"&gt;Permission denied (publickey)&lt;/tt&gt; if no active
+agent socket is available. While running &lt;tt class="docutils literal"&gt;eval &lt;span class="pre"&gt;&amp;quot;$(ssh-agent&lt;/span&gt; &lt;span class="pre"&gt;-s)&amp;quot;&lt;/span&gt;&lt;/tt&gt; and
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt; manually on the remote host solves the issue for a single
+session, OpenSSH provides a much cleaner, permanent workflow via client
+configuration.&lt;/p&gt;
+&lt;p&gt;By combining agent forwarding on the client side with native OS credential
+integration, you can authenticate Git operations and secondary SSH jumps
+from a remote Linux host without ever copying private keys onto it.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="core-ssh-client-directives"&gt;
+&lt;h2&gt;Core SSH Client Directives&lt;/h2&gt;
+&lt;p&gt;To manage SSH key lifecycles automatically on macOS and forward credentials
+securely to a Linux host, three primary directives in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt;
+work together:&lt;/p&gt;
+&lt;div class="section" id="addkeystoagent-yes"&gt;
+&lt;h3&gt;1. &lt;tt class="docutils literal"&gt;AddKeysToAgent yes&lt;/tt&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;What it does:&lt;/strong&gt; Automatically loads your private SSH key into the
+running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt; memory the first time you use it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Why it matters:&lt;/strong&gt; Instead of manually running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt; after every
+system reboot or new terminal session, OpenSSH silently registers the key
+the moment you initiate a connection.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usekeychain-yes"&gt;
+&lt;h3&gt;2. &lt;tt class="docutils literal"&gt;UseKeychain yes&lt;/tt&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;What it does:&lt;/strong&gt; Integrates OpenSSH with native &lt;strong&gt;macOS Keychain
+Services&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Why it matters:&lt;/strong&gt; When you unlock an encrypted SSH key with its
+passphrase on macOS, the passphrase is stored securely in your Keychain.
+On subsequent logins or reboots, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt; retrieves the passphrase
+automatically so you do not have to re-enter it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;&lt;tt class="docutils literal"&gt;UseKeychain&lt;/tt&gt; is a macOS-specific OpenSSH option. If you share your
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; across Linux systems like &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;, OpenSSH on Linux
+will ignore it or require &lt;tt class="docutils literal"&gt;IgnoreUnknown UseKeychain&lt;/tt&gt; at the top of
+the configuration file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="forwardagent-yes"&gt;
+&lt;h3&gt;3. &lt;tt class="docutils literal"&gt;ForwardAgent yes&lt;/tt&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;What it does:&lt;/strong&gt; Passes your local machine's active &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt; socket
+through the encrypted SSH tunnel to the remote host.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Why it matters:&lt;/strong&gt; Remote processes—such as &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; interacting with
+GitHub—can request cryptographic signatures directly from your local
+agent. Your private key never leaves your local machine; only
+authentication challenges and signatures traverse the encrypted channel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="admonition warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p class="last"&gt;Only enable &lt;tt class="docutils literal"&gt;ForwardAgent yes&lt;/tt&gt; on trusted remote hosts where you
+control root access, as a privileged user on the remote machine could
+temporarily access the forwarded socket while your session is active.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="configuring-the-client-machine-macos"&gt;
+&lt;h2&gt;Configuring the Client Machine (macOS)&lt;/h2&gt;
+&lt;p&gt;To put this workflow into practice, configure your SSH client on the
+initiating machine. Using my setup as a working example, I configure
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; on &lt;tt class="docutils literal"&gt;ankaa&lt;/tt&gt; (macOS) to define connection parameters for
+&lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt; (Fedora Linux).&lt;/p&gt;
+&lt;div class="section" id="step-1-edit-ssh-config"&gt;
+&lt;h3&gt;Step 1: Edit &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt;&lt;/h3&gt;
+&lt;p&gt;Open your SSH client configuration file on your local machine:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nano&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/config
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add a host definition block specifying the target address, user, identity
+file, and agent directives:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Host taylor
+    HostName &amp;lt;taylor-ip-or-hostname&amp;gt;
+    User porfirio
+    IdentityFile ~/.ssh/id_ed25519
+    AddKeysToAgent yes
+    UseKeychain yes
+    ForwardAgent yes
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Replace ``&amp;lt;taylor-ip-or-hostname&amp;gt;`` and ``porfirio`` with your target
+host's IP address or local hostname and username).&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-enforce-strict-configuration-permissions"&gt;
+&lt;h3&gt;Step 2: Enforce Strict Configuration Permissions&lt;/h3&gt;
+&lt;p&gt;OpenSSH enforces &lt;tt class="docutils literal"&gt;StrictModes&lt;/tt&gt; on configuration files as well as keys.
+Ensure your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; file is readable and writable only by your
+user account:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;600&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/config
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="verifying-the-workflow-on-the-remote-host"&gt;
+&lt;h2&gt;Verifying the Workflow on the Remote Host&lt;/h2&gt;
+&lt;p&gt;Once the configuration block is saved on &lt;tt class="docutils literal"&gt;ankaa&lt;/tt&gt;, connecting and
+authenticating remote Git operations requires zero manual agent
+management:&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Initiate the SSH connection from &lt;tt class="docutils literal"&gt;ankaa&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;taylor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;macOS automatically loads &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/id_ed25519&lt;/span&gt;&lt;/tt&gt; into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;,
+unlocks it via Keychain, and forwards the agent socket to &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;On &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;, verify that the forwarded identity is visible to the
+remote shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-add&lt;span class="w"&gt; &lt;/span&gt;-l
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Navigate to a repository and run remote Git operations directly against
+GitHub without storing local keys on &lt;tt class="docutils literal"&gt;taylor&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/gitRepos/github.com/porfiriopaiz/site
+git&lt;span class="w"&gt; &lt;/span&gt;fetch&lt;span class="w"&gt; &lt;/span&gt;origin
+git&lt;span class="w"&gt; &lt;/span&gt;switch&lt;span class="w"&gt; &lt;/span&gt;devel
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;Finishing Touches&lt;/h2&gt;
+&lt;p&gt;With &lt;tt class="docutils literal"&gt;AddKeysToAgent&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;UseKeychain&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;ForwardAgent&lt;/tt&gt; properly
+configured, your primary workstation acts as a single, secure credential
+vault. You can seamlessly administer remote Linux systems and interact with
+authenticated Git repositories while keeping your private keys isolated on
+a single physical device.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Porfirio Páiz</dc:creator><pubDate>Sun, 22 Nov 2026 05:16:00 -0600</pubDate><guid>tag:porfiriopaiz.github.io,2026-11-22:/site/posts/2026/11/22/ssh-agent-forwarding-keychain-macos-linux.html</guid><category>floss</category><category>cli</category><category>fedora</category><category>git</category><category>linux</category><category>macos</category><category>security</category><category>ssh</category></item></channel></rss>
