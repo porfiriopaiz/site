@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="backup, cli, fedora, linux, macos, rsync, ssh, zsh">
+
+  <title>
+    porfirio's blog
+&ndash; Syncing Files from macOS to Fedora Linux with rsync and SSH  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/11/23/syncing-files-macos-to-fedora-rsync-ssh.html">Syncing Files from macOS to Fedora Linux with rsync and SSH</a></h1>
+  </div>
+  <div class="article_text">
+    <p>When transferring files between a macOS workstation (such as my MacBook Air
+<tt class="docutils literal">ankaa</tt>) and a Fedora Linux machine (my Lenovo ThinkPad T450 <tt class="docutils literal">taylor</tt>),
+<tt class="docutils literal">rsync</tt> over SSH provides fast, incremental synchronization. Once the
+<tt class="docutils literal">taylor</tt> host alias is configured in <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt>, <tt class="docutils literal">rsync</tt>
+automatically inherits your target IP address (<tt class="docutils literal">192.168.0.10</tt>), username,
+and custom identity key without requiring explicit connection flags on every
+run.</p>
+<hr class="docutils" />
+<div class="section" id="the-recommended-command-structure-short-flags">
+<h2>The Recommended Command Structure (Short Flags)</h2>
+<p>The standard pattern for copying files from macOS to a remote Linux host
+uses compact short options:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avzP<span class="w"> </span>/path/to/local/source/<span class="w"> </span>taylor:/path/to/remote/destination/
+</pre></div>
+<div class="section" id="flag-breakdown-avzp">
+<h3>Flag Breakdown (<tt class="docutils literal"><span class="pre">-avzP</span></tt>)</h3>
+<ul class="simple">
+<li><strong>`-a` (archive mode):</strong> Preserves file permissions, ownership,
+timestamps, and symbolic links recursively.</li>
+<li><strong>`-v` (verbose):</strong> Displays which files are being transferred.</li>
+<li><strong>`-z` (compress):</strong> Compresses data in transit to speed up transfers
+over Wi-Fi or LAN.</li>
+<li><strong>`-P` (progress and partial):</strong> Displays real-time progress bars and
+retains partially transferred files to allow resuming interrupted
+transfers.</li>
+</ul>
+</div>
+<div class="section" id="common-use-cases-and-trailing-slashes">
+<h3>Common Use Cases and Trailing Slashes</h3>
+<ol class="arabic">
+<li><p class="first"><strong>Transferring a Single File:</strong></p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avzP<span class="w"> </span>~/Downloads/document.pdf<span class="w"> </span>taylor:~/Downloads/
+</pre></div>
+</li>
+<li><p class="first"><strong>Transferring an Entire Folder:</strong></p>
+<p>Pay close attention to the trailing slash (<tt class="docutils literal">/</tt>) on the source directory:</p>
+<ul>
+<li><p class="first"><strong>Copy the contents of a directory into a target folder</strong> (note the
+trailing slash on <tt class="docutils literal">Photos/</tt>):</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avzP<span class="w"> </span>~/Photos/<span class="w"> </span>taylor:~/Pictures/
+</pre></div>
+<p><em>(Result: Files inside ``~/Photos/`` are placed directly inside
+``~/Pictures/`` on ``taylor``).</em></p>
+</li>
+<li><p class="first"><strong>Copy the directory itself as a subdirectory</strong> (no trailing slash on
+<tt class="docutils literal">Photos</tt>):</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avzP<span class="w"> </span>~/Photos<span class="w"> </span>taylor:~/Pictures/
+</pre></div>
+<p><em>(Result: Creates ``~/Pictures/Photos/`` on ``taylor``).</em></p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="safe-verification-run-a-dry-run-first-n">
+<h3>Safe Verification: Run a Dry Run First (<tt class="docutils literal"><span class="pre">-n</span></tt>)</h3>
+<p>To preview which files will be copied or updated without modifying anything
+on disk, pass the <tt class="docutils literal"><span class="pre">-n</span></tt> (or <tt class="docutils literal"><span class="pre">--dry-run</span></tt>) flag:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avzPn<span class="w"> </span>~/Documents/<span class="w"> </span>taylor:~/Documents/
+</pre></div>
+<p>Once you confirm the file list looks accurate, remove the <tt class="docutils literal">n</tt> flag to
+perform the live transfer.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="short-flags-vs-long-options">
+<h2>Short Flags vs. Long Options</h2>
+<p>Short options (like <tt class="docutils literal"><span class="pre">-a</span></tt>, <tt class="docutils literal"><span class="pre">-v</span></tt>, <tt class="docutils literal"><span class="pre">-z</span></tt>) are single-letter abbreviations
+designed for quick terminal input. Long options (like <tt class="docutils literal"><span class="pre">--archive</span></tt>,
+<tt class="docutils literal"><span class="pre">--verbose</span></tt>, <tt class="docutils literal"><span class="pre">--compress</span></tt>) perform the exact same operations while
+remaining self-documenting and easier to read in scripts and documentation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="29%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Short Flag</th>
+<th class="head">Equivalent Long Option</th>
+<th class="head">What It Does</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">-a</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--archive</span></tt></td>
+<td>Enables recursion and preserves permissions,
+modification times, ownership, and symlinks.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-v</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--verbose</span></tt></td>
+<td>Displays detailed information about which
+files are being transferred.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-z</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--compress</span></tt></td>
+<td>Compresses file data during network transit
+to speed up transfer times over Wi-Fi.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-P</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--progress</span></tt>
+<tt class="docutils literal"><span class="pre">--partial</span></tt></td>
+<td>Combined shortcut: <tt class="docutils literal"><span class="pre">--progress</span></tt> shows the
+live bar; <tt class="docutils literal"><span class="pre">--partial</span></tt> keeps incomplete
+files if the connection breaks for resuming.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-n</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--dry-run</span></tt></td>
+<td>Performs a trial run showing what would
+change without transferring or modifying
+any files.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">-u</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">--update</span></tt></td>
+<td>Skips files that are already newer on the
+destination host (<tt class="docutils literal">taylor</tt>).</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="what-update-adds-to-your-workflow">
+<h3>What <tt class="docutils literal"><span class="pre">--update</span></tt> Adds to Your Workflow</h3>
+<p>Adding <tt class="docutils literal"><span class="pre">--update</span></tt> instructs <tt class="docutils literal">rsync</tt> to compare file timestamps across
+both machines:</p>
+<ul class="simple">
+<li>If a file on <tt class="docutils literal">taylor</tt> is <strong>newer</strong> than the corresponding file on your
+Mac, <tt class="docutils literal">rsync</tt> will <strong>not</strong> overwrite it.</li>
+<li>This prevents accidentally rolling back recent edits made directly on the
+remote Linux workstation.</li>
+</ul>
+</div>
+<div class="section" id="recommended-command-structure-long-options">
+<h3>Recommended Command Structure (Long Options)</h3>
+<p>Using explicit long options, the standard transfer syntax becomes:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--compress<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>/path/to/local/source/<span class="w"> </span>taylor:/path/to/remote/destination/
+</pre></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">--compress</span></tt> is optional over fast local networks, though still
+recommended when transferring large text files, source code repositories,
+or scripts.</p>
+</div>
+</div>
+<div class="section" id="long-option-use-cases-and-dry-runs">
+<h3>Long-Option Use Cases and Dry Runs</h3>
+<ol class="arabic">
+<li><p class="first"><strong>Transferring a Single File:</strong></p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>~/Downloads/document.pdf<span class="w"> </span>taylor:~/Downloads/
+</pre></div>
+</li>
+<li><p class="first"><strong>Transferring Directory Contents vs. Subdirectories:</strong></p>
+<ul>
+<li><p class="first"><strong>Copy contents directly</strong> (trailing slash on <tt class="docutils literal">Photos/</tt>):</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--compress<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>~/Photos/<span class="w"> </span>taylor:~/Pictures/
+</pre></div>
+</li>
+<li><p class="first"><strong>Copy the directory itself</strong> (no trailing slash on <tt class="docutils literal">Photos</tt>):</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--compress<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>~/Photos<span class="w"> </span>taylor:~/Pictures/
+</pre></div>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>Running a Dry Run with Long Options:</strong></p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--dry-run<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>~/Documents/<span class="w"> </span>taylor:~/Documents/
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="filtering-macos-metadata-files">
+<h2>Filtering macOS Metadata Files</h2>
+<p>macOS automatically generates hidden metadata files such as <tt class="docutils literal">.DS_Store</tt>
+and <tt class="docutils literal">.localized</tt> that clutter Linux directories. You can exclude them
+per command or configure a permanent global exclusion list.</p>
+<div class="section" id="option-1-inline-exclusions-per-command">
+<h3>Option 1: Inline Exclusions (Per-Command)</h3>
+<p>Pass individual <tt class="docutils literal"><span class="pre">--exclude</span></tt> parameters directly to <tt class="docutils literal">rsync</tt>:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--exclude<span class="o">=</span><span class="s1">&#39;.DS_Store&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--exclude<span class="o">=</span><span class="s1">&#39;.localized&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--exclude<span class="o">=</span><span class="s1">&#39;._*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--exclude<span class="o">=</span><span class="s1">&#39;.CFUserTextEncoding&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>~/Desktop/<span class="w"> </span>taylor:~/Desktop/
+</pre></div>
+<p>Common macOS metadata files to exclude include:</p>
+<ul class="simple">
+<li><tt class="docutils literal">.DS_Store</tt> (Finder folder display settings)</li>
+<li><tt class="docutils literal">.localized</tt> (system folder localization hints)</li>
+<li><tt class="docutils literal">._*</tt> (AppleDouble resource fork files created on non-HFS/APFS
+volumes)</li>
+<li><tt class="docutils literal">.CFUserTextEncoding</tt> (user text encoding preferences)</li>
+<li><tt class="docutils literal">.Trashes</tt> and <tt class="docutils literal"><span class="pre">.Spotlight-V100</span></tt> (system trash and Spotlight index
+directories)</li>
+</ul>
+<div class="section" id="one-liner-with-zsh-brace-expansion">
+<h4>One-Liner with Zsh Brace Expansion</h4>
+<p>Because macOS uses <tt class="docutils literal">zsh</tt> as its default shell, you can collapse multiple
+<tt class="docutils literal"><span class="pre">--exclude</span></tt> flags into a single brace expansion one-liner:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>--exclude<span class="o">={</span><span class="s1">&#39;.DS_Store&#39;</span>,<span class="s1">&#39;.localized&#39;</span>,<span class="s1">&#39;._*&#39;</span>,<span class="s1">&#39;.CFUserTextEncoding&#39;</span><span class="o">}</span><span class="w"> </span>~/Desktop/<span class="w"> </span>taylor:~/Desktop/
+</pre></div>
+<p>The shell expands <tt class="docutils literal"><span class="pre">{...}</span></tt> into separate <tt class="docutils literal"><span class="pre">--exclude</span></tt> arguments before
+executing <tt class="docutils literal">rsync</tt>.</p>
+</div>
+</div>
+<div class="section" id="option-2-permanent-global-exclusion-list-recommended">
+<h3>Option 2: Permanent Global Exclusion List (Recommended)</h3>
+<p>To avoid typing exclusion flags repeatedly, define a global ignore file in
+your home directory and alias <tt class="docutils literal">rsync</tt> in <tt class="docutils literal"><span class="pre">~/.zshrc</span></tt>.</p>
+<ol class="arabic">
+<li><p class="first"><strong>Create ``~/.rsync-exclude`` on macOS:</strong></p>
+<div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; ~/.rsync-exclude</span>
+<span class="s">.DS_Store</span>
+<span class="s">.localized</span>
+<span class="s">._*</span>
+<span class="s">.CFUserTextEncoding</span>
+<span class="s">.Trashes</span>
+<span class="s">.Spotlight-V100</span>
+<span class="s">EOF</span>
+</pre></div>
+</li>
+<li><p class="first"><strong>Add an alias to ``~/.zshrc``:</strong></p>
+<p>Open <tt class="docutils literal"><span class="pre">~/.zshrc</span></tt> in your editor:</p>
+<div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.zshrc
+</pre></div>
+<p>Append the following line and save the file:</p>
+<div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">rsync</span><span class="o">=</span><span class="s1">&#39;rsync --exclude-from=&quot;$HOME/.rsync-exclude&quot;&#39;</span>
+</pre></div>
+<p>Reload your shell configuration:</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.zshrc
+</pre></div>
+</li>
+<li><p class="first"><strong>Run your standard sync command:</strong></p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>--archive<span class="w"> </span>--verbose<span class="w"> </span>--update<span class="w"> </span>--progress<span class="w"> </span>--partial<span class="w"> </span>~/Desktop/<span class="w"> </span>taylor:~/Desktop/
+</pre></div>
+</li>
+</ol>
+</div>
+<div class="section" id="cleaning-up-existing-metadata-files-on-linux">
+<h3>Cleaning Up Existing Metadata Files on Linux</h3>
+<p>If macOS metadata files were already synced to <tt class="docutils literal">taylor</tt> previously, you
+can remove them remotely via SSH:</p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>taylor<span class="w"> </span><span class="s2">&quot;find ~/Desktop -name &#39;.DS_Store&#39; -o -name &#39;.localized&#39; -delete&quot;</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="ssh-host-key-troubleshooting-and-connection-verification">
+<h2>SSH Host Key Troubleshooting and Connection Verification</h2>
+<p>When reinstalling Fedora Linux on <tt class="docutils literal">taylor</tt> while retaining the same local
+IP address (<tt class="docutils literal">192.168.0.10</tt>), SSH generates a new host key fingerprint.
+Attempting to copy keys or connect from <tt class="docutils literal">ankaa</tt> will trigger a remote host
+identification warning because the stored fingerprint in
+<tt class="docutils literal"><span class="pre">~/.ssh/known_hosts</span></tt> no longer matches.</p>
+<div class="section" id="step-1-remove-the-stale-host-key-entry">
+<h3>Step 1: Remove the Stale Host Key Entry</h3>
+<p>Clear the old fingerprint for <tt class="docutils literal">192.168.0.10</tt> from <tt class="docutils literal">ankaa</tt>:</p>
+<div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="m">192</span>.168.0.10
+</pre></div>
+<p>This removes the outdated entry from <tt class="docutils literal"><span class="pre">~/.ssh/known_hosts</span></tt> and saves a
+backup copy of the previous file.</p>
+</div>
+<div class="section" id="step-2-copy-your-public-key-and-accept-the-new-fingerprint">
+<h3>Step 2: Copy Your Public Key and Accept the New Fingerprint</h3>
+<p>Re-run <tt class="docutils literal"><span class="pre">ssh-copy-id</span></tt> using your custom-named public key:</p>
+<div class="highlight"><pre><span></span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/porfirio@ankaa.pub<span class="w"> </span>porfirio@192.168.0.10
+</pre></div>
+<p>Type <tt class="docutils literal">yes</tt> when prompted to trust the new host fingerprint, then enter
+your Fedora password to install the public key on <tt class="docutils literal">taylor</tt>.</p>
+</div>
+<div class="section" id="step-3-configure-ssh-config-and-test-connections">
+<h3>Step 3: Configure <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> and Test Connections</h3>
+<p>Ensure your SSH client configuration on <tt class="docutils literal">ankaa</tt> points to the private key
+file (without the <tt class="docutils literal">.pub</tt> extension):</p>
+<div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.ssh/config
+</pre></div>
+<div class="highlight"><pre><span></span>Host taylor
+    HostName 192.168.0.10
+    User porfirio
+    IdentityFile ~/.ssh/porfirio@ankaa
+</pre></div>
+<p>Enforce strict permissions on the configuration file:</p>
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/config
+</pre></div>
+<p>You can now verify passwordless authentication using three methods:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Direct connection with explicit identity flag:</strong></p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/porfirio@ankaa<span class="w"> </span>porfirio@192.168.0.10
+</pre></div>
+</li>
+<li><p class="first"><strong>Non-interactive remote command execution:</strong></p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/porfirio@ankaa<span class="w"> </span>porfirio@192.168.0.10<span class="w"> </span><span class="s2">&quot;hostname; uptime&quot;</span>
+</pre></div>
+</li>
+<li><p class="first"><strong>Alias-based connection:</strong></p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>taylor
+</pre></div>
+</li>
+</ol>
+<p>If SSH still prompts for a password, run the connection in verbose mode
+(<tt class="docutils literal"><span class="pre">-v</span></tt>) to inspect key negotiation:</p>
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>-v<span class="w"> </span>-i<span class="w"> </span>~/.ssh/porfirio@ankaa<span class="w"> </span>porfirio@192.168.0.10
+</pre></div>
+</div>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Mon 23 November 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/backup.html">backup</a>,      <a href="../../../../tag/cli.html">cli</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/linux.html">linux</a>,      <a href="../../../../tag/macos.html">macos</a>,      <a href="../../../../tag/rsync.html">rsync</a>,      <a href="../../../../tag/ssh.html">ssh</a>,      <a href="../../../../tag/zsh.html">zsh</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/11/23/syncing-files-macos-to-fedora-rsync-ssh.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>
