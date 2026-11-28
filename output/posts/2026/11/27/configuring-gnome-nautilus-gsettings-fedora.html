@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="../../../../theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../../../../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Porfirio Páiz">
+  <meta name="description" content="Posts and writings by Porfirio Páiz">
+
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="porfirio's blog Atom" />
+  <link href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="porfirio's blog RSS" />
+
+<meta name="keywords" content="cli, dconf, fedora, gnome, gsettings, linux, nautilus">
+
+  <title>
+    porfirio's blog
+&ndash; Configuring GNOME and Nautilus via gsettings on Fedora  </title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="../../../..">
+        <img src="https://porfiriopaiz.github.io/site/images/prpd8Vi.png" alt="logo">
+      </a>
+      <h2><a href="../../../..">porfirio's blog</a></h2>
+      <p>(■_■¬)</p>
+      <button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--text-color);">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <ul>
+        <li><a href="../../../../category/floss.html">floss</a></li>
+        <li><a href="../../../../category/gis.html">gis</a></li>
+        <li><a href="../../../../category/misc.html">misc</a></li>
+        <li><a href="https://fedoraproject.org/wiki/User:Porfiriopaiz" target="_blank">About</a></li>
+        <li><a href="https://github.com/porfiriopaiz" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/porfiriopaiz" target="_blank">Twitter</a></li>
+        <li><a href="https://plus.google.com/+PorfirioAndresPaizCarrasco" target="_blank">Google+</a></li>
+        <li><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">License</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="../../../..">Index</a> &brvbar; <a href="../../../../archives.html">Archives</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.atom.xml">Atom</a>
+      &brvbar; <a href="https://porfiriopaiz.github.io/site/feeds/all.rss.xml">RSS</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="../../../../posts/2026/11/27/configuring-gnome-nautilus-gsettings-fedora.html">Configuring GNOME and Nautilus via gsettings on Fedora</a></h1>
+  </div>
+  <div class="article_text">
+    <p>On Fedora Linux with the GNOME desktop, hardware, interface, and file
+manager preferences are distributed across multiple GSettings schemas. Using
+<tt class="docutils literal">gsettings</tt> from the terminal lets you inspect keys, query allowed
+values, monitor live changes, and script reproducible workstation setups
+without clicking through graphical menus.</p>
+<hr class="docutils" />
+<div class="section" id="essential-gnome-hardware-and-interface-settings">
+<h2>Essential GNOME Hardware and Interface Settings</h2>
+<div class="section" id="touchpad-and-input-configuration">
+<h3>Touchpad and Input Configuration</h3>
+<p>On a portable workstation such as a Lenovo ThinkPad, enabling tap-to-click
+and comfortable scrolling behavior directly from the shell is often one of
+the first post-install adjustments.</p>
+<ul class="simple">
+<li><strong>Schema:</strong> <tt class="docutils literal">org.gnome.desktop.peripherals.touchpad</tt></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># Enable tap-to-click</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.peripherals.touchpad<span class="w"> </span>tap-to-click<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Enable Natural Scrolling (reverse scroll)</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.peripherals.touchpad<span class="w"> </span>natural-scroll<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Set Two-finger scrolling</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.peripherals.touchpad<span class="w"> </span>two-finger-scrolling-enabled<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+</div>
+<div class="section" id="panel-clock-and-status-indicators">
+<h3>Panel, Clock, and Status Indicators</h3>
+<p>GNOME refers to the top bar as the <strong>Panel</strong> and the application dock as
+the <strong>Dash</strong>. Interface indicators such as clock formatting and battery
+readouts live under <tt class="docutils literal">org.gnome.desktop.interface</tt>, while dock extensions
+such as Dash to Dock use their own extension schema under
+<tt class="docutils literal"><span class="pre">org.gnome.shell.extensions.dash-to-dock</span></tt>.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Show the day of the week alongside date/time</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>show-datetime-day-of-week<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Show seconds in the clock</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>clock-show-seconds<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Show battery percentage</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>show-battery-percentage<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+</div>
+<div class="section" id="power-and-lid-behavior">
+<h3>Power and Lid Behavior</h3>
+<p>Power management and sleep timeouts are controlled through the
+<tt class="docutils literal"><span class="pre">org.gnome.settings-daemon.plugins.power</span></tt> schema.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Set sleep timeout on Battery (seconds, e.g., 900 = 15 mins)</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.settings-daemon.plugins.power<span class="w"> </span>sleep-inactive-battery-timeout<span class="w"> </span><span class="m">900</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Prevent suspend when the laptop lid is closed (if plugged in)</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.settings-daemon.plugins.power<span class="w"> </span>lid-close-ac-action<span class="w"> </span><span class="s1">&#39;nothing&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="discovering-schemas-and-monitoring-changes">
+<h3>Discovering Schemas and Monitoring Changes</h3>
+<p>When configuring unfamiliar tools or extensions, you can filter available
+schema names and watch live property updates as you interact with GNOME
+Settings:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Filter schemas by keyword:</strong></p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>list-schemas<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;power&quot;</span>
+</pre></div>
+</li>
+<li><p class="first"><strong>Monitor a schema in real time while changing settings in the GUI:</strong></p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>monitor<span class="w"> </span>org.gnome.desktop.peripherals.touchpad
+</pre></div>
+</li>
+</ol>
+</div>
+<div class="section" id="common-gsettings-schemas-reference">
+<h3>Common GSettings Schemas Reference</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Feature</th>
+<th class="head">GSettings Schema</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Touchpad</td>
+<td><tt class="docutils literal">org.gnome.desktop.peripherals.touchpad</tt></td>
+</tr>
+<tr><td>Keyboard</td>
+<td><tt class="docutils literal">org.gnome.desktop.peripherals.keyboard</tt></td>
+</tr>
+<tr><td>Interface/Fonts</td>
+<td><tt class="docutils literal">org.gnome.desktop.interface</tt></td>
+</tr>
+<tr><td>Privacy/Lock</td>
+<td><tt class="docutils literal">org.gnome.desktop.screensaver</tt></td>
+</tr>
+<tr><td>Window Focus</td>
+<td><tt class="docutils literal">org.gnome.desktop.wm.preferences</tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="switching-between-dark-and-light-color-schemes">
+<h2>Switching Between Dark and Light Color Schemes</h2>
+<p>System-wide light and dark color scheme preferences on GNOME are controlled
+by the <tt class="docutils literal"><span class="pre">color-scheme</span></tt> key under <tt class="docutils literal">org.gnome.desktop.interface</tt>.</p>
+<div class="section" id="enable-dark-mode">
+<h3>Enable Dark Mode</h3>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span><span class="s1">&#39;prefer-dark&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="revert-to-light-default-mode">
+<h3>Revert to Light / Default Mode</h3>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span><span class="s1">&#39;default&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="check-the-active-color-scheme">
+<h3>Check the Active Color Scheme</h3>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>get<span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme
+</pre></div>
+</div>
+<div class="section" id="toggle-color-scheme-via-shell-snippet">
+<h3>Toggle Color Scheme via Shell Snippet</h3>
+<p>You can toggle between <tt class="docutils literal"><span class="pre">'prefer-dark'</span></tt> and <tt class="docutils literal">'default'</tt> with a short
+shell check:</p>
+<div class="highlight"><pre><span></span><span class="nv">CURRENT</span><span class="o">=</span><span class="k">$(</span>gsettings<span class="w"> </span>get<span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="k">)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CURRENT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&#39;prefer-dark&#39;&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span><span class="s1">&#39;default&#39;</span>
+<span class="k">else</span>
+<span class="w">    </span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span><span class="s1">&#39;prefer-dark&#39;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="configuring-nautilus-sorting-and-folders-first">
+<h2>Configuring Nautilus Sorting and Folders First</h2>
+<p>Nautilus schema keys and sorting behavior have shifted across GNOME and
+GTK releases—for example, folder-first sorting is handled at the GTK
+FileChooser level rather than as a standalone <tt class="docutils literal"><span class="pre">folders-first</span></tt> key under
+<tt class="docutils literal">org.gnome.nautilus.preferences</tt>.</p>
+<div class="section" id="inspecting-nautilus-keys-and-ranges">
+<h3>Inspecting Nautilus Keys and Ranges</h3>
+<p>List available keys and current values under <tt class="docutils literal">org.gnome.nautilus.preferences</tt>:</p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>list-keys<span class="w"> </span>org.gnome.nautilus.preferences
+</pre></div>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>list-recursively<span class="w"> </span>org.gnome.nautilus.preferences
+</pre></div>
+<p>Search across all schemas for keys matching <tt class="docutils literal">sort</tt> or <tt class="docutils literal">folder</tt>:</p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>list-recursively<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">&quot;sort|folder&quot;</span>
+</pre></div>
+<p>Check valid enum values or ranges for a key using <tt class="docutils literal">gsettings range</tt>:</p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>range<span class="w"> </span>org.gnome.nautilus.preferences<span class="w"> </span>default-sort-order
+</pre></div>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>range<span class="w"> </span>org.gtk.Settings.FileChooser<span class="w"> </span>sort-directories-first
+</pre></div>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>range<span class="w"> </span>org.gtk.gtk4.Settings.FileChooser<span class="w"> </span>sort-directories-first
+</pre></div>
+</div>
+<div class="section" id="sorting-by-type-and-ascending-order">
+<h3>Sorting by Type and Ascending Order</h3>
+<p>Set default sorting by type and keep ascending order enabled:</p>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.nautilus.preferences<span class="w"> </span>default-sort-order<span class="w"> </span><span class="s1">&#39;type&#39;</span>
+</pre></div>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.nautilus.preferences<span class="w"> </span>default-sort-in-reverse-order<span class="w"> </span><span class="nb">false</span>
+</pre></div>
+</div>
+<div class="section" id="enforcing-folders-first-via-gsettings-and-dconf">
+<h3>Enforcing Folders First via GSettings and dconf</h3>
+<p>Set <tt class="docutils literal"><span class="pre">sort-directories-first</span></tt> across GTK 3 and GTK 4 FileChooser schemas:</p>
+<div class="highlight"><pre><span></span><span class="c1"># GTK3 FileChooser</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gtk.Settings.FileChooser<span class="w"> </span>sort-directories-first<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># GTK4 FileChooser (used by modern GNOME/Nautilus)</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gtk.gtk4.Settings.FileChooser<span class="w"> </span>sort-directories-first<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<p>If a schema is not exposed through <tt class="docutils literal">gsettings</tt> in your session, write the
+underlying keys directly with <tt class="docutils literal">dconf</tt> or search for matching keys:</p>
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>write<span class="w"> </span>/org/gtk/settings/file-chooser/sort-directories-first<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>write<span class="w"> </span>/org/gtk/gtk4/settings/file-chooser/sort-directories-first<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+<div class="highlight"><pre><span></span>gsettings<span class="w"> </span>list-recursively<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;sort-directories&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="restarting-nautilus-and-clearing-cached-metadata">
+<h3>Restarting Nautilus and Clearing Cached Metadata</h3>
+<p>To apply the changes immediately and clear per-directory overrides stored
+in GVfs metadata:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Terminate Nautilus process</span>
+nautilus<span class="w"> </span>-q
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># Remove saved per-directory metadata overrides</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>~/.local/share/gvfs-metadata
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="finishing-touches">
+<h2>Finishing Touches</h2>
+<p>Keeping GNOME and Nautilus settings in <tt class="docutils literal">gsettings</tt> and <tt class="docutils literal">dconf</tt> commands
+makes it straightforward to reproduce your exact desktop layout, input
+behavior, and file sorting preferences across fresh Fedora installations.</p>
+</div>
+
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Fri 27 November 2026</p>
+    <p>Category: <a href="../../../../category/floss.html">floss</a>
+ &ndash; Tags:
+      <a href="../../../../tag/cli.html">cli</a>,      <a href="../../../../tag/dconf.html">dconf</a>,      <a href="../../../../tag/fedora.html">fedora</a>,      <a href="../../../../tag/gnome.html">gnome</a>,      <a href="../../../../tag/gsettings.html">gsettings</a>,      <a href="../../../../tag/linux.html">linux</a>,      <a href="../../../../tag/nautilus.html">nautilus</a>    </p>
+  </div>
+
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = "posts/2026/11/27/configuring-gnome-nautilus-gsettings-fedora.html";
+        (function() {
+             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+             dsq.src = '//porfiriopaizsite.disqus.com/embed.js';
+             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+    </script>
+  </div>
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Porfirio Páiz. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function updateIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateIcon(currentTheme);
+
+    toggleButton.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+  </script>
+</body>
+</html>
