@@ -1,5 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - systemd</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/systemd.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-02-01T15:00:00-06:00</updated><entry><title>Keeping Your APT Package Cache Persistent</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/01/keep-apt-cache.html" rel="alternate"/><published>2026-02-01T15:00:00-06:00</published><updated>2026-02-01T15:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-01:/site/posts/2026/02/01/keep-apt-cache.html</id><summary type="html">&lt;p class="first last"&gt;How to prevent Debian from automatically clearing the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>porfirio's blog - systemd</title><link href="https://porfiriopaiz.github.io/site/" rel="alternate"/><link href="https://porfiriopaiz.github.io/site/feeds/systemd.atom.xml" rel="self"/><id>https://porfiriopaiz.github.io/site/</id><updated>2026-11-27T23:00:00-06:00</updated><entry><title>Configuring GNOME, Nautilus, and Power Management via CLI on Fedora</title><link href="https://porfiriopaiz.github.io/site/posts/2026/11/27/configuring-gnome-nautilus-power-cli-fedora.html" rel="alternate"/><published>2026-11-27T23:00:00-06:00</published><updated>2026-11-27T23:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-11-27:/site/posts/2026/11/27/configuring-gnome-nautilus-power-cli-fedora.html</id><summary type="html">&lt;p class="first last"&gt;A practical guide on discovering, inspecting, and setting GNOME
+desktop preferences, Nautilus sorting behavior, battery charge
+thresholds, and lid-close policies from the command line on
+Fedora Linux.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;On Fedora Linux with the GNOME desktop, hardware, interface, file manager,
+and power management settings are distributed across GSettings schemas,
+D-Bus interfaces, and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt;. Rather than clicking through
+graphical menus, you can discover the exact schema paths, inspect valid
+key ranges, monitor live changes, and script reproducible workstation
+setups directly from the terminal.&lt;/p&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="discovering-schemas-keys-and-valid-values"&gt;
+&lt;h2&gt;Discovering Schemas, Keys, and Valid Values&lt;/h2&gt;
+&lt;p&gt;Before modifying any setting, you can query GNOME's GSettings database to
+locate the right schema, read key documentation, check allowed data types
+or enum values, and watch changes in real time.&lt;/p&gt;
+&lt;div class="section" id="step-1-search-for-relevant-schemas"&gt;
+&lt;h3&gt;Step 1: Search for Relevant Schemas&lt;/h3&gt;
+&lt;p&gt;List all available schemas and filter them by keyword:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;list-schemas&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;power&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Alternatively, search recursively across all schemas and current values
+simultaneously:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;touchpad
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-inspect-keys-and-current-values"&gt;
+&lt;h3&gt;Step 2: Inspect Keys and Current Values&lt;/h3&gt;
+&lt;p&gt;Once you have a schema name, list its available keys or print every key
+alongside its active value:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# List only key names in a schema&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-keys&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# List all keys and their current values&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-read-key-descriptions-and-allowed-ranges"&gt;
+&lt;h3&gt;Step 3: Read Key Descriptions and Allowed Ranges&lt;/h3&gt;
+&lt;p&gt;To avoid invalid value errors, inspect a key's built-in description and
+check the exact values or range it accepts (booleans, integers, or string
+enums):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Read a key&amp;#39;s description&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;describe&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad&lt;span class="w"&gt; &lt;/span&gt;two-finger-scrolling-enabled
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Check valid values or range for a specific key&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;range&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad&lt;span class="w"&gt; &lt;/span&gt;scroll-method
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-monitor-live-changes-from-the-gui"&gt;
+&lt;h3&gt;Step 4: Monitor Live Changes from the GUI&lt;/h3&gt;
+&lt;p&gt;If you want to identify which key a toggle in the Fedora &lt;strong&gt;Settings&lt;/strong&gt; app
+modifies, run &lt;tt class="docutils literal"&gt;gsettings monitor&lt;/tt&gt; on a schema and click the option in
+the GUI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;monitor&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="common-gsettings-schemas-reference"&gt;
+&lt;h3&gt;Common GSettings Schemas Reference&lt;/h3&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="31%" /&gt;
+&lt;col width="69%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Feature&lt;/th&gt;
+&lt;th class="head"&gt;GSettings Schema&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Touchpad&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals.touchpad&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Mouse&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals.mouse&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Keyboard&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals.keyboard&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Interface / Fonts&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.interface&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Power Management&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;org.gnome.settings-daemon.plugins.power&lt;/span&gt;&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Privacy / Lock&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.screensaver&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Window Focus&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.desktop.wm.preferences&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;File Manager&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;org.gnome.nautilus.preferences&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="touchpad-and-mouse-configuration"&gt;
+&lt;h2&gt;Touchpad and Mouse Configuration&lt;/h2&gt;
+&lt;p&gt;On a laptop such as a Lenovo ThinkPad, configuring tap-to-click,
+two-finger scrolling, and natural scrolling across both the touchpad and
+external mice is handled under &lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="touchpad-preferences"&gt;
+&lt;h3&gt;Touchpad Preferences&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Schema:&lt;/strong&gt; &lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals.touchpad&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable tap-to-click&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad&lt;span class="w"&gt; &lt;/span&gt;tap-to-click&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable Natural Scrolling (reverse scroll)&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad&lt;span class="w"&gt; &lt;/span&gt;natural-scroll&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable two-finger scrolling&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.touchpad&lt;span class="w"&gt; &lt;/span&gt;two-finger-scrolling-enabled&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mouse-preferences"&gt;
+&lt;h3&gt;Mouse Preferences&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Schema:&lt;/strong&gt; &lt;tt class="docutils literal"&gt;org.gnome.desktop.peripherals.mouse&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Inspect all mouse keys and current values&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.mouse
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable natural scrolling for an external mouse&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.peripherals.mouse&lt;span class="w"&gt; &lt;/span&gt;natural-scroll&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="panel-indicators-and-color-schemes"&gt;
+&lt;h2&gt;Panel Indicators and Color Schemes&lt;/h2&gt;
+&lt;p&gt;GNOME refers to the top bar as the &lt;strong&gt;Panel&lt;/strong&gt; and the application dock as
+the &lt;strong&gt;Dash&lt;/strong&gt;. System-wide appearance, clock details, and battery
+percentage indicators live under &lt;tt class="docutils literal"&gt;org.gnome.desktop.interface&lt;/tt&gt;, while
+extensions such as Dash to Dock use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;org.gnome.shell.extensions.dash-to-dock&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="top-panel-clock-and-battery-readouts"&gt;
+&lt;h3&gt;Top Panel Clock and Battery Readouts&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Show the day of the week alongside date/time&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;show-datetime-day-of-week&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Show seconds in the clock&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;clock-show-seconds&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Show battery percentage&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;show-battery-percentage&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="switching-between-dark-and-light-themes"&gt;
+&lt;h3&gt;Switching Between Dark and Light Themes&lt;/h3&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;color-scheme&lt;/span&gt;&lt;/tt&gt; key under &lt;tt class="docutils literal"&gt;org.gnome.desktop.interface&lt;/tt&gt; controls
+GNOME's system-wide dark and light appearance:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Activate Dark Mode&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;prefer-dark&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Revert to Light / Default Mode&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Check the currently active theme mode&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;get&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also toggle between both modes automatically in a script or alias:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CURRENT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;get&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$CURRENT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;#39;prefer-dark&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.desktop.interface&lt;span class="w"&gt; &lt;/span&gt;color-scheme&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;prefer-dark&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="configuring-nautilus-sorting-and-folders-first"&gt;
+&lt;h2&gt;Configuring Nautilus Sorting and Folders First&lt;/h2&gt;
+&lt;p&gt;Nautilus schema keys have evolved across recent GNOME and GTK releases.
+Folder-first sorting is managed upstream at the GTK FileChooser level
+rather than as a standalone &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;folders-first&lt;/span&gt;&lt;/tt&gt; key inside Nautilus.&lt;/p&gt;
+&lt;div class="section" id="inspecting-nautilus-and-gtk-filechooser-keys"&gt;
+&lt;h3&gt;Inspecting Nautilus and GTK FileChooser Keys&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Inspect Nautilus preference keys and valid sort orders&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;org.gnome.nautilus.preferences
+gsettings&lt;span class="w"&gt; &lt;/span&gt;range&lt;span class="w"&gt; &lt;/span&gt;org.gnome.nautilus.preferences&lt;span class="w"&gt; &lt;/span&gt;default-sort-order
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Locate all directory-sorting keys across schemas&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;-iE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sort|folder&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="setting-sort-order-and-enforcing-folders-first"&gt;
+&lt;h3&gt;Setting Sort Order and Enforcing Folders First&lt;/h3&gt;
+&lt;p&gt;Configure Nautilus to sort by file type in ascending order, and enable
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;sort-directories-first&lt;/span&gt;&lt;/tt&gt; across both GTK 3 and GTK 4 schemas:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Sort files by type in ascending order&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.nautilus.preferences&lt;span class="w"&gt; &lt;/span&gt;default-sort-order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.nautilus.preferences&lt;span class="w"&gt; &lt;/span&gt;default-sort-in-reverse-order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable folders-first sorting in GTK 3 and GTK 4 FileChooser schemas&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gtk.Settings.FileChooser&lt;span class="w"&gt; &lt;/span&gt;sort-directories-first&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gtk.gtk4.Settings.FileChooser&lt;span class="w"&gt; &lt;/span&gt;sort-directories-first&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If a GTK schema is not exposed directly to &lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt; in your current
+session, write the underlying keys using &lt;tt class="docutils literal"&gt;dconf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dconf&lt;span class="w"&gt; &lt;/span&gt;write&lt;span class="w"&gt; &lt;/span&gt;/org/gtk/settings/file-chooser/sort-directories-first&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+dconf&lt;span class="w"&gt; &lt;/span&gt;write&lt;span class="w"&gt; &lt;/span&gt;/org/gtk/gtk4/settings/file-chooser/sort-directories-first&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="applying-changes-globally"&gt;
+&lt;h3&gt;Applying Changes Globally&lt;/h3&gt;
+&lt;p&gt;Restart Nautilus and clear cached per-folder GVfs metadata so the new
+defaults apply recursively across all directories:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nautilus&lt;span class="w"&gt; &lt;/span&gt;-q
+rm&lt;span class="w"&gt; &lt;/span&gt;-rf&lt;span class="w"&gt; &lt;/span&gt;~/.local/share/gvfs-metadata
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="power-management-battery-thresholds-and-lid-switch-policies"&gt;
+&lt;h2&gt;Power Management, Battery Thresholds, and Lid Switch Policies&lt;/h2&gt;
+&lt;p&gt;Power behavior on modern Fedora GNOME systems spans three subsystems:
+&lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt; for idle sleep timeouts, UPower over D-Bus (&lt;tt class="docutils literal"&gt;busctl&lt;/tt&gt;) for
+battery charge thresholds, and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt; for physical lid-switch
+events.&lt;/p&gt;
+&lt;div class="section" id="idle-sleep-and-suspend-timeouts-gsettings"&gt;
+&lt;h3&gt;Idle Sleep and Suspend Timeouts (&lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt;)&lt;/h3&gt;
+&lt;p&gt;Control inactive sleep timeouts and automatic suspend actions via
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;org.gnome.settings-daemon.plugins.power&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Inspect current sleep and suspend settings&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;list-recursively&lt;span class="w"&gt; &lt;/span&gt;org.gnome.settings-daemon.plugins.power&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;sleep
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Set sleep timeout on battery (in seconds, e.g., 900 = 15 minutes)&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.settings-daemon.plugins.power&lt;span class="w"&gt; &lt;/span&gt;sleep-inactive-battery-timeout&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;900&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Disable automatic suspend on AC power and battery&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.settings-daemon.plugins.power&lt;span class="w"&gt; &lt;/span&gt;sleep-inactive-ac-type&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;nothing&amp;#39;&lt;/span&gt;
+gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.settings-daemon.plugins.power&lt;span class="w"&gt; &lt;/span&gt;sleep-inactive-battery-type&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;nothing&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To prevent the GDM login screen from suspending automatically while idle:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;gdm&lt;span class="w"&gt; &lt;/span&gt;dbus-run-session&lt;span class="w"&gt; &lt;/span&gt;gsettings&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;org.gnome.settings-daemon.plugins.power&lt;span class="w"&gt; &lt;/span&gt;sleep-inactive-ac-type&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;nothing&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="battery-charging-thresholds-busctl-upower"&gt;
+&lt;h3&gt;Battery Charging Thresholds (&lt;tt class="docutils literal"&gt;busctl&lt;/tt&gt; / UPower)&lt;/h3&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;GNOME's native &lt;strong&gt;Preserve Battery Health&lt;/strong&gt; vs. &lt;strong&gt;Maximize Charge&lt;/strong&gt;
+option does not use a &lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt; key; instead, it communicates
+directly with UPower over D-Bus.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;First, locate your battery's UPower device path and inspect its supported
+methods:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;upower&lt;span class="w"&gt; &lt;/span&gt;-e&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;battery
+busctl&lt;span class="w"&gt; &lt;/span&gt;introspect&lt;span class="w"&gt; &lt;/span&gt;org.freedesktop.UPower&lt;span class="w"&gt; &lt;/span&gt;/org/freedesktop/UPower/devices/battery_BAT0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Toggle the charge threshold (replace &lt;tt class="docutils literal"&gt;battery_BAT0&lt;/tt&gt; if your system uses
+a different battery identifier):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Enable &amp;quot;Preserve Battery Health&amp;quot; (caps charge around 80%)&lt;/span&gt;
+busctl&lt;span class="w"&gt; &lt;/span&gt;call&lt;span class="w"&gt; &lt;/span&gt;org.freedesktop.UPower&lt;span class="w"&gt; &lt;/span&gt;/org/freedesktop/UPower/devices/battery_BAT0&lt;span class="w"&gt; &lt;/span&gt;org.freedesktop.UPower.Device&lt;span class="w"&gt; &lt;/span&gt;EnableChargeThreshold&lt;span class="w"&gt; &lt;/span&gt;b&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Set to &amp;quot;Maximize Charge&amp;quot; (allows charging to 100%)&lt;/span&gt;
+busctl&lt;span class="w"&gt; &lt;/span&gt;call&lt;span class="w"&gt; &lt;/span&gt;org.freedesktop.UPower&lt;span class="w"&gt; &lt;/span&gt;/org/freedesktop/UPower/devices/battery_BAT0&lt;span class="w"&gt; &lt;/span&gt;org.freedesktop.UPower.Device&lt;span class="w"&gt; &lt;/span&gt;EnableChargeThreshold&lt;span class="w"&gt; &lt;/span&gt;b&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="preventing-sleep-on-laptop-lid-close-systemd-logind"&gt;
+&lt;h3&gt;Preventing Sleep on Laptop Lid Close (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt;)&lt;/h3&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Modern GNOME releases removed lid-close action keys from &lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt;
+(such as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;lid-close-ac-action&lt;/span&gt;&lt;/tt&gt;) and delegate hardware lid-switch
+handling directly to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To permanently ignore lid-close events across battery, AC power, and
+docked states, create a drop-in configuration file for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;/etc/systemd/logind.conf.d
+sudo&lt;span class="w"&gt; &lt;/span&gt;tee&lt;span class="w"&gt; &lt;/span&gt;/etc/systemd/logind.conf.d/lid.conf&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;[Login]&lt;/span&gt;
+&lt;span class="s"&gt;HandleLidSwitch=ignore&lt;/span&gt;
+&lt;span class="s"&gt;HandleLidSwitchExternalPower=ignore&lt;/span&gt;
+&lt;span class="s"&gt;HandleLidSwitchDocked=ignore&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt; to apply the policy immediately (note that
+restarting &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt; may terminate your active graphical session):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;systemctl&lt;span class="w"&gt; &lt;/span&gt;restart&lt;span class="w"&gt; &lt;/span&gt;systemd-logind
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you only want to prevent sleep temporarily while a specific task runs,
+use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-inhibit&lt;/span&gt;&lt;/tt&gt; instead of modifying system configuration files:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemd-inhibit&lt;span class="w"&gt; &lt;/span&gt;--what&lt;span class="o"&gt;=&lt;/span&gt;handle-lid-switch&lt;span class="w"&gt; &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3600&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;div class="section" id="finishing-touches"&gt;
+&lt;h2&gt;Finishing Touches&lt;/h2&gt;
+&lt;p&gt;Combining &lt;tt class="docutils literal"&gt;gsettings&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;dconf&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;busctl&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt;
+gives you complete command-line control over your Fedora GNOME workstation,
+making it straightforward to version-control and replicate your exact
+desktop, file manager, and power configuration across fresh installs.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="floss"/><category term="busctl"/><category term="cli"/><category term="dconf"/><category term="fedora"/><category term="gnome"/><category term="gsettings"/><category term="linux"/><category term="nautilus"/><category term="systemd"/></entry><entry><title>Keeping Your APT Package Cache Persistent</title><link href="https://porfiriopaiz.github.io/site/posts/2026/02/01/keep-apt-cache.html" rel="alternate"/><published>2026-02-01T15:00:00-06:00</published><updated>2026-02-01T15:00:00-06:00</updated><author><name>Porfirio Páiz</name></author><id>tag:porfiriopaiz.github.io,2026-02-01:/site/posts/2026/02/01/keep-apt-cache.html</id><summary type="html">&lt;p class="first last"&gt;How to prevent Debian from automatically clearing the
 /var/cache/apt/archives directory and disable automated updates.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;If &lt;tt class="docutils literal"&gt;/var/cache/apt/archives&lt;/tt&gt; is empty, it usually means your system is
 configured to clean up automatically to save disk space. While this keeps the
